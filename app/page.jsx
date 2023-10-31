@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { rajdhani } from "@/components/ui/fonts";
 
 // import { accessToken, logout } from "@/lib/spotify";
 // import { useEffect, useState } from "react";
@@ -13,12 +14,25 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-evenly">
-      <h1>This Song</h1>
       <section>
+        <p>page.jsx</p>
         {/* <a className="App-link" href="http://localhost:8000/login">
           Log in to Spotify
         </a> */}
-        <p>page.jsx</p>
+        <Image
+          src="/next.svg"
+          width={300}
+          height={300}
+          className="hidden md:block"
+          alt="Next.js logo"
+        />
+        <Image
+          src="/vercel.svg"
+          width={100}
+          height={100}
+          className="block md:hidden"
+          alt="Vercel logo"
+        />
       </section>
     </main>
   );
