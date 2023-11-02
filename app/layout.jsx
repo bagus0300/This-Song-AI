@@ -12,13 +12,13 @@ export default function RootLayout({ children }) {
   return (
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased overflow-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <div className="flex flex-col h-screen md:flex-row md:overflow-hidden">
             <div className="flex-none w-full md:w-64">
               <Sidebar />
             </div>
-            <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+            <div className="flex-grow px-4 overflow-y-auto md:p-2">
               {children}
             </div>
           </div>

@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 
-export function MenuToggle() {
+export function MenuToggle({ clickFunction }) {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ export function MenuToggle() {
       className="md:hidden"
       onClick={() => {
         setToggle(!toggle);
-        console.log("toggle", toggle);
+        clickFunction();
       }}
     >
       <Menu
