@@ -6,6 +6,9 @@ import { MenuToggle } from "@/components/ui/toggle-menu";
 import clsx from "clsx";
 import Search from "@/components/search";
 import SidebarTabs from "./sidebar-tabs";
+import LoginButton from "./login-button";
+
+const BACKEND_URI = "http://192.168.4.158:8000";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -36,6 +39,9 @@ const Sidebar = () => {
             )}
           >
             <SidebarTabs />
+            <Link href={`${BACKEND_URI}/login`}>
+              <LoginButton />
+            </Link>
           </div>
         </div>
         {/* <form>
