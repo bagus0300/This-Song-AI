@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { ModeToggle } from "./ui/toggle-mode";
 import Link from "next/link";
-import { MenuToggle } from "./ui/toggle-menu";
+import { ModeToggle } from "@/components/ui/toggle-mode";
+import { MenuToggle } from "@/components/ui/toggle-menu";
 import clsx from "clsx";
+import Search from "@/components/search";
+import SidebarTabs from "./sidebar-tabs";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -29,13 +31,11 @@ const Sidebar = () => {
         >
           <div
             className={clsx(
-              "h-full md:flex flex-col justify-between",
+              "h-full md:flex flex-col justify-between p-1",
               showMenu ? "flex" : "hidden"
             )}
           >
-            {/* <NavLinks /> */}
-            <p>Item</p>
-            <p>Item</p>
+            <SidebarTabs />
           </div>
         </div>
         {/* <form>

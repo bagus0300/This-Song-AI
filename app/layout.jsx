@@ -1,6 +1,6 @@
 import "./globals.css";
 import { inter } from "@/components/ui/fonts";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
