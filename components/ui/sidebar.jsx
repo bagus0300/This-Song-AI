@@ -7,7 +7,7 @@ import clsx from "clsx";
 import Search from "@/components/search";
 import SidebarTabs from "./sidebar-tabs";
 import LoginButton from "./login-button";
-import Avatar from "../avatar";
+import UserProfile from "../user-profile";
 
 const BACKEND_URI = "http://192.168.4.158:8000";
 
@@ -41,7 +41,7 @@ const Sidebar = () => {
           >
             <SidebarTabs />
             {/* <Link href={`${BACKEND_URI}/login`}> */}
-            <Avatar />
+            <UserProfile />
             {/* </Link> */}
           </div>
         </div>
