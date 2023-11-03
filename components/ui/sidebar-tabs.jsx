@@ -10,7 +10,7 @@ const SidebarTabs = () => {
   console.log("SidebarTabs token", token);
 
   return (
-    <div>
+    <div className="overflow-x-hidden overflow-y-auto">
       <Tabs defaultValue="search">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="search">Search</TabsTrigger>
