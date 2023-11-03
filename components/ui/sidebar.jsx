@@ -17,8 +17,6 @@ const Sidebar = () => {
 
   const { token, setToken } = useContext(TokenContext);
 
-  // console.log("Token in sidebar: ", token);
-
   // useEffect(() => {
   //   setToken("Token!");
   // }, []);

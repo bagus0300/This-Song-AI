@@ -60,7 +60,14 @@ const UserProfile = () => {
         <DropdownMenuContent>
           <DropdownMenuLabel>{profile.display_name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => logout()}>Sign out</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setToken(null);
+              logout();
+            }}
+          >
+            Sign out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     );
