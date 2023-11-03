@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "./ui/input";
-import { clientAccessToken } from "@/lib/spotify";
+// import { clientAccessToken } from "@/lib/spotify";
 
 const Search = () => {
   // const [token, setToken] = useState(null);
