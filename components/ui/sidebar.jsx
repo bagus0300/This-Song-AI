@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/toggle-mode";
 import { MenuToggle } from "@/components/ui/toggle-menu";
@@ -8,11 +8,20 @@ import Search from "@/components/search";
 import SidebarTabs from "./sidebar-tabs";
 import LoginButton from "./login-button";
 import UserProfile from "../user-profile";
+import { TokenContext } from "@/context/ContextProvider";
 
 const BACKEND_URI = "http://192.168.4.158:8000";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
+
+  const { token, setToken } = useContext(TokenContext);
+
+  // console.log("Token in sidebar: ", token);
+
+  // useEffect(() => {
+  //   setToken("Token!");
+  // }, []);
 
   return (
     <div className="relative flex flex-col md:p-2">
@@ -28,9 +37,9 @@ const Sidebar = () => {
       <div className="relative flex flex-row space-x-2 grow md:flex-col md:space-x-0 md:space-y-2">
         <div
           className={clsx(
-            "md:static md:h-[calc(100dvh-80px)] absolute w-full md:rounded-md grow md:block transition-all duration-200 bg-zinc-500",
+            "md:static md:h-[calc(100dvh-80px)] h-[calc(100dvh-56px)] scale-y-0 md:scale-y-100 origin-top absolute w-full md:rounded-md grow md:block transition-all duration-200 bg-zinc-500 md:duration-0",
             // If the menu is open, set its height to the dynamic viewport height minus the header height.
-            showMenu ? "h-[calc(100dvh-56px)]" : "h-0"
+            showMenu ? "h-[calc(100dvh-56px)] scale-y-100" : "scale-y-0"
           )}
         >
           <div

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginButton from "./ui/login-button";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,44 +12,63 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
+import { TokenContext } from "@/context/ContextProvider";
+import { useContext } from "react";
+import { accessToken, getCurrentUserProfile, logout } from "@/lib/spotify";
+import { catchErrors } from "@/lib/utils";
+import { usePathname, useRouter } from "next/navigation";
 
 const UserProfile = () => {
-  // const { data: session, status } = useSession();
-  // const userEmail = session?.user?.email;
+  const [profile, setProfile] = useState(null);
+  const { token, setToken } = useContext(TokenContext);
 
-  // if (status === "loading") {
-  //   return <button>Loading...</button>;
-  // }
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  // if (status === "authenticated") {
-  //   console.log(session);
+  useEffect(() => {
+    setToken(accessToken);
+  }, []);
 
-  //   return (
-  //     <DropdownMenu>
-  //       <DropdownMenuTrigger>
-  //         <div className="flex items-center justify-center w-full gap-2 p-1 text-sm font-medium text-center align-middle rounded-sm bg-primary text-primary-foreground hover:bg-primary/90">
-  //           <Avatar>
-  //             <AvatarImage src={session.user.image} />
-  //             <AvatarFallback>{session.user.name[0]}</AvatarFallback>
-  //           </Avatar>
-  //           Signed in as {session.user.name}
-  //         </div>
-  //       </DropdownMenuTrigger>
-  //       <DropdownMenuContent>
-  //         <DropdownMenuLabel>{userEmail}</DropdownMenuLabel>
-  //         <DropdownMenuSeparator />
-  //         <DropdownMenuItem onClick={() => signOut()}>
-  //           Sign out
-  //         </DropdownMenuItem>
-  //       </DropdownMenuContent>
-  //     </DropdownMenu>
-  //     // {/* <button onClick={() => signOut()}>Sign out</button> */}
-  //   );
-  // }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        const profile = await getCurrentUserProfile();
+        if (profile) {
+          setProfile(profile.data);
+          replace(`${pathname}`);
+        }
+      }
+    };
+
+    catchErrors(fetchData());
+  }, [token]);
+
+  if (profile) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <div className="flex items-center justify-center w-full gap-2 p-1 text-sm font-medium text-center align-middle rounded-sm bg-primary text-primary-foreground hover:bg-primary/90">
+            <Avatar>
+              <AvatarImage
+                src={profile.images.length ? profile.images[0].url : ""}
+              />
+              <AvatarFallback>{profile.display_name[0]}</AvatarFallback>
+            </Avatar>
+            Signed in as {profile.display_name}
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>{profile.display_name}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => logout()}>Sign out</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
 
   return (
     <>
-      <a onClick={() => signIn("spotify")}>
+      <a href="http://192.168.4.158:8000/login">
         <LoginButton />
       </a>
     </>
