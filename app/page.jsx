@@ -17,7 +17,7 @@ export default function Home() {
         {/* <a className="App-link" href="http://localhost:8000/login">
           Log in to Spotify
         </a> */}
-        <Image
+        {/* <Image
           src="/next.svg"
           width={300}
           height={300}
@@ -30,7 +30,7 @@ export default function Home() {
           height={100}
           className="block md:hidden"
           alt="Vercel logo"
-        />
+        /> */}
         <p></p>
       </section>
     </main>

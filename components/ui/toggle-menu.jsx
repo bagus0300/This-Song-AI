@@ -22,14 +22,14 @@ export function MenuToggle({ clickFunction }) {
     >
       <Menu
         className={clsx(
-          "h-[1.2rem] w-[1.2rem] transition-all",
-          toggle && "rotate-90 scale-0"
+          "h-[1.2rem] w-[1.2rem] transition-all duration-200",
+          toggle && "rotate-180 scale-0"
         )}
       />
       <X
         className={clsx(
-          "absolute h-[1.2rem] w-[1.2rem] transition-all",
-          !toggle && "rotate-90 scale-0"
+          "absolute h-[1.2rem] w-[1.2rem] transition-all duration-200",
+          !toggle && "-rotate-180 scale-0"
         )}
       />
       <span className="sr-only">Toggle theme</span>
