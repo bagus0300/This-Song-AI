@@ -43,11 +43,11 @@ const Recent = () => {
       {(data && (
         <div>
           {data.items.map((song, index) => (
-            <TooltipProvider delayDuration={200}>
+            <TooltipProvider delayDuration={200} key={`song.track.id-${index}`}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div
-                    className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-8 hover:bg-secondary group"
+                    className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
                     key={`song.track.id-${index}`}
                     // onClick={() => {
                     //   recentSelectSong(song);
@@ -57,7 +57,7 @@ const Recent = () => {
                       className="w-16 h-16"
                       src={song.track.album.images[2].url}
                     />
-                    <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis group-hover:overflow-x-visible">
+                    <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
                       <span className="text-blue-300">{song.track.name}</span>
                       <br />
                       {song.track.artists[0].name}
