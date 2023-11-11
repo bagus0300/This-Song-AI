@@ -82,11 +82,11 @@ const SongData = () => {
                 }}
               >
                 <img
-                  className="transition-all duration-500 rounded-lg opacity-100 group-hover:opacity-50 group-hover:rounded-[50%] group-hover:brightness-50 -z-10"
+                  className="transition-all duration-500 rounded-lg opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10"
                   src={song.albumArt}
                 />
                 <img
-                  className="absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 -z-10"
+                  className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 -z-10"
                   src="/images/refresh.png"
                 />
               </div>
