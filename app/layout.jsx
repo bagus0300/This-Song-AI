@@ -4,6 +4,7 @@ import Sidebar from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/context/ContextProvider";
 import { accessToken, logout } from "@/lib/spotify";
+import SongData from "@/components/song-data";
 
 export const metadata = {
   title: "This Song",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
                 <Sidebar />
               </div>
               <div className="flex-grow px-4 overflow-y-auto md:p-2">
+                <SongData />
                 {children}
               </div>
             </div>

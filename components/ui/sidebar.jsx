@@ -22,7 +22,7 @@ const Sidebar = () => {
   // }, []);
 
   return (
-    <div className="relative flex flex-col md:p-2">
+    <div className="relative z-10 flex flex-col md:p-2">
       <div className="flex items-center justify-between p-4 transition-none md:mb-2 md:rounded-md bg-zinc-500 h-14">
         <Link href="/">
           <div className="text-white">This Song</div>
