@@ -29,7 +29,10 @@ const Sidebar = () => {
         </Link>
         <section id="toggle-buttons" className="flex gap-2">
           <ModeToggle />
-          <MenuToggle clickFunction={() => setShowMenu((prev) => !prev)} />
+          <MenuToggle
+            showMenu={showMenu}
+            clickFunction={() => setShowMenu((prev) => !prev)}
+          />
         </section>
       </div>
       <div className="relative flex flex-row space-x-2 grow md:flex-col md:space-x-0 md:space-y-2">
