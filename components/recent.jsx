@@ -18,7 +18,7 @@ const Recent = ({ setShowMenu }) => {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
 
-  const { song, setSong } = useContext(SongContext);
+  const { setSong } = useContext(SongContext);
 
   useEffect(() => {
     getRecentSongs();

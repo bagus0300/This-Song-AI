@@ -7,7 +7,7 @@ import { TokenContext } from "@/context/ContextProvider";
 const SidebarTabs = ({ setShowMenu }) => {
   const { token } = useContext(TokenContext);
 
-  console.log("SidebarTabs token", token);
+  console.log("Rendering SidebarTabs");
 
   return (
     <div>
@@ -19,7 +19,7 @@ const SidebarTabs = ({ setShowMenu }) => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="search">
-          <Search />
+          <Search setShowMenu={setShowMenu} />
         </TabsContent>
         <TabsContent
           value="recent"
