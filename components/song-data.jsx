@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
 
-import { TokenContext } from "@/context/ContextProvider";
+import { SongContext, TokenContext } from "@/context/ContextProvider";
 
 import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
@@ -14,12 +14,13 @@ const SongData = () => {
    */
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
-  const [song, setSong] = useState(null);
+  // const [song, setSong] = useState(null);
 
   // Init is used to determine whether the token has been read at least once
   const [init, setInit] = useState(0);
 
   const { token } = useContext(TokenContext);
+  const { song, setSong } = useContext(SongContext);
 
   useEffect(() => {
     setInit(1);
@@ -40,6 +41,11 @@ const SongData = () => {
       setSong(null);
     }
   }, [data]);
+
+  // Force a rerender when the song changes
+  useEffect(() => {
+    console.log(song);
+  }, [song]);
 
   // Awaits the song that's currently playing and sets state variables accordingly
   const getSong = (select) => {

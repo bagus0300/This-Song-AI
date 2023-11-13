@@ -46,7 +46,7 @@ const Sidebar = () => {
               showMenu ? "flex" : "hidden"
             )}
           >
-            <SidebarTabs />
+            <SidebarTabs setShowMenu={setShowMenu} />
             {/* <Link href={`${BACKEND_URI}/login`}> */}
             <UserProfile />
             {/* </Link> */}

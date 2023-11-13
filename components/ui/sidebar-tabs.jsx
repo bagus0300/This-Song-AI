@@ -4,7 +4,7 @@ import Search from "../search";
 import Recent from "../recent";
 import { TokenContext } from "@/context/ContextProvider";
 
-const SidebarTabs = () => {
+const SidebarTabs = ({ setShowMenu }) => {
   const { token } = useContext(TokenContext);
 
   console.log("SidebarTabs token", token);
@@ -25,7 +25,7 @@ const SidebarTabs = () => {
           value="recent"
           className="md:h-[calc(100dvh-56px-40px-48px-16px-32px)] h-[calc(100dvh-40px-56px-48px-16px)] overflow-y-scroll"
         >
-          <Recent />
+          <Recent setShowMenu={setShowMenu} />
         </TabsContent>
       </Tabs>
     </div>

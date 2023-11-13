@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { getRecentlyPlayed } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import {
@@ -7,8 +7,9 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
+import { SongContext } from "@/context/ContextProvider";
 
-const Recent = () => {
+const Recent = ({ setShowMenu }) => {
   /**
    * STATE VARIABLES
    * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/recently-played endpoint
@@ -16,6 +17,8 @@ const Recent = () => {
    */
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
+
+  const { song, setSong } = useContext(SongContext);
 
   useEffect(() => {
     getRecentSongs();
@@ -38,6 +41,18 @@ const Recent = () => {
     catchErrors(fetchData());
   };
 
+  const recentSelectSong = (song) => {
+    console.log("recentSelectSong: " + song);
+    const thisSong = {
+      albumArt: song.track.album.images[1].url,
+      songName: song.track.name,
+      artists: song.track.artists,
+      albumName: song.track.album.name
+    };
+    setSong(thisSong);
+    setShowMenu(false);
+  };
+
   return (
     <>
       {(data && (
@@ -49,9 +64,9 @@ const Recent = () => {
                   <div
                     className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
                     key={`song.track.id-${index}`}
-                    // onClick={() => {
-                    //   recentSelectSong(song);
-                    // }}
+                    onClick={() => {
+                      recentSelectSong(song);
+                    }}
                   >
                     <img
                       className="w-16 h-16"

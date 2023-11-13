@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased overflow-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          <ContextProvider token={accessToken}>
+          <ContextProvider>
             <div className="flex flex-col h-screen md:flex-row md:overflow-hidden">
               <div className="flex-none w-full md:w-64">
                 <Sidebar />
