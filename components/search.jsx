@@ -24,6 +24,14 @@ const Search = ({ setShowMenu }) => {
 
   const { setSong } = useContext(SongContext);
 
+  useEffect(() => {
+    console.log("Search useEffect");
+
+    return () => {
+      console.log("Search unmounted!");
+    };
+  }, []);
+
   const searchSongs = (term) => {
     // Clear the previous state variables
     setData(null);
@@ -53,11 +61,6 @@ const Search = ({ setShowMenu }) => {
     };
     setSong(thisSong);
     setShowMenu(false);
-
-    // Clear the previous state variables
-    setData(null);
-    setStatus(null);
-    setSearchTerm("");
   };
 
   const handleSearch = useDebouncedCallback((term) => {
@@ -114,6 +117,11 @@ const Search = ({ setShowMenu }) => {
         (status == 204 && (
           <>
             <p>No content to display.</p>
+          </>
+        )) ||
+        (searchTerm && (
+          <>
+            <p>Searching for {searchTerm}...</p>
           </>
         )) || <></>}
     </section>
