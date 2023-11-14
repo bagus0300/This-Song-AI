@@ -3,6 +3,7 @@ import Image from "next/image";
 import { rajdhani } from "@/components/ui/fonts";
 import { TokenContext } from "@/context/ContextProvider";
 import { useContext } from "react";
+import Lyrics from "@/components/lyrics";
 
 // import { accessToken, logout } from "@/lib/spotify";
 // import { useEffect, useState } from "react";
@@ -12,8 +13,8 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-evenly">
+      <Lyrics />
       <section>
-        <p>Main Page</p>
         {/* <a className="App-link" href="http://localhost:8000/login">
           Log in to Spotify
         </a> */}
