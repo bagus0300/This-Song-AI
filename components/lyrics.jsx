@@ -17,6 +17,10 @@ const Lyrics = () => {
   // The useEffect hook will run whenever the song changes
   useEffect(() => {
     const fetchData = async () => {
+      // Clear the previous state variables
+      setLyrics(null);
+      setStatus(null);
+
       const songLyricsResponse = await getLyrics(
         song.songName,
         song.artists,
