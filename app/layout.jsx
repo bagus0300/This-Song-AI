@@ -19,8 +19,8 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <ContextProvider>
-            <div className="flex flex-col h-fit lg:flex-row">
-              <div className="sticky top-0 w-full lg:w-64">
+            <div className="flex flex-col h-full lg:flex-row">
+              <div className="sticky top-0 w-full h-full lg:w-64">
                 <Sidebar />
               </div>
               <Main children={children} />
