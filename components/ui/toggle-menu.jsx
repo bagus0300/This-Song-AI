@@ -9,7 +9,7 @@ export function MenuToggle({ showMenu, clickFunction }) {
     <Button
       variant="outline"
       size="icon"
-      className="md:hidden"
+      className="lg:hidden"
       onClick={() => {
         clickFunction();
       }}

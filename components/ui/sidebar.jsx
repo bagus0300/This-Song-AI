@@ -22,8 +22,8 @@ const Sidebar = () => {
   // }, []);
 
   return (
-    <div className="relative z-10 flex flex-col md:p-2">
-      <div className="flex items-center justify-between p-4 transition-none md:mb-2 md:rounded-md bg-zinc-500 h-14">
+    <div className="z-10 flex flex-col lg:p-2">
+      <div className="flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-md bg-zinc-500 h-14">
         <Link href="/">
           <div className="text-white">This Song</div>
         </Link>
@@ -35,17 +35,17 @@ const Sidebar = () => {
           />
         </section>
       </div>
-      <div className="relative flex flex-row space-x-2 grow md:flex-col md:space-x-0 md:space-y-2">
+      <div className="relative flex flex-row space-x-2 grow lg:flex-col lg:space-x-0 lg:space-y-2">
         <div
           className={clsx(
-            "md:static md:h-[calc(100dvh-80px)] h-[calc(100dvh-56px)] scale-y-0 md:scale-y-100 origin-top absolute w-full md:rounded-md grow md:block transition-all duration-200 bg-zinc-500 md:duration-0",
+            "lg:static lg:h-[calc(100dvh-80px)] h-[calc(100dvh-56px)] scale-y-0 lg:scale-y-100 origin-top absolute w-full lg:rounded-md grow lg:block transition-all duration-200 bg-zinc-500 lg:duration-0",
             // If the menu is open, set its height to the dynamic viewport height minus the header height.
             showMenu ? "h-[calc(100dvh-56px)] scale-y-100" : "scale-y-0"
           )}
         >
           <div
             className={clsx(
-              "h-full md:flex flex-col justify-between p-1",
+              "h-full lg:flex flex-col justify-between p-1",
               showMenu ? "flex" : "hidden"
             )}
           >

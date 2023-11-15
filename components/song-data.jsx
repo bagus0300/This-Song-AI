@@ -27,9 +27,7 @@ const SongData = ({ parent }) => {
     container: parent
   });
 
-  const { scrollY } = useScroll({
-    container: parent
-  });
+  const { scrollY } = useScroll({});
 
   const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 

@@ -3,7 +3,7 @@ import { SongContext } from "@/context/ContextProvider";
 import { getLyrics } from "@/lib/musicmatch";
 // import { getLyrics } from "@/lib/lyrics";
 import { catchErrors } from "@/lib/utils";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 const Lyrics = () => {
   /**
@@ -14,6 +14,8 @@ const Lyrics = () => {
   const [status, setStatus] = useState(null);
 
   const { song } = useContext(SongContext);
+
+  const ref = useRef(null);
 
   // The useEffect hook will run whenever the song changes
   useEffect(() => {
@@ -72,7 +74,7 @@ const Lyrics = () => {
   };
 
   return (
-    <>
+    <div className="">
       {(lyrics && (
         <div className="flex flex-col gap-2">
           <div className="text-base whitespace-pre-line">
@@ -89,7 +91,7 @@ const Lyrics = () => {
           </p>
         )) ||
         (song && <p>Loading data for {song.songName}...</p>)}
-    </>
+    </div>
   );
 };
 
