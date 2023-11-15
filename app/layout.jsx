@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/context/ContextProvider";
 import { accessToken, logout } from "@/lib/spotify";
 import SongData from "@/components/song-data";
+import Main from "@/components/ui/main";
 
 export const metadata = {
   title: "This Song",
@@ -22,10 +23,7 @@ export default function RootLayout({ children }) {
               <div className="flex-none w-full md:w-64">
                 <Sidebar />
               </div>
-              <div className="flex-grow px-4 overflow-y-auto md:p-2">
-                <SongData />
-                {children}
-              </div>
+              <Main children={children} />
             </div>
           </ContextProvider>
         </ThemeProvider>

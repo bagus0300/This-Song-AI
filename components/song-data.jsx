@@ -5,8 +5,9 @@ import { SongContext, TokenContext } from "@/context/ContextProvider";
 
 import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-const SongData = () => {
+const SongData = ({ parent }) => {
   /**
    * STATE VARIABLES
    * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/currently-playing endpoint
@@ -21,6 +22,16 @@ const SongData = () => {
 
   const { token } = useContext(TokenContext);
   const { song, setSong } = useContext(SongContext);
+
+  const { scrollYProgress } = useScroll({
+    container: parent
+  });
+
+  const { scrollY } = useScroll({
+    container: parent
+  });
+
+  const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 
   useEffect(() => {
     setInit(1);
@@ -76,30 +87,43 @@ const SongData = () => {
   };
 
   return (
-    <section>
+    <section className="flex flex-row items-end justify-end align-bottom">
       {(song && (
         <>
-          <div className="flex flex-col items-center justify-center text-center md:flex-row">
-            <div className="flex items-center justify-center text-center">
-              <div
-                className="relative flex max-w-[300px] max-h-[300px] data-image-container group"
+          <div className="flex flex-col items-center justify-center text-center align-bottom md:flex-row">
+            <motion.div className="flex items-end justify-center text-center align-bottom h-[300px]">
+              <motion.div
+                className="flex max-w-[300px] max-h-[300px] data-image-container group"
                 onClick={() => {
                   getSong(null);
+                }}
+                style={{
+                  height: scrollHeight,
+                  width: scrollHeight
                 }}
               >
                 <img
                   className="transition-all duration-500 rounded-lg opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10"
                   src={song.albumArt}
+                  // style={{
+                  //   scale: scaleProgress
+                  // }}
                 />
                 <img
                   className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 -z-10"
                   src="/images/refresh.png"
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             <div className="text-center data-info col-md-8 text-md-start">
-              <h1 className="text-3xl font-extrabold text-yellow-500 dark:text-yellow-200">
+              <h1
+                className="text-3xl font-extrabold text-yellow-500 dark:text-yellow-200"
+                onClick={() => {
+                  console.log("scrollY: ", scrollY.current);
+                }}
+              >
                 {song.songName}
+                {/* {scrollHeight.current} */}
               </h1>
               <h2 className="text-2xl text-blue-300">
                 {song.artists.map((artist) => artist.name).join(", ")}
