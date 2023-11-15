@@ -5,9 +5,8 @@ import { SongContext, TokenContext } from "@/context/ContextProvider";
 
 import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
-import clsx from "clsx";
 
-const SongData = ({ container, getScrollYPercent }) => {
+const SongData = () => {
   /**
    * STATE VARIABLES
    * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/currently-playing endpoint
@@ -22,23 +21,6 @@ const SongData = ({ container, getScrollYPercent }) => {
 
   const { token } = useContext(TokenContext);
   const { song, setSong } = useContext(SongContext);
-
-  const [scrollYPercent, setScrollYPercent] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      console.log(getScrollYPercent());
-      setScrollYPercent(getScrollYPercent());
-    };
-
-    console.log(container.current);
-
-    container.current.addEventListener("scroll", handleScroll);
-
-    return () => {
-      container.current.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     setInit(1);
@@ -97,72 +79,32 @@ const SongData = ({ container, getScrollYPercent }) => {
     <section>
       {(song && (
         <>
-          <div
-            className={clsx(
-              "flex items-center justify-center text-center md:flex-row bg-secondary pb-2 px-2",
-              scrollYPercent > 0.25 ? "flex-row h-[100px]" : "flex-col"
-            )}
-          >
-            <div
-              className="flex items-center justify-center text-center min-w-[100px] min-h-[100px] h-auto"
-              style={{
-                // scale: 1 - scrollYPercent,
-                height:
-                  scrollYPercent < 0.25
-                    ? Math.round(300 - (scrollYPercent / 0.75) * 300)
-                    : 100,
-                width:
-                  scrollYPercent < 0.25
-                    ? Math.round(300 - (scrollYPercent / 0.75) * 300)
-                    : 100
-              }}
-            >
+          <div className="flex flex-col items-center justify-center text-center md:flex-row">
+            <div className="flex items-center justify-center text-center">
               <div
-                className="relative flex max-w-[300px] max-h-[300px] data-image-container group w-full h-full"
+                className="relative flex max-w-[300px] max-h-[300px] data-image-container group"
                 onClick={() => {
                   getSong(null);
                 }}
               >
                 <img
-                  className="transition-all duration-500 rounded-lg opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 w-full h-full"
+                  className="transition-all duration-500 rounded-lg opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10"
                   src={song.albumArt}
-                  // style={{
-                  //   height: "20%",
-                  //   width: "20%"
-                  // }}
                 />
                 <img
-                  className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100"
+                  className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 -z-10"
                   src="/images/refresh.png"
                 />
               </div>
             </div>
-            <div
-              className={clsx(
-                "text-center data-info col-md-8 text-md-start",
-                scrollYPercent > 0.25 ? "h-[100px]" : ""
-              )}
-            >
-              <h1
-                className={clsx(
-                  "font-extrabold text-yellow-500 dark:text-yellow-200",
-                  scrollYPercent < 0.25 ? "text-3xl" : "text-xl"
-                )}
-              >
+            <div className="text-center data-info col-md-8 text-md-start">
+              <h1 className="text-3xl font-extrabold text-yellow-500 dark:text-yellow-200">
                 {song.songName}
-                {/* {scrollYPercent} */}
               </h1>
-              <h2
-                className={clsx(
-                  "text-blue-300",
-                  scrollYPercent < 0.25 ? "text-2xl" : "text-lg"
-                )}
-              >
+              <h2 className="text-2xl text-blue-300">
                 {song.artists.map((artist) => artist.name).join(", ")}
               </h2>
-              <h3 className={scrollYPercent < 0.25 ? "text-xl" : "text-base"}>
-                {song.albumName}
-              </h3>
+              <h3 className="text-xl text-">{song.albumName}</h3>
             </div>
           </div>
         </>
