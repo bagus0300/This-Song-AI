@@ -1,7 +1,6 @@
 "use client";
 import { SongContext } from "@/context/ContextProvider";
 import { getLyrics } from "@/lib/musicmatch";
-// import { getLyrics } from "@/lib/lyrics";
 import { catchErrors } from "@/lib/utils";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -27,7 +26,7 @@ const Lyrics = () => {
         song.artists,
         song.albumName
       );
-      console.log(songLyricsResponse);
+      // console.log(songLyricsResponse);
       const statusCode = songLyricsResponse.data.message?.header?.status_code;
       setStatus(statusCode);
 
@@ -84,8 +83,7 @@ const Lyrics = () => {
       )) ||
         (status && (
           <p>
-            {/* Unable to get lyrics from Musixmatch (response status code {status}) */}
-            No lyrics found.
+            Unable to get lyrics from Musixmatch (response status code {status})
           </p>
         )) ||
         (song && <p>Loading data for {song.songName}...</p>)}
