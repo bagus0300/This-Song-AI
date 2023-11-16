@@ -99,7 +99,7 @@ const SongData = ({ parent }) => {
     <section className="flex flex-col items-center justify-center align-bottom">
       {(song && (
         <>
-          <div className="flex flex-col items-center justify-end text-center align-bottom h-[356px] lg:h-[300px] w-full">
+          <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
             <motion.div
               className={clsx(
                 "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px)] lg:top-0 lg:pt-2 bg-background"
