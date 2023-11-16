@@ -135,8 +135,9 @@ const SongData = ({ parent }) => {
             <motion.div
               className={clsx(
                 "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
-                "bg-card",
-                "border-red-500 border-2"
+                "bg-background"
+                // "bg-card rounded-lg",
+                // "border-red-500 border-2"
               )}
               style={{
                 height: scrollHeight
@@ -173,7 +174,7 @@ const SongData = ({ parent }) => {
                 )}
               >
                 <h1
-                  className="text-base text-yellow-500 font-extra bold sm:text-xl dark:text-yellow-200 min-w-[300px]"
+                  className="text-base font-extra bold sm:text-xl text-[#1fdf64] min-w-[300px]"
                   onClick={() => {
                     console.log("scrollHeight: ", scrollHeight.current);
                   }}
@@ -181,7 +182,7 @@ const SongData = ({ parent }) => {
                   {song.songName}
                   {/* {scrollHeight.current} */}
                 </h1>
-                <h2 className="text-base text-blue-300 sm:text-lg min-w-[300px]">
+                <h2 className="text-base text-muted sm:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </h2>
                 <h3 className="text-base min-w-[300px]">{song.albumName}</h3>
@@ -197,14 +198,14 @@ const SongData = ({ parent }) => {
             )}
           >
             <h1
-              className="text-3xl font-extrabold text-yellow-500 dark:text-yellow-200"
+              className="text-3xl font-extrabold text-[#1fdf64]"
               onClick={() => {
                 console.log("scrollHeight: ", scrollHeight.current);
               }}
             >
               {song.songName}
             </h1>
-            <h2 className="text-2xl text-blue-300">
+            <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
             </h2>
             <h3 className="text-xl text-">{song.albumName}</h3>

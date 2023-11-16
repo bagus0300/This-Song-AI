@@ -94,11 +94,11 @@ const Search = ({ setShowMenu }) => {
                   >
                     <img className="w-16 h-16" src={song.album.images[2].url} />
                     <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                      <span className="text-blue-300">{song.name}</span>
+                      <span className="text-foreground">{song.name}</span>
                       <br />
-                      {song.artists[0].name}
+                      <span className="text-muted">{song.artists[0].name}</span>
                       <br />
-                      {song.album.name}
+                      <span className="text-foreground">{song.album.name}</span>
                     </p>
                   </div>
                 </TooltipTrigger>

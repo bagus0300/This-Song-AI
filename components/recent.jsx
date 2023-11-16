@@ -73,11 +73,15 @@ const Recent = ({ setShowMenu }) => {
                       src={song.track.album.images[2].url}
                     />
                     <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                      <span className="text-blue-300">{song.track.name}</span>
+                      <span className="text-foreground">{song.track.name}</span>
                       <br />
-                      {song.track.artists[0].name}
+                      <span className="text-muted">
+                        {song.track.artists[0].name}
+                      </span>
                       <br />
-                      {song.track.album.name}
+                      <span className="text-foreground">
+                        {song.track.album.name}
+                      </span>
                     </p>
                   </div>
                 </TooltipTrigger>
