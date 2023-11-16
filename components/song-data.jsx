@@ -180,7 +180,7 @@ const SongData = ({ parent }) => {
                 )}
               >
                 <h1
-                  className="text-base font-extra bold sm:text-xl text-[#1fdf64] min-w-[300px]"
+                  className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]"
                   onClick={() => {
                     console.log("scrollHeight: ", scrollHeight.current);
                   }}
@@ -189,10 +189,12 @@ const SongData = ({ parent }) => {
                   {/* {song.id} */}
                   {/* {scrollHeight.current} */}
                 </h1>
-                <h2 className="text-base text-muted sm:text-lg min-w-[300px]">
+                <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </h2>
-                <h3 className="text-base min-w-[300px]">{song.albumName}</h3>
+                <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px]">
+                  {song.albumName}
+                </h3>
               </div>
             </motion.div>
           </div>
