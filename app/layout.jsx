@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" defaultTheme="system">
           <ContextProvider>
             <div className="flex flex-col h-full lg:flex-row">
-              <div className="sticky top-0 w-full h-full lg:w-64">
+              <div className="fixed top-0 left-0 w-full h-fit lg:w-64 lg:min-w-[16rem] z-20 lg:p-2">
                 <Sidebar />
               </div>
               <Main children={children} />

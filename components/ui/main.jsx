@@ -6,7 +6,7 @@ const Main = ({ children }) => {
   const ref = useRef(null);
 
   return (
-    <div className="flex-grow px-4 md:p-2" ref={ref}>
+    <div className="flex-grow" ref={ref}>
       <SongData parent={ref} />
       {children}
     </div>

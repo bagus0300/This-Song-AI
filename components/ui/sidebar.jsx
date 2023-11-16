@@ -22,7 +22,7 @@ const Sidebar = () => {
   // }, []);
 
   return (
-    <div className="z-10 flex flex-col lg:p-2">
+    <div className="z-20 flex flex-col">
       <div className="flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-md bg-zinc-500 h-14">
         <Link href="/">
           <div className="text-white">This Song</div>
