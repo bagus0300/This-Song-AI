@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { SongContext, TokenContext } from "@/context/ContextProvider";
 
@@ -30,6 +30,8 @@ const SongData = ({ parent }) => {
     container: parent
   });
 
+  const ref = useRef(null);
+
   const { scrollY } = useScroll({});
 
   const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
@@ -37,6 +39,7 @@ const SongData = ({ parent }) => {
   useEffect(() => {
     setInit(1);
     getSong();
+
     window.addEventListener("scroll", stick);
     return () => {
       window.removeEventListener("scroll", stick);
@@ -44,7 +47,7 @@ const SongData = ({ parent }) => {
   }, [token]);
 
   const stick = () => {
-    window.scrollY > 200 ? setScrolled(true) : setScrolled(false);
+    // window.scrollY > 200 ? setScrolled(true) : setScrolled(false);
   };
 
   useEffect(() => {
@@ -64,14 +67,43 @@ const SongData = ({ parent }) => {
 
   // Force a rerender when the song changes
   useEffect(() => {
-    console.log(song);
+    // console.log(song);
+
+    // Toggle the scrolled state variable when the scroll target is intersected
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+        }
+      },
+      { threshold: 0, rootMargin: "-156px" }
+    );
+
+    const scrollTarget = ref.current;
+    console.log("Scroll target: ", scrollTarget);
+
+    if (scrollTarget) {
+      console.log("Observe");
+      observer.observe(scrollTarget);
+    }
+
+    return () => {
+      if (scrollTarget) {
+        observer.unobserve(scrollTarget);
+      }
+    };
   }, [song]);
+
+  console.log("Rendering SongData");
 
   // Awaits the song that's currently playing and sets state variables accordingly
   const getSong = (select) => {
     // Clear the previous state variables
     setData(null);
     setStatus(null);
+    setScrolled(false);
 
     if (!select && token) {
       const fetchData = async () => {
@@ -102,8 +134,9 @@ const SongData = ({ parent }) => {
           <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
             <motion.div
               className={clsx(
-                "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px)] lg:top-0 lg:pt-2 bg-background"
-                // "border-red-500 border-2"
+                "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
+                "bg-card",
+                "border-red-500 border-2"
               )}
               style={{
                 height: scrollHeight
@@ -131,11 +164,11 @@ const SongData = ({ parent }) => {
               </motion.div>
               <div
                 className={clsx(
-                  "flex flex-col justify-center h-[100px] transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit",
+                  "relative flex flex-col justify-center h-[100px] transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit origin-left",
                   // "border-red-500 border-2",
                   // scrolled ? "opacity-100 w-[300px]" : "w-[0%] opacity-0",
                   scrolled
-                    ? "opacity-100 sm:w-[500px] w-[300px]"
+                    ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0"
                     : "w-[0%] opacity-0"
                 )}
               >
@@ -156,6 +189,8 @@ const SongData = ({ parent }) => {
             </motion.div>
           </div>
           <div
+            // id="scroll-target"
+            ref={ref}
             className={clsx(
               "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:hidden"
               // scrolled ? "opacity-0 -z-10" : "opacity-100"

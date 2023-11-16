@@ -16,14 +16,14 @@ export default function RootLayout({ children }) {
   return (
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <ContextProvider>
             <div className="flex flex-col h-full lg:flex-row">
-              <div className="fixed top-0 left-0 w-full h-fit lg:w-64 lg:min-w-[16rem] z-20">
+              <div className="fixed top-0 left-0 w-full h-fit lg:w-64 lg:min-w-[16rem] z-20 lg:p-2">
                 <Sidebar />
               </div>
-              <div className="relative top-[56px] lg:top-0 lg:left-[256px] lg:w-[calc(100dvw-256px)]">
+              <div className="relative top-[56px] lg:top-0 lg:left-[256px] lg:w-[calc(99dvw-256px-8px)]">
                 <Main children={children} />
               </div>
             </div>
