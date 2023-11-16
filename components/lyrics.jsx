@@ -48,7 +48,7 @@ const Lyrics = () => {
   }, [song]);
 
   const formatLyrics = (lyricsData) => {
-    console.log("Lyrics: " + lyricsData.lyrics_body);
+    // console.log("Lyrics: " + lyricsData.lyrics_body);
 
     // The Musixmatch API has an annoying grammatical problem so we'll change that part of its returned data
     const lyricsBody = lyricsData.lyrics_body.replace(

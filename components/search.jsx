@@ -10,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "./ui/tooltip";
+import clsx from "clsx";
 // import { clientAccessToken } from "@/lib/spotify";
 
 const Search = ({ setShowMenu }) => {
@@ -22,7 +23,7 @@ const Search = ({ setShowMenu }) => {
   const [status, setStatus] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { setSong } = useContext(SongContext);
+  const { song, setSong } = useContext(SongContext);
 
   useEffect(() => {
     console.log("Search useEffect");
@@ -54,6 +55,7 @@ const Search = ({ setShowMenu }) => {
   const searchSelectSong = (song) => {
     console.log("searchSelectSong: " + song);
     const thisSong = {
+      id: song.id,
       albumArt: song.album.images[1].url,
       songName: song.name,
       artists: song.artists,
@@ -81,33 +83,41 @@ const Search = ({ setShowMenu }) => {
       />
       {(data && (
         <div className="w-full md:h-[calc(100dvh-56px-40px-48px-16px-32px-40px)] h-[calc(100dvh-40px-56px-48px-16px-40px)] overflow-y-scroll">
-          {data.items.map((song, index) => (
-            <TooltipProvider delayDuration={200} key={`song.id-${index}`}>
+          {data.items.map((item, index) => (
+            <TooltipProvider delayDuration={200} key={`item.id-${index}`}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div
                     className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
-                    key={`song.id-${index}`}
+                    key={`item.id-${index}`}
                     onClick={() => {
-                      searchSelectSong(song);
+                      searchSelectSong(item);
                     }}
                   >
-                    <img className="w-16 h-16" src={song.album.images[2].url} />
+                    <img className="w-16 h-16" src={item.album.images[2].url} />
                     <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                      <span className="text-foreground">{song.name}</span>
+                      <span
+                        className={clsx(
+                          item.id == song?.id
+                            ? "text-[#1fdf64]"
+                            : "text-foreground"
+                        )}
+                      >
+                        {item.name}
+                      </span>
                       <br />
-                      <span className="text-muted">{song.artists[0].name}</span>
+                      <span className="text-muted">{item.artists[0].name}</span>
                       <br />
-                      <span className="text-foreground">{song.album.name}</span>
+                      <span className="text-foreground">{item.album.name}</span>
                     </p>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent side="right">
-                  <span>{song.name}</span>
+                  <span>{item.name}</span>
                   <br />
-                  {song.artists[0].name}
+                  {item.artists[0].name}
                   <br />
-                  {song.album.name}
+                  {item.album.name}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

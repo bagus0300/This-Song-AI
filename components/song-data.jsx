@@ -53,12 +53,16 @@ const SongData = ({ parent }) => {
   useEffect(() => {
     if (data) {
       const thisSong = {
+        id: data.item.id,
         albumArt: data.item.album.images[1].url,
         songName: data.item.name,
         artists: data.item.artists,
         albumName: data.item.album.name
       };
 
+      // console.log("Setting song: ", thisSong);
+
+      console.log("Song id: ", thisSong.id);
       setSong(thisSong);
     } else {
       setSong(null);
@@ -117,12 +121,14 @@ const SongData = ({ parent }) => {
       console.log(select);
 
       const thisSong = {
+        id: select.id,
         albumArt: select.albumArt,
         songName: select.songName,
         artists: select.artists,
         albumName: select.albumName
       };
 
+      console.log("Song id: ", thisSong);
       setSong(thisSong);
     }
   };
@@ -180,6 +186,7 @@ const SongData = ({ parent }) => {
                   }}
                 >
                   {song.songName}
+                  {/* {song.id} */}
                   {/* {scrollHeight.current} */}
                 </h1>
                 <h2 className="text-base text-muted sm:text-lg min-w-[300px]">
@@ -204,6 +211,7 @@ const SongData = ({ parent }) => {
               }}
             >
               {song.songName}
+              {/* {song.id} */}
             </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
