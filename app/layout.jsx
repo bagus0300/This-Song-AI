@@ -3,8 +3,8 @@ import { inter } from "@/components/ui/fonts";
 import Sidebar from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/context/ContextProvider";
-import { accessToken, logout } from "@/lib/spotify";
-import SongData from "@/components/song-data";
+// import { accessToken, logout } from "@/lib/spotify";
+// import SongData from "@/components/song-data";
 import Main from "@/components/ui/main";
 
 export const metadata = {

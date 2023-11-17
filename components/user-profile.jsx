@@ -26,7 +26,11 @@ const UserProfile = () => {
   const { replace } = useRouter();
 
   useEffect(() => {
-    setToken(accessToken);
+    const getAccessToken = () => {
+      console.log("user-profile.js: Getting access token...");
+      setToken(accessToken);
+    };
+    if (!token) catchErrors(getAccessToken());
   }, []);
 
   useEffect(() => {
@@ -80,8 +84,6 @@ const UserProfile = () => {
       </a>
     </>
   );
-
-  return;
 };
 
 export default UserProfile;
