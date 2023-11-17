@@ -94,6 +94,8 @@ const SongData = ({ parent }) => {
     }
 
     return () => {
+      setScrolled(false);
+      scrollTo(0, 0);
       if (scrollTarget) {
         observer.unobserve(scrollTarget);
       }
@@ -108,6 +110,8 @@ const SongData = ({ parent }) => {
     setData(null);
     setStatus(null);
     setScrolled(false);
+
+    scrollTo(0, 0);
 
     if (!select && token) {
       const fetchData = async () => {
@@ -171,7 +175,7 @@ const SongData = ({ parent }) => {
               </motion.div>
               <div
                 className={clsx(
-                  "relative flex flex-col justify-center h-[100px] transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit origin-left",
+                  "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0",
                   // "border-red-500 border-2",
                   // scrolled ? "opacity-100 w-[300px]" : "w-[0%] opacity-0",
                   scrolled
@@ -186,6 +190,7 @@ const SongData = ({ parent }) => {
                   }}
                 >
                   {song.songName}
+                  {/* {scrolled.toString()} */}
                   {/* {song.id} */}
                   {/* {scrollHeight.current} */}
                 </h1>
@@ -202,7 +207,7 @@ const SongData = ({ parent }) => {
             // id="scroll-target"
             ref={ref}
             className={clsx(
-              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:hidden"
+              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:h-0 overflow-hidden"
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
@@ -213,6 +218,7 @@ const SongData = ({ parent }) => {
               }}
             >
               {song.songName}
+              {/* {scrolled.toString()} */}
               {/* {song.id} */}
             </h1>
             <h2 className="text-2xl text-muted">
