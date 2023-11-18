@@ -47,7 +47,7 @@ const Page = () => {
 
       scrollTo(0, 0);
 
-      if (token && !select) {
+      if (!select) {
         const fetchData = async () => {
           console.log("Getting currently playing song...");
           const currentlyPlaying = await getCurrentlyPlaying();
