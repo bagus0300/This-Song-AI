@@ -139,7 +139,7 @@ const Page = ({ params }) => {
               }}
             >
               <Link
-                href="/song/current"
+                href="/song"
                 style={{
                   cursor: "default"
                 }}
