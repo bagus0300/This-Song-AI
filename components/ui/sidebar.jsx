@@ -9,6 +9,7 @@ import SidebarTabs from "./sidebar-tabs";
 import LoginButton from "./login-button";
 import UserProfile from "../user-profile";
 import { TokenContext } from "@/context/ContextProvider";
+import { Music } from "lucide-react";
 
 const BACKEND_URI = "http://192.168.4.158:8000";
 
@@ -25,7 +26,9 @@ const Sidebar = () => {
     <div className="z-20 flex flex-col">
       <div className="z-20 flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-lg bg-card h-14">
         <Link href="/">
-          <div className="font-extrabold text-foreground">This Song</div>
+          <div className="font-extrabold text-foreground">
+            <Music /> This Song
+          </div>
         </Link>
         <section id="toggle-buttons" className="flex gap-2">
           <ModeToggle />
