@@ -77,7 +77,11 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         <div className="flex flex-col gap-2">
           <div className="text-base whitespace-pre-line">
             {lyrics.body}
-            <script type="text/javascript" src={lyrics.trackingURL}></script>
+            <script
+              type="text/javascript"
+              src={lyrics.trackingURL}
+              defer
+            ></script>
           </div>
           <div className="text-xs italic">{lyrics.copyright}</div>
         </div>
