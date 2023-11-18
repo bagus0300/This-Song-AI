@@ -73,8 +73,8 @@ const UserProfile = () => {
     if (token) catchErrors(fetchData());
     console.log("Pathname: " + pathname);
     if (searchParams.has("access_token")) {
-      replace(`${pathname}`);
-      // window.location.href = "/song/current";
+      // replace(`${pathname}`);
+      window.location.href = "/song";
     }
   }, [token, pathname, replace, searchParams]);
 
