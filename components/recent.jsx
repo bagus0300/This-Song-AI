@@ -1,14 +1,9 @@
-import { React, useState, useEffect, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import { getRecentlyPlayed } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "@/components/ui/tooltip";
-import { SongContext } from "@/context/ContextProvider";
-import clsx from "clsx";
+
+import SongItem from "@/components/ui/song-item";
+import { usePathname } from "next/navigation";
 
 const Recent = ({ setShowMenu }) => {
   /**
@@ -19,7 +14,7 @@ const Recent = ({ setShowMenu }) => {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
 
-  const { song, setSong } = useContext(SongContext);
+  const pathname = usePathname();
 
   useEffect(() => {
     getRecentSongs();
@@ -42,72 +37,18 @@ const Recent = ({ setShowMenu }) => {
     catchErrors(fetchData());
   };
 
-  const recentSelectSong = (song) => {
-    console.log("recentSelectSong: ", song);
-    const thisSong = {
-      id: song.track.id,
-      albumArt: song.track.album.images[1].url,
-      songName: song.track.name,
-      artists: song.track.artists,
-      albumName: song.track.album.name
-    };
-    setSong(thisSong);
-    setShowMenu(false);
-  };
-
   return (
     <>
-      {(data && (
-        <div>
-          {data.items.map((item, index) => (
-            <TooltipProvider delayDuration={200} key={`item.track.id-${index}`}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div
-                    className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
-                    key={`item.track.id-${index}`}
-                    onClick={() => {
-                      recentSelectSong(item);
-                    }}
-                  >
-                    <img
-                      className="w-16 h-16"
-                      src={item.track.album.images[2].url}
-                    />
-                    <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                      <span
-                        className={clsx(
-                          item.track.id == song?.id
-                            ? "text-[#1fdf64]"
-                            : "text-foreground"
-                        )}
-                      >
-                        {item.track.name}
-                      </span>
-                      <br />
-                      <span className="text-muted">
-                        {item.track.artists[0].name}
-                        {/* {item.track.id} */}
-                      </span>
-                      <br />
-                      <span className="text-foreground">
-                        {item.track.album.name}
-                      </span>
-                    </p>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent side="right">
-                  <span>{item.track.name}</span>
-                  <br />
-                  {item.track.artists[0].name}
-                  <br />
-                  {item.track.album.name}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          ))}
-        </div>
-      )) ||
+      {(data &&
+        data.items.map((item, index) => (
+          <SongItem
+            // We can't set the key to the song's id because the same song could be in the recently-played list multiple times, so we'll use the index instead
+            key={index}
+            item={item.track}
+            path={pathname}
+            setShowMenu={setShowMenu}
+          />
+        ))) ||
         (status == 204 && (
           <>
             <p>No content to display.</p>

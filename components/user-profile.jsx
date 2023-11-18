@@ -56,6 +56,7 @@ const UserProfile = () => {
 
           setProfile(profile);
           replace(`${pathname}`);
+          // window.location.href = "/song";
         } else {
           console.error(`Failed to get user profile! (${res.status})`);
         }
