@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div className="z-20 flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-lg bg-card h-14">
         <Link href="/">
           <div className="font-extrabold text-foreground hover:text-[#1fdf64]">
-            <span className="inline-flex gap-2">
+            <span className="inline-flex gap-2 align-middle">
               <Music4 />
               This Song
             </span>
