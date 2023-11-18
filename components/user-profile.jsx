@@ -21,6 +21,7 @@ import {
 } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const UserProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -56,14 +57,13 @@ const UserProfile = () => {
 
           setProfile(profile);
           replace(`${pathname}`);
-          // window.location.href = "/song";
         } else {
           console.error(`Failed to get user profile! (${res.status})`);
         }
       }
     };
 
-    catchErrors(fetchData());
+    if (token) catchErrors(fetchData());
   }, [token]);
 
   if (profile) {
@@ -94,6 +94,13 @@ const UserProfile = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+    );
+  } else if (token) {
+    return (
+      <div className="flex items-center justify-center w-full gap-2 p-1 rounded-sm bg-primary">
+        <Skeleton className="w-10 h-10 rounded-full" />
+        <Skeleton className="w-36 h-9" />
+      </div>
     );
   } else {
     return (
