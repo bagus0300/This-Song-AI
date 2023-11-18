@@ -67,7 +67,7 @@ const Page = ({ params }) => {
       }
     };
     catchErrors(fetchData());
-  }, []);
+  }, [id, setSongID]);
 
   // Run this hook when the songID changes; by that point, the DOM will be ready so the ref will be defined
   useEffect(() => {

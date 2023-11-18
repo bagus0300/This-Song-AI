@@ -4,8 +4,6 @@ import Sidebar from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/context/ContextProvider";
 // import { accessToken, logout } from "@/lib/spotify";
-// import SongData from "@/components/song-data";
-import Main from "@/components/ui/main";
 
 export const metadata = {
   title: "This Song",
@@ -25,7 +23,6 @@ export default function RootLayout({ children }) {
               </div>
               <div className="relative top-[56px] lg:top-0 lg:left-[256px] lg:w-[calc(99dvw-256px-8px)]">
                 {children}
-                {/* <Main children={children} /> */}
               </div>
             </div>
           </ContextProvider>

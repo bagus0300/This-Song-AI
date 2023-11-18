@@ -20,7 +20,7 @@ import {
   logout
 } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const UserProfile = () => {
@@ -30,6 +30,8 @@ const UserProfile = () => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
     const getToken = () => {
       console.log("user-profile.js: Getting access token...");
@@ -38,33 +40,43 @@ const UserProfile = () => {
       setToken(accessToken);
     };
     catchErrors(getToken());
-  }, []);
+  }, [setToken]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
         console.log("Getting user profile...");
-        const res = await getCurrentUserProfile();
-        if (res.status === 200) {
-          console.log("res: ", res);
+        try {
+          const res = await getCurrentUserProfile();
+          if (res.status === 200) {
+            console.log("res: ", res);
 
-          const profile = {
-            id: res.data.id,
-            display_name: res.data.display_name,
-            images: res.data.images,
-            link: res.data.external_urls.spotify
-          };
+            const profile = {
+              id: res.data.id,
+              display_name: res.data.display_name,
+              images: res.data.images,
+              link: res.data.external_urls.spotify
+            };
 
-          setProfile(profile);
-          replace(`${pathname}`);
-        } else {
-          console.error(`Failed to get user profile! (${res.status})`);
+            setProfile(profile);
+          } else {
+            console.error(`Failed to get user profile! (${res.status})`);
+          }
+        } catch (err) {
+          console.log(
+            "Tried to get user profile before token was set... Will try again."
+          );
         }
       }
     };
 
     if (token) catchErrors(fetchData());
-  }, [token]);
+    console.log("Pathname: " + pathname);
+    if (searchParams.has("access_token")) {
+      replace(`${pathname}`);
+      // window.location.href = "/song/current";
+    }
+  }, [token, pathname, replace, searchParams]);
 
   if (profile) {
     return (

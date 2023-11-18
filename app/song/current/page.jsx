@@ -35,18 +35,45 @@ const Page = () => {
   const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 
   useEffect(() => {
+    // Awaits the song that's currently playing and sets state variables accordingly
+    const getSong = (select) => {
+      // Clear the previous state variables
+      setData(null);
+      setStatus(null);
+      setScrolled(false);
+
+      setSongID(null);
+
+      scrollTo(0, 0);
+
+      if (!select) {
+        const fetchData = async () => {
+          console.log("Getting currently playing song...");
+          const currentlyPlaying = await getCurrentlyPlaying();
+          setData(currentlyPlaying.data);
+          setStatus(currentlyPlaying.status);
+        };
+        catchErrors(fetchData());
+      } else if (select) {
+        console.log(select);
+
+        const thisSong = {
+          id: select.id,
+          albumArt: select.albumArt,
+          songName: select.songName,
+          artists: select.artists,
+          albumName: select.albumName
+        };
+
+        console.log("Song id: ", thisSong);
+        setSongID(thisSong.id);
+        setSong(thisSong);
+      }
+    };
+
     setInit(1);
     getSong();
-
-    window.addEventListener("scroll", stick);
-    return () => {
-      window.removeEventListener("scroll", stick);
-    };
-  }, [token]);
-
-  const stick = () => {
-    // window.scrollY > 200 ? setScrolled(true) : setScrolled(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -67,7 +94,7 @@ const Page = () => {
       setSongID(null);
       setSong(null);
     }
-  }, [data]);
+  }, [data, setSongID]);
 
   // Force a rerender when the song changes
   useEffect(() => {
@@ -104,42 +131,6 @@ const Page = () => {
 
   console.log("Rendering song/current/page.jsx");
 
-  // Awaits the song that's currently playing and sets state variables accordingly
-  const getSong = (select) => {
-    // Clear the previous state variables
-    setData(null);
-    setStatus(null);
-    setScrolled(false);
-
-    setSongID(null);
-
-    scrollTo(0, 0);
-
-    if (!select && token) {
-      const fetchData = async () => {
-        console.log("Getting currently playing song...");
-        const currentlyPlaying = await getCurrentlyPlaying();
-        setData(currentlyPlaying.data);
-        setStatus(currentlyPlaying.status);
-      };
-      catchErrors(fetchData());
-    } else if (select) {
-      console.log(select);
-
-      const thisSong = {
-        id: select.id,
-        albumArt: select.albumArt,
-        songName: select.songName,
-        artists: select.artists,
-        albumName: select.albumName
-      };
-
-      console.log("Song id: ", thisSong);
-      setSongID(thisSong.id);
-      setSong(thisSong);
-    }
-  };
-
   return (
     <section className="flex flex-col items-center justify-center align-bottom">
       {(song && (
@@ -160,7 +151,8 @@ const Page = () => {
                 className="relative group"
                 // className="border-2 border-red-500"
                 onClick={() => {
-                  getSong(null);
+                  // getSong(null);
+                  window.location.reload();
                 }}
                 style={{
                   width: scrollHeight,
