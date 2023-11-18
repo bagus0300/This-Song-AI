@@ -4,6 +4,7 @@ import { catchErrors } from "@/lib/utils";
 
 import SongItem from "@/components/ui/song-item";
 import { usePathname } from "next/navigation";
+import { Skeleton } from "./ui/skeleton";
 
 const Recent = ({ setShowMenu }) => {
   /**
@@ -53,11 +54,19 @@ const Recent = ({ setShowMenu }) => {
           <>
             <p>No content to display.</p>
           </>
-        )) || (
-          <>
-            <p>Loading recent songs...</p>
-          </>
-        )}
+        )) ||
+        new Array(10).fill(0).map((item, index) => (
+          <div className="py-3">
+            <div className="flex flex-row items-start justify-start w-full gap-1 align-middle">
+              <Skeleton className="w-[64px] h-[64px]" />
+              <div className="flex flex-col items-start justify-start gap-2">
+                <Skeleton className="w-[200px] h-[16px]" />
+                <Skeleton className="w-[100px] h-[16px]" />
+                <Skeleton className="w-[150px] h-[16px]" />
+              </div>
+            </div>
+          </div>
+        ))}
     </>
   );
 };
