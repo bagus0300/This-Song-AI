@@ -24,7 +24,8 @@ export default function RootLayout({ children }) {
                 <Sidebar />
               </div>
               <div className="relative top-[56px] lg:top-0 lg:left-[256px] lg:w-[calc(99dvw-256px-8px)]">
-                <Main children={children} />
+                {children}
+                {/* <Main children={children} /> */}
               </div>
             </div>
           </ContextProvider>

@@ -7,8 +7,6 @@ import { TokenContext } from "@/context/ContextProvider";
 const SidebarTabs = ({ setShowMenu }) => {
   const { token } = useContext(TokenContext);
 
-  console.log("Rendering SidebarTabs");
-
   return (
     <div>
       <Tabs defaultValue="search">

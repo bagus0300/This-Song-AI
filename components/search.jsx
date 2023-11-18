@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Input } from "./ui/input";
-import { SongContext } from "@/context/ContextProvider";
+import { SongContext, TokenContext } from "@/context/ContextProvider";
 import { useDebouncedCallback } from "use-debounce";
 import { searchTracks } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
@@ -11,7 +11,6 @@ import {
   TooltipTrigger
 } from "./ui/tooltip";
 import clsx from "clsx";
-// import { clientAccessToken } from "@/lib/spotify";
 
 const Search = ({ setShowMenu }) => {
   /**
@@ -25,13 +24,7 @@ const Search = ({ setShowMenu }) => {
 
   const { song, setSong } = useContext(SongContext);
 
-  useEffect(() => {
-    console.log("Search useEffect");
-
-    return () => {
-      console.log("Search unmounted!");
-    };
-  }, []);
+  const { token } = useContext(TokenContext);
 
   const searchSongs = (term) => {
     // Clear the previous state variables
@@ -69,7 +62,7 @@ const Search = ({ setShowMenu }) => {
     searchSongs(term);
   }, 300);
 
-  console.log("Rendering Search");
+  // console.log("Rendering Search");
 
   return (
     <section className="flex flex-col items-center gap-1">

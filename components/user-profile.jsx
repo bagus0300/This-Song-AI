@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import LoginButton from "./ui/login-button";
-import Image from "next/image";
+// import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -11,10 +11,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
 import { TokenContext } from "@/context/ContextProvider";
 import { useContext } from "react";
-import { accessToken, getCurrentUserProfile, logout } from "@/lib/spotify";
+import {
+  checkToken,
+  getAccessToken,
+  getCurrentUserProfile,
+  logout
+} from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -26,20 +30,34 @@ const UserProfile = () => {
   const { replace } = useRouter();
 
   useEffect(() => {
-    const getAccessToken = () => {
+    const getToken = () => {
       console.log("user-profile.js: Getting access token...");
+      const accessToken = getAccessToken();
+      console.log("Access token: " + accessToken);
       setToken(accessToken);
     };
-    if (!token) catchErrors(getAccessToken());
+    catchErrors(getToken());
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
-        const profile = await getCurrentUserProfile();
-        if (profile) {
-          setProfile(profile.data);
+        console.log("Getting user profile...");
+        const res = await getCurrentUserProfile();
+        if (res.status === 200) {
+          console.log("res: ", res);
+
+          const profile = {
+            id: res.data.id,
+            display_name: res.data.display_name,
+            images: res.data.images,
+            link: res.data.external_urls.spotify
+          };
+
+          setProfile(profile);
           replace(`${pathname}`);
+        } else {
+          console.error(`Failed to get user profile! (${res.status})`);
         }
       }
     };
@@ -66,6 +84,7 @@ const UserProfile = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => {
+              setProfile(null);
               setToken(null);
               logout();
             }}
@@ -75,15 +94,15 @@ const UserProfile = () => {
         </DropdownMenuContent>
       </DropdownMenu>
     );
+  } else {
+    return (
+      <>
+        <a href="http://192.168.4.158:8000/login">
+          <LoginButton />
+        </a>
+      </>
+    );
   }
-
-  return (
-    <>
-      <a href="http://192.168.4.158:8000/login">
-        <LoginButton />
-      </a>
-    </>
-  );
 };
 
 export default UserProfile;
