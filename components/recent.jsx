@@ -56,7 +56,7 @@ const Recent = ({ setShowMenu }) => {
           </>
         )) ||
         new Array(10).fill(0).map((item, index) => (
-          <div className="py-3">
+          <div className="py-3" key={index}>
             <div className="flex flex-row items-start justify-start w-full gap-1 align-middle">
               <Skeleton className="min-w-[64px] min-h-[64px] w-[64px] h-[64px]" />
               <div className="flex flex-col items-start justify-start gap-2">
