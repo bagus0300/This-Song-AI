@@ -5,7 +5,7 @@ import { getLyrics } from "@/lib/musicmatch";
 import { catchErrors } from "@/lib/utils";
 import React, { useContext, useEffect, useState } from "react";
 
-const Lyrics = () => {
+const Lyrics = ({ songName, artistName, albumName }) => {
   /**
    * STATE VARIABLES
    * Info is the data retured by the Musixmatch API when given the (first, if multiple) artist's name
@@ -13,7 +13,7 @@ const Lyrics = () => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
 
-  const { song } = useContext(SongContext);
+  // const { song } = useContext(SongContext);
 
   // The useEffect hook will run whenever the song changes
   useEffect(() => {
@@ -23,9 +23,9 @@ const Lyrics = () => {
 
     const fetchData = async () => {
       const songLyricsResponse = await getLyrics(
-        song.songName,
-        song.artists,
-        song.albumName
+        songName,
+        artistName,
+        albumName
       );
       console.log(songLyricsResponse);
       const statusCode = songLyricsResponse.data.message?.header?.status_code;
@@ -43,9 +43,9 @@ const Lyrics = () => {
     };
 
     // If a song exists, fetch the corresponding data
-    if (song) catchErrors(fetchData());
+    if (songName) catchErrors(fetchData());
     else setLyrics(null);
-  }, [song]);
+  }, [songName, artistName, albumName]);
 
   const formatLyrics = (lyricsData) => {
     // console.log("Lyrics: " + lyricsData.lyrics_body);
@@ -88,7 +88,7 @@ const Lyrics = () => {
             No lyrics found.
           </p>
         )) ||
-        (song && <p>Loading data for {song.songName}...</p>)}
+        (songName && <p>Loading data for {songName}...</p>)}
     </div>
   );
 };

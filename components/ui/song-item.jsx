@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -7,8 +8,11 @@ import {
 } from "@/components/ui/tooltip";
 import clsx from "clsx";
 import Link from "next/link";
+import { SongContext } from "@/context/ContextProvider";
 
 const SongItem = ({ item, path, setShowMenu }) => {
+  const { songID } = useContext(SongContext);
+
   return (
     <>
       <TooltipProvider delayDuration={200}>
@@ -30,9 +34,9 @@ const SongItem = ({ item, path, setShowMenu }) => {
                 <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
                   <span
                     className={clsx(
-                      path === `/song/${item.id}`
-                        ? "text-[#1fdf64]"
-                        : "text-foreground"
+                      // Use context instead of path so that /song/current can give the highlight effect as well.
+                      // path === `/song/${item.id}` ||
+                      songID === item.id ? "text-[#1fdf64]" : "text-foreground"
                     )}
                   >
                     {item.name}

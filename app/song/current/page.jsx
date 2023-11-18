@@ -7,6 +7,7 @@ import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import clsx from "clsx";
+import Lyrics from "@/components/lyrics";
 
 const Page = () => {
   /**
@@ -24,7 +25,8 @@ const Page = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const { token } = useContext(TokenContext);
-  const { song, setSong } = useContext(SongContext);
+  const { songID, setSongID } = useContext(SongContext);
+  const [song, setSong] = useState(null);
 
   const ref = useRef(null);
 
@@ -59,8 +61,10 @@ const Page = () => {
       // console.log("Setting song: ", thisSong);
 
       console.log("Song id: ", thisSong.id);
+      setSongID(thisSong.id);
       setSong(thisSong);
     } else {
+      setSongID(null);
       setSong(null);
     }
   }, [data]);
@@ -107,6 +111,8 @@ const Page = () => {
     setStatus(null);
     setScrolled(false);
 
+    setSongID(null);
+
     scrollTo(0, 0);
 
     if (!select && token) {
@@ -129,6 +135,7 @@ const Page = () => {
       };
 
       console.log("Song id: ", thisSong);
+      setSongID(thisSong.id);
       setSong(thisSong);
     }
   };
@@ -222,6 +229,11 @@ const Page = () => {
             </h2>
             <h3 className="text-xl text-">{song.albumName}</h3>
           </div>
+          <Lyrics
+            songName={song.songName}
+            artistName={song.artists[0].name}
+            albumName={song.albumName}
+          />
         </>
       )) ||
         (status == 204 && (

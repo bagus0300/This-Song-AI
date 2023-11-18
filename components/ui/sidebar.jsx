@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   return (
     <div className="z-20 flex flex-col">
-      <div className="flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-lg bg-card h-14">
+      <div className="z-20 flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-lg bg-card h-14">
         <Link href="/">
           <div className="font-extrabold text-foreground">This Song</div>
         </Link>
@@ -35,18 +35,21 @@ const Sidebar = () => {
           />
         </section>
       </div>
-      <div className="relative flex flex-row space-x-2 grow lg:flex-col lg:space-x-0 lg:space-y-2">
+      <div className="relative z-10 flex flex-row space-x-2 grow lg:flex-col lg:space-x-0 lg:space-y-2">
         <div
           className={clsx(
-            "lg:static lg:h-[calc(100dvh-80px)] h-[calc(100dvh-56px)] scale-y-0 lg:scale-y-100 origin-top absolute w-full lg:rounded-lg grow lg:block transition-all duration-200 bg-card lg:duration-0",
+            "lg:static lg:h-[calc(100dvh-80px)] h-[calc(100dvh-56px)] lg:translate-y-0 origin-top absolute w-full lg:rounded-lg grow lg:block transition-all duration-300 ease-out bg-card lg:duration-0 lg:opacity-100",
             // If the menu is open, set its height to the dynamic viewport height minus the header height.
-            showMenu ? "h-[calc(100dvh-56px)] scale-y-100" : "scale-y-0"
+            // showMenu ? "h-[calc(100dvh-56px)] scale-y-100" : "scale-y-0"
+            showMenu
+              ? "h-[calc(100dvh-56px)] translate-y-0 opacity-100"
+              : "-translate-y-[100%] opacity-0"
           )}
         >
           <div
             className={clsx(
-              "h-full lg:flex flex-col justify-between p-1",
-              showMenu ? "flex" : "hidden"
+              "h-full lg:flex flex-col justify-between p-1 flex"
+              // showMenu ? "flex" : "hidden"
             )}
           >
             <SidebarTabs setShowMenu={setShowMenu} />

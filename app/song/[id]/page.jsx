@@ -1,5 +1,5 @@
 "use client";
-import { TokenContext } from "@/context/ContextProvider";
+import { SongContext, TokenContext } from "@/context/ContextProvider";
 import { getTrack } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import { useScroll, useTransform, motion } from "framer-motion";
@@ -8,6 +8,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
+import Link from "next/link";
+import Lyrics from "@/components/lyrics";
 
 const Page = ({ params }) => {
   /**
@@ -21,6 +23,7 @@ const Page = ({ params }) => {
 
   const [scrolled, setScrolled] = useState(false);
   const { token } = useContext(TokenContext);
+  const { songID, setSongID } = useContext(SongContext);
 
   const ref = useRef(null);
 
@@ -36,6 +39,8 @@ const Page = ({ params }) => {
     // setData(null);
     setStatus(null);
     setScrolled(false);
+
+    setSongID(null);
 
     const fetchData = async () => {
       console.log("Getting song...");
@@ -57,11 +62,43 @@ const Page = ({ params }) => {
 
         console.log("thisSong", thisSong);
 
+        setSongID(id);
         setSong(thisSong);
       }
     };
     catchErrors(fetchData());
   }, []);
+
+  // Run this hook when the songID changes; by that point, the DOM will be ready so the ref will be defined
+  useEffect(() => {
+    // Toggle the scrolled state variable when the scroll target is intersected
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+        }
+      },
+      { threshold: 0, rootMargin: "-156px" }
+    );
+
+    const scrollTarget = ref.current;
+    console.log("Scroll target: ", scrollTarget);
+
+    if (scrollTarget) {
+      console.log("Observe");
+      observer.observe(scrollTarget);
+    }
+
+    return () => {
+      setScrolled(false);
+      scrollTo(0, 0);
+      if (scrollTarget) {
+        observer.unobserve(scrollTarget);
+      }
+    };
+  }, [songID]);
 
   // These two functions are used to convert the album art to a base64 string representing a shimmer effect, which is used as a placeholder for the Image component
   // https://image-component.nextjs.gallery/shimmer
@@ -101,32 +138,39 @@ const Page = ({ params }) => {
                 height: scrollHeight
               }}
             >
-              <motion.div
-                className="relative group"
-                // className="border-2 border-red-500"
-                // onClick={() => {
-                //   getSong(null);
-                // }}
+              <Link
+                href="/song/current"
                 style={{
-                  width: scrollHeight,
-                  height: scrollHeight
+                  cursor: "default"
                 }}
               >
-                <Image
-                  className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
-                  src={song.album.images[1].url}
-                  width={300}
-                  height={300}
-                  placeholder={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(300, 300)
-                  )}`}
-                  alt="Album art"
-                />
-                <img
-                  className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
-                  src="/images/refresh.png"
-                />
-              </motion.div>
+                <motion.div
+                  className="relative group"
+                  // className="border-2 border-red-500"
+                  // onClick={() => {
+                  //   getSong(null);
+                  // }}
+                  style={{
+                    width: scrollHeight,
+                    height: scrollHeight
+                  }}
+                >
+                  <Image
+                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    src={song.album.images[1].url}
+                    width={300}
+                    height={300}
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(300, 300)
+                    )}`}
+                    alt="Album art"
+                  />
+                  <img
+                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
+                    src="/images/refresh.png"
+                  />
+                </motion.div>
+              </Link>
               <div
                 className={clsx(
                   "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0",
@@ -180,6 +224,11 @@ const Page = ({ params }) => {
             </h2>
             <h3 className="text-xl text-">{song.album.name}</h3>
           </div>
+          <Lyrics
+            songName={song.name}
+            artistName={song.artists[0].name}
+            albumName={song.album.name}
+          />
         </>
       )) ||
         (status >= 400 && (
