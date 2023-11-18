@@ -74,7 +74,7 @@ const Page = () => {
 
     setInit(1);
     getSong();
-  }, []);
+  }, [setSongID]);
 
   useEffect(() => {
     if (data) {
