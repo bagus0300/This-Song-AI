@@ -260,7 +260,7 @@ const Page = () => {
         (!token && (
           <>
             <p className="relative top-[56px]">
-              Log in to Spotify to see what you're listening to.
+              Log in to Spotify to see what you&apos;re listening to.
             </p>
           </>
         )) || (
