@@ -9,6 +9,7 @@ import {
 import clsx from "clsx";
 import Link from "next/link";
 import { SongContext } from "@/context/ContextProvider";
+import Image from "next/image";
 
 const SongItem = ({ item, path, setShowMenu }) => {
   const { songID } = useContext(SongContext);
@@ -30,7 +31,13 @@ const SongItem = ({ item, path, setShowMenu }) => {
                 //   recentSelectSong(item);
                 // }}
               >
-                <img className="w-16 h-16" src={item.album.images[2].url} />
+                <Image
+                  className="w-16 h-16"
+                  src={item.album.images[2].url}
+                  width={300}
+                  height={300}
+                  alt="Album image"
+                />
                 <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
                   <span
                     className={clsx(
