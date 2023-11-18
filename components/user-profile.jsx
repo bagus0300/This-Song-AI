@@ -103,9 +103,13 @@ const UserProfile = () => {
       </div>
     );
   } else {
+    const LOGIN_URI =
+      process.env.NODE_ENV !== "production"
+        ? "http://localhost:8000/login"
+        : "https://spotify-node1313-f6ce692711e7.herokuapp.com/login";
     return (
       <>
-        <a href="http://192.168.4.158:8000/login">
+        <a href={LOGIN_URI}>
           <LoginButton />
         </a>
       </>
