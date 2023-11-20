@@ -115,9 +115,8 @@ const UserProfile = () => {
       </div>
     );
   } else {
-    const LOGIN_URI =
-      // "http://localhost:8000/login"
-      "https://spotify-node1313-f6ce692711e7.herokuapp.com/login";
+    const LOGIN_URI = "http://localhost:8000/login";
+    // "https://spotify-node1313-f6ce692711e7.herokuapp.com/login";
     return (
       <>
         <a href={LOGIN_URI}>

@@ -1,9 +1,12 @@
 "use client";
 import { SongContext } from "@/context/ContextProvider";
-import { getLyrics } from "@/lib/musicmatch";
+// import { getLyrics } from "@/lib/musicmatch";
 // import { getLyrics } from "@/lib/lyrics";
+import { getLyrics } from "@/lib/genius";
 import { catchErrors } from "@/lib/utils";
+import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
+import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
 
 const Lyrics = ({ songName, artistName, albumName }) => {
   /**
@@ -28,15 +31,20 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         albumName
       );
       console.log(songLyricsResponse);
-      const statusCode = songLyricsResponse.data.message?.header?.status_code;
+      const statusCode =
+        songLyricsResponse.data.message?.header?.status_code ||
+        songLyricsResponse.status;
       setStatus(statusCode);
 
       console.log("Lyrics status code: " + statusCode);
 
       if (statusCode == 200) {
-        const songLyrics = songLyricsResponse.data.message?.body?.lyrics;
+        const songLyrics =
+          songLyricsResponse.data.message?.body?.lyrics ||
+          songLyricsResponse.data;
         // console.log(songLyrics);
-        setLyrics(formatLyrics(songLyrics));
+        // setLyrics(formatLyrics(songLyrics));
+        setLyrics(testLyrics(songLyrics));
       } else {
         setLyrics(null);
       }
@@ -46,6 +54,14 @@ const Lyrics = ({ songName, artistName, albumName }) => {
     if (songName) catchErrors(fetchData());
     else setLyrics(null);
   }, [songName, artistName, albumName]);
+
+  const testLyrics = (lyricsData) => {
+    return {
+      body: lyricsData,
+      copyright: "",
+      trackingURL: ""
+    };
+  };
 
   const formatLyrics = (lyricsData) => {
     // console.log("Lyrics: " + lyricsData.lyrics_body);
@@ -84,6 +100,13 @@ const Lyrics = ({ songName, artistName, albumName }) => {
             ></script>
           </div>
           <div className="text-xs italic">{lyrics.copyright}</div>
+          <a
+            href="https://www.musixmatch.com/"
+            target="_blank"
+            className="w-[calc(384px/3)]"
+          >
+            <Image src={musixmatchLogo} alt="Musicxmatch logo" />
+          </a>
         </div>
       )) ||
         (status && (
