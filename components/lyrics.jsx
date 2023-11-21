@@ -6,7 +6,7 @@ import { getLyrics } from "@/lib/genius";
 import { catchErrors } from "@/lib/utils";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
+// import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
 import clsx from "clsx";
 import { Bars } from "react-loader-spinner";
 
@@ -21,6 +21,8 @@ const Lyrics = ({ songName, artistName, albumName }) => {
   const [showGPT, setShowGPT] = useState(false);
 
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
+
+  const musixmatchLogo = "/images/musixmatch_logo.svg";
 
   const GPT_ENDPOINT =
     process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -179,7 +181,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           <div
             className={clsx(
               "h-full transition-all duration-1000 whitespace-break-spaces",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-[500px]"
+              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-full"
             )}
           >
             <section className="pb-10 text-base lg:pb-0">
@@ -201,7 +203,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                         wrapperClass=""
                         visible={true}
                       />
-                      <p>Generating interpretation...</p>
+                      <p>Generating AI analysis...</p>
                     </div>
                   </div>
                 )}
