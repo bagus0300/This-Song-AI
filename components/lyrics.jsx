@@ -154,7 +154,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
           <div
             className={clsx(
-              "h-full flex flex-col w-fit gap-2 items-center text-center min-w-[350px]"
+              "h-full flex flex-col lg:w-fit w-full gap-2 items-center text-center min-w-[350px]"
             )}
           >
             <div className="text-base whitespace-pre-line">
@@ -178,7 +178,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           <div
             className={clsx(
               "h-full transition-all duration-1000 whitespace-break-spaces",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-[200px]"
+              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-[500px]"
             )}
           >
             <section className="pb-10 text-base lg:pb-0">
@@ -190,7 +190,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                   GPTInterpretation
                 ) : (
                   <div className="items-center justify-center text-center">
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center justify-center text-center">
                       <Bars
                         height="70"
                         width="70"
