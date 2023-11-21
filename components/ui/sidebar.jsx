@@ -8,19 +8,27 @@ import Search from "@/components/search";
 import SidebarTabs from "./sidebar-tabs";
 import LoginButton from "./login-button";
 import UserProfile from "../user-profile";
-import { TokenContext } from "@/context/ContextProvider";
+import { MenuContext, TokenContext } from "@/context/ContextProvider";
 import { Music4 } from "lucide-react";
 
 const BACKEND_URI = "http://192.168.4.158:8000";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { menu, setMenu } = useContext(MenuContext);
 
   const { token, setToken } = useContext(TokenContext);
 
   // useEffect(() => {
   //   setToken("Token!");
   // }, []);
+
+  useEffect(() => {
+    if (menu) {
+      setShowMenu(true);
+      setMenu(false);
+    }
+  }, [menu, setMenu]);
 
   return (
     <div className="z-20 flex flex-col">

@@ -8,7 +8,7 @@ import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 // import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
 import clsx from "clsx";
-import { Bars } from "react-loader-spinner";
+import { Bars, ThreeCircles } from "react-loader-spinner";
 
 const Lyrics = ({ songName, artistName, albumName }) => {
   /**
@@ -194,7 +194,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                 ) : (
                   <div className="items-center justify-center text-center">
                     <div className="flex flex-col items-center justify-center text-center">
-                      <Bars
+                      {/* <Bars
                         height="70"
                         width="70"
                         color="#1fdf64"
@@ -202,6 +202,18 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                         wrapperStyle={{}}
                         wrapperClass=""
                         visible={true}
+                      /> */}
+                      <ThreeCircles
+                        height="100"
+                        width="100"
+                        color="#1fdf64"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="three-circles-rotating"
+                        outerCircleColor=""
+                        innerCircleColor=""
+                        middleCircleColor=""
                       />
                       <p>Generating AI analysis...</p>
                     </div>
