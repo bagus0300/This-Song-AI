@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
 import clsx from "clsx";
+import { Bars } from "react-loader-spinner";
 
 const Lyrics = ({ songName, artistName, albumName }) => {
   /**
@@ -101,7 +102,9 @@ const Lyrics = ({ songName, artistName, albumName }) => {
 
       while (true) {
         const { value, done } = await reader.read();
-        if (done) break;
+        if (done) {
+          break;
+        }
         console.log("Received: ", value);
         setGPTInterpretation((prev) => (prev ? prev : "") + value);
       }
@@ -148,10 +151,10 @@ const Lyrics = ({ songName, artistName, albumName }) => {
   return (
     <div className="px-4 md:p-2">
       {(lyrics && (
-        <div className="flex flex-col-reverse items-start justify-center gap-2 align-top lg:flex-row">
+        <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
           <div
             className={clsx(
-              "flex-1 h-full flex flex-col w-full gap-2 items-center text-center"
+              "h-full flex flex-col w-fit gap-2 items-center text-center min-w-[350px]"
             )}
           >
             <div className="text-base whitespace-pre-line">
@@ -174,19 +177,34 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           </div>
           <div
             className={clsx(
-              "h-full transition-all duration-500",
-              GPTInterpretation ? "flex-1 flex-grow" : "flex-0"
+              "h-full transition-all duration-1000 whitespace-break-spaces",
+              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-[200px]"
             )}
           >
-            <section className="pb-10 text-base lg:py-0">
-              <h2 className="p-2 text-lg text-center">
+            <section className="pb-10 text-base lg:pb-0">
+              {/* <h2 className="items-center p-2 text-lg text-center">
                 Interpretation of lyrics:
-              </h2>
-              <p className="text-left">
-                {GPTInterpretation
-                  ? GPTInterpretation
-                  : "Generating interpretation..."}
-              </p>
+              </h2> */}
+              <div className="items-center text-left">
+                {GPTInterpretation ? (
+                  GPTInterpretation
+                ) : (
+                  <div className="items-center justify-center text-center">
+                    <div className="flex flex-col items-center text-center">
+                      <Bars
+                        height="70"
+                        width="70"
+                        color="#1fdf64"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                      />
+                      <p>Generating interpretation...</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </section>
           </div>
         </div>
@@ -197,7 +215,20 @@ const Lyrics = ({ songName, artistName, albumName }) => {
             No lyrics found.
           </p>
         )) ||
-        (songName && <p>Loading data for {songName}...</p>)}
+        (songName && (
+          <div className="flex flex-col items-center text-center">
+            <Bars
+              height="140"
+              width="140"
+              color="#1fdf64"
+              ariaLabel="bars-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+            <p>Loading data for {songName}...</p>
+          </div>
+        ))}
     </div>
   );
 };

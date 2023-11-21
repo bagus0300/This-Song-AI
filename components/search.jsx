@@ -5,6 +5,7 @@ import { searchTracks } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import SongItem from "@/components/ui/song-item";
 import { usePathname } from "next/navigation";
+import { Bars } from "react-loader-spinner";
 
 const Search = ({ setShowMenu }) => {
   /**
@@ -87,6 +88,15 @@ const Search = ({ setShowMenu }) => {
         (searchTerm && (
           <>
             <p>Searching for {searchTerm}...</p>
+            <Bars
+              height="30"
+              width="30"
+              color="#1fdf64"
+              ariaLabel="bars-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
           </>
         )) || <></>}
     </section>

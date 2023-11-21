@@ -23,6 +23,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loader-spinner": "^5.4.5",
     "react-use": "^17.4.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
