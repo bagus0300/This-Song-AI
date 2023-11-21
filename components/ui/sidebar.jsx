@@ -33,14 +33,26 @@ const Sidebar = () => {
   return (
     <div className="z-20 flex flex-col">
       <div className="z-20 flex items-center justify-between p-4 transition-none lg:mb-2 lg:rounded-lg bg-card h-14">
-        <Link href="/">
-          <div className="font-extrabold text-foreground hover:text-[#1fdf64]">
-            <span className="inline-flex gap-2 align-middle">
+        <div className="font-extrabold text-foreground">
+          <Link href="/">
+            <span className="inline-flex gap-2 align-middle hover:text-[#1fdf64]">
               <Music4 />
               This Song
             </span>
-          </div>
-        </Link>
+          </Link>
+          <a href="https://spotify.com" target="_blank">
+            <p className="flex items-center justify-center gap-1 align-middle group">
+              <span className="text-xs text-gray-400 group-hover:text-[#1fdf64]">
+                Powered by
+              </span>
+              <img
+                src="/images/Spotify_Logo_RGB_Green.png"
+                className="h-5 group-hover:brightness-125"
+              />
+            </p>
+          </a>
+        </div>
+
         <section id="toggle-buttons" className="flex gap-2">
           <ModeToggle />
           <MenuToggle

@@ -18,7 +18,7 @@ const Page = () => {
       <div className="flex flex-col items-center justify-center gap-5 p-10 text-base text-center align-bottom">
         <img src="/this_song.svg" alt="This Song logo" width={200} />
         <p>
-          Discover the meaning behind your favorite songs through AI-powered
+          Discover the meaning behind your favorite songs through AI-enhanced
           lyric analysis!
         </p>
         <button
