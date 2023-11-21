@@ -172,7 +172,8 @@ const Lyrics = ({ songName, artistName, albumName }) => {
               target="_blank"
               className="w-[calc(384px/3)]"
             >
-              <Image src={musixmatchLogo} alt="Musicxmatch logo" />
+              {/* <Image src={musixmatchLogo} alt="Musicxmatch logo" /> */}
+              <img src={musixmatchLogo} alt="Musicxmatch logo" />
             </a>
           </div>
           <div

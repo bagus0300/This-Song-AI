@@ -31,11 +31,16 @@ const SongItem = ({ item, path, setShowMenu }) => {
                 //   recentSelectSong(item);
                 // }}
               >
-                <Image
+                {/* <Image
                   className="w-16 h-16"
                   src={item.album.images[2].url}
                   width={300}
                   height={300}
+                  alt="Album image"
+                /> */}
+                <img
+                  className="w-16 h-16"
+                  src={item.album.images[2].url}
                   alt="Album image"
                 />
                 <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
