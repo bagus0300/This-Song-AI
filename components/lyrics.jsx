@@ -80,7 +80,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
 
   useEffect(() => {
     const fetchGPTResponse = async () => {
-      if (!lyrics) return;
+      if (!lyrics || lyrics.body == "No lyrics found") return;
       // console.log(`Asking GPT about ${songName} by ${artistName}...`);
       // console.log("Lyrics: ", lyrics);
 
@@ -180,8 +180,9 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           </div>
           <div
             className={clsx(
-              "h-full transition-all duration-1000 whitespace-break-spaces",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "w-full"
+              "h-full transition-all duration-1000 whitespace-break-spaces w-full",
+              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "lg:w-[200px]",
+              lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
             <section className="pb-10 text-base lg:pb-0">
@@ -189,12 +190,13 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                 Interpretation of lyrics:
               </h2> */}
               <div className="items-center text-left">
-                {GPTInterpretation ? (
-                  GPTInterpretation
-                ) : (
-                  <div className="items-center justify-center text-center">
-                    <div className="flex flex-col items-center justify-center text-center">
-                      {/* <Bars
+                {GPTInterpretation
+                  ? GPTInterpretation
+                  : lyrics &&
+                    lyrics.body != "No lyrics found" && (
+                      <div className="items-center justify-center text-center">
+                        <div className="flex flex-col items-center justify-center text-center">
+                          {/* <Bars
                         height="70"
                         width="70"
                         color="#1fdf64"
@@ -203,22 +205,22 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                         wrapperClass=""
                         visible={true}
                       /> */}
-                      <ThreeCircles
-                        height="100"
-                        width="100"
-                        color="#1fdf64"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                        ariaLabel="three-circles-rotating"
-                        outerCircleColor=""
-                        innerCircleColor=""
-                        middleCircleColor=""
-                      />
-                      <p>Generating AI analysis...</p>
-                    </div>
-                  </div>
-                )}
+                          <ThreeCircles
+                            height="100"
+                            width="100"
+                            color="#1fdf64"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                            ariaLabel="three-circles-rotating"
+                            outerCircleColor=""
+                            innerCircleColor=""
+                            middleCircleColor=""
+                          />
+                          <p>Generating AI analysis...</p>
+                        </div>
+                      </div>
+                    )}
               </div>
             </section>
           </div>
