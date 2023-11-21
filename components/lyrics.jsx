@@ -43,7 +43,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         artistName,
         albumName
       );
-      console.log(songLyricsResponse);
+      // console.log(songLyricsResponse);
       const statusCode =
         songLyricsResponse.data.message?.header?.status_code ||
         songLyricsResponse.status;
@@ -79,8 +79,8 @@ const Lyrics = ({ songName, artistName, albumName }) => {
   useEffect(() => {
     const fetchGPTResponse = async () => {
       if (!lyrics) return;
-      console.log(`Asking GPT about ${songName} by ${artistName}...`);
-      console.log("Lyrics: ", lyrics);
+      // console.log(`Asking GPT about ${songName} by ${artistName}...`);
+      // console.log("Lyrics: ", lyrics);
 
       const response = await fetch(GPT_ENDPOINT, {
         method: "POST",
@@ -94,7 +94,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         })
       });
 
-      console.log("Response body: ", response.body);
+      // console.log("Response body: ", response.body);
 
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
@@ -105,7 +105,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         if (done) {
           break;
         }
-        console.log("Received: ", value);
+        // console.log("Received: ", value);
         setGPTInterpretation((prev) => (prev ? prev : "") + value);
       }
 
