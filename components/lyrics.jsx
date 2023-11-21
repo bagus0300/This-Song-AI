@@ -21,6 +21,11 @@ const Lyrics = ({ songName, artistName, albumName }) => {
 
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
 
+  const GPT_ENDPOINT =
+    process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+      ? "http://192.168.4.158:8000/gpt"
+      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/gpt";
+
   // const { song } = useContext(SongContext);
 
   // The useEffect hook will run whenever the song changes
@@ -76,7 +81,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
       console.log(`Asking GPT about ${songName} by ${artistName}...`);
       console.log("Lyrics: ", lyrics);
 
-      const response = await fetch("http://192.168.4.158:8000/gpt", {
+      const response = await fetch(GPT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
