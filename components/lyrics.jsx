@@ -7,6 +7,7 @@ import { catchErrors } from "@/lib/utils";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
+import clsx from "clsx";
 
 const Lyrics = ({ songName, artistName, albumName }) => {
   /**
@@ -16,6 +17,10 @@ const Lyrics = ({ songName, artistName, albumName }) => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
 
+  const [showGPT, setShowGPT] = useState(false);
+
+  const [GPTInterpretation, setGPTInterpretation] = useState(null);
+
   // const { song } = useContext(SongContext);
 
   // The useEffect hook will run whenever the song changes
@@ -23,6 +28,8 @@ const Lyrics = ({ songName, artistName, albumName }) => {
     // Clear the previous state variables
     setLyrics(null);
     setStatus(null);
+
+    setGPTInterpretation(null);
 
     const fetchData = async () => {
       const songLyricsResponse = await getLyrics(
@@ -63,6 +70,52 @@ const Lyrics = ({ songName, artistName, albumName }) => {
     };
   };
 
+  useEffect(() => {
+    const fetchGPTResponse = async () => {
+      if (!lyrics) return;
+      console.log(`Asking GPT about ${songName} by ${artistName}...`);
+      console.log("Lyrics: ", lyrics);
+
+      const response = await fetch("http://192.168.4.158:8000/gpt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          trackName: songName,
+          artistName: artistName,
+          lyrics: lyrics.body.replace(/\n/g, " ")
+        })
+      });
+
+      console.log("Response body: ", response.body);
+
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        console.log("Received: ", value);
+        setGPTInterpretation((prev) => (prev ? prev : "") + value);
+      }
+
+      // const response = await axios({
+      //   method: "POST",
+      //   url: URL,
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   params: parameters
+      // });
+
+      // return response;
+    };
+
+    fetchGPTResponse();
+  }, [lyrics]);
+
   const formatLyrics = (lyricsData) => {
     // console.log("Lyrics: " + lyricsData.lyrics_body);
 
@@ -90,23 +143,47 @@ const Lyrics = ({ songName, artistName, albumName }) => {
   return (
     <div className="px-4 md:p-2">
       {(lyrics && (
-        <div className="flex flex-col gap-2">
-          <div className="text-base whitespace-pre-line">
-            {lyrics.body}
-            <script
-              type="text/javascript"
-              src={lyrics.trackingURL}
-              defer
-            ></script>
-          </div>
-          <div className="text-xs italic">{lyrics.copyright}</div>
-          <a
-            href="https://www.musixmatch.com/"
-            target="_blank"
-            className="w-[calc(384px/3)]"
+        <div className="flex flex-col-reverse items-start justify-center gap-2 align-top lg:flex-row">
+          <div
+            className={clsx(
+              "flex-1 h-full flex flex-col w-full gap-2 items-center text-center"
+            )}
           >
-            <Image src={musixmatchLogo} alt="Musicxmatch logo" />
-          </a>
+            <div className="text-base whitespace-pre-line">
+              {lyrics.body}
+              {/* {GPTInterpretation} */}
+              <script
+                type="text/javascript"
+                src={lyrics.trackingURL}
+                defer
+              ></script>
+            </div>
+            <div className="text-xs italic">{lyrics.copyright}</div>
+            <a
+              href="https://www.musixmatch.com/"
+              target="_blank"
+              className="w-[calc(384px/3)]"
+            >
+              <Image src={musixmatchLogo} alt="Musicxmatch logo" />
+            </a>
+          </div>
+          <div
+            className={clsx(
+              "h-full transition-all duration-500",
+              GPTInterpretation ? "flex-1 flex-grow" : "flex-0"
+            )}
+          >
+            <section className="pb-10 text-base lg:py-0">
+              <h2 className="p-2 text-lg text-center">
+                Interpretation of lyrics:
+              </h2>
+              <p className="text-left">
+                {GPTInterpretation
+                  ? GPTInterpretation
+                  : "Generating interpretation..."}
+              </p>
+            </section>
+          </div>
         </div>
       )) ||
         (status && (
