@@ -1,6 +1,7 @@
 "use client";
 
 import { MenuContext, TokenContext } from "@/context/ContextProvider";
+import { redirect } from "next/navigation";
 import React, { useContext } from "react";
 
 const Page = () => {
@@ -8,7 +9,8 @@ const Page = () => {
   const { menu, setMenu } = useContext(MenuContext);
 
   if (token) {
-    window.location.replace("/song");
+    // window.location.replace("/song");
+    redirect("/song");
   }
 
   if (token === false) {
@@ -29,8 +31,8 @@ const Page = () => {
     );
   } else if (token === null) {
     return (
-      <div className="flex flex-col items-center justify-center gap-5 p-10 text-base text-center align-bottom">
-        Loading...
+      <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom">
+        <p className="relative top-[56px]">Loading...</p>
       </div>
     );
   }

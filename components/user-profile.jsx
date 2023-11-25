@@ -20,7 +20,12 @@ import {
   logout
 } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const UserProfile = () => {
@@ -68,7 +73,8 @@ const UserProfile = () => {
     // console.log("Pathname: " + pathname);
     if (searchParams.has("access_token")) {
       // replace(`${pathname}`);
-      window.location.href = "/song";
+      // window.location.href = "/song";
+      // redirect("/song");
     }
   }, [token, pathname, replace, searchParams]);
 
