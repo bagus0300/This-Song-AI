@@ -1,8 +1,7 @@
 "use client";
 import { SongContext } from "@/context/ContextProvider";
 // import { getLyrics } from "@/lib/musicmatch";
-// import { getLyrics } from "@/lib/lyrics";
-import { getLyrics } from "@/lib/genius";
+import { getLyrics } from "@/lib/lyrics";
 import { catchErrors } from "@/lib/utils";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
@@ -59,7 +58,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           songLyricsResponse.data;
         // console.log(songLyrics);
         // setLyrics(formatLyrics(songLyrics));
-        setLyrics(testLyrics(songLyrics));
+        setLyrics(createLyrics(songLyrics));
       } else {
         setLyrics(null);
       }
@@ -70,7 +69,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
     else setLyrics(null);
   }, [songName, artistName, albumName]);
 
-  const testLyrics = (lyricsData) => {
+  const createLyrics = (lyricsData) => {
     return {
       body: lyricsData,
       copyright: "",
