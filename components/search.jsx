@@ -29,13 +29,13 @@ const Search = ({ setShowMenu }) => {
     setStatus(null);
 
     if (term) {
-      console.log(`Searching for ${term}...`);
+      // console.log(`Searching for ${term}...`);
 
       const fetchData = async () => {
         const searchResults = await searchTracks(term);
         setData(searchResults.data.tracks);
         setStatus(searchResults.status);
-        console.log("searchResults", searchResults);
+        // console.log("searchResults", searchResults);
       };
 
       catchErrors(fetchData());
@@ -43,7 +43,7 @@ const Search = ({ setShowMenu }) => {
   };
 
   const searchSelectSong = (song) => {
-    console.log("searchSelectSong: " + song);
+    // console.log("searchSelectSong: " + song);
     const thisSong = {
       id: song.id,
       albumArt: song.album.images[1].url,
@@ -62,8 +62,6 @@ const Search = ({ setShowMenu }) => {
   const clearSearch = () => {
     searchSongs("");
   };
-
-  // console.log("Rendering Search");
 
   return (
     <section className="flex flex-col items-center gap-1">

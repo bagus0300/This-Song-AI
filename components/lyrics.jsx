@@ -1,24 +1,21 @@
 "use client";
 import { SongContext } from "@/context/ContextProvider";
-// import { getLyrics } from "@/lib/musicmatch";
 import { getLyrics } from "@/lib/lyrics";
 import { catchErrors } from "@/lib/utils";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-// import musixmatchLogo from "@/public/images/musixmatch_logo.svg";
 import clsx from "clsx";
 import { Bars, ThreeCircles } from "react-loader-spinner";
 
 const Lyrics = ({ songName, artistName, albumName }) => {
   /**
    * STATE VARIABLES
-   * Info is the data retured by the Musixmatch API when given the (first, if multiple) artist's name
+   * lyrics: the lyrics of the song
+   * status: the status code of the API response
+   * GPTInterpretation the interpretation of the lyrics by GPT-3.5
    */
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
-
-  const [showGPT, setShowGPT] = useState(false);
-
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
 
   const musixmatchLogo = "/images/musixmatch_logo.svg";
@@ -28,14 +25,11 @@ const Lyrics = ({ songName, artistName, albumName }) => {
       ? "http://192.168.4.158:8000/gpt"
       : "https://spotify-node1313-f6ce692711e7.herokuapp.com/gpt";
 
-  // const { song } = useContext(SongContext);
-
-  // The useEffect hook will run whenever the song changes
+  // The useEffect hook will run whenever the song changes and fetch the lyrics for that song
   useEffect(() => {
     // Clear the previous state variables
     setLyrics(null);
     setStatus(null);
-
     setGPTInterpretation(null);
 
     const fetchData = async () => {
@@ -50,7 +44,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         songLyricsResponse.status;
       setStatus(statusCode);
 
-      console.log("Lyrics status code: " + statusCode);
+      // console.log("Lyrics status code: " + statusCode);
 
       if (statusCode == 200) {
         const songLyrics =
@@ -71,12 +65,11 @@ const Lyrics = ({ songName, artistName, albumName }) => {
 
   const createLyrics = (lyricsData) => {
     return {
-      body: lyricsData,
-      copyright: "",
-      trackingURL: ""
+      body: lyricsData
     };
   };
 
+  // This hook will run whenever the lyrics change and fetch the interpretation of the lyrics from GPT-3.5
   useEffect(() => {
     const fetchGPTResponse = async () => {
       if (!lyrics || lyrics.body == "No lyrics found") return;
@@ -97,10 +90,12 @@ const Lyrics = ({ songName, artistName, albumName }) => {
 
       // console.log("Response body: ", response.body);
 
+      // Create a ReadableStream to read the response body
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
         .getReader();
 
+      // Read each chunk of the response body and append it to the GPTInterpretation state variable
       while (true) {
         const { value, done } = await reader.read();
         if (done) {
@@ -109,17 +104,6 @@ const Lyrics = ({ songName, artistName, albumName }) => {
         // console.log("Received: ", value);
         setGPTInterpretation((prev) => (prev ? prev : "") + value);
       }
-
-      // const response = await axios({
-      //   method: "POST",
-      //   url: URL,
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   params: parameters
-      // });
-
-      // return response;
     };
 
     fetchGPTResponse();
@@ -161,21 +145,9 @@ const Lyrics = ({ songName, artistName, albumName }) => {
             <div className="text-base whitespace-pre-line">
               {lyrics.body}
               {/* {GPTInterpretation} */}
-              <script
-                type="text/javascript"
-                src={lyrics.trackingURL}
-                defer
-              ></script>
             </div>
-            <div className="text-xs italic">{lyrics.copyright}</div>
-            <a
-              href="https://www.musixmatch.com/"
-              target="_blank"
-              className="w-[calc(384px/3)]"
-            >
-              {/* <Image src={musixmatchLogo} alt="Musicxmatch logo" /> */}
-              <img src={musixmatchLogo} alt="Musicxmatch logo" />
-            </a>
+            {/* <Image src={musixmatchLogo} alt="Musicxmatch logo" /> */}
+            {/* <img src={musixmatchLogo} alt="Musicxmatch logo" width="200px" /> */}
           </div>
           <div
             className={clsx(
@@ -195,15 +167,6 @@ const Lyrics = ({ songName, artistName, albumName }) => {
                     lyrics.body != "No lyrics found" && (
                       <div className="items-center justify-center text-center">
                         <div className="flex flex-col items-center justify-center text-center">
-                          {/* <Bars
-                        height="70"
-                        width="70"
-                        color="#1fdf64"
-                        ariaLabel="bars-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                      /> */}
                           <ThreeCircles
                             height="100"
                             width="100"
@@ -225,12 +188,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           </div>
         </div>
       )) ||
-        (status && (
-          <p>
-            {/* Unable to get lyrics from Musixmatch (response status code {status}) */}
-            No lyrics found.
-          </p>
-        )) ||
+        (status && <p>No lyrics found.</p>) ||
         (songName && (
           <div className="flex flex-col items-center text-center">
             <Bars

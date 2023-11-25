@@ -34,9 +34,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const getToken = () => {
-      console.log("user-profile.js: Getting access token...");
       const accessToken = getAccessToken();
-      console.log("Access token: " + accessToken);
       setToken(accessToken);
     };
     catchErrors(getToken());
@@ -45,12 +43,10 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
-        console.log("Getting user profile...");
+        // console.log("Getting user profile...");
         try {
           const res = await getCurrentUserProfile();
           if (res.status === 200) {
-            console.log("res: ", res);
-
             const profile = {
               id: res.data.id,
               display_name: res.data.display_name,
@@ -63,15 +59,13 @@ const UserProfile = () => {
             console.error(`Failed to get user profile! (${res.status})`);
           }
         } catch (err) {
-          console.log(
-            "Tried to get user profile before token was set... Will try again."
-          );
+          console.log("Logging in...");
         }
       }
     };
 
     if (token) catchErrors(fetchData());
-    console.log("Pathname: " + pathname);
+    // console.log("Pathname: " + pathname);
     if (searchParams.has("access_token")) {
       // replace(`${pathname}`);
       window.location.href = "/song";

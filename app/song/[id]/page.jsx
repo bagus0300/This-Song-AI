@@ -14,10 +14,8 @@ import Lyrics from "@/components/lyrics";
 const Page = ({ params }) => {
   /**
    * STATE VARIABLES
-   * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/currently-playing endpoint
    * Status is the response status, which if 204 indicates that no song is currently playing
    */
-  // const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
   const [song, setSong] = useState(null);
 
@@ -43,7 +41,7 @@ const Page = ({ params }) => {
     setSongID(null);
 
     const fetchData = async () => {
-      console.log("Getting song...");
+      // console.log("Getting song...");
       const data = await getTrack(id);
       // console.log("data", data);
 
@@ -60,7 +58,7 @@ const Page = ({ params }) => {
           trackNumber: data.data.track_number
         };
 
-        console.log("thisSong", thisSong);
+        // console.log("thisSong", thisSong);
 
         setSongID(id);
         setSong(thisSong);
@@ -84,10 +82,8 @@ const Page = ({ params }) => {
     );
 
     const scrollTarget = ref.current;
-    console.log("Scroll target: ", scrollTarget);
 
     if (scrollTarget) {
-      console.log("Observe");
       observer.observe(scrollTarget);
     }
 
@@ -131,8 +127,6 @@ const Page = ({ params }) => {
               className={clsx(
                 "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
                 "bg-background"
-                // "bg-card rounded-lg",
-                // "border-red-500 border-2"
               )}
               style={{
                 height: scrollHeight
@@ -146,10 +140,6 @@ const Page = ({ params }) => {
               >
                 <motion.div
                   className="relative group"
-                  // className="border-2 border-red-500"
-                  // onClick={() => {
-                  //   getSong(null);
-                  // }}
                   style={{
                     width: scrollHeight,
                     height: scrollHeight
@@ -190,23 +180,13 @@ const Page = ({ params }) => {
               <div
                 className={clsx(
                   "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0",
-                  // "border-red-500 border-2",
-                  // scrolled ? "opacity-100 w-[300px]" : "w-[0%] opacity-0",
                   scrolled
                     ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0"
                     : "w-[0%] opacity-0"
                 )}
               >
-                <h1
-                  className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]"
-                  onClick={() => {
-                    console.log("scrollHeight: ", scrollHeight.current);
-                  }}
-                >
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]">
                   {song.name}
-                  {/* {scrolled.toString()} */}
-                  {/* {song.id} */}
-                  {/* {scrollHeight.current} */}
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
@@ -225,15 +205,8 @@ const Page = ({ params }) => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1
-              className="text-3xl font-extrabold text-[#1fdf64]"
-              onClick={() => {
-                console.log("scrollHeight: ", scrollHeight.current);
-              }}
-            >
+            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
               {song.name}
-              {/* {scrolled.toString()} */}
-              {/* {song.id} */}
             </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}

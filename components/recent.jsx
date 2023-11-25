@@ -27,10 +27,10 @@ const Recent = ({ setShowMenu }) => {
     setData(null);
     setStatus(null);
 
-    console.log("Getting recent songs...");
+    // console.log("Getting recent songs...");
     const fetchData = async () => {
       const recentSongs = await getRecentlyPlayed();
-      console.log("recentSongs", recentSongs);
+      // console.log("recentSongs", recentSongs);
       setData(recentSongs.data);
       setStatus(recentSongs.status);
     };

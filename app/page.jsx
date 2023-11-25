@@ -7,8 +7,6 @@ const Page = () => {
   const { token } = useContext(TokenContext);
   const { menu, setMenu } = useContext(MenuContext);
 
-  console.log("Token: ", token);
-
   if (token) {
     window.location.replace("/song");
   }

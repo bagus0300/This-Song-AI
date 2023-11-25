@@ -49,14 +49,18 @@ const Page = () => {
 
       if (!select) {
         const fetchData = async () => {
-          console.log("Getting currently playing song...");
-          const currentlyPlaying = await getCurrentlyPlaying();
-          setData(currentlyPlaying.data);
-          setStatus(currentlyPlaying.status);
+          // console.log("Getting currently playing song...");
+          try {
+            const currentlyPlaying = await getCurrentlyPlaying();
+            setData(currentlyPlaying.data);
+            setStatus(currentlyPlaying.status);
+          } catch (error) {
+            console.log("Could not get currently playing song.");
+          }
         };
         catchErrors(fetchData());
       } else if (select) {
-        console.log(select);
+        // console.log(select);
 
         const thisSong = {
           id: select.id,
@@ -66,7 +70,7 @@ const Page = () => {
           albumName: select.albumName
         };
 
-        console.log("Song id: ", thisSong);
+        // console.log("Song id: ", thisSong);
         setSongID(thisSong.id);
         setSong(thisSong);
       }
@@ -88,7 +92,7 @@ const Page = () => {
 
       // console.log("Setting song: ", thisSong);
 
-      console.log("Song id: ", thisSong.id);
+      // console.log("Song id: ", thisSong.id);
       setSongID(thisSong.id);
       setSong(thisSong);
     } else {
@@ -114,10 +118,8 @@ const Page = () => {
     );
 
     const scrollTarget = ref.current;
-    console.log("Scroll target: ", scrollTarget);
 
     if (scrollTarget) {
-      console.log("Observe");
       observer.observe(scrollTarget);
     }
 
@@ -130,7 +132,7 @@ const Page = () => {
     };
   }, [song]);
 
-  console.log("Rendering song/current/page.jsx");
+  // console.log("Rendering song/page.jsx");
 
   return (
     <section className="flex flex-col items-center justify-center align-bottom">
@@ -141,8 +143,6 @@ const Page = () => {
               className={clsx(
                 "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
                 "bg-background"
-                // "bg-card rounded-lg",
-                // "border-red-500 border-2"
               )}
               style={{
                 height: scrollHeight
@@ -150,9 +150,7 @@ const Page = () => {
             >
               <motion.div
                 className="relative group"
-                // className="border-2 border-red-500"
                 onClick={() => {
-                  // getSong(null);
                   window.location.reload();
                 }}
                 style={{
@@ -180,9 +178,6 @@ const Page = () => {
                 <img
                   className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
                   src={song.albumArt}
-                  // placeholder={`data:image/svg+xml;base64,${toBase64(
-                  //   shimmer(300, 300)
-                  // )}`}
                   alt="Album art"
                 />
                 <img
@@ -201,16 +196,8 @@ const Page = () => {
                     : "w-[0%] opacity-0"
                 )}
               >
-                <h1
-                  className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]"
-                  onClick={() => {
-                    console.log("scrollHeight: ", scrollHeight.current);
-                  }}
-                >
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]">
                   {song.songName}
-                  {/* {scrolled.toString()} */}
-                  {/* {song.id} */}
-                  {/* {scrollHeight.current} */}
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
@@ -229,15 +216,8 @@ const Page = () => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1
-              className="text-3xl font-extrabold text-[#1fdf64]"
-              onClick={() => {
-                console.log("scrollHeight: ", scrollHeight.current);
-              }}
-            >
+            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
               {song.songName}
-              {/* {scrolled.toString()} */}
-              {/* {song.id} */}
             </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
