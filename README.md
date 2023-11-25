@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# This Song
 
-## Getting Started
+This Song is a web application providing AI-enhanced analysis of song lyrics. A user can search for and select any song present in the Spotify database, after which the lyrics will be fetched from a third-party provider and then passed through GPT-3.5 for interpretation.
 
-First, run the development server:
+The user can also log in with their Spotify account and gain the ability to analyze the lyrics of the song they're currently playing as well as the songs they've recently played.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technology stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project was built using [React](https://react.dev/) via [Next.js](https://nextjs.org/), using a [Node.js](https://nodejs.org/) backend.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## APIs used
+[Spotify](https://developer.spotify.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Musixmatch](https://developer.musixmatch.com/)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[OpenAI](https://platform.openai.com/)
