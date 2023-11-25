@@ -7,10 +7,3 @@ The user can also log in with their Spotify account and gain the ability to anal
 ## Technology stack
 
 This project was built using [React](https://react.dev/) via [Next.js](https://nextjs.org/), using a [Node.js](https://nodejs.org/) backend.
-
-## APIs used
-[Spotify](https://developer.spotify.com/)
-
-[Musixmatch](https://developer.musixmatch.com/)
-
-[OpenAI](https://platform.openai.com/)
