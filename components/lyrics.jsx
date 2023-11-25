@@ -181,7 +181,7 @@ const Lyrics = ({ songName, artistName, albumName }) => {
           <div
             className={clsx(
               "h-full transition-all duration-1000 whitespace-break-spaces w-full",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "lg:w-[200px]",
+              GPTInterpretation ? "lg:w-[400px] xl:w-[600px]" : "lg:w-[200px]",
               lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
