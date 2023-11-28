@@ -76,14 +76,17 @@ const Search = ({ setShowMenu }) => {
           className="text-base"
         />
         <span
-          className="absolute top-0 right-0 w-10 h-10 opacity-0 cursor-default group-focus-within/field:cursor-pointer group/x group-focus-within/field:opacity-100"
+          className={clsx(
+            "absolute top-0 right-0 w-10 h-10 cursor-default group/x",
+            !searchTerm && "hidden"
+          )}
           onClick={(e) => {
             setSearchTerm("");
             clearSearch();
             inputElement.current.focus();
           }}
         >
-          <X className="absolute w-4 h-4 rounded-full top-[12px] right-[12px] bg-secondary " />
+          <X className="absolute w-4 h-4 rounded-full top-[12px] right-[12px] group-hover/x:bg-secondary" />
         </span>
       </span>
 
@@ -91,7 +94,7 @@ const Search = ({ setShowMenu }) => {
         <div className="w-full md:h-[calc(100dvh-56px-40px-48px-16px-32px-40px)] h-[calc(100dvh-40px-56px-48px-16px-40px)] overflow-y-scroll">
           {data.items.map((item, index) => (
             <SongItem
-              // We can't set the key to the song's id because the same song could be in the recently-played list multiple times, so we'll use the index instead
+              // We can't set the key to the song's id because the same song could be in the recently played list multiple times, so we'll use the index instead
               key={index}
               item={item}
               path={pathname}
