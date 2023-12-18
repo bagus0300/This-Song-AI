@@ -64,7 +64,7 @@ const UserProfile = () => {
             console.error(`Failed to get user profile! (${res.status})`);
           }
         } catch (err) {
-          console.log("Logging in...");
+          // console.log("Logging in...");
         }
       }
     };
