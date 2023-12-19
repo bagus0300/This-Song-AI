@@ -35,6 +35,8 @@ const Page = () => {
 
   const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 
+  console.log("Rendering song/page.jsx");
+
   useEffect(() => {
     // Awaits the song that's currently playing and sets state variables accordingly
     const getSong = (select) => {

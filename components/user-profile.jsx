@@ -37,6 +37,8 @@ const UserProfile = () => {
 
   const searchParams = useSearchParams();
 
+  console.log("Rendering user-profile.jsx");
+
   useEffect(() => {
     const getToken = () => {
       const accessToken = getAccessToken();
