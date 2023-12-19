@@ -72,7 +72,7 @@ const UserProfile = () => {
     if (token) catchErrors(fetchData());
     // console.log("Pathname: " + pathname);
     if (searchParams.has("access_token")) {
-      // replace(`${pathname}`);
+      replace(`${pathname}`);
       // window.location.href = "/song";
       // redirect("/song");
     }

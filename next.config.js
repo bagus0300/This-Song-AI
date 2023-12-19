@@ -9,6 +9,9 @@ const nextConfig = {
         pathname: "/image/**"
       }
     ]
+  },
+  compiler: {
+    removeConsole: process.env.NEXT_PUBLIC_VERCEL_ENV != "development"
   }
 };
 
