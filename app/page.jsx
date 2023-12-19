@@ -8,12 +8,12 @@ const Page = () => {
         Discover the meaning behind your favorite songs through AI-enhanced
         lyric analysis!
       </p>
-      <Link
+      <a
         href="song"
         className="inline-block px-6 py-2 font-bold text-white bg-[#1DB954] rounded-full hover:brightness-110"
       >
         Click here to begin!
-      </Link>
+      </a>
     </div>
   );
 };

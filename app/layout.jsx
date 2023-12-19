@@ -3,8 +3,12 @@ import { inter } from "@/components/ui/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
-  title: "This Song",
-  description: "Displays information and lyrics about songs on Spotify."
+  title: {
+    template: "This Song | %s",
+    default: "This Song - AI-powered lyric analysis"
+  },
+  description:
+    "Discover the meaning behind your favorite songs through AI-enhanced lyric analysis! Search for any song or log in through Spotify to see what's currently playing."
 };
 
 export default function RootLayout({ children }) {

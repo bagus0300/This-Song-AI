@@ -3,8 +3,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/context/ContextProvider";
 
 export const metadata = {
-  title: "This Song",
-  description: "Displays information and lyrics about songs on Spotify."
+  title: "Currently Playing",
+  description:
+    "AI-enhanced analysis of lyrics for the song currently playing on Spotify."
 };
 
 export default function SongLayout({ children }) {
