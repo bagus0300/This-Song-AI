@@ -74,6 +74,7 @@ const Search = ({ setShowMenu }) => {
           }}
           value={searchTerm}
           className="text-base"
+          placeholder="Search for a song...."
         />
         <span
           className={clsx(
@@ -91,7 +92,7 @@ const Search = ({ setShowMenu }) => {
       </span>
 
       {(data && (
-        <div className="w-full md:h-[calc(100dvh-56px-40px-48px-16px-32px-40px)] h-[calc(100dvh-40px-56px-48px-16px-40px)] overflow-y-scroll">
+        <div className="w-full lg:h-[calc(100dvh-64px-40px-40px-32px)] h-[calc(100dvh-40px-56px-48px-16px-40px)] overflow-y-scroll">
           {data.items.map((item, index) => (
             <SongItem
               // We can't set the key to the song's id because the same song could be in the recently played list multiple times, so we'll use the index instead

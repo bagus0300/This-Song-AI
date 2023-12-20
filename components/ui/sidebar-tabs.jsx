@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import Search from "../search";
