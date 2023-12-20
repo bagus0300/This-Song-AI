@@ -1,6 +1,5 @@
 import "./globals.css";
 import { inter } from "@/components/ui/fonts";
-import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
   title: {
@@ -16,9 +15,7 @@ export default function RootLayout({ children }) {
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
-        </ThemeProvider>
+        <main className="max-w-5xl gap-2 mx-auto">{children}</main>
       </body>
     </html>
   );

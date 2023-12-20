@@ -8,8 +8,28 @@ import SidebarTabs from "./sidebar-tabs";
 import UserProfile from "../user-profile";
 import { MenuContext, TokenContext } from "@/context/ContextProvider";
 import { Music4 } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const BACKEND_URI = "http://192.168.4.158:8000";
+
+const AuthButton = () => {
+  const { data: session } = useSession();
+
+  if (session) {
+    return (
+      <>
+        {session?.user?.name} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    );
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  );
+};
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -76,7 +96,8 @@ const Sidebar = () => {
           >
             <SidebarTabs setShowMenu={setShowMenu} />
             {/* <Link href={`${BACKEND_URI}/login`}> */}
-            <UserProfile />
+            {/* <UserProfile /> */}
+            <AuthButton />
             {/* </Link> */}
           </div>
         </div>

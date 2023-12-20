@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { SongContext, TokenContext } from "@/context/ContextProvider";
+import { SongContext } from "@/context/ContextProvider";
 
 import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
@@ -25,7 +25,6 @@ const Page = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
-  const { token } = useContext(TokenContext);
   const { songID, setSongID } = useContext(SongContext);
   const [song, setSong] = useState(null);
 
@@ -251,13 +250,13 @@ const Page = () => {
           <>
             <p className="relative top-[56px]">Loading data from Spotify...</p>
           </>
-        )) ||
-        (!token && (
-          <>
-            <p className="relative top-[56px]">
-              Log in to Spotify to see what you&apos;re listening to.
-            </p>
-          </>
+          // )) ||
+          // (!token && (
+          //   <>
+          //     <p className="relative top-[56px]">
+          //       Log in to Spotify to see what you&apos;re listening to.
+          //     </p>
+          //   </>
         )) || (
           <>
             <p className="relative top-[56px]">
