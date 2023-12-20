@@ -17,6 +17,8 @@ const Recent = ({ setShowMenu }) => {
 
   const pathname = usePathname();
 
+  console.log("Rendering recent.jsx");
+
   useEffect(() => {
     getRecentSongs();
   }, []);

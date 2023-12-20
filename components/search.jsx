@@ -23,6 +23,8 @@ const Search = ({ setShowMenu }) => {
 
   const pathname = usePathname();
 
+  console.log("Rendering search.jsx");
+
   const searchSongs = (term) => {
     // Clear the previous state variables
     setData(null);

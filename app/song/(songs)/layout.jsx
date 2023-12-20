@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import Search from "@/components/search";
 import { useState } from "react";
 import Recent from "@/components/recent";
+import ConditionalModal from "@/components/ConditionalModal";
 
 // export const metadata = {
 //   title: "Song Information",
@@ -24,6 +25,7 @@ import Recent from "@/components/recent";
 
 export default function SongLayout({ children }) {
   const [activeItem, setActiveItem] = useState("Search");
+  const [modalOpen, setModalOpen] = useState(false);
   // const session = await getServerSession();
 
   const items = [
@@ -73,11 +75,74 @@ export default function SongLayout({ children }) {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="block lg:hidden">
-              {activeItem === "Search" && <Search />}
+            <div className="flex lg:hidden">
+              {/* {activeItem === "Search" && <Search />}
               {activeItem === "Recently Played" && <Recent />}
               {activeItem === "Top Songs (user)" && <p>Top Songs (user)</p>}
-              {activeItem === "Top Songs (global)" && <p>Top Songs (global)</p>}
+              {activeItem === "Top Songs (global)" && <p>Top Songs (global)</p>} */}
+              {/* {items.map((item) => (
+                <Button
+                  key={item}
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    setActiveItem(item);
+                    setModalOpen(true);
+                  }}
+                >
+                  {item}
+                </Button>
+              ))} */}
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Search
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Recently Played
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    Top Songs
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    onSelect={() => {
+                      // setActiveItem(item);
+                    }}
+                  >
+                    User
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onSelect={() => {
+                      // setActiveItem(item);
+                    }}
+                  >
+                    Global
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Top Songs
+              </Button> */}
             </div>
           </div>
           {/* <SidebarTabs /> */}
