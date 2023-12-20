@@ -1,8 +1,9 @@
-import Sidebar from "@/components/ui/sidebar";
+// import Sidebar from "@/components/ui/sidebar";
 import { getServerSession } from "next-auth";
 import { ThemeProvider } from "@/components/theme-provider";
 import SessionProvider from "@/components/SessionProvider";
 import { ContextProvider } from "@/context/ContextProvider";
+import NavMenu from "@/components/ui/NavMenu";
 
 export const metadata = {
   title: "Song Information",
@@ -19,11 +20,11 @@ export default async function SongLayout({ children }) {
     <ThemeProvider attribute="class" defaultTheme="system">
       <SessionProvider session={session}>
         <ContextProvider>
-          <div className="flex flex-col h-full lg:flex-row">
-            <div className="fixed top-0 left-0 w-full h-fit lg:w-64 lg:min-w-[16rem] z-20 lg:p-2">
-              <Sidebar />
+          <div className="flex flex-col h-full lg:flex-row lg:px-2">
+            <div className="fixed top-0 left-0 z-20 w-full bg-white h-fit lg:pt-2 lg:px-2">
+              <NavMenu />
             </div>
-            <div className="relative top-[56px] lg:top-0 lg:left-[256px] lg:w-[calc(99dvw-256px-8px)]">
+            <div className="relative mt-[56px] lg:mt-[64px] lg:w-full">
               {children}
             </div>
           </div>

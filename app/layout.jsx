@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
-        <main className="max-w-5xl gap-2 mx-auto">{children}</main>
+        <main className="gap-2 mx-auto">{children}</main>
       </body>
     </html>
   );
