@@ -13,6 +13,7 @@ import { Bars } from "react-loader-spinner";
 import { X } from "lucide-react";
 import clsx from "clsx";
 import { TokenContext } from "@/context/ContextProvider";
+import { useSession } from "next-auth/react";
 
 const Search = ({ onClick }) => {
   /**
@@ -26,6 +27,8 @@ const Search = ({ onClick }) => {
 
   const { clientToken, setClientToken } = useContext(TokenContext);
   console.log("clientToken", clientToken);
+
+  const { data: session } = useSession();
 
   const inputElement = useRef(null);
 
@@ -42,24 +45,34 @@ const Search = ({ onClick }) => {
       // console.log(`Searching for ${term}...`);
 
       const fetchData = async () => {
-        let token = clientToken;
-        if (!token) {
-          token = await getClientAccessToken();
-          setClientToken(token);
-          console.log("token", token);
-          console.log("clientToken", clientToken);
+        let token = null;
+        let accessToken = null;
+        if (session && session.accessToken) {
+          accessToken = session.accessToken;
         } else {
-          console.log("Found a token in TokenContext");
-          if (hasClientTokenExpired(token)) {
-            console.log("Token has expired");
+          token = clientToken;
+          if (!token) {
             token = await getClientAccessToken();
             setClientToken(token);
             console.log("token", token);
             console.log("clientToken", clientToken);
+            accessToken = token.clientToken;
+          } else {
+            console.log("Found a token in TokenContext");
+            if (hasClientTokenExpired(token)) {
+              console.log("Token has expired");
+              token = await getClientAccessToken();
+              setClientToken(token);
+              console.log("token", token);
+              console.log("clientToken", clientToken);
+            }
+            accessToken = token.clientToken;
           }
         }
 
-        const searchResults = await searchTracks(term, token);
+        console.log("search token", accessToken);
+
+        const searchResults = await searchTracks(term, accessToken);
         setData(searchResults.data.tracks);
         setStatus(searchResults.status);
         // console.log("searchResults", searchResults);
