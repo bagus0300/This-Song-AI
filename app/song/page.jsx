@@ -1,7 +1,8 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 const Song = () => {
-  return <div>Song</div>;
+  redirect("/song/current");
 };
 
 export default Song;

@@ -119,7 +119,7 @@ export default function SongLayout({ children }) {
                     <DialogTitle>Search</DialogTitle>
                     <DialogDescription></DialogDescription>
                   </DialogHeader>
-                  <Search />
+                  <Search onClick={() => setDialogOpen((prev) => !prev)} />
                 </DialogContent>
               </Dialog>
               <Dialog

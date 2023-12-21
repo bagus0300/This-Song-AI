@@ -9,7 +9,7 @@ import { Bars } from "react-loader-spinner";
 import { X } from "lucide-react";
 import clsx from "clsx";
 
-const Search = ({ setShowMenu }) => {
+const Search = ({ onClick }) => {
   /**
    * STATE VARIABLES
    * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/recently-played endpoint
@@ -42,19 +42,6 @@ const Search = ({ setShowMenu }) => {
 
       catchErrors(fetchData());
     }
-  };
-
-  const searchSelectSong = (song) => {
-    // console.log("searchSelectSong: " + song);
-    const thisSong = {
-      id: song.id,
-      albumArt: song.album.images[1].url,
-      songName: song.name,
-      artists: song.artists,
-      albumName: song.album.name
-    };
-    setSong(thisSong);
-    setShowMenu(false);
   };
 
   const handleSearch = useDebouncedCallback((term) => {
@@ -101,7 +88,7 @@ const Search = ({ setShowMenu }) => {
               key={index}
               item={item}
               path={pathname}
-              setShowMenu={setShowMenu}
+              onClick={onClick}
             />
           ))}
         </div>
