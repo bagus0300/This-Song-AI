@@ -9,6 +9,7 @@ import { MenuToggle } from "./toggle-menu";
 import { useState } from "react";
 import clsx from "clsx";
 import { rajdhani } from "@/components/ui/fonts";
+import ProfileButton from "./ProfileButton";
 
 const ACTIVE_ROUTE = "py-1 px-2 rounded-md text-green-500";
 const INACTIVE_ROUTE = "py-1 px-2 rounded-md bg-transparent text-foreground";
@@ -19,10 +20,11 @@ const AuthButton = () => {
   if (session) {
     // console.log(session);
     return (
-      <>
-        {session?.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+      <ProfileButton
+        name={session?.user?.name}
+        img={session?.user?.image}
+        signOutCallback={signOut}
+      />
     );
   }
   return (
