@@ -8,7 +8,7 @@ import { Skeleton } from "./ui/skeleton";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 
-const SongList = ({ songs, setShowMenu = null }) => {
+const SongList = ({ songs, onClick = null }) => {
   /**
    * STATE VARIABLES
    * Data is the Spotify data returned by the https://api.spotify.com/v1/me/player/recently-played endpoint
@@ -69,7 +69,7 @@ const SongList = ({ songs, setShowMenu = null }) => {
               key={index}
               item={item.track ?? item}
               path={pathname}
-              setShowMenu={setShowMenu}
+              onClick={onClick}
             />
           ))) ||
           (status == 204 && (

@@ -11,7 +11,7 @@ import Link from "next/link";
 import { SongContext } from "@/context/ContextProvider";
 import Image from "next/image";
 
-const SongItem = ({ item, path, setShowMenu }) => {
+const SongItem = ({ item, path, onClick = null }) => {
   const { songID } = useContext(SongContext);
 
   return (
@@ -19,12 +19,7 @@ const SongItem = ({ item, path, setShowMenu }) => {
       <TooltipProvider delayDuration={200}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link
-              href={`/song/${item.id}`}
-              onClick={() => {
-                setShowMenu(false);
-              }}
-            >
+            <Link href={`/song/${item.id}`} onClick={onClick}>
               <div
                 className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
                 // onClick={() => {
@@ -47,8 +42,9 @@ const SongItem = ({ item, path, setShowMenu }) => {
                   <span
                     className={clsx(
                       // Use context instead of path so that /song/current can give the highlight effect as well.
-                      // path === `/song/${item.id}` ||
-                      songID === item.id ? "text-[#1fdf64]" : "text-foreground"
+                      path === `/song/${item.id}` || songID === item.id
+                        ? "text-[#1fdf64]"
+                        : "text-foreground"
                     )}
                   >
                     {item.name}

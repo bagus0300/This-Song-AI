@@ -35,6 +35,7 @@ import { useSession } from "next-auth/react";
 
 export default function SongLayout({ children }) {
   const [activeItem, setActiveItem] = useState("Search");
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { data: session } = useSession();
 
   const items = [
@@ -97,7 +98,14 @@ export default function SongLayout({ children }) {
             </div>
             {/* Dropdown menu on small screens */}
             <div className={clsx("flex lg:hidden", rajdhani.className)}>
-              <Dialog>
+              <Dialog
+                open={dialogOpen === "search"}
+                onOpenChange={() =>
+                  setDialogOpen((prev) =>
+                    prev === "search" ? false : "search"
+                  )
+                }
+              >
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
@@ -114,7 +122,14 @@ export default function SongLayout({ children }) {
                   <Search />
                 </DialogContent>
               </Dialog>
-              <Dialog>
+              <Dialog
+                open={dialogOpen === "recent"}
+                onOpenChange={() =>
+                  setDialogOpen((prev) =>
+                    prev === "recent" ? false : "recent"
+                  )
+                }
+              >
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
@@ -128,12 +143,22 @@ export default function SongLayout({ children }) {
                     <DialogTitle>Recently Played</DialogTitle>
                     <DialogDescription></DialogDescription>
                   </DialogHeader>
-                  <SongList songs="recent" />
+                  <SongList
+                    songs="recent"
+                    onClick={() => setDialogOpen((prev) => !prev)}
+                  />
                 </DialogContent>
               </Dialog>
 
               {!session && (
-                <Dialog>
+                <Dialog
+                  open={dialogOpen === "top-global"}
+                  onOpenChange={() =>
+                    setDialogOpen((prev) =>
+                      prev === "top-global" ? false : "top-global"
+                    )
+                  }
+                >
                   <DialogTrigger asChild>
                     <Button
                       variant="outline"
@@ -147,7 +172,10 @@ export default function SongLayout({ children }) {
                       <DialogTitle>Most Popular Songs</DialogTitle>
                       <DialogDescription></DialogDescription>
                     </DialogHeader>
-                    <SongList songs="top-global" />
+                    <SongList
+                      songs="top-global"
+                      onClick={() => setDialogOpen((prev) => !prev)}
+                    />
                   </DialogContent>
                 </Dialog>
               )}
@@ -162,7 +190,14 @@ export default function SongLayout({ children }) {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <Dialog>
+                    <Dialog
+                      open={dialogOpen === "top-user"}
+                      onOpenChange={() =>
+                        setDialogOpen((prev) =>
+                          prev === "top-user" ? false : "top-user"
+                        )
+                      }
+                    >
                       <DialogTrigger asChild>
                         <Button
                           variant="ghost"
@@ -179,10 +214,20 @@ export default function SongLayout({ children }) {
                           </DialogTitle>
                           <DialogDescription></DialogDescription>
                         </DialogHeader>
-                        <SongList songs="top-user" />
+                        <SongList
+                          songs="top-user"
+                          onClick={() => setDialogOpen((prev) => !prev)}
+                        />
                       </DialogContent>
                     </Dialog>
-                    <Dialog>
+                    <Dialog
+                      open={dialogOpen === "top-global"}
+                      onOpenChange={() =>
+                        setDialogOpen((prev) =>
+                          prev === "top-global" ? false : "top-global"
+                        )
+                      }
+                    >
                       <DialogTrigger asChild>
                         <Button
                           variant="ghost"
@@ -196,7 +241,10 @@ export default function SongLayout({ children }) {
                           <DialogTitle>Most Popular Songs</DialogTitle>
                           <DialogDescription></DialogDescription>
                         </DialogHeader>
-                        <SongList songs="top-global" />
+                        <SongList
+                          songs="top-global"
+                          onClick={() => setDialogOpen((prev) => !prev)}
+                        />
                       </DialogContent>
                     </Dialog>
                   </DropdownMenuContent>
