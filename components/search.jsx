@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { useDebouncedCallback } from "use-debounce";
-import { searchTracks } from "@/lib/spotify";
+import { getClientAccessToken, searchTracks } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import SongItem from "@/components/ui/song-item";
 import { usePathname } from "next/navigation";
 import { Bars } from "react-loader-spinner";
 import { X } from "lucide-react";
 import clsx from "clsx";
+import { TokenContext } from "@/context/ContextProvider";
 
 const Search = ({ onClick }) => {
   /**
@@ -18,6 +19,9 @@ const Search = ({ onClick }) => {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const { clientToken, setClientToken } = useContext(TokenContext);
+  console.log("clientToken", clientToken);
 
   const inputElement = useRef(null);
 
@@ -34,7 +38,17 @@ const Search = ({ onClick }) => {
       // console.log(`Searching for ${term}...`);
 
       const fetchData = async () => {
-        const searchResults = await searchTracks(term);
+        let token = clientToken;
+        if (!token) {
+          token = await getClientAccessToken();
+          setClientToken(token);
+          console.log("token", token);
+          console.log("clientToken", clientToken);
+        } else {
+          console.log("Found a token in TokenContext");
+        }
+
+        const searchResults = await searchTracks(term, token);
         setData(searchResults.data.tracks);
         setStatus(searchResults.status);
         // console.log("searchResults", searchResults);

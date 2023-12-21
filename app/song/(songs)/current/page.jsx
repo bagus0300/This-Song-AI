@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { SongContext, TokenContext } from "@/context/ContextProvider";
+import { SongContext } from "@/context/ContextProvider";
 
 import { getCurrentlyPlaying } from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
@@ -26,7 +26,6 @@ const Page = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
-  const { token } = useContext(TokenContext);
   const { songID, setSongID } = useContext(SongContext);
   const [song, setSong] = useState(null);
 
