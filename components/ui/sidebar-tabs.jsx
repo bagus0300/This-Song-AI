@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import Search from "../search";
-import Recent from "../SongList";
+import Recent from "./SongList";
 import { TokenContext } from "@/context/ContextProvider";
 
 const SidebarTabs = ({ setShowMenu }) => {

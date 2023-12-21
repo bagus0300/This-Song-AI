@@ -4,7 +4,7 @@ import { catchErrors } from "@/lib/utils";
 
 import SongItem from "@/components/ui/song-item";
 import { usePathname } from "next/navigation";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "./skeleton";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 

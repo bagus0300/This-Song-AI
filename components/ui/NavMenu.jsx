@@ -59,7 +59,7 @@ export default function NavMenu() {
 
   return (
     <div>
-      <div className="z-20 flex items-center justify-between p-4 lg:rounded-lg bg-card h-14">
+      <div className="z-20 flex items-center justify-between p-4 lg:rounded-lg bg-background h-14">
         <Banner />
         <div
           className={

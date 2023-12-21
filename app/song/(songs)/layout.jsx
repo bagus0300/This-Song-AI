@@ -6,7 +6,7 @@ import SidebarTabs from "@/components/ui/sidebar-tabs";
 import { Button } from "@/components/ui/button";
 import Search from "@/components/search";
 import { useState } from "react";
-import SongList from "@/components/SongList";
+import SongList from "@/components/ui/SongList";
 import ConditionalModal from "@/components/ConditionalModal";
 import {
   DropdownMenu,
@@ -49,7 +49,7 @@ export default function SongLayout({ children }) {
     <>
       <div
         id="menu"
-        className="fixed left-0 lg:w-72 w-full lg:h-[calc(100dvh-80px)] lg:m-2 lg:rounded-lg bg-card"
+        className="fixed left-0 lg:w-72 w-full lg:h-[calc(100dvh-80px)] lg:m-2 lg:rounded-lg lg:bg-card bg-background z-10"
       >
         <div className={clsx("h-full justify-between p-1")}>
           <div className="flex flex-col justify-between h-full">
@@ -259,7 +259,10 @@ export default function SongLayout({ children }) {
         </div>
       </div>
       {/* Content */}
-      <div id="content" className={clsx("px-2 mt-12 lg:mt-0 lg:ml-72")}>
+      <div
+        id="content"
+        className={clsx("px-2 mt-12 lg:mt-2 lg:ml-72 bg-background")}
+      >
         {children}
       </div>
     </>

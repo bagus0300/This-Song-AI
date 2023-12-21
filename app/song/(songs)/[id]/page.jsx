@@ -1,120 +1,245 @@
-import React from "react";
+"use client";
+import { SongContext, TokenContext } from "@/context/ContextProvider";
+import { getTrack } from "@/lib/spotify";
+import { catchErrors } from "@/lib/utils";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
+import Link from "next/link";
+import Lyrics from "@/components/lyrics";
 
-const Id = () => {
+const Page = ({ params }) => {
+  /**
+   * STATE VARIABLES
+   * Status is the response status, which if 204 indicates that no song is currently playing
+   */
+  const [status, setStatus] = useState(null);
+  const [song, setSong] = useState(null);
+
+  const [scrolled, setScrolled] = useState(false);
+  const { token } = useContext(TokenContext);
+  const { songID, setSongID } = useContext(SongContext);
+
+  const ref = useRef(null);
+
+  const { scrollY } = useScroll({});
+
+  const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
+
+  const id = params.id;
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Clear the previous state variables
+    // setData(null);
+    setStatus(null);
+    setScrolled(false);
+
+    setSongID(null);
+
+    const fetchData = async () => {
+      // console.log("Getting song...");
+      const data = await getTrack(id);
+      // console.log("data", data);
+
+      if (data.status == 200) {
+        setStatus(data.status);
+
+        const thisSong = {
+          id: id,
+          album: data.data.album,
+          artists: data.data.artists,
+          link: data.data.external_urls.spotify,
+          name: data.data.name,
+          previewURL: data.data.preview_url,
+          trackNumber: data.data.track_number
+        };
+
+        // console.log("thisSong", thisSong);
+
+        setSongID(id);
+        setSong(thisSong);
+      }
+    };
+    catchErrors(fetchData());
+  }, [id, setSongID]);
+
+  // Run this hook when the songID changes; by that point, the DOM will be ready so the ref will be defined
+  useEffect(() => {
+    // Toggle the scrolled state variable when the scroll target is intersected
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+        }
+      },
+      { threshold: 0, rootMargin: "-156px" }
+    );
+
+    const scrollTarget = ref.current;
+
+    if (scrollTarget) {
+      observer.observe(scrollTarget);
+    }
+
+    return () => {
+      setScrolled(false);
+      scrollTo(0, 0);
+      if (scrollTarget) {
+        observer.unobserve(scrollTarget);
+      }
+    };
+  }, [songID]);
+
+  // These two functions are used to convert the album art to a base64 string representing a shimmer effect, which is used as a placeholder for the Image component
+  // https://image-component.nextjs.gallery/shimmer
+  const toBase64 = (str) =>
+    typeof window === "undefined"
+      ? Buffer.from(str).toString("base64")
+      : window.btoa(str);
+  const shimmer = (
+    w,
+    h
+  ) => `<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`;
+
   return (
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo est omnis
-      provident, sint cumque assumenda commodi porro vel quae consectetur
-      debitis repellat harum at praesentium. Porro modi eveniet, aliquid
-      voluptatem ut voluptatibus distinctio ex aspernatur quibusdam culpa
-      architecto, doloremque, quod quasi. Voluptates dolorum rem optio, atque
-      pariatur nesciunt temporibus eaque aliquid totam at voluptatum distinctio
-      error sapiente exercitationem nam saepe eum recusandae commodi deleniti?
-      Quam voluptatibus facere at doloribus iusto earum incidunt tempora
-      delectus eaque reprehenderit consequatur debitis cupiditate, quae rem,
-      consectetur nobis cumque, architecto velit nesciunt enim quibusdam sit? Ut
-      architecto eius est, et totam fuga odio ullam harum officiis molestias
-      autem, velit explicabo veritatis inventore dolorum dolores beatae possimus
-      amet delectus impedit quam dignissimos, quis quae. Cupiditate laboriosam,
-      ratione tempore quo culpa ducimus placeat. Odit placeat reiciendis
-      voluptas nam mollitia, vitae ducimus nesciunt optio consectetur. Facere
-      accusantium ab praesentium doloremque illum rem repudiandae accusamus
-      dolores. Eaque minus corporis doloribus temporibus, quisquam quidem,
-      reprehenderit atque deserunt velit suscipit laudantium vitae natus culpa
-      et dicta tempore hic quos ad. Omnis ex dolore architecto, ratione
-      voluptates, atque ea, quibusdam deserunt magnam molestiae voluptatibus
-      blanditiis qui fugiat exercitationem odio? Molestias provident earum
-      dolorum? Dolor, repudiandae laborum neque reprehenderit voluptates
-      corporis maiores tenetur excepturi natus ipsum. Pariatur commodi quis
-      eligendi quia! Eius exercitationem explicabo atque harum labore odio
-      soluta, maxime alias, ipsum vitae, quis debitis! Nesciunt quidem
-      perferendis, suscipit sit corrupti praesentium inventore ex dolorum nam
-      sapiente nihil omnis, commodi nemo eum dolor? Eos tenetur quis, iure,
-      dolore temporibus accusamus fugiat voluptatum quibusdam repellendus nihil
-      incidunt molestiae, eveniet delectus dolor itaque labore iusto maxime
-      dolorum? Soluta dolor corporis impedit doloribus laboriosam tempora
-      blanditiis harum quis? Reprehenderit alias aut ullam molestiae vero culpa
-      consequuntur unde beatae quidem porro, velit placeat debitis obcaecati
-      sapiente expedita ratione temporibus. At aliquam praesentium nihil
-      voluptas natus ipsam possimus, autem maxime in est. Non maxime quae quos
-      laborum nobis ducimus quisquam eos, et, illum id ab mollitia neque.
-      Incidunt necessitatibus quibusdam commodi, impedit, ipsam facilis unde
-      repudiandae, quia iusto consequuntur quisquam animi quas? Quaerat
-      perferendis, autem temporibus at natus consequuntur ipsam a illum dolor
-      atque assumenda dignissimos minima laborum animi in dolorum commodi
-      aliquid odio exercitationem voluptatem voluptates sit repudiandae illo.
-      Delectus, eum. Labore facere odio aperiam mollitia sed vero dolorum
-      nesciunt commodi sapiente eaque quisquam sint tempora praesentium
-      distinctio laborum harum exercitationem, voluptatibus ratione repellat ex
-      voluptas natus illo repellendus. Necessitatibus officia sunt quia impedit
-      ea. Exercitationem quo nihil nesciunt fuga facilis incidunt modi. Quidem
-      adipisci, optio modi quae incidunt sapiente, ad dolore cumque reiciendis
-      veniam in numquam architecto quasi laudantium qui nihil tempora! Eos, vero
-      dignissimos totam quia temporibus nisi explicabo. Vel, delectus nulla
-      illum amet est corporis cumque nisi tempora placeat explicabo? In placeat
-      mollitia tenetur fuga minima ratione modi vitae voluptate consectetur
-      laudantium soluta aut dolorum vero, eius fugit id quidem earum a molestiae
-      recusandae sit! Sint culpa deleniti error eveniet nam cumque neque nobis
-      quas non commodi, est vitae eius quam soluta doloribus consequatur maxime
-      minima laudantium reprehenderit accusantium esse laboriosam nemo? Dolor
-      ipsum sed ea iste illum autem at ratione sunt, voluptate possimus eaque.
-      Et explicabo repellat asperiores corporis voluptatibus quos ipsam nihil
-      doloribus quis quidem, nam ut quam culpa hic dignissimos tempora iusto
-      veniam nisi aliquid ab fugiat est beatae! Unde nulla incidunt, cumque sed
-      nisi odio quos id tempore, quo hic qui placeat officiis deserunt? Sunt
-      veniam dolor delectus, optio praesentium iusto aliquid suscipit ea.
-      Cupiditate similique aperiam unde? Tenetur maxime quae molestias nam
-      suscipit sed quibusdam expedita quaerat vel odio aspernatur laborum
-      repudiandae ut ea, tempora, impedit voluptatibus quidem et qui laudantium
-      repellendus iste dolores? Quibusdam nam at, quasi dolore aliquid amet
-      possimus dolor, saepe beatae laboriosam quia tempora doloribus fugit
-      deserunt architecto ducimus. Dicta laudantium id delectus ut, magni
-      tempore, eius pariatur fuga nisi cum ad obcaecati repellendus alias
-      mollitia unde, praesentium numquam vel laboriosam cumque. Commodi quos
-      excepturi soluta asperiores, deserunt maiores laudantium, suscipit
-      praesentium, magnam nobis delectus mollitia aliquid possimus est
-      molestiae? Aspernatur, ratione distinctio? Aspernatur doloremque nihil
-      dignissimos, blanditiis deleniti alias velit similique ut magnam odio,
-      nisi dolores. Obcaecati tempora reprehenderit commodi et facere
-      cupiditate? Eos tenetur hic aliquid ipsam non optio magnam repellendus!
-      Illum velit facilis ab nulla iure officia iste perferendis amet quas? Aut
-      consequatur dolores, eius natus laboriosam voluptas tenetur saepe quaerat.
-      Quos veniam illum placeat esse delectus nostrum consequatur libero
-      necessitatibus repellat, commodi id aperiam nesciunt maiores fuga tempore
-      officiis reiciendis. Reiciendis pariatur ipsa architecto? Blanditiis,
-      animi? Eveniet, unde ut! Minima architecto ullam illo pariatur quam
-      quaerat omnis placeat fuga porro quisquam! Dicta ex consequuntur quisquam
-      sint, at facere nostrum tenetur eius excepturi voluptas. Incidunt, sint
-      veniam illo ratione voluptate ullam laborum rerum dicta nostrum inventore
-      fuga labore voluptatibus molestiae reprehenderit mollitia perferendis
-      libero quisquam nesciunt asperiores dolorum error ducimus odio. Dolorem
-      culpa reiciendis unde! Nam corrupti culpa omnis nulla assumenda aperiam
-      odio, nihil debitis deleniti itaque magni alias commodi perferendis libero
-      quos facilis laudantium id. Possimus, temporibus natus. Eum, explicabo
-      magni non deleniti nulla id dolorem quaerat ut, libero nesciunt
-      voluptatem. Ullam soluta odit eaque, sit excepturi enim eveniet ea,
-      reprehenderit, mollitia corrupti perferendis exercitationem. Ipsum nihil
-      voluptas distinctio. Praesentium distinctio aliquam et quia reiciendis
-      culpa officiis saepe corporis quo sunt, tempora harum ratione error illum
-      est iure, optio cupiditate mollitia rerum odio neque dignissimos delectus
-      ipsum? Porro ab veniam aperiam quod dolores id corrupti perspiciatis,
-      consectetur, temporibus magnam at! Quae itaque aut earum qui, illo et
-      exercitationem, perspiciatis enim quas vel nisi suscipit impedit nemo
-      inventore nam ut voluptates provident eaque rem consequuntur? Adipisci
-      mollitia reprehenderit, rerum maxime numquam magni neque! Nam cumque
-      aliquam consectetur beatae ut, ducimus exercitationem aspernatur
-      repellendus saepe modi. Iste, nesciunt iusto sunt, iure omnis distinctio
-      exercitationem non totam cumque id facere nam vero minima excepturi magni
-      pariatur optio temporibus ab. Mollitia dolore officia culpa odit animi
-      adipisci debitis impedit dolorum pariatur eos accusantium iure sapiente
-      similique minima obcaecati recusandae commodi optio, consequuntur nulla
-      ducimus tempore! Quis libero expedita voluptates ex reiciendis assumenda
-      neque et molestiae, soluta consequatur praesentium at ipsam necessitatibus
-      recusandae placeat est. Distinctio ab itaque at? Vitae eaque corporis
-      dicta error saepe culpa consequuntur, qui harum aperiam natus
-      perspiciatis! Molestiae maiores iusto obcaecati fuga quos impedit illum.
-    </div>
+    <section className="flex flex-col items-center justify-center align-bottom">
+      {(song && (
+        <>
+          <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
+            <motion.div
+              className={clsx(
+                "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
+                "bg-background"
+              )}
+              style={{
+                height: scrollHeight
+              }}
+            >
+              <Link
+                href="/song"
+                style={{
+                  cursor: "default"
+                }}
+              >
+                <motion.div
+                  className="relative group"
+                  style={{
+                    width: scrollHeight,
+                    height: scrollHeight
+                  }}
+                >
+                  {/* <Image
+                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    src={song.album.images[1].url}
+                    width={300}
+                    height={300}
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(300, 300)
+                    )}`}
+                    alt="Album art"
+                  />
+                  <Image
+                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
+                    src="/images/refresh.png"
+                    alt="Refresh icon"
+                    width={300}
+                    height={300}
+                  /> */}
+                  <img
+                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    src={song.album.images[1].url}
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(300, 300)
+                    )}`}
+                    alt="Album art"
+                  />
+                  <img
+                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
+                    src="/images/refresh.png"
+                    alt="Refresh icon"
+                  />
+                </motion.div>
+              </Link>
+              <div
+                className={clsx(
+                  "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0",
+                  scrolled
+                    ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0"
+                    : "w-[0%] opacity-0"
+                )}
+              >
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]">
+                  {song.name}
+                </h1>
+                <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
+                  {song.artists.map((artist) => artist.name).join(", ")}
+                </h2>
+                <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px]">
+                  {song.album.name}
+                </h3>
+              </div>
+            </motion.div>
+          </div>
+          <div
+            // id="scroll-target"
+            ref={ref}
+            className={clsx(
+              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:h-0 overflow-hidden"
+              // scrolled ? "opacity-0 -z-10" : "opacity-100"
+            )}
+          >
+            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
+              {song.name}
+            </h1>
+            <h2 className="text-2xl text-muted">
+              {song.artists.map((artist) => artist.name).join(", ")}
+            </h2>
+            <h3 className="text-xl text-">{song.album.name}</h3>
+          </div>
+          <Lyrics
+            songName={song.name}
+            artistName={song.artists[0].name}
+            albumName={song.album.name}
+          />
+        </>
+      )) ||
+        (status >= 400 && (
+          <>
+            <p className="relative top-[56px]">
+              Error retrieving data from Spotify.
+            </p>
+          </>
+        )) || (
+          <>
+            <div className="flex flex-col items-center justify-center w-full gap-1 align-middle md:flex-row md:gap-5">
+              <Skeleton className="w-[300px] h-[300px]" />
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Skeleton className="w-[400px] h-[36px]" />
+                <Skeleton className="w-[200px] h-[32px]" />
+                <Skeleton className="w-[250px] h-[28px]" />
+              </div>
+            </div>
+          </>
+        )}
+    </section>
   );
 };
 
-export default Id;
+export default Page;
