@@ -131,54 +131,77 @@ export default function SongLayout({ children }) {
                   <SongList songs="recent" />
                 </DialogContent>
               </Dialog>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full text-base font-semibold"
-                  >
-                    Top Songs
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className={clsx("w-full", rajdhani.className)}
-                      >
-                        {session && session?.user?.name}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-h-[80dvh]">
-                      <DialogHeader>
-                        <DialogTitle>
-                          {session && session?.user?.name + "'s Top Songs"}
-                        </DialogTitle>
-                        <DialogDescription></DialogDescription>
-                      </DialogHeader>
-                      <SongList songs="top-user" />
-                    </DialogContent>
-                  </Dialog>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className={clsx("w-full", rajdhani.className)}
-                      >
-                        Global
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-h-[80dvh]">
-                      <DialogHeader>
-                        <DialogTitle>Most Popular Songs</DialogTitle>
-                        <DialogDescription></DialogDescription>
-                      </DialogHeader>
-                      <SongList songs="top-global" />
-                    </DialogContent>
-                  </Dialog>
-                </DropdownMenuContent>
-              </DropdownMenu>
+
+              {!session && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full text-base font-semibold"
+                    >
+                      Top Songs
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-h-[80dvh]">
+                    <DialogHeader>
+                      <DialogTitle>Most Popular Songs</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                    <SongList songs="top-global" />
+                  </DialogContent>
+                </Dialog>
+              )}
+              {session && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full text-base font-semibold"
+                    >
+                      Top Songs
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className={clsx("w-full", rajdhani.className)}
+                        >
+                          {session && session?.user?.name}
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-h-[80dvh]">
+                        <DialogHeader>
+                          <DialogTitle>
+                            {session && session?.user?.name + "'s Top Songs"}
+                            {!session && "Log in to see your top songs"}
+                          </DialogTitle>
+                          <DialogDescription></DialogDescription>
+                        </DialogHeader>
+                        <SongList songs="top-user" />
+                      </DialogContent>
+                    </Dialog>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className={clsx("w-full", rajdhani.className)}
+                        >
+                          Global
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-h-[80dvh]">
+                        <DialogHeader>
+                          <DialogTitle>Most Popular Songs</DialogTitle>
+                          <DialogDescription></DialogDescription>
+                        </DialogHeader>
+                        <SongList songs="top-global" />
+                      </DialogContent>
+                    </Dialog>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
           </div>
           {/* <SidebarTabs /> */}
