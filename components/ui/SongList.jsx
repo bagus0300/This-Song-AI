@@ -1,5 +1,11 @@
-import { React, useState, useEffect } from "react";
-import { getRecentlyPlayed, getTopSongs } from "@/lib/spotify";
+import { React, useState, useEffect, useContext } from "react";
+import {
+  getClientAccessToken,
+  getRecentlyPlayed,
+  getTopSongs,
+  getTopSongsGlobal,
+  hasClientTokenExpired
+} from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 
 import SongItem from "@/components/ui/song-item";
@@ -7,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { Skeleton } from "./skeleton";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
+import { TokenContext } from "@/context/ContextProvider";
 
 const SongList = ({ songs, onClick = null }) => {
   /**
@@ -21,6 +28,8 @@ const SongList = ({ songs, onClick = null }) => {
   const pathname = usePathname();
 
   console.log("Rendering SongList.jsx");
+
+  const { clientToken, setClientToken } = useContext(TokenContext);
 
   useEffect(() => {
     getSongs();
@@ -45,6 +54,38 @@ const SongList = ({ songs, onClick = null }) => {
         const topSongs = await getTopSongs(session.accessToken);
         console.log("topSongs", topSongs);
         setData(topSongs.data);
+        setStatus(topSongs.status);
+      } else if (songs === "top-global") {
+        let token = null;
+        let accessToken = null;
+        if (session && session.accessToken) {
+          accessToken = session.accessToken;
+        } else {
+          token = clientToken;
+          if (!token) {
+            token = await getClientAccessToken();
+            setClientToken(token);
+            console.log("token", token);
+            console.log("clientToken", clientToken);
+            accessToken = token.clientToken;
+          } else {
+            console.log("Found a token in TokenContext");
+            if (hasClientTokenExpired(token)) {
+              console.log("Token has expired");
+              token = await getClientAccessToken();
+              setClientToken(token);
+              console.log("token", token);
+              console.log("clientToken", clientToken);
+            }
+            accessToken = token.clientToken;
+          }
+        }
+
+        console.log("search token", accessToken);
+
+        const topSongs = await getTopSongsGlobal(accessToken);
+        console.log("topSongs", topSongs);
+        setData(topSongs.data.tracks);
         setStatus(topSongs.status);
       }
     };
