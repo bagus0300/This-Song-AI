@@ -123,6 +123,7 @@ export default function SongLayout({ children }) {
                     <DialogTitle>Recently Played</DialogTitle>
                     <DialogDescription></DialogDescription>
                   </DialogHeader>
+                  <Recent />
                 </DialogContent>
               </Dialog>
               <DropdownMenu>
