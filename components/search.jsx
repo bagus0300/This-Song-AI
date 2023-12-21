@@ -66,7 +66,7 @@ const Search = ({ setShowMenu }) => {
   };
 
   return (
-    <section className="flex flex-col items-center gap-1">
+    <section className="flex flex-col items-center w-full gap-1">
       <span className="relative w-full group/field">
         <Input
           ref={inputElement}
@@ -94,7 +94,7 @@ const Search = ({ setShowMenu }) => {
       </span>
 
       {(data && (
-        <div className="w-full lg:h-[calc(100dvh-64px-40px-40px-32px)] h-[calc(100dvh-56px-48px-40px)] overflow-y-scroll">
+        <div className="w-full max-w-[85dvw] md:max-w-[462px] lg:h-[calc(100dvh-64px-40px-40px-32px)] h-[calc(80dvh-48px-2px-24px-40px)] overflow-y-scroll">
           {data.items.map((item, index) => (
             <SongItem
               // We can't set the key to the song's id because the same song could be in the recently played list multiple times, so we'll use the index instead

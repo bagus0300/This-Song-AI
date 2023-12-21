@@ -3,6 +3,11 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
 import clsx from "clsx";
 import SidebarTabs from "@/components/ui/sidebar-tabs";
+import { Button } from "@/components/ui/button";
+import Search from "@/components/search";
+import { useState } from "react";
+import Recent from "@/components/recent";
+import ConditionalModal from "@/components/ConditionalModal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,11 +16,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import Search from "@/components/search";
-import { useState } from "react";
-import Recent from "@/components/recent";
-import ConditionalModal from "@/components/ConditionalModal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
 
 // export const metadata = {
 //   title: "Song Information",
@@ -76,84 +84,68 @@ export default function SongLayout({ children }) {
               </DropdownMenu>
             </div>
             <div className="flex lg:hidden">
-              <Button
-                variant={
-                  modalOpen && activeItem === "Search" ? "default" : "outline"
-                }
-                className="w-full"
-                onClick={() => {
-                  !modalOpen && setModalOpen(true);
-                  modalOpen && activeItem === "Search" && setModalOpen(false);
-                  setActiveItem("Search");
-                }}
-              >
-                Search
-              </Button>
-              <Button
-                variant={
-                  modalOpen && activeItem === "Recently Played"
-                    ? "default"
-                    : "outline"
-                }
-                className="w-full"
-                onClick={() => {
-                  !modalOpen && setModalOpen(true);
-                  modalOpen &&
-                    activeItem === "Recently Played" &&
-                    setModalOpen(false);
-                  setActiveItem("Recently Played");
-                }}
-              >
-                Recent
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    Search
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-h-[80dvh]">
+                  <DialogHeader>
+                    <DialogTitle>Search</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                  <Search />
+                </DialogContent>
+              </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    Recently Played
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-h-[80dvh]">
+                  <DialogHeader>
+                    <DialogTitle>Recently Played</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant={
-                      modalOpen && activeItem.includes("Top Songs")
-                        ? "default"
-                        : "outline"
-                    }
-                    className="w-full"
-                  >
+                  <Button variant="outline" className="w-full">
                     Top Songs
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem
-                    onSelect={() => {
-                      !modalOpen && setModalOpen(true);
-                      modalOpen &&
-                        activeItem === "Top Songs (user)" &&
-                        setModalOpen(false);
-                      setActiveItem("Top Songs (user)");
-                    }}
-                  >
-                    User
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onSelect={() => {
-                      !modalOpen && setModalOpen(true);
-                      modalOpen &&
-                        activeItem === "Top Songs (global)" &&
-                        setModalOpen(false);
-                      setActiveItem("Top Songs (global)");
-                    }}
-                  >
-                    Global
-                  </DropdownMenuItem>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" className="w-full">
+                        User
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-h-[80dvh]">
+                      <DialogHeader>
+                        <DialogTitle>Top Songs (user)</DialogTitle>
+                        <DialogDescription></DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" className="w-full">
+                        Global
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-h-[80dvh]">
+                      <DialogHeader>
+                        <DialogTitle>Top Songs (global)</DialogTitle>
+                        <DialogDescription></DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </div>
-            <div className="flex lg:hidden">
-              <ConditionalModal modalOpen={modalOpen}>
-                {activeItem === "Search" && <Search />}
-                {activeItem === "Recently Played" && <Recent />}
-                {activeItem === "Top Songs (user)" && <p>Top Songs (user)</p>}
-                {activeItem === "Top Songs (global)" && (
-                  <p>Top Songs (global)</p>
-                )}
-              </ConditionalModal>
             </div>
           </div>
           {/* <SidebarTabs /> */}
@@ -162,10 +154,7 @@ export default function SongLayout({ children }) {
           {/* </Link> */}
         </div>
       </div>
-      <div
-        id="content"
-        className={clsx("px-2 mt-12 lg:mt-0 lg:ml-72", modalOpen && "hidden")}
-      >
+      <div id="content" className={clsx("px-2 mt-12 lg:mt-0 lg:ml-72")}>
         {children}
       </div>
     </>
