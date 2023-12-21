@@ -6,7 +6,7 @@ import SidebarTabs from "@/components/ui/sidebar-tabs";
 import { Button } from "@/components/ui/button";
 import Search from "@/components/search";
 import { useState } from "react";
-import Recent from "@/components/recent";
+import SongList from "@/components/SongList";
 import ConditionalModal from "@/components/ConditionalModal";
 import {
   DropdownMenu,
@@ -25,6 +25,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { rajdhani } from "@/components/ui/fonts";
+import { useSession } from "next-auth/react";
 
 // export const metadata = {
 //   title: "Song Information",
@@ -34,7 +35,7 @@ import { rajdhani } from "@/components/ui/fonts";
 
 export default function SongLayout({ children }) {
   const [activeItem, setActiveItem] = useState("Search");
-  // const session = await getServerSession();
+  const { data: session } = useSession();
 
   const items = [
     "Search",
@@ -54,9 +55,13 @@ export default function SongLayout({ children }) {
             {/* Sidebar on large screens */}
             <div className="hidden lg:block">
               {activeItem === "Search" && <Search />}
-              {activeItem === "Recently Played" && <Recent />}
-              {activeItem === "Top Songs (user)" && <p>Top Songs (user)</p>}
-              {activeItem === "Top Songs (global)" && <p>Top Songs (global)</p>}
+              {activeItem === "Recently Played" && <SongList songs="recent" />}
+              {activeItem === "Top Songs (user)" && (
+                <SongList songs="top-user" />
+              )}
+              {activeItem === "Top Songs (global)" && (
+                <SongList songs="top-global" />
+              )}
             </div>
             <div className="hidden lg:block">
               <DropdownMenu>
@@ -123,7 +128,7 @@ export default function SongLayout({ children }) {
                     <DialogTitle>Recently Played</DialogTitle>
                     <DialogDescription></DialogDescription>
                   </DialogHeader>
-                  <Recent />
+                  <SongList songs="recent" />
                 </DialogContent>
               </Dialog>
               <DropdownMenu>
@@ -142,14 +147,17 @@ export default function SongLayout({ children }) {
                         variant="ghost"
                         className={clsx("w-full", rajdhani.className)}
                       >
-                        User
+                        {session && session?.user?.name}
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="max-h-[80dvh]">
                       <DialogHeader>
-                        <DialogTitle>Top Songs (user)</DialogTitle>
+                        <DialogTitle>
+                          {session && session?.user?.name + "'s Top Songs"}
+                        </DialogTitle>
                         <DialogDescription></DialogDescription>
                       </DialogHeader>
+                      <SongList songs="top-user" />
                     </DialogContent>
                   </Dialog>
                   <Dialog>
@@ -163,9 +171,10 @@ export default function SongLayout({ children }) {
                     </DialogTrigger>
                     <DialogContent className="max-h-[80dvh]">
                       <DialogHeader>
-                        <DialogTitle>Top Songs (global)</DialogTitle>
+                        <DialogTitle>Most Popular Songs</DialogTitle>
                         <DialogDescription></DialogDescription>
                       </DialogHeader>
+                      <SongList songs="top-global" />
                     </DialogContent>
                   </Dialog>
                 </DropdownMenuContent>
