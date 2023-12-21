@@ -36,6 +36,7 @@ import { useSession } from "next-auth/react";
 export default function SongLayout({ children }) {
   const [activeItem, setActiveItem] = useState("Search");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data: session } = useSession();
 
   const items = [
@@ -180,7 +181,13 @@ export default function SongLayout({ children }) {
                 </Dialog>
               )}
               {session && (
-                <DropdownMenu>
+                <DropdownMenu
+                  open={dropdownOpen}
+                  onOpenChange={() => {
+                    console.log("dropdownOpen", dropdownOpen);
+                    setDropdownOpen((prev) => !prev);
+                  }}
+                >
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="outline"
@@ -192,11 +199,11 @@ export default function SongLayout({ children }) {
                   <DropdownMenuContent>
                     <Dialog
                       open={dialogOpen === "top-user"}
-                      onOpenChange={() =>
+                      onOpenChange={() => {
                         setDialogOpen((prev) =>
                           prev === "top-user" ? false : "top-user"
-                        )
-                      }
+                        );
+                      }}
                     >
                       <DialogTrigger asChild>
                         <Button
@@ -216,7 +223,10 @@ export default function SongLayout({ children }) {
                         </DialogHeader>
                         <SongList
                           songs="top-user"
-                          onClick={() => setDialogOpen((prev) => !prev)}
+                          onClick={() => {
+                            setDialogOpen((prev) => !prev);
+                            setDropdownOpen(false);
+                          }}
                         />
                       </DialogContent>
                     </Dialog>
@@ -243,7 +253,10 @@ export default function SongLayout({ children }) {
                         </DialogHeader>
                         <SongList
                           songs="top-global"
-                          onClick={() => setDialogOpen((prev) => !prev)}
+                          onClick={() => {
+                            setDialogOpen((prev) => !prev);
+                            setDropdownOpen(false);
+                          }}
                         />
                       </DialogContent>
                     </Dialog>
