@@ -48,9 +48,9 @@ export default function NavMenu() {
         </li>
       </a>
       {[
-        { title: "Currently Playing", path: "/song/current" },
-        { title: "Song", path: "/song/id" },
-        { title: "Protected", path: "/song/protected" }
+        { title: "Currently Playing", path: "/song/current" }
+        // { title: "Song", path: "/song/id" },
+        // { title: "Protected", path: "/song/protected" }
       ].map(({ title, path }) => (
         <Link key={path} href={path} onClick={() => setShowMenu(false)}>
           <li className={pathname === path ? ACTIVE_ROUTE : INACTIVE_ROUTE}>
