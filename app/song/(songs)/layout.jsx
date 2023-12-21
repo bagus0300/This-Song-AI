@@ -46,7 +46,7 @@ export default function SongLayout({ children }) {
   return (
     <>
       <div
-        id="sidebar"
+        id="menu"
         className="fixed left-0 lg:w-72 w-full lg:h-[calc(100dvh-80px)] lg:m-2 lg:rounded-lg bg-card"
       >
         <div className={clsx("h-full justify-between p-1")}>

@@ -61,14 +61,18 @@ export default function NavMenu() {
     <div>
       <div className="z-20 flex items-center justify-between p-4 lg:rounded-lg bg-card h-14">
         <Banner />
-        <div className={"flex items-center gap-2 font-semibold tracking-wider"}>
+        <div
+          className={
+            "flex items-center gap-2 font-semibold tracking-wider h-14 justify-center align-middle"
+          }
+        >
           <span
             className={clsx("hidden lg:flex-row lg:flex ", rajdhani.className)}
           >
             {menuLinks()}
           </span>
           <AuthButton />
-          <span className="hidden lg:inline">
+          <span className="items-center justify-center hidden align-middle lg:flex">
             <ModeToggle />
           </span>
           <span className="inline lg:hidden">
