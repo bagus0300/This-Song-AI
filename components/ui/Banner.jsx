@@ -1,12 +1,13 @@
 import { Music4 } from "lucide-react";
+import { rajdhani } from "@/components/ui/fonts";
 
 const Banner = () => {
   return (
     <div className="font-extrabold text-foreground w-fit">
       <a href="/">
-        <span className="inline-flex gap-2 align-middle hover:text-[#1fdf64]">
+        <span className="inline-flex gap-2 align-middle text-lg hover:text-[#1fdf64] tracking-wide">
           <Music4 />
-          This Song
+          <span className={rajdhani.className}>This Song</span>
         </span>
       </a>
       <a href="https://spotify.com" target="_blank">

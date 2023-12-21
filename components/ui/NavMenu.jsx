@@ -8,6 +8,7 @@ import LoginButton from "./login-button";
 import { MenuToggle } from "./toggle-menu";
 import { useState } from "react";
 import clsx from "clsx";
+import { rajdhani } from "@/components/ui/fonts";
 
 const ACTIVE_ROUTE = "py-1 px-2 rounded-md text-green-500";
 const INACTIVE_ROUTE = "py-1 px-2 rounded-md bg-transparent text-foreground";
@@ -37,7 +38,7 @@ export default function NavMenu() {
   console.log("Rendering NavMenu.jsx");
 
   const menuLinks = (mobile = null) => (
-    <ul className={mobile ? "flex flex-col items-center text-2xl" : "flex"}>
+    <ul className={mobile ? "flex flex-col items-center text-3xl" : "flex"}>
       {[
         { title: "Song", path: "/song" },
         { title: "Protected", path: "/song/protected" },
@@ -57,8 +58,12 @@ export default function NavMenu() {
     <div>
       <div className="z-20 flex items-center justify-between p-4 lg:rounded-lg bg-card h-14">
         <Banner />
-        <div className="flex items-center gap-2">
-          <span className="hidden lg:flex-row lg:flex">{menuLinks()}</span>
+        <div className={"flex items-center gap-2 font-semibold tracking-wider"}>
+          <span
+            className={clsx("hidden lg:flex-row lg:flex ", rajdhani.className)}
+          >
+            {menuLinks()}
+          </span>
           <AuthButton />
           <span className="hidden lg:inline">
             <ModeToggle />
@@ -77,13 +82,13 @@ export default function NavMenu() {
         className={clsx(
           "lg:hidden h-[calc(100dvh-56px)] origin-top absolute w-full grow transition-all duration-300 ease-out bg-card -z-10",
           // If the menu is open, set its height to the dynamic viewport height minus the header height.
-          // showMenu ? "h-[calc(100dvh-56px)] scale-y-100" : "scale-y-0"
           showMenu ? "h-[calc(100dvh-56px)]" : "-mt-[100vh]"
         )}
       >
         <div
           className={clsx(
-            "h-full lg:flex flex-col justify-between items-center p-1 flex"
+            "h-full lg:flex flex-col justify-between items-center p-1 flex font-semibold",
+            rajdhani.className
             // showMenu ? "flex" : "hidden"
           )}
         >
