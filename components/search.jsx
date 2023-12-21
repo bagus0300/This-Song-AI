@@ -1,7 +1,11 @@
 import React, { useContext, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { useDebouncedCallback } from "use-debounce";
-import { getClientAccessToken, searchTracks } from "@/lib/spotify";
+import {
+  getClientAccessToken,
+  hasClientTokenExpired,
+  searchTracks
+} from "@/lib/spotify";
 import { catchErrors } from "@/lib/utils";
 import SongItem from "@/components/ui/song-item";
 import { usePathname } from "next/navigation";
@@ -46,6 +50,13 @@ const Search = ({ onClick }) => {
           console.log("clientToken", clientToken);
         } else {
           console.log("Found a token in TokenContext");
+          if (hasClientTokenExpired(token)) {
+            console.log("Token has expired");
+            token = await getClientAccessToken();
+            setClientToken(token);
+            console.log("token", token);
+            console.log("clientToken", clientToken);
+          }
         }
 
         const searchResults = await searchTracks(term, token);
