@@ -100,7 +100,7 @@ const TopSongsSnippets = async () => {
                   <p className="p-2 text-sm text-muted">
                     {summaries.has(item.track.id)
                       ? summaries.get(item.track.id)
-                      : "Click to generate description!"}
+                      : "Description currently unavailable."}
                   </p>
                 </div>
               </a>
