@@ -80,8 +80,9 @@ export const authOptions = {
       }
     },
     async session({ session, token }) {
-      // console.log("session", session);
-      // console.log("token", token);
+      console.log("Session callback");
+      console.log("session", session);
+      console.log("token", token);
 
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;
