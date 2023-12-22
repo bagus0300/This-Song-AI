@@ -80,7 +80,7 @@ const TopSongsSnippets = async () => {
             >
               <a href={`/song/${item.track.id}`} className="w-full">
                 <div className="w-full md:w-[400px] h-[200px] flex flex-col justify-center p-1">
-                  <div className="flex justify-center w-full gap-4 p-2 overflow-x-hidden">
+                  <div className="flex items-center justify-center w-full gap-4 p-2 overflow-x-hidden">
                     <img
                       className="w-16 h-16"
                       src={item.track.album.images[2].url}
