@@ -39,6 +39,8 @@ export default function SongLayout({ children }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data: session } = useSession();
 
+  console.log("session", session);
+
   const items = [
     "Search",
     "Recently Played",
