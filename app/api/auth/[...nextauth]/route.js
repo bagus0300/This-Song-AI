@@ -93,7 +93,7 @@ export const authOptions = {
       session.refreshToken = token.refreshToken;
       session.expiresAt = token.expiresAt;
       session.error = token.error;
-      // console.log("session", session);
+      console.log("session", session);
       return session;
     }
   }
