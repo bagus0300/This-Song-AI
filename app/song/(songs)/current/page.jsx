@@ -248,7 +248,8 @@ const Page = () => {
         (!session && (
           <>
             <p className="">
-              Log in to Spotify to see what you&apos;re listening to.
+              Search for a song, or log in to Spotify to see what you&apos;re
+              currently listening to.
             </p>
           </>
         )) || (
