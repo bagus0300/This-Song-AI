@@ -43,7 +43,7 @@ export default function SongLayout({ children }) {
 
   useEffect(() => {
     console.log("Updating session...");
-    update();
+    if (session) update();
   }, []);
 
   const items = [
