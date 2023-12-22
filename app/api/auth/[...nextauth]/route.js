@@ -2,10 +2,6 @@ import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
 export const authOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt"
-  },
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -22,9 +18,9 @@ export const authOptions = {
       }
     })
   ],
-  // session: {
-  //   strategy: "jwt"
-  // },
+  session: {
+    strategy: "jwt"
+  },
   callbacks: {
     async jwt({ token, account, profile }) {
       console.log("JWT callback");
