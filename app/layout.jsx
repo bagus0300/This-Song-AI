@@ -14,13 +14,6 @@ export default function RootLayout({ children }) {
   return (
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2709522242259696"
-          crossorigin="anonymous"
-        ></script>
-      </head>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <main className="gap-2 mx-auto">{children}</main>
       </body>
