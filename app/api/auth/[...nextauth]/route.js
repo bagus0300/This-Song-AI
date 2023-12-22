@@ -18,9 +18,9 @@ export const authOptions = {
       }
     })
   ],
-  session: {
-    strategy: "jwt"
-  },
+  // session: {
+  //   strategy: "jwt"
+  // },
   callbacks: {
     async jwt({ token, account, profile }) {
       console.log("JWT callback");
@@ -44,6 +44,7 @@ export const authOptions = {
       console.log("Current date", Date.now());
       if (Date.now() < token.expiresAt * 1000) {
         console.log("Token is valid");
+        console.log("jwt token (modified)", token);
         return token;
       } else if (token.refreshToken) {
         console.log("Token is invalid");
