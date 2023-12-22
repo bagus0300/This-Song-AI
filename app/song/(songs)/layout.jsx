@@ -5,7 +5,7 @@ import clsx from "clsx";
 import SidebarTabs from "@/components/ui/sidebar-tabs";
 import { Button } from "@/components/ui/button";
 import Search from "@/components/search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SongList from "@/components/ui/SongList";
 import ConditionalModal from "@/components/ConditionalModal";
 import {
@@ -37,9 +37,14 @@ export default function SongLayout({ children }) {
   const [activeItem, setActiveItem] = useState("Search");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
 
   console.log("session", session);
+
+  useEffect(() => {
+    console.log("Updating session...");
+    update();
+  }, []);
 
   const items = [
     "Search",
