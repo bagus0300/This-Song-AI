@@ -221,6 +221,7 @@ const Page = () => {
             <h3 className="text-xl text-">{song.albumName}</h3>
           </div>
           <Lyrics
+            songID={song.id}
             songName={song.songName}
             artistName={song.artists[0].name}
             albumName={song.albumName}
