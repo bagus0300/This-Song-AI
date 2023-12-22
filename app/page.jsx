@@ -28,26 +28,29 @@ const Page = () => {
           </Suspense>
         </div>
       </div>
-      <footer class="bg-secondary">
-        <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-          <div class="text-center sm:text-end grid grid-cols-1 gap-8 pt-8 sm:grid-cols-2 lg:grid-cols-2 lg:pt-16 mb-10">
+      <footer className="bg-secondary">
+        <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 pt-8 mb-10 text-center sm:text-end sm:grid-cols-2 lg:grid-cols-2 lg:pt-16">
             <div></div>
 
             <div>
-              <p class="font-medium text-gray-900">This Song</p>
+              <p className="font-medium text-gray-900">This Song</p>
 
-              <ul class="text-sm">
+              <ul className="text-sm">
                 <li>
                   <a
                     href="mailto:atopala7@gmail.com"
-                    class="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-700 transition hover:opacity-75"
                   >
                     Contact
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                  <a
+                    href="#"
+                    className="text-gray-700 transition hover:opacity-75"
+                  >
                     {/* About */}
                   </a>
                 </li>
@@ -56,11 +59,11 @@ const Page = () => {
           </div>
 
           <div className="text-end">
-            <p class="text-xs text-muted">
+            <p className="text-xs text-muted">
               All songs, lyrics, and images are property of their respective
               owners.
             </p>
-            <p class="text-xs text-muted">
+            <p className="text-xs text-muted">
               &copy; 2023. This Song. All rights reserved.
             </p>
           </div>
