@@ -20,6 +20,7 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account, profile }) {
+      console.log("JWT callback");
       console.log("jwt token", token);
       console.log("jwt account", account);
       console.log("jwt profile", profile);
