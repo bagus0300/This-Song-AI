@@ -79,28 +79,30 @@ const TopSongsSnippets = async () => {
               key={index}
             >
               <a href={`/song/${item.track.id}`}>
-                <div className="flex items-center w-full gap-2 p-2 overflow-x-hidden">
-                  <img
-                    className="w-16 h-16"
-                    src={item.track.album.images[2].url}
-                    alt="Album image"
-                  />
-                  <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                    {item.track.name}
-                    <br />
-                    <span className="inline-flex justify-between text-muted">
-                      {/* <span>Popularity: {item.track.popularity}</span> */}
-                      <span>{item.track.artists[0].name}</span>
-                    </span>
-                    <br />
-                    {/* <span className="text-foreground">{item.album.name}</span> */}
+                <div className="w-full md:w-[400px] h-[200px] flex flex-col items-center justify-center">
+                  <div className="flex items-center w-full gap-2 p-2 overflow-x-hidden">
+                    <img
+                      className="w-16 h-16"
+                      src={item.track.album.images[2].url}
+                      alt="Album image"
+                    />
+                    <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
+                      {item.track.name}
+                      <br />
+                      <span className="inline-flex justify-between text-muted">
+                        {/* <span>Popularity: {item.track.popularity}</span> */}
+                        <span>{item.track.artists[0].name}</span>
+                      </span>
+                      <br />
+                      {/* <span className="text-foreground">{item.album.name}</span> */}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted">
+                    {summaries.has(item.track.id)
+                      ? summaries.get(item.track.id)
+                      : "Click to generate description!"}
                   </p>
                 </div>
-                <p className="text-sm text-muted">
-                  {summaries.has(item.track.id)
-                    ? summaries.get(item.track.id)
-                    : "Click to generate description!"}
-                </p>
               </a>
             </div>
           ))) ||
