@@ -18,6 +18,9 @@ export const authOptions = {
       }
     })
   ],
+  session: {
+    strategy: "jwt"
+  },
   callbacks: {
     async jwt({ token, account, profile }) {
       console.log("JWT callback");
