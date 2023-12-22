@@ -20,7 +20,7 @@ const Page = () => {
           Or check out what AI has to say about the songs everybody&apos;s
           talking about:
         </h2>
-        <p className="text-sm">(Click on a song to learn more)</p>
+        <p className="text-sm">(Select a song to learn more)</p>
         <TopSongsSnippets />
       </div>
     </div>
