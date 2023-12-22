@@ -9,6 +9,8 @@ const BACKEND_URI =
     ? "http://192.168.4.158:8000"
     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
+const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
+
 const TopSongsSnippets = async () => {
   const { data } = await axios.get(`${BACKEND_URI}/client_token`);
 
@@ -28,9 +30,44 @@ const TopSongsSnippets = async () => {
   );
   // console.log("topSongs", topSongs);
   const songs = topSongs.data.items;
-  console.log("songs", songs);
+  // console.log("songs", songs);
 
-  // return <p>{topSongs.data.tracks.items}</p>;
+  const summaries = new Map();
+
+  await Promise.all(
+    songs.map(async (element) => {
+      // console.log(element.track.name);
+      const songID = element.track.id;
+      const songName = element.track.name;
+
+      const gpt4Response = await fetch(GPT_SUMMARY_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          songID: songID,
+          trackName: songName
+        })
+      });
+
+      // console.log("GPT-4 fetch response: ", gpt4Response);
+      if (gpt4Response.ok) {
+        const summary = await gpt4Response.text();
+        if (summary) {
+          // console.log("GPT-4 summary response: ", summary);
+          const firstLetter = summary.slice(13, 14);
+          const restOfSummary = summary.slice(14);
+          summaries.set(
+            element.track.id,
+            firstLetter.toUpperCase() + restOfSummary
+          );
+        }
+      }
+    })
+  );
+
+  // console.log("summaries", summaries);
 
   return (
     <section className="w-full gap-1">
@@ -38,7 +75,7 @@ const TopSongsSnippets = async () => {
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="py-4 m-4 transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full"
+              className="flex py-4 m-4 transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[200px] items-center justify-center"
               key={index}
             >
               <a href={`/song/${item.track.id}`}>
@@ -59,7 +96,11 @@ const TopSongsSnippets = async () => {
                     {/* <span className="text-foreground">{item.album.name}</span> */}
                   </p>
                 </div>
-                {/* <p className="text-muted">Song description</p> */}
+                <p className="text-sm text-muted">
+                  {summaries.has(item.track.id)
+                    ? summaries.get(item.track.id)
+                    : "Click to generate description!"}
+                </p>
               </a>
             </div>
           ))) ||
