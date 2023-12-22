@@ -1,5 +1,6 @@
 import TopSongsSnippets from "@/components/TopSongsSnippets";
-import Link from "next/link";
+import TopSongsSnippetsSkeleton from "@/components/TopSongsSnippetsSkeleton";
+import { Suspense } from "react";
 
 const Page = () => {
   return (
@@ -21,7 +22,9 @@ const Page = () => {
           talking about:
         </h2>
         <p className="text-sm">(Select a song to learn more)</p>
-        <TopSongsSnippets />
+        <Suspense fallback={<TopSongsSnippetsSkeleton />}>
+          <TopSongsSnippets />
+        </Suspense>
       </div>
     </div>
   );
