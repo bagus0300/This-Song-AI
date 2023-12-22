@@ -79,8 +79,8 @@ const TopSongsSnippets = async () => {
               key={index}
             >
               <a href={`/song/${item.track.id}`} className="w-full">
-                <div className="w-full md:w-[400px] h-[200px] flex flex-col justify-center p-1">
-                  <div className="flex items-center justify-center w-full gap-4 p-2 overflow-x-hidden">
+                <div className="w-full md:w-[400px] h-[200px] flex flex-col justify-center">
+                  <div className="flex items-center justify-center w-full gap-2 p-2 overflow-x-hidden">
                     <img
                       className="w-16 h-16"
                       src={item.track.album.images[2].url}
@@ -97,7 +97,7 @@ const TopSongsSnippets = async () => {
                       {/* <span className="text-foreground">{item.album.name}</span> */}
                     </p>
                   </div>
-                  <p className="text-sm text-muted">
+                  <p className="p-2 text-sm text-muted">
                     {summaries.has(item.track.id)
                       ? summaries.get(item.track.id)
                       : "Click to generate description!"}
