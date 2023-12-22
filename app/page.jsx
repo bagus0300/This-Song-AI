@@ -16,7 +16,7 @@ const Page = () => {
         Click here to search for a song!
       </a>
       <div>
-        <h2 className="px-2 mt-4 text-lg text-center md:mt-10">
+        <h2 className="px-2 mt-2 text-lg text-center md:mt-10">
           Or check out what AI has to say about the songs everybody&apos;s
           talking about:
         </h2>
