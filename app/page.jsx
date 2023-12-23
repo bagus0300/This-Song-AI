@@ -28,7 +28,7 @@ const Page = () => {
               "px-2 mt-2 text-lg text-center md:mt-10"
             )}
           >
-            Or check out what GPT-4 has to say about the songs everybody&apos;s
+            Check out what GPT-4 has to say about the songs everybody&apos;s
             talking about:
           </h2>
           <p className={clsx(rajdhani.className, "text-base")}>
