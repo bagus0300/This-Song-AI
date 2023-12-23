@@ -7,18 +7,20 @@ import clsx from "clsx";
 const Page = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-5 p-10 text-base text-center align-bottom xl:px-0 max-w-[1680px] mx-auto">
-        <img src="/this_song.svg" alt="This Song logo" width={200} />
-        <h1 className={clsx(rajdhani.className, `text-2xl`)}>
-          Discover the meaning behind your favorite songs through AI-enhanced
-          lyric analysis!
-        </h1>
-        <a
-          href="song"
-          className="inline-block px-6 py-2 font-bold text-white bg-[#1DB954] rounded-full hover:brightness-110"
-        >
-          Click here to search for a song!
-        </a>
+      <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
+        <div className="flex flex-col items-center justify-center w-full gap-5 p-10 text-base text-center align-bottom xl:px-0 bg-secondary">
+          <img src="/this_song.svg" alt="This Song logo" width={200} />
+          <h1 className={clsx(rajdhani.className, `text-2xl`)}>
+            Discover the meaning behind your favorite songs through AI-enhanced
+            lyric analysis!
+          </h1>
+          <a
+            href="song"
+            className="inline-block px-6 py-2 font-bold text-white bg-[#1DB954] rounded-full hover:brightness-110"
+          >
+            Click here to search for a song!
+          </a>
+        </div>
         <div>
           <h2
             className={clsx(
