@@ -49,7 +49,7 @@ const Page = () => {
               <ul className="text-base">
                 <li>
                   <a
-                    href="mailto:atopala7@gmail.com"
+                    href="mailto:admin@thissong.app"
                     className="text-gray-700 transition hover:opacity-75"
                   >
                     Contact
