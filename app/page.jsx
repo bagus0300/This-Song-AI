@@ -34,9 +34,11 @@ const Page = () => {
           <p className={clsx(rajdhani.className, "text-base")}>
             (Select a song to learn more)
           </p>
-          <Suspense fallback={<TopSongsSnippetsSkeleton />}>
-            <TopSongsSnippets />
-          </Suspense>
+          <div className="max-w-[1680px]">
+            <Suspense fallback={<TopSongsSnippetsSkeleton />}>
+              <TopSongsSnippets />
+            </Suspense>
+          </div>
         </div>
       </div>
       <footer className={clsx(rajdhani.className, "bg-secondary")}>

@@ -71,11 +71,11 @@ const TopSongsSnippets = async () => {
 
   return (
     <section className="w-full gap-1">
-      <div className="flex flex-wrap items-center justify-center w-full">
+      <div className="flex flex-wrap items-center justify-center w-full my-8">
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="flex py-4 m-4 transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[200px] items-center justify-center"
+              className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[200px] items-center justify-center"
               key={index}
             >
               <a href={`/song/${item.track.id}`} className="w-full">
