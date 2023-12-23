@@ -80,7 +80,6 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     const fetchGPTResponse = async () => {
       if (!lyrics || lyrics.body == "No lyrics found") return;
       console.log(`Asking GPT about ${songName} by ${artistName}...`);
-      console.log("Lyrics: ", lyrics);
 
       // See if we can get a response from GPT-4
       try {

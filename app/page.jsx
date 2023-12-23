@@ -7,7 +7,7 @@ import clsx from "clsx";
 const Page = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-5 p-10 text-base text-center align-bottom">
+      <div className="flex flex-col items-center justify-center gap-5 p-10 text-base text-center align-bottom xl:px-0 max-w-[1680px] mx-auto">
         <img src="/this_song.svg" alt="This Song logo" width={200} />
         <h1 className={clsx(rajdhani.className, `text-2xl`)}>
           Discover the meaning behind your favorite songs through AI-enhanced
