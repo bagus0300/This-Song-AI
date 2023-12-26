@@ -31,10 +31,10 @@ const Page = () => {
             Check out what GPT-4 has to say about the songs everybody&apos;s
             talking about:
           </h2>
-          <p className={clsx(rajdhani.className, "text-base, mt-5")}>
+          <p className={clsx(rajdhani.className, "text-base mt-5")}>
             (Select a song to learn more)
           </p>
-          <div className="max-w-[1680px]">
+          <div className="max-w-[1680px] mx-auto">
             <Suspense fallback={<TopSongsSnippetsSkeleton />}>
               <TopSongsSnippets />
             </Suspense>
