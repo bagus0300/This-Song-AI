@@ -28,11 +28,8 @@ const Page = () => {
               "px-2 mt-2 text-lg text-center md:mt-10"
             )}
           >
-            Check out what{" "}
-            <abbr title="Generative Pre-trained Transformer 4, a large language model built by OpenAI">
-              GPT-4
-            </abbr>{" "}
-            has to say about the songs everybody&apos;s talking about:
+            Check out what GPT-4 has to say about the songs everybody&apos;s
+            talking about:
           </h2>
           <p className={clsx(rajdhani.className, "text-base mt-5")}>
             (Select a song to learn more)
