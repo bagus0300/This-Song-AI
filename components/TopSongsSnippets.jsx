@@ -26,7 +26,8 @@ const TopSongsSnippets = async () => {
       {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        cache: "no-store"
       }
     );
 
@@ -47,7 +48,8 @@ const TopSongsSnippets = async () => {
           body: JSON.stringify({
             songID: songID,
             trackName: songName
-          })
+          }),
+          cache: "no-store"
         });
 
         if (gpt4Response.ok) {

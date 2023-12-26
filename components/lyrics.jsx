@@ -170,22 +170,15 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     <div className="px-4 md:p-2">
       {(lyrics && (
         <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
+          {lyrics.body == "No lyrics found" && (
+            <p className="items-center justify-center text-center">
+              No lyrics found.
+            </p>
+          )}
           <div
             className={clsx(
-              "h-full flex flex-col lg:w-fit w-full gap-2 items-center text-center min-w-[350px]"
-            )}
-          >
-            <div className="text-base whitespace-pre-line">
-              {lyrics.body}
-              {/* {GPTInterpretation} */}
-            </div>
-            {/* <Image src={musixmatchLogo} alt="Musicxmatch logo" /> */}
-            {/* <img src={musixmatchLogo} alt="Musicxmatch logo" width="200px" /> */}
-          </div>
-          <div
-            className={clsx(
-              "h-full transition-all duration-1000 whitespace-break-spaces w-full",
-              GPTInterpretation ? "lg:w-[400px] xl:w-[600px]" : "lg:w-[200px]",
+              "h-full whitespace-break-spaces w-full",
+              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "lg:w-[200px]",
               lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
