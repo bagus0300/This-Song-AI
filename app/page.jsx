@@ -21,7 +21,7 @@ const Page = () => {
             Click here to search for a song!
           </a>
         </div>
-        <div>
+        <div className="w-full">
           <h2
             className={clsx(
               rajdhani.className,
@@ -31,7 +31,7 @@ const Page = () => {
             Check out what GPT-4 has to say about the songs everybody&apos;s
             talking about:
           </h2>
-          <p className={clsx(rajdhani.className, "text-base")}>
+          <p className={clsx(rajdhani.className, "text-base, mt-5")}>
             (Select a song to learn more)
           </p>
           <div className="max-w-[1680px]">

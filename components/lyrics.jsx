@@ -172,7 +172,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
           {lyrics.body == "No lyrics found" && (
             <p className="items-center justify-center text-center">
-              No lyrics found.
+              Description unavailable.
             </p>
           )}
           <div
