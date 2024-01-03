@@ -15,7 +15,7 @@ const Page = () => {
             lyric analysis!
           </h1>
           <a
-            href="song"
+            href="song/current"
             className="inline-block px-6 py-2 font-bold text-white bg-[#1DB954] rounded-full hover:brightness-110"
           >
             Click here to search for a song!
