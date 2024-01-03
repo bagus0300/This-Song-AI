@@ -22,7 +22,7 @@ const TopSongsSnippets = async () => {
     axios.defaults.baseURL = "https://api.spotify.com/v1";
     axios.defaults.headers["Content-Type"] = "application/json";
     topSongs = await axios.get(
-      `https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks?limit=20`,
+      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks?limit=20`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -77,7 +77,7 @@ const TopSongsSnippets = async () => {
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="flex py-4 m-[10px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer hover:bg-card group md:w-[400px] w-full h-[200px] items-center justify-center group"
+              className="flex py-4 m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer hover:bg-card group md:w-[400px] w-full h-[200px] items-center justify-center group"
               key={index}
             >
               <a href={`/song/${item.track.id}`} className="w-full">
