@@ -8,7 +8,7 @@ const BACKEND_URI =
 
 const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
 
-const TopSongsSnippets = async () => {
+const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   let topSongs = null;
   const summaries = new Map();
   let errorMessage = "";
@@ -22,7 +22,7 @@ const TopSongsSnippets = async () => {
     axios.defaults.baseURL = "https://api.spotify.com/v1";
     axios.defaults.headers["Content-Type"] = "application/json";
     topSongs = await axios.get(
-      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks?limit=20`,
+      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks?limit=${limit}&offset=${offset}`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -73,7 +73,7 @@ const TopSongsSnippets = async () => {
 
   return (
     <section className="w-full gap-1">
-      <div className="flex flex-wrap items-center justify-center w-full my-8">
+      <div className="flex flex-wrap items-center justify-center w-full">
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div

@@ -34,9 +34,9 @@ const Page = () => {
           <p className={clsx(rajdhani.className, "text-base mt-5")}>
             (Select a song to learn more)
           </p>
-          <div className="max-w-[1680px] mx-auto">
+          <div className="max-w-[1680px] mx-auto py-8">
             <Suspense fallback={<TopSongsSnippetsSkeleton />}>
-              <TopSongsSnippets />
+              <TopSongsSnippets limit="20" offset="0" />
             </Suspense>
           </div>
         </div>
