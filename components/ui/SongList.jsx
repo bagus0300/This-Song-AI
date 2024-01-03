@@ -100,6 +100,7 @@ const SongList = ({ songs, onClick = null }) => {
         {songs === "top-user" &&
           session &&
           session?.user?.name + "'s Top Songs"}
+        {songs === "top-user" && !session && "Your Top Songs"}
         {songs === "top-global" && "Most Popular Songs"}
       </div>
       <div className="w-full max-w-[85dvw] md:max-w-[462px] lg:h-[calc(100dvh-64px-40px-32px-40px)] h-[calc(80dvh-48px-2px-24px)] overflow-y-scroll">
@@ -118,7 +119,7 @@ const SongList = ({ songs, onClick = null }) => {
               <p>No content to display.</p>
             </>
           )) ||
-          (songs === "recent" && !session && (
+          ((songs === "recent" || songs === "top-user") && !session && (
             <>
               <p>Not signed in.</p>
             </>
