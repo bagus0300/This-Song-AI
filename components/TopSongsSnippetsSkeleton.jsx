@@ -4,7 +4,7 @@ import { Skeleton } from "./ui/skeleton";
 const TopSongsSnippetsSkeleton = async () => {
   return (
     <section className="w-full gap-1">
-      <div className="flex flex-wrap items-center justify-center w-full my-8">
+      <div className="flex flex-wrap items-center justify-center w-full">
         {new Array(20).fill().map((item, index) => (
           <div
             className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[200px] items-center justify-center"
