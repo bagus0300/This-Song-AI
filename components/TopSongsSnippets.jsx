@@ -98,6 +98,20 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                       <br />
                       {/* <span className="text-foreground">{item.album.name}</span> */}
                     </p>
+                    <div className="flex flex-col items-center justify-center align-middle min-w-[36px]">
+                      <a
+                        href={item.track.external_urls.spotify}
+                        target="_blank"
+                      >
+                        <button className="flex flex-col items-center gap-1 text-xs text-white align-middle rounded-full hover:brightness-110">
+                          <img
+                            src="/images/Spotify_Icon_RGB_Green.png"
+                            className="w-9 h-9"
+                          />
+                          {/* <p>Listen</p> */}
+                        </button>
+                      </a>
+                    </div>
                   </div>
                   <p className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
                     {summaries.has(item.track.id)
