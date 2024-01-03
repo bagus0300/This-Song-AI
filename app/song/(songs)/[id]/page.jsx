@@ -168,7 +168,7 @@ const Page = ({ params }) => {
               }}
             >
               <Link
-                href="/song"
+                href="/song/current"
                 style={{
                   cursor: "default"
                 }}
@@ -214,19 +214,19 @@ const Page = ({ params }) => {
               </Link>
               <div
                 className={clsx(
-                  "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0",
+                  "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0 text-ellipsis whitespace-nowrap",
                   scrolled
-                    ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0"
+                    ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0 max-h-[100px]"
                     : "w-[0%] opacity-0"
                 )}
               >
-                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px]">
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
                   {song.name}
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </h2>
-                <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px]">
+                <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
                   {song.album.name}
                 </h3>
               </div>
@@ -236,7 +236,7 @@ const Page = ({ params }) => {
             // id="scroll-target"
             ref={ref}
             className={clsx(
-              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:h-0 overflow-hidden"
+              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:h-0 overflow-hidden mb-2"
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
