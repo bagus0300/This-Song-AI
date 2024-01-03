@@ -77,7 +77,7 @@ const TopSongsSnippets = async () => {
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="flex py-4 m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer hover:bg-card group md:w-[400px] w-full h-[200px] items-center justify-center group"
+              className="flex py-4 m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer hover:bg-card group md:w-[400px] w-full h-[200px] items-center justify-center group overflow-hidden"
               key={index}
             >
               <a href={`/song/${item.track.id}`} className="w-full">
@@ -99,7 +99,7 @@ const TopSongsSnippets = async () => {
                       {/* <span className="text-foreground">{item.album.name}</span> */}
                     </p>
                   </div>
-                  <p className="p-2 text-sm duration-300 text-muted group-hover:text-primary">
+                  <p className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
                     {summaries.has(item.track.id)
                       ? summaries.get(item.track.id)
                       : "Click to generate description!"}
