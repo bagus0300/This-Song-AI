@@ -220,11 +220,9 @@ const Page = ({ params }) => {
                     : "w-[0%] opacity-0"
                 )}
               >
-                <a href={song.link} target="_blank">
-                  <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis hover:brightness-150">
-                    {song.name}
-                  </h1>
-                </a>
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
+                  {song.name}
+                </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </h2>
@@ -242,11 +240,9 @@ const Page = ({ params }) => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <a href={song.link} target="_blank">
-              <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150">
-                {song.name}
-              </h1>
-            </a>
+            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
+              {song.name}
+            </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
             </h2>
