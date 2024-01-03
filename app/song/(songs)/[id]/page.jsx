@@ -220,9 +220,11 @@ const Page = ({ params }) => {
                     : "w-[0%] opacity-0"
                 )}
               >
-                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
-                  {song.name}
-                </h1>
+                <a href={song.link} target="_blank">
+                  <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis hover:brightness-150">
+                    {song.name}
+                  </h1>
+                </a>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </h2>
