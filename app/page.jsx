@@ -78,7 +78,7 @@ const Page = () => {
               owners.
             </p>
             <p className="text-sm text-muted">
-              &copy; 2023. This Song. All rights reserved.
+              &copy; 2024. This Song. All rights reserved.
             </p>
           </div>
         </div>
