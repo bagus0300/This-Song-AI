@@ -240,9 +240,11 @@ const Page = ({ params }) => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
-              {song.name}
-            </h1>
+            <a href={song.link} target="_blank">
+              <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150">
+                {song.name}
+              </h1>
+            </a>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
             </h2>

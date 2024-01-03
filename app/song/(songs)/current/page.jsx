@@ -67,12 +67,14 @@ const Page = () => {
 
   useEffect(() => {
     if (data) {
+      console.log("data", data);
       const thisSong = {
         id: data.item.id,
         albumArt: data.item.album.images[1].url,
         songName: data.item.name,
         artists: data.item.artists,
-        albumName: data.item.album.name
+        albumName: data.item.album.name,
+        link: data.item.external_urls.spotify
       };
 
       // console.log("Setting song: ", thisSong);
@@ -195,16 +197,11 @@ const Page = () => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1
-              className="text-3xl font-extrabold text-[#1fdf64]"
-              onClick={() => {
-                console.log("scrollHeight: ", scrollHeight.current);
-              }}
-            >
-              {song.songName}
-              {/* {scrolled.toString()} */}
-              {/* {song.id} */}
-            </h1>
+            <a href={song.link} target="_blank">
+              <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150">
+                {song.songName}
+              </h1>
+            </a>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist) => artist.name).join(", ")}
             </h2>

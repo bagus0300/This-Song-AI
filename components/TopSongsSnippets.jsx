@@ -107,6 +107,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                           <img
                             src="/images/Spotify_Icon_RGB_Green.png"
                             className="w-9 h-9"
+                            alt="Listen on Spotify"
                           />
                           {/* <p>Listen</p> */}
                         </button>
