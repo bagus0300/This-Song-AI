@@ -6,11 +6,11 @@ import { ContextProvider } from "@/context/ContextProvider";
 import NavMenu from "@/components/ui/NavMenu";
 import clsx from "clsx";
 import { rajdhani } from "@/components/ui/fonts";
+import Footer from "@/components/ui/Footer";
 
 export const metadata = {
   title: "Song Information",
-  description:
-    "AI-enhanced analysis of lyrics for the song currently playing on Spotify."
+  description: "AI-enhanced analysis of lyrics for songs on Spotify."
 };
 
 export default async function SongLayout({ children }) {
@@ -29,48 +29,7 @@ export default async function SongLayout({ children }) {
             <section className="relative mt-[56px] lg:w-full">
               {children}
             </section>
-            <footer className={clsx(rajdhani.className, "bg-secondary")}>
-              <div className="max-w-screen-xl px-4 py-4 mx-auto sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 gap-8 pt-8 mb-10 text-center sm:text-end sm:grid-cols-2 lg:grid-cols-2">
-                  <div></div>
-                  <div>
-                    <p className="text-lg font-semibold tracking-widest text-gray-900">
-                      This Song
-                    </p>
-
-                    <ul className="text-base">
-                      <li>
-                        <a
-                          href="mailto:admin@thissong.app"
-                          className="text-gray-700 transition hover:opacity-75"
-                        >
-                          Contact
-                        </a>
-                      </li>
-
-                      <li>
-                        <a
-                          href="#"
-                          className="text-gray-700 transition hover:opacity-75"
-                        >
-                          {/* About */}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="text-end">
-                  <p className="text-sm text-muted">
-                    All songs, lyrics, and images are property of their
-                    respective owners.
-                  </p>
-                  <p className="text-sm text-muted">
-                    &copy; 2024. This Song. All rights reserved.
-                  </p>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </div>
         </ContextProvider>
       </SessionProvider>

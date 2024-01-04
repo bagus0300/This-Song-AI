@@ -205,7 +205,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                             innerCircleColor=""
                             middleCircleColor=""
                           />
-                          <p>Generating AI analysis...</p>
+                          <p>Generating analysis...</p>
                         </div>
                       </div>
                     )}

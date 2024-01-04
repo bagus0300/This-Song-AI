@@ -55,10 +55,10 @@ export default function SongLayout({ children }) {
 
   return (
     <>
-      <div className="relative lg:flex min-h-[100dvh]">
+      <div className="relative lg:flex lg:min-h-[100vh] sm:min-h-[calc(100vh-196px-104px)] min-h-[calc(100vh-228px-104px)]">
         <div
           id="menu"
-          className="lg:sticky flex-shrink-0 fixed lg:top-[72px] top-[56px] left-0 lg:w-72 w-full lg:h-[calc(100dvh-80px)] lg:m-2 lg:rounded-lg lg:bg-card bg-background z-10"
+          className="lg:sticky flex-shrink-0 fixed lg:top-[72px] top-[56px] left-0 lg:w-72 w-full lg:h-[calc(100vh-80px)] lg:m-2 lg:rounded-lg lg:bg-card bg-background z-10"
         >
           <div className={clsx("h-full justify-between p-1")}>
             <div className="flex flex-col justify-between h-full">
@@ -125,7 +125,7 @@ export default function SongLayout({ children }) {
                       Search
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-h-[80dvh]">
+                  <DialogContent className="max-h-[80vh]">
                     <DialogHeader>
                       <DialogTitle>Search</DialogTitle>
                       <DialogDescription></DialogDescription>
@@ -149,7 +149,7 @@ export default function SongLayout({ children }) {
                       Recently Played
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-h-[80dvh]">
+                  <DialogContent className="max-h-[80vh]">
                     <DialogHeader>
                       <DialogTitle>Recently Played</DialogTitle>
                       <DialogDescription></DialogDescription>
@@ -178,7 +178,7 @@ export default function SongLayout({ children }) {
                         Top Songs
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-h-[80dvh]">
+                    <DialogContent className="max-h-[80vh]">
                       <DialogHeader>
                         <DialogTitle>Most Popular Songs</DialogTitle>
                         <DialogDescription></DialogDescription>
@@ -223,7 +223,7 @@ export default function SongLayout({ children }) {
                             {session && session?.user?.name}
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-h-[80dvh]">
+                        <DialogContent className="max-h-[80vh]">
                           <DialogHeader>
                             <DialogTitle>
                               {session && session?.user?.name + "'s Top Songs"}
@@ -256,7 +256,7 @@ export default function SongLayout({ children }) {
                             Global
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-h-[80dvh]">
+                        <DialogContent className="max-h-[80vh]">
                           <DialogHeader>
                             <DialogTitle>Most Popular Songs</DialogTitle>
                             <DialogDescription></DialogDescription>
