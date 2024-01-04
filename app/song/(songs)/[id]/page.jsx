@@ -258,7 +258,7 @@ const Page = ({ params }) => {
       )) ||
         (status >= 400 && (
           <>
-            <p className="relative top-[56px]">
+            <p className="relative mt-2 top-[56px]">
               Error retrieving data from Spotify.
             </p>
           </>

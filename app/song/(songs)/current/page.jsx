@@ -220,12 +220,12 @@ const Page = () => {
       )) ||
         (status == 204 && (
           <>
-            <p className="">No song is currently playing.</p>
+            <p className="mt-2">No song is currently playing.</p>
           </>
         )) ||
         (status >= 400 && (
           <>
-            <p className="">Error retrieving data from Spotify.</p>
+            <p className="mt-2">Error retrieving data from Spotify.</p>
           </>
         )) ||
         // If init is false, then the token hasn't been read yet
@@ -237,14 +237,14 @@ const Page = () => {
         // )) ||
         (!session && (
           <>
-            <p className="">
+            <p className="mt-2">
               Search for a song, or log in to Spotify to see what you&apos;re
               currently listening to.
             </p>
           </>
         )) || (
           <>
-            <p className="">Loading currently playing song...</p>
+            <p className="mt-2">Loading currently playing song...</p>
           </>
         )}
     </section>
