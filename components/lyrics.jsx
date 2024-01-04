@@ -182,7 +182,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
-            <section className="pb-10 text-base lg:pb-0">
+            <section className="pb-2 text-base">
               {/* <h2 className="items-center p-2 text-lg text-center">
                 Interpretation of lyrics:
               </h2> */}

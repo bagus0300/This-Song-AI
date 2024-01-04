@@ -26,7 +26,7 @@ export default async function SongLayout({ children }) {
             <nav className="fixed top-0 left-0 z-20 w-full bg-background h-fit lg:py-2 lg:px-2">
               <NavMenu />
             </nav>
-            <section className="relative mt-[56px] lg:w-full">
+            <section className="relative mt-[56px] lg:mt-[72px] lg:w-full">
               {children}
             </section>
             <Footer />
