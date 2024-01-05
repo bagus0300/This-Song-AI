@@ -104,7 +104,10 @@ export default function NavMenu() {
           )}
         >
           {menuLinks(true)}
-          <ModeToggle text="Toggle theme" />
+          <ModeToggle
+            text="Toggle theme"
+            clickFunction={() => setShowMenu((prev) => !prev)}
+          />
         </div>
       </div>
     </div>

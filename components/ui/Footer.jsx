@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 pt-8 mb-10 text-center sm:text-end sm:grid-cols-2 lg:grid-cols-2">
           <div></div>
           <div>
-            <p className="text-lg font-semibold tracking-widest text-gray-900">
+            <p className="text-lg font-semibold tracking-widest text-primary">
               This Song
             </p>
 
@@ -17,17 +17,14 @@ const Footer = () => {
               <li>
                 <a
                   href="mailto:admin@thissong.app"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="transition text-muted hover:opacity-75"
                 >
                   Contact
                 </a>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  className="text-gray-700 transition hover:opacity-75"
-                >
+                <a href="#" className="transition text-muted hover:opacity-75">
                   {/* About */}
                 </a>
               </li>
