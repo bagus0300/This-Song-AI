@@ -14,7 +14,7 @@ const Page = () => {
             <source src="videos/this-song.mp4" type="video/mp4" />
             <img src="images/this-song.png" alt="This Song" />
           </video>
-          <h1 className={clsx(rajdhani.className, `text-2xl`)}>
+          <h1 className={clsx(rajdhani.className, `text-2xl`, "px-10")}>
             Discover the meaning behind your favorite songs!
           </h1>
           <a
