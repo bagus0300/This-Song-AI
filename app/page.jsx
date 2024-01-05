@@ -10,10 +10,10 @@ const Page = () => {
     <>
       <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
         <div className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 bg-secondary">
-          <video width="540" height="360" autoPlay loop>
-            <source src="videos/this-song.mp4" type="video/mp4" />
-            <img src="images/this-song.png" alt="This Song" />
-          </video>
+          {/* <video width="540" height="360" autoPlay loop>
+            <source src="videos/this-song.mp4" type="video/mp4" /> */}
+          <img src="images/this-song.png" alt="This Song" />
+          {/* </video> */}
           <h1 className={clsx(rajdhani.className, `text-2xl`, "px-10")}>
             Discover the meaning behind your favorite songs!
           </h1>
