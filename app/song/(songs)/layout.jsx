@@ -55,7 +55,7 @@ export default function SongLayout({ children }) {
 
   return (
     <>
-      <div className="relative lg:flex  sm:min-h-[calc(100vh-196px-104px)] min-h-[calc(100vh-228px-104px)]">
+      <div className="relative lg:flex">
         <div
           id="menu"
           className="lg:sticky flex-shrink-0 fixed lg:top-[72px] top-[56px] left-0 lg:w-72 w-full lg:h-[calc(100vh-80px)] lg:mx-2 lg:mb-2 lg:rounded-lg lg:bg-card bg-background z-10"
