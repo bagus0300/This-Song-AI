@@ -90,11 +90,20 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             toast({
               title: "Report sent successfully:",
               description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                  <code className="text-white">
-                    {JSON.stringify(data, null, 2)}
-                  </code>
-                </pre>
+                <p className="mt-2 w-[340px] rounded-md p-4">
+                  A report of &quot;
+                  {data.problem}&quot; for the song {data.songName} (
+                  {data.songID}) by {data.artistName} was sent successfully.
+                  <br />
+                  <br />
+                  {(data.name && "Thank you, " + data.name + "! ") ||
+                    "Thank you! "}
+                  {(data.email &&
+                    "We will notify you at " +
+                      data.email +
+                      " when the problem is fixed.") ||
+                    ""}
+                </p>
               )
             });
           },
