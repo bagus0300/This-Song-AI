@@ -102,7 +102,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                       {/* <span className="text-foreground">{item.album.name}</span> */}
                     </p>
                     <div className="flex flex-col items-center justify-center align-middle min-w-[36px]">
-                      <a
+                      {/* <a
                         href={item.track.external_urls.spotify}
                         target="_blank"
                       >
@@ -112,9 +112,8 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                             className="w-9 h-9"
                             alt="Listen on Spotify"
                           />
-                          {/* <p>Listen</p> */}
                         </button>
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                   <p className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
