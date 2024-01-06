@@ -504,6 +504,18 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           Thank you for submitting a report!
         </div>
       </div>
+      <div className="flex flex-col items-end w-full max-w-screen-xl pb-2 text-base text-center">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
+          {" "}
+          Scroll to top
+        </Button>
+      </div>
     </div>
   );
 };
