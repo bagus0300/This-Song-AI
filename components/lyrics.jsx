@@ -97,6 +97,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         )
         .then(
           () => {
+            document.getElementById("problem").classList.add("hidden");
+            document
+              .getElementById("problemReported")
+              .classList.remove("hidden");
             setLoading(false);
             toast({
               title: "Report sent successfully:",
@@ -477,8 +481,13 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             <p>Loading data for {songName}...</p>
           </div>
         ))}
-      <div className="flex flex-col items-end pt-10 ">
-        <Accordion type="single" collapsible className="w-[360px] mx-auto">
+      <div className="flex flex-col items-end pt-10">
+        <Accordion
+          id="problem"
+          type="single"
+          collapsible
+          className="w-[360px] mx-auto"
+        >
           <AccordionItem value="item-1">
             <AccordionTrigger>
               Report a problem with this description
@@ -488,6 +497,12 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+        <div
+          id="problemReported"
+          className="hidden w-[360px] mx-auto text-muted"
+        >
+          Thank you for submitting a report!
+        </div>
       </div>
     </div>
   );
