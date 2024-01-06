@@ -109,7 +109,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full px-2 space-y-7"
+          className="w-[360px] px-2 space-y-7"
         >
           <FormField
             control={form.control}
@@ -126,20 +126,23 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                       <SelectValue placeholder="Select what best describes the problem" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="wrong">
+                  <SelectContent className="w-[310px]">
+                    <SelectItem className="w-[310px]" value="wrong">
                       Interpretation is completely wrong
                     </SelectItem>
-                    <SelectItem value="grammmar-or-spelling">
+                    <SelectItem
+                      className="w-[310px]"
+                      value="grammmar-or-spelling"
+                    >
                       Grammar or spelling errors in interpretation
                     </SelectItem>
-                    <SelectItem value="offensive">
+                    <SelectItem className="w-[310px]" value="offensive">
                       Interpretation is offensive
                     </SelectItem>
-                    <SelectItem value="different">
+                    <SelectItem className="w-[310px]" value="different">
                       Interpretation seems to be about a different song
                     </SelectItem>
-                    <SelectItem value="not-instrumental">
+                    <SelectItem className="w-[310px]" value="not-instrumental">
                       Description unavailable for a song that should have lyrics
                     </SelectItem>
                   </SelectContent>
@@ -422,7 +425,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           </div>
         ))}
       <div className="flex flex-col items-end pt-10 ">
-        <Accordion type="single" collapsible className="w-full sm:w-[500px]">
+        <Accordion type="single" collapsible className="w-[360px] mx-auto">
           <AccordionItem value="item-1">
             <AccordionTrigger>
               Report a problem with this interpretation
