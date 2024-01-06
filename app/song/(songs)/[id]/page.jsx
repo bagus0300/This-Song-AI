@@ -160,7 +160,7 @@ const Page = ({ params }) => {
             <motion.div
               className={clsx(
                 // "flex flex-row items-center justify-center align-middle w-full fixed top-[56px] lg:left-[256px] lg:w-[calc(100dvw-256px-8px)] lg:top-0 md:gap-5",
-                "flex flex-row items-center justify-center align-middle w-full fixed top-[calc(56px+48px)] lg:left-[calc(288px+16px)] lg:w-[calc(100dvw-256px-8px)] lg:top-[calc(56px+8px+8px)] md:gap-5",
+                "flex flex-row items-center justify-center align-middle w-full fixed top-[calc(56px+48px)] lg:left-[calc(288px+16px)] lg:w-[calc(100dvw-256px-8px)] lg:top-[calc(56px+8px+8px)] md:gap-5 z-10",
                 "bg-background"
               )}
               style={{

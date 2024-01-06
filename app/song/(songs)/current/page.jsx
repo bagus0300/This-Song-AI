@@ -128,7 +128,7 @@ const Page = () => {
           <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
             <motion.div
               className={clsx(
-                "flex flex-row items-center justify-center align-middle w-full fixed top-[calc(56px+48px)] lg:left-[calc(288px+16px)] lg:w-[calc(100dvw-256px-8px)] lg:top-[calc(56px+8px+8px)] md:gap-5",
+                "flex flex-row items-center justify-center align-middle w-full fixed top-[calc(56px+48px)] lg:left-[calc(288px+16px)] lg:w-[calc(100dvw-256px-8px)] lg:top-[calc(56px+8px+8px)] md:gap-5 z-10",
                 "bg-background"
                 // "bg-card rounded-lg",
                 // "border-red-500 border-2"
