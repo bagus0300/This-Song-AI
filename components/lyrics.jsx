@@ -140,8 +140,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                       Interpretation seems to be about a different song
                     </SelectItem>
                     <SelectItem value="not-instrumental">
-                      "Description unavailable" for a song that should have
-                      lyrics
+                      Description unavailable for a song that should have lyrics
                     </SelectItem>
                   </SelectContent>
                 </Select>
