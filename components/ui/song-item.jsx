@@ -35,7 +35,11 @@ const SongItem = ({ item, path, onClick = null }) => {
                 /> */}
                 <img
                   className="w-16 h-16"
-                  src={item.album.images[2].url}
+                  src={
+                    item.album.images &&
+                    item.album.images.length > 2 &&
+                    item.album.images[2].url
+                  }
                   alt="Album image"
                 />
                 <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
