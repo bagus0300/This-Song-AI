@@ -481,7 +481,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             <p>Loading data for {songName}...</p>
           </div>
         ))}
-      <div className="flex flex-col items-end pt-10">
+      <div className="flex flex-col items-end pt-10 pb-10">
         <Accordion
           id="problem"
           type="single"
@@ -499,7 +499,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         </Accordion>
         <div
           id="problemReported"
-          className="hidden w-[360px] mx-auto text-muted"
+          className="hidden w-[360px] mx-auto text-muted text-center"
         >
           Thank you for submitting a report!
         </div>
