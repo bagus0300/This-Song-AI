@@ -428,7 +428,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         <Accordion type="single" collapsible className="w-[360px] mx-auto">
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              Report a problem with this interpretation
+              Report a problem with this description
             </AccordionTrigger>
             <AccordionContent>
               <SelectForm />
