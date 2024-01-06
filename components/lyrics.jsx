@@ -163,7 +163,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                         />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        Grammar or spelling errors in interpretation
+                        Grammar or spelling errors
                       </FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
@@ -171,7 +171,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                         <RadioGroupItem value="offensive" disabled={loading} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        Interpretation is offensive
+                        Description is offensive
                       </FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
@@ -179,7 +179,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                         <RadioGroupItem value="different" disabled={loading} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        Interpretation seems to be about a different song
+                        Description seems to be about a different song
                       </FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
@@ -191,7 +191,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                       </FormControl>
                       <FormLabel className="font-normal">
                         Description unavailable even though the song should have
-                        lyrics.
+                        lyrics
                       </FormLabel>
                     </FormItem>
                   </RadioGroup>
