@@ -190,8 +190,8 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                         />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        Description unavailable for a song that should have
-                        lyrics
+                        Description unavailable even though the song should have
+                        lyrics.
                       </FormLabel>
                     </FormItem>
                   </RadioGroup>
