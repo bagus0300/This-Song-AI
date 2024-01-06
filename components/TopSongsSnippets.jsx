@@ -19,10 +19,13 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
     const token = data.access_token;
 
     console.log("Getting top songs...");
+
+    // Today's top hits: 37i9dQZF1DXcBWIGoYBM5M
+    // Rock classics: 37i9dQZF1DWXRqgorJj26U
     axios.defaults.baseURL = "https://api.spotify.com/v1";
     axios.defaults.headers["Content-Type"] = "application/json";
     topSongs = await axios.get(
-      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks?limit=${limit}&offset=${offset}`,
+      `https://api.spotify.com/v1/playlists/37i9dQZF1DWXRqgorJj26U/tracks?limit=${limit}&offset=${offset}`,
       {
         headers: {
           Authorization: `Bearer ${token}`

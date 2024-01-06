@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dialog";
 import { rajdhani } from "@/components/ui/fonts";
 import { useSession } from "next-auth/react";
+import { Toaster } from "@/components/ui/toaster";
 
 // export const metadata = {
 //   title: "Song Information",
@@ -55,6 +56,7 @@ export default function SongLayout({ children }) {
 
   return (
     <>
+      <Toaster />
       <div className="relative lg:flex">
         <div
           id="menu"

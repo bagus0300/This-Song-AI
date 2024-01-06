@@ -6,8 +6,197 @@ import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
 import { Bars, ThreeCircles } from "react-loader-spinner";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { rajdhani } from "./ui/fonts";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "@/components/ui/use-toast";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import emailjs from "@emailjs/browser";
 
 const Lyrics = ({ songID, songName, artistName, albumName }) => {
+  const emailjsPublicKey = "BRpCzUI0MwvVUI2Vs";
+  const emailjsTemplateID = "template_p5nstyt";
+  const emailjsServiceID = "service_6a9uc18";
+
+  const formSchema = z.object({
+    songID: z.string(),
+    songName: z.string(),
+    artistName: z.string(),
+    albumName: z.string(),
+    problem: z.string({
+      required_error: "Please select a problem."
+    }),
+    name: z.string().optional(),
+    email: z.string().optional()
+  });
+
+  function SelectForm() {
+    const form = useForm({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        songID: songID,
+        songName: songName,
+        artistName: artistName,
+        albumName: albumName,
+        problem: undefined,
+        name: "",
+        email: ""
+      }
+    });
+
+    function onSubmit(data) {
+      console.log(data);
+      setLoading(true);
+      emailjs
+        .send(
+          emailjsServiceID,
+          emailjsTemplateID,
+          {
+            from_name: data.name,
+            to_name: "admin",
+            reply_to: data.email,
+            to_email: "admin@thissong.app",
+            message: JSON.stringify(data, null, 2)
+          },
+          emailjsPublicKey
+        )
+        .then(
+          () => {
+            setLoading(false);
+            toast({
+              title: "Report sent successfully:",
+              description: (
+                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                  <code className="text-white">
+                    {JSON.stringify(data, null, 2)}
+                  </code>
+                </pre>
+              )
+            });
+          },
+          (error) => {
+            setLoading(false);
+            console.log(error);
+          }
+        );
+    }
+
+    return (
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full px-2 space-y-7"
+        >
+          <FormField
+            control={form.control}
+            name="problem"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Problem</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select what best describes the problem" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="wrong">
+                      Interpretation is completely wrong
+                    </SelectItem>
+                    <SelectItem value="grammmar-or-spelling">
+                      Grammar or spelling errors in interpretation
+                    </SelectItem>
+                    <SelectItem value="offensive">
+                      Interpretation is offensive
+                    </SelectItem>
+                    <SelectItem value="different">
+                      Interpretation seems to be about a different song
+                    </SelectItem>
+                    <SelectItem value="not-instrumental">
+                      "Description unavailable" for a song that should have
+                      lyrics
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your name (optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your name" {...field} />
+                </FormControl>
+                <FormDescription className="text-muted">
+                  In case you want to be thanked for your help.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your email (optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="email@address.com" {...field} />
+                </FormControl>
+                <FormDescription className="text-muted">
+                  If you wish to be notified when the problem is fixed.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" disabled={loading} className="w-24">
+            {loading ? (
+              <span className="w-5 h-5 border-b-2 rounded-full animate-spin border-text" />
+            ) : (
+              <>
+                Submit
+                {/* <FaPaperPlane className="text-xs transition-transform duration-500 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1" />{" "} */}
+              </>
+            )}
+          </Button>
+        </form>
+      </Form>
+    );
+  }
+
   /**
    * STATE VARIABLES
    * lyrics: the lyrics of the song
@@ -17,6 +206,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [sendingError, setSendingError] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
 
   const musixmatchLogo = "/images/musixmatch_logo.svg";
 
@@ -172,7 +365,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
           {lyrics.body == "No lyrics found" && (
             <p className="items-center justify-center text-center">
-              Description currently unavailable.
+              Description unavailable.
             </p>
           )}
           <div
@@ -229,6 +422,18 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             <p>Loading data for {songName}...</p>
           </div>
         ))}
+      <div className="flex flex-col items-end pt-10 ">
+        <Accordion type="single" collapsible className="w-full sm:w-[500px]">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              Report a problem with this interpretation
+            </AccordionTrigger>
+            <AccordionContent>
+              <SelectForm />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     </div>
   );
 };
