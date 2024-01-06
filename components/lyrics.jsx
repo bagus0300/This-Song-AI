@@ -35,6 +35,8 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import emailjs from "@emailjs/browser";
 
 const Lyrics = ({ songID, songName, artistName, albumName }) => {
@@ -47,14 +49,23 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     songName: z.string(),
     artistName: z.string(),
     albumName: z.string(),
-    problem: z.string({
-      required_error: "Please select a problem."
-    }),
+    problem: z.enum(
+      [
+        "wrong",
+        "grammar-or-spelling",
+        "offensive",
+        "different",
+        "not-instrumental"
+      ],
+      {
+        required_error: "Please select a problem."
+      }
+    ),
     name: z.string().optional(),
     email: z.string().optional()
   });
 
-  function SelectForm() {
+  function RadioGroupForm() {
     const form = useForm({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -126,7 +137,56 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Problem</FormLabel>
-                <Select
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="wrong" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Interpretation is completely wrong
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="grammar-or-spelling" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Grammar or spelling errors in interpretation
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="offensive" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Interpretation is offensive
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="different" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Interpretation seems to be about a different song
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="not-instrumental" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Description unavailable for a song that should have
+                        lyrics
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                {/* <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
@@ -155,7 +215,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                       Description unavailable for a song that should have lyrics
                     </SelectItem>
                   </SelectContent>
-                </Select>
+                </Select> */}
                 <FormDescription></FormDescription>
                 <FormMessage />
               </FormItem>
@@ -440,7 +500,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               Report a problem with this description
             </AccordionTrigger>
             <AccordionContent>
-              <SelectForm />
+              <RadioGroupForm />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
