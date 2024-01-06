@@ -145,7 +145,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="wrong" />
+                        <RadioGroupItem value="wrong" disabled={loading} />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Interpretation is completely wrong
@@ -153,7 +153,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="grammar-or-spelling" />
+                        <RadioGroupItem
+                          value="grammar-or-spelling"
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Grammar or spelling errors in interpretation
@@ -161,7 +164,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="offensive" />
+                        <RadioGroupItem value="offensive" disabled={loading} />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Interpretation is offensive
@@ -169,7 +172,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="different" />
+                        <RadioGroupItem value="different" disabled={loading} />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Interpretation seems to be about a different song
@@ -177,7 +180,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="not-instrumental" />
+                        <RadioGroupItem
+                          value="not-instrumental"
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Description unavailable for a song that should have
@@ -186,36 +192,6 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
-                {/* <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select what best describes the problem" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="w-[310px]">
-                    <SelectItem className="w-[310px]" value="wrong">
-                      Interpretation is completely wrong
-                    </SelectItem>
-                    <SelectItem
-                      className="w-[310px]"
-                      value="grammmar-or-spelling"
-                    >
-                      Grammar or spelling errors in interpretation
-                    </SelectItem>
-                    <SelectItem className="w-[310px]" value="offensive">
-                      Interpretation is offensive
-                    </SelectItem>
-                    <SelectItem className="w-[310px]" value="different">
-                      Interpretation seems to be about a different song
-                    </SelectItem>
-                    <SelectItem className="w-[310px]" value="not-instrumental">
-                      Description unavailable for a song that should have lyrics
-                    </SelectItem>
-                  </SelectContent>
-                </Select> */}
                 <FormDescription></FormDescription>
                 <FormMessage />
               </FormItem>
@@ -228,7 +204,11 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               <FormItem>
                 <FormLabel>Your name (optional)</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your name" {...field} />
+                  <Input
+                    placeholder="Enter your name"
+                    {...field}
+                    disabled={loading}
+                  />
                 </FormControl>
                 <FormDescription className="text-muted">
                   In case you want to be thanked for your help.
@@ -244,7 +224,11 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               <FormItem>
                 <FormLabel>Your email (optional)</FormLabel>
                 <FormControl>
-                  <Input placeholder="email@address.com" {...field} />
+                  <Input
+                    placeholder="email@address.com"
+                    {...field}
+                    disabled={loading}
+                  />
                 </FormControl>
                 <FormDescription className="text-muted">
                   If you wish to be notified when the problem is fixed.
