@@ -22,9 +22,7 @@ const AboutPage = () => {
 
       {/* Our Mission Section */}
       <section className="mb-6 our-mission">
-        <h3 className="mb-3 text-2xl font-semibold text-primary">
-          Our Mission
-        </h3>
+        <h3 className="mb-3 text-2xl font-semibold text-primary">About Us</h3>
         <p className="leading-relaxed text-muted">
           This Song was born out of a desire to engage with song lyrics on a
           thematic and historical level and thus spark a deeper understanding of
