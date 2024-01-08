@@ -3,13 +3,13 @@ import { rajdhani } from "@/components/ui/fonts";
 
 const AboutPage = () => {
   return (
-    <div className="max-w-4xl p-4 mx-auto about-page">
+    <div className="max-w-5xl p-4 mx-auto about-page">
       {/* <h2 className="mb-5 text-3xl font-bold text-center text-primary">
         About Us
       </h2> */}
 
       {/* Header Image */}
-      <div className="mb-5 header-image">
+      <div className="max-w-3xl mx-auto mb-5 header-image">
         {/* Replace with actual image component or path */}
         <img
           src="/images/this-song-full.png"
