@@ -14,14 +14,16 @@ const PrivacyPolicyPage = () => {
           Introduction
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          This Privacy Policy describes how This Song (the "Site", "we", "us",
-          or "our") collects, uses, and discloses your personal information when
-          you visit, use our services, or make a purchase from
-          https://www.thissong.app (the "Site") or otherwise communicate with us
-          (collectively, the "Services"). For purposes of this Privacy Policy,
-          "you" and "your" means you as the user of the Services, whether you
-          are a customer, website visitor, or another individual whose
-          information we have collected pursuant to this Privacy Policy.
+          This Privacy Policy describes how This Song (the &quot;Site&quot;,
+          &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses,
+          and discloses your personal information when you visit, use our
+          services, or make a purchase from https://www.thissong.app (the
+          &quot;Site&quot;) or otherwise communicate with us (collectively, the
+          &quot;Services&quot;). For purposes of this Privacy Policy,
+          &quot;you&quot; and &quot;your&quot; means you as the user of the
+          Services, whether you are a customer, website visitor, or another
+          individual whose information we have collected pursuant to this
+          Privacy Policy.
         </p>
         <p className="text-sm leading-relaxed text-muted">
           Please read this Privacy Policy carefully. By using and accessing any
@@ -40,8 +42,8 @@ const PrivacyPolicyPage = () => {
           We may update this Privacy Policy from time to time, including to
           reflect changes to our practices or for other operational, legal, or
           regulatory reasons. We will post the revised Privacy Policy on the
-          Site, update the "Last updated" date and take any other steps required
-          by applicable law.
+          Site, update the &quot;Last updated&quot; date and take any other
+          steps required by applicable law.
         </p>
       </section>
 
@@ -69,7 +71,7 @@ const PrivacyPolicyPage = () => {
         <p className="text-sm leading-relaxed text-muted">
           The types of personal information we obtain about you depends on how
           you interact with our Site and use our Services. When we use the term
-          "personal information", we are referring to information that
+          &quot;personal information&quot;, we are referring to information that
           identifies, relates to, describes or can be associated with you. The
           following sections describe the categories and specific types of
           personal information we collect.
@@ -82,12 +84,12 @@ const PrivacyPolicyPage = () => {
         </h2>
         <p className="text-xs leading-relaxed text-muted">
           We automatically collect certain information about your interaction
-          with the Services ("Usage Data"). To do this, we may use cookies,
-          pixels and similar technologies ("Cookies"). Usage Data may include
-          information about how you access and use our Site and your account,
-          including device information, browser information, information about
-          your network connection, your IP address and other information
-          regarding your interaction with the Services.
+          with the Services (&quot;Usage Data&quot;). To do this, we may use
+          cookies, pixels and similar technologies (&quot;Cookies&quot;). Usage
+          Data may include information about how you access and use our Site and
+          your account, including device information, browser information,
+          information about your network connection, your IP address and other
+          information regarding your interaction with the Services.
         </p>
         <h2 className="pt-2 text-base font-semibold text-primary">
           Information We Obtain from Third Parties
@@ -168,9 +170,10 @@ const PrivacyPolicyPage = () => {
           the parent or guardian of a child who has provided us with their
           personal information, you may contact us using the contact details set
           out below to request that it be deleted. As of the Effective Date of
-          this Privacy Policy, we do not have actual knowledge that we "share"
-          or "sell" (as those terms are defined in applicable law) personal
-          information of individuals under 16 years of age.
+          this Privacy Policy, we do not have actual knowledge that we
+          &quot;share&quot; or &quot;sell&quot; (as those terms are defined in
+          applicable law) personal information of individuals under 16 years of
+          age.
         </p>
         {/* Additional details about data security */}
       </section>
@@ -181,9 +184,9 @@ const PrivacyPolicyPage = () => {
         </h3>
         <p className="text-sm leading-relaxed text-muted">
           We may employ third party companies and individuals to facilitate our
-          service ("Service Providers"), to provide the service on our behalf,
-          to perform service-related services or to assist us in analyzing how
-          our service is used.
+          service (&quot;Service Providers&quot;), to provide the service on our
+          behalf, to perform service-related services or to assist us in
+          analyzing how our service is used.
         </p>
         {/* Additional details about service providers */}
       </section>
@@ -194,7 +197,7 @@ const PrivacyPolicyPage = () => {
         </h3>
         <p className="text-sm leading-relaxed text-muted">
           Please be aware that no security measures are perfect or impenetrable,
-          and we cannot guarantee "perfect security." In addition, any
+          and we cannot guarantee &quot;perfect security.&quot; In addition, any
           information you send to us may not be secure while in transit. We
           recommend that you do not use unsecure channels to communicate
           sensitive or confidential information to us. How long we retain your
