@@ -84,7 +84,7 @@ const AboutPage = () => {
           This Song was founded in 2023; excited by the idea of leveraging
           artificial intelligence to explore song meanings with a precision and
           speed hitherto impossible, we set out to create a platform that not
-          only deciphers lyrics but also celebrates the art of music. We are
+          only deciphers lyrics but also celebrates the art of lyricism. We are
           committed to providing the best possible experience for our users and
           are constantly working to improve our product. We hope you enjoy
           exploring the world of lyrics with us!
