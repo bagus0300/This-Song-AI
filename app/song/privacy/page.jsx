@@ -11,7 +11,7 @@ const PrivacyPolicyPage = () => {
       <h2 className="text-2xl font-bold text-center text-primary">
         Privacy Policy for This Song
       </h2>
-      <p className="text-base text-center mb-7 text-muted">
+      <p className="mb-5 text-base text-center text-muted">
         Last updated: January 8, 2024
       </p>
 
