@@ -85,14 +85,18 @@ const Page = ({ params }) => {
         const thisSong = {
           id: id,
           album: data.data.album,
+          albumLink: data.data.album.external_urls.spotify,
           artists: data.data.artists,
+          artistsLinks: data.data.artists.map(
+            (artist) => artist.external_urls.spotify
+          ),
           link: data.data.external_urls.spotify,
           name: data.data.name,
           previewURL: data.data.preview_url,
           trackNumber: data.data.track_number
         };
 
-        // console.log("thisSong", thisSong);
+        console.log("thisSong", thisSong);
 
         setSongID(id);
         setSong(thisSong);
@@ -108,7 +112,9 @@ const Page = ({ params }) => {
       (entries) => {
         if (entries[0].isIntersecting) {
           setScrolled(false);
+          // console.log("Not scrolled!");
         } else {
+          // console.log("Scrolled!");
           setScrolled(true);
         }
       },
@@ -221,13 +227,36 @@ const Page = ({ params }) => {
                 )}
               >
                 <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
-                  {song.name}
+                  <a
+                    href={song.link}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {song.name}
+                  </a>
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
-                  {song.artists.map((artist) => artist.name).join(", ")}
+                  {song.artists.map((artist, index) => (
+                    <>
+                      <a
+                        href={artist.external_urls.spotify}
+                        target="_blank"
+                        className="hover:brightness-150 hover:underline"
+                      >
+                        {artist.name}
+                      </a>
+                      {index < song.artists.length - 1 && ", "}
+                    </>
+                  ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
-                  {song.album.name}
+                  <a
+                    href={song.album.external_urls.spotify}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {song.album.name}
+                  </a>
                 </h3>
               </div>
             </motion.div>
@@ -240,13 +269,30 @@ const Page = ({ params }) => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1 className="text-3xl font-extrabold text-[#1fdf64]">
-              {song.name}
+            <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150 hover:underline">
+              <a href={song.link} target="_blank">
+                {song.name}
+              </a>
             </h1>
             <h2 className="text-2xl text-muted">
-              {song.artists.map((artist) => artist.name).join(", ")}
+              {song.artists.map((artist, index) => (
+                <>
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {artist.name}
+                  </a>
+                  {index < song.artists.length - 1 && ", "}
+                </>
+              ))}
             </h2>
-            <h3 className="text-xl text-">{song.album.name}</h3>
+            <h3 className="text-xl hover:brightness-150 hover:underline">
+              <a href={song.album.external_urls.spotify} target="_blank">
+                {song.album.name}
+              </a>
+            </h3>
           </div>
           <Lyrics
             songID={song.id}

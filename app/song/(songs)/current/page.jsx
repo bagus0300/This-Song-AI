@@ -69,10 +69,16 @@ const Page = () => {
     if (data) {
       const thisSong = {
         id: data.item.id,
-        albumArt: data.item.album.images[1].url,
-        songName: data.item.name,
+        album: data.item.album,
+        albumLink: data.item.album.external_urls.spotify,
         artists: data.item.artists,
-        albumName: data.item.album.name
+        artistsLinks: data.item.artists.map(
+          (artist) => artist.external_urls.spotify
+        ),
+        link: data.item.external_urls.spotify,
+        name: data.item.name,
+        previewURL: data.item.preview_url,
+        trackNumber: data.item.track_number
       };
 
       // console.log("Setting song: ", thisSong);
@@ -151,7 +157,7 @@ const Page = () => {
               >
                 <img
                   className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
-                  src={song.albumArt}
+                  src={song.album.images[1].url}
                   width={300}
                   height={300}
                   // placeholder={`data:image/svg+xml;base64,${toBase64(
@@ -176,13 +182,36 @@ const Page = () => {
                 )}
               >
                 <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
-                  {song.songName}
+                  <a
+                    href={song.link}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {song.name}
+                  </a>
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
-                  {song.artists.map((artist) => artist.name).join(", ")}
+                  {song.artists.map((artist, index) => (
+                    <>
+                      <a
+                        href={artist.external_urls.spotify}
+                        target="_blank"
+                        className="hover:brightness-150 hover:underline"
+                      >
+                        {artist.name}
+                      </a>
+                      {index < song.artists.length - 1 && ", "}
+                    </>
+                  ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
-                  {song.albumName}
+                  <a
+                    href={song.album.external_urls.spotify}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {song.album.name}
+                  </a>
                 </h3>
               </div>
             </motion.div>
@@ -195,26 +224,36 @@ const Page = () => {
               // scrolled ? "opacity-0 -z-10" : "opacity-100"
             )}
           >
-            <h1
-              className="text-3xl font-extrabold text-[#1fdf64]"
-              onClick={() => {
-                console.log("scrollHeight: ", scrollHeight.current);
-              }}
-            >
-              {song.songName}
-              {/* {scrolled.toString()} */}
-              {/* {song.id} */}
+            <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150 hover:underline">
+              <a href={song.link} target="_blank">
+                {song.name}
+              </a>
             </h1>
             <h2 className="text-2xl text-muted">
-              {song.artists.map((artist) => artist.name).join(", ")}
+              {song.artists.map((artist, index) => (
+                <>
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {artist.name}
+                  </a>
+                  {index < song.artists.length - 1 && ", "}
+                </>
+              ))}
             </h2>
-            <h3 className="text-xl text-">{song.albumName}</h3>
+            <h3 className="text-xl hover:brightness-150 hover:underline">
+              <a href={song.album.external_urls.spotify} target="_blank">
+                {song.album.name}
+              </a>
+            </h3>
           </div>
           <Lyrics
             songID={song.id}
-            songName={song.songName}
+            songName={song.name}
             artistName={song.artists[0].name}
-            albumName={song.albumName}
+            albumName={song.album.name}
           />
         </>
       )) ||
