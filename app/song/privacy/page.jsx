@@ -8,11 +8,12 @@ export const metadata = {
 const PrivacyPolicyPage = () => {
   return (
     <div className="max-w-4xl p-4 mx-auto privacy-policy">
-      <h2 className="mb-6 text-2xl font-bold text-center text-primary">
+      <h2 className="text-2xl font-bold text-center text-primary">
         Privacy Policy for This Song
-        <br />
-        Last updated: 2024-01-08
       </h2>
+      <p className="text-base text-center mb-7 text-muted">
+        Last updated: January 8, 2024
+      </p>
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
