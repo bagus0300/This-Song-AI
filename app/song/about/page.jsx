@@ -41,13 +41,14 @@ const AboutPage = () => {
         <ul className="space-y-2 list-disc list-inside text-muted">
           <li>
             Song Meanings: Dive into a comprehensive library of song
-            interpretations, where each song's lyrics are analyzed to reveal the
-            hidden messages, historical context, and artistic nuances.
+            interpretations, where each song&apos;s lyrics are analyzed to
+            reveal the hidden messages, historical context, and artistic
+            nuances.
           </li>
           <li>
             Spotify Integration: Seamlessly connect your Spotify account to
             access your favorite songs, discover the meanings of your recently
-            played tracks, and see what you're listening to right now.
+            played tracks, and see what you&apos;re listening to right now.
           </li>
           <li>
             Instant Interpretations: Get instant access to the meaning of any
