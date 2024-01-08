@@ -166,6 +166,71 @@ const PrivacyPolicyPage = () => {
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
+          CCPA Privacy Rights (Do Not Sell My Personal Information)
+        </h3>
+        <p className="text-sm leading-relaxed text-muted">
+          Under the CCPA, among other rights, California consumers have the
+          right to: Request that a business that collects a consumer&apos;s
+          personal data disclose the categories and specific pieces of personal
+          data that a business has collected about consumers. Request that a
+          business deletes any personal data about the consumer that a business
+          has collected. Request that a business that sells a consumer&apos;s
+          personal data, not sell the consumer&apos;s personal data. If you
+          would like to exercise any of these rights, please contact us at
+          admin@thissong.app.
+        </p>
+      </section>
+
+      <section className="mb-6">
+        <h3 className="mb-3 text-xl font-semibold text-primary">
+          GDPR Data Protection Rights
+        </h3>
+        <p className="text-sm leading-relaxed text-muted">
+          We would like to make sure you are fully aware of all of your data
+          protection rights. Every user is entitled to the following:
+        </p>
+        <ul className="ml-5 text-xs list-disc text-muted">
+          <li>
+            <span className="font-bold">The right to access</span> &mdash; You
+            have the right to request copies of your personal data. We may
+            charge you a small fee for this service.
+          </li>
+          <li>
+            <span className="font-bold">The right to rectification</span>{" "}
+            &mdash; You have the right to request that we correct any
+            information you believe is inaccurate. You also have the right to
+            request that we complete the information you believe is incomplete.
+          </li>
+          <li>
+            <span className="font-bold">The right to erasure</span> &mdash; You
+            have the right to request that we erase your personal data, under
+            certain conditions.
+          </li>
+          <li>
+            <span className="font-bold">The right to restrict processing</span>{" "}
+            &mdash; You have the right to request that we restrict the
+            processing of your personal data, under certain conditions.
+          </li>
+          <li>
+            <span className="font-bold">The right to object to processing</span>{" "}
+            &mdash; You have the right to object to our processing of your
+            personal data, under certain conditions.
+          </li>
+          <li>
+            <span className="font-bold"> The right to data portability</span>{" "}
+            &mdash; You have the right to request that we transfer the data that
+            we have collected to another organization, or directly to you, under
+            certain conditions.
+          </li>
+        </ul>
+        <p className="text-sm leading-relaxed text-muted">
+          If you would like to exercise any of these rights, please contact us
+          at admin@thissong.app.
+        </p>
+      </section>
+
+      <section className="mb-6">
+        <h3 className="mb-3 text-xl font-semibold text-primary">
           Children&apos;s Data
         </h3>
         <p className="text-sm leading-relaxed text-muted">
