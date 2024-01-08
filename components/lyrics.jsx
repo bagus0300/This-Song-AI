@@ -419,7 +419,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
   };
 
   return (
-    <div className="px-4 md:p-2">
+    <div id="lyrics-container" className="px-4 md:p-2">
       {(lyrics && (
         <div className="flex flex-col-reverse items-start justify-center gap-10 align-top lg:flex-row">
           {lyrics.body == "No lyrics found" && (
@@ -481,41 +481,73 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             <p>Loading data for {songName}...</p>
           </div>
         ))}
-      <div className="flex flex-col items-end pt-10 pb-10">
-        <Accordion
-          id="problem"
-          type="single"
-          collapsible
-          className="w-[360px] mx-auto"
-        >
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              Report a problem with this description
-            </AccordionTrigger>
-            <AccordionContent>
-              <RadioGroupForm />
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-        <div
-          id="problemReported"
-          className="hidden w-[360px] mx-auto text-muted text-center"
-        >
-          Thank you for submitting a report!
-        </div>
-      </div>
-      <div className="flex flex-col items-end w-full max-w-screen-xl pb-2 text-base text-center">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          {" "}
-          Scroll to top
-        </Button>
-      </div>
+      {status && (
+        <>
+          <div className="flex flex-col items-end pt-10 pb-10">
+            <Accordion
+              id="problem"
+              type="single"
+              collapsible
+              className="w-[360px] mx-auto"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  Report a problem with this description
+                </AccordionTrigger>
+                <AccordionContent>
+                  <RadioGroupForm />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <div
+              id="problemReported"
+              className="hidden w-[360px] mx-auto text-muted text-center"
+            >
+              Thank you for submitting a report!
+            </div>
+          </div>
+          {/* <div
+            className={clsx(
+              "flex flex-col items-end w-full max-w-screen-xl pb-2 text-base text-center transition-all duration-500",
+              document &&
+                document.getElementById("lyrics-container") &&
+                window &&
+                document.getElementById("lyrics-container").offsetHeight + 500 >
+                  window.innerHeight
+                ? "opacity-100"
+                : "opacity-0"
+            )}
+          > */}
+          <div
+            className={clsx(
+              "flex flex-col items-end w-full max-w-screen-xl pb-2 text-base text-center transition-all duration-500",
+              document &&
+                window &&
+                document.body.scrollHeight - 196 >= window.innerHeight
+                ? "opacity-100"
+                : "opacity-0"
+            )}
+          >
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              disabled={
+                !(
+                  document &&
+                  window &&
+                  document.body.scrollHeight - 196 >= window.innerHeight
+                )
+              }
+            >
+              {" "}
+              Scroll to top
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
