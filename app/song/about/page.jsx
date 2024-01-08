@@ -1,6 +1,11 @@
 import React from "react";
 import { rajdhani } from "@/components/ui/fonts";
 
+export const metadata = {
+  title: "This Song | About",
+  description: "AI-enhanced analysis of lyrics for songs on Spotify."
+};
+
 const AboutPage = () => {
   return (
     <div className="max-w-5xl p-4 mx-auto about-page">

@@ -1,5 +1,10 @@
 import React from "react";
 
+export const metadata = {
+  title: "This Song | Privacy Policy",
+  description: "AI-enhanced analysis of lyrics for songs on Spotify."
+};
+
 const PrivacyPolicyPage = () => {
   return (
     <div className="max-w-4xl p-4 mx-auto privacy-policy">
