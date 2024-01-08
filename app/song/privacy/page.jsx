@@ -103,25 +103,23 @@ const PrivacyPolicyPage = () => {
           We may obtain information about you from third parties, including from
           vendors and service providers who may collect information on our
           behalf, such as:
-          <ul className="ml-5 list-disc">
-            <li>
-              Companies who support our Site and Services, such as Spotify.
-            </li>
-            <li>
-              When you visit our Site, open or click on emails we send you, or
-              interact with our Services or advertisements, we, or third parties
-              we work with, may automatically collect certain information using
-              online tracking technologies such as pixels, web beacons, software
-              developer kits, third-party libraries, and cookies. Any
-              information we obtain from third parties will be treated in
-              accordance with this Privacy Policy. We are not responsible or
-              liable for the accuracy of the information provided to us by third
-              parties and are not responsible for any third party&apos;s
-              policies or practices. For more information, see the section
-              below, Third Party Websites and Links.
-            </li>
-          </ul>
         </p>
+        <ul className="ml-5 text-xs list-disc text-muted">
+          <li>Companies who support our Site and Services, such as Spotify.</li>
+          <li>
+            When you visit our Site, open or click on emails we send you, or
+            interact with our Services or advertisements, we, or third parties
+            we work with, may automatically collect certain information using
+            online tracking technologies such as pixels, web beacons, software
+            developer kits, third-party libraries, and cookies. Any information
+            we obtain from third parties will be treated in accordance with this
+            Privacy Policy. We are not responsible or liable for the accuracy of
+            the information provided to us by third parties and are not
+            responsible for any third party&apos;s policies or practices. For
+            more information, see the section below, Third Party Websites and
+            Links.
+          </li>
+        </ul>
       </section>
 
       <section className="mb-6">
@@ -132,15 +130,15 @@ const PrivacyPolicyPage = () => {
           In certain circumstances, we may disclose your personal information to
           third parties for legitimate purposes subject to this Privacy Policy.
           Such circumstances may include:
-          <ul className="ml-5 text-xs list-disc">
-            <li>
-              With business and marketing partners, including Spotify, to
-              provide services and advertise to you. Our business and marketing
-              partners will use your information in accordance with their own
-              privacy notices.
-            </li>
-          </ul>
         </p>
+        <ul className="ml-5 text-xs list-disc text-muted">
+          <li>
+            With business and marketing partners, including Spotify, to provide
+            services and advertise to you. Our business and marketing partners
+            will use your information in accordance with their own privacy
+            notices.
+          </li>
+        </ul>
       </section>
 
       <section className="mb-6">
