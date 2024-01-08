@@ -111,9 +111,9 @@ const PrivacyPolicyPage = () => {
               information we obtain from third parties will be treated in
               accordance with this Privacy Policy. We are not responsible or
               liable for the accuracy of the information provided to us by third
-              parties and are not responsible for any third party's policies or
-              practices. For more information, see the section below, Third
-              Party Websites and Links.
+              parties and are not responsible for any third party&apos;s
+              policies or practices. For more information, see the section
+              below, Third Party Websites and Links.
             </li>
           </ul>
         </p>
@@ -162,7 +162,7 @@ const PrivacyPolicyPage = () => {
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
-          Children's Data
+          Children&apos;s Data
         </h3>
         <p className="text-sm leading-relaxed text-muted">
           The Services are not intended to be used by children, and we do not
