@@ -15,11 +15,24 @@ const Footer = () => {
 
             <ul className="text-base">
               <li>
+                <a href="/" className="transition text-muted hover:opacity-75">
+                  Home
+                </a>
+              </li>
+              <li>
                 <a
                   href="/song/about"
                   className="transition text-muted hover:opacity-75"
                 >
                   About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/song/privacy"
+                  className="transition text-muted hover:opacity-75"
+                >
+                  Privacy Policy
                 </a>
               </li>
               <li>
