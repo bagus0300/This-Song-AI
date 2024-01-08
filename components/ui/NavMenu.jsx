@@ -48,7 +48,8 @@ export default function NavMenu() {
         </li>
       </a>
       {[
-        { title: "Currently Playing", path: "/song/current" }
+        { title: "Currently Playing", path: "/song/current" },
+        { title: "About Us", path: "/song/about" }
         // { title: "Song", path: "/song/id" },
         // { title: "Protected", path: "/song/protected" }
       ].map(({ title, path }) => (
