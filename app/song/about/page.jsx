@@ -13,8 +13,10 @@ const AboutPage = () => {
         {/* Replace with actual image component or path */}
         <img
           src="/images/this-song-full.png"
+          width={768}
+          height={512}
           alt="This Song - AI-Enhanced Lyric Analysis"
-          className="w-full h-auto rounded-lg"
+          className="rounded-lg"
         />
       </div>
 
@@ -69,11 +71,10 @@ const AboutPage = () => {
           Our Journey
         </h3>
         <p className="leading-relaxed text-muted">
-          This Song was founded in 2023 by a group of lyrics enthusiasts and
-          tech innovators. Excited by the idea of leveraging artificial
-          intelligence to explore song meanings with a precision and speed
-          hitherto impossible, we set out to create a platform that not only
-          deciphers lyrics but also celebrates the art of music. We are
+          This Song was founded in 2023; excited by the idea of leveraging
+          artificial intelligence to explore song meanings with a precision and
+          speed hitherto impossible, we set out to create a platform that not
+          only deciphers lyrics but also celebrates the art of music. We are
           committed to providing the best possible experience for our users and
           are constantly working to improve our product. We hope you enjoy
           exploring the world of lyrics with us!

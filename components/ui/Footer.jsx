@@ -16,6 +16,14 @@ const Footer = () => {
             <ul className="text-base">
               <li>
                 <a
+                  href="/song/about"
+                  className="transition text-muted hover:opacity-75"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:admin@thissong.app"
                   className="transition text-muted hover:opacity-75"
                 >
