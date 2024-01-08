@@ -19,149 +19,138 @@ const PrivacyPolicyPage = () => {
         <h3 className="mb-3 text-xl font-semibold text-primary">
           Introduction
         </h3>
-        <p className="text-sm leading-relaxed text-muted">
+        <p className="mb-2 text-sm leading-relaxed text-muted">
           This Privacy Policy describes how This Song (the &quot;Site&quot;,
           &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses,
-          and discloses your personal information when you visit, use our
-          services, or make a purchase from https://www.thissong.app (the
-          &quot;Site&quot;) or otherwise communicate with us (collectively, the
+          and discloses your personal information when you visit
+          https://www.thissong.app (the &quot;Site&quot;), use our services, or
+          otherwise communicate with us (collectively, the
           &quot;Services&quot;). For purposes of this Privacy Policy,
           &quot;you&quot; and &quot;your&quot; means you as the user of the
           Services, whether you are a customer, website visitor, or another
           individual whose information we have collected pursuant to this
           Privacy Policy.
         </p>
+        <p className="mb-2 text-sm leading-relaxed text-muted">
+          Please read this Privacy Policy carefully. By using and accessing This
+          Song, you agree to the collection, use, and disclosure of your
+          information as described in this Privacy Policy.
+        </p>
         <p className="text-sm leading-relaxed text-muted">
-          Please read this Privacy Policy carefully. By using and accessing any
-          of the Services, you agree to the collection, use, and disclosure of
-          your information as described in this Privacy Policy. If you do not
-          agree to this Privacy Policy, please do not use or access any of the
-          Services.
+          If you have additional questions or require more information about our
+          Privacy Policy, do not hesitate to contact us through email at
+          admin@thissong.app
         </p>
       </section>
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
-          Changes to This Privacy Policy
+          Information We Collect
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          We may update this Privacy Policy from time to time, including to
-          reflect changes to our practices or for other operational, legal, or
-          regulatory reasons. We will post the revised Privacy Policy on the
-          Site, update the &quot;Last updated&quot; date and take any other
-          steps required by applicable law.
+          The personal information that you are asked to provide, and the
+          reasons why you are asked to provide it, will be made clear to you at
+          the point we ask you to provide your personal information. If you
+          contact us directly, we may receive additional information about you
+          such as your name, email address, phone number, the contents of the
+          message and/or attachments you may send us, and any other information
+          you may choose to provide.
+          {/* When you register for an Account, we may
+          ask for your contact information, including items such as name,
+          company name, address, email address, and telephone number. */}
         </p>
       </section>
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
-          How We Collect and Use Your Personal Information
+          How We Use Your Information
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          To provide the Services, we collect and have collected over the past
-          12 months personal information about you from a variety of sources, as
-          set out below. The information that we collect and use varies
-          depending on how you interact with us. In addition to the specific
-          uses set out below, we may use information we collect about you to
-          communicate with you, provide the Services, comply with any applicable
-          legal obligations, enforce any applicable terms of service, and to
-          protect or defend the Services, our rights, and the rights of our
-          users or others.
-        </p>
-      </section>
-
-      <section className="mb-6">
-        <h3 className="mb-3 text-xl font-semibold text-primary">
-          What Personal Information We Collect
-        </h3>
-        <p className="text-sm leading-relaxed text-muted">
-          The types of personal information we obtain about you depends on how
-          you interact with our Site and use our Services. When we use the term
-          &quot;personal information&quot;, we are referring to information that
-          identifies, relates to, describes or can be associated with you. The
-          following sections describe the categories and specific types of
-          personal information we collect.
-        </p>
-        {/* <h2 className="py-2 text-lg font-semibold text-primary">
-          Information We Collect Directly from You
-        </h2> */}
-        <h2 className="pt-2 text-base font-semibold text-primary">
-          Information We Collect through Cookies
-        </h2>
-        <p className="text-xs leading-relaxed text-muted">
-          We automatically collect certain information about your interaction
-          with the Services (&quot;Usage Data&quot;). To do this, we may use
-          cookies, pixels and similar technologies (&quot;Cookies&quot;). Usage
-          Data may include information about how you access and use our Site and
-          your account, including device information, browser information,
-          information about your network connection, your IP address and other
-          information regarding your interaction with the Services.
-        </p>
-        <h2 className="pt-2 text-base font-semibold text-primary">
-          Information We Obtain from Third Parties
-        </h2>
-        <p className="text-xs leading-relaxed text-muted">
-          We may obtain information about you from third parties, including from
-          vendors and service providers who may collect information on our
-          behalf, such as:
+          We use the information we collect in various ways, including to:
         </p>
         <ul className="ml-5 text-xs list-disc text-muted">
-          <li>Companies who support our Site and Services, such as Spotify.</li>
+          <li>Provide, operate, and maintain our website</li>
+          <li>Improve, personalize, and expand our website</li>
+          <li>Understand and analyze how you use our website</li>
+          <li>Develop new products, services, features, and functionality</li>
           <li>
-            When you visit our Site, open or click on emails we send you, or
-            interact with our Services or advertisements, we, or third parties
-            we work with, may automatically collect certain information using
-            online tracking technologies such as pixels, web beacons, software
-            developer kits, third-party libraries, and cookies. Any information
-            we obtain from third parties will be treated in accordance with this
-            Privacy Policy. We are not responsible or liable for the accuracy of
-            the information provided to us by third parties and are not
-            responsible for any third party&apos;s policies or practices. For
-            more information, see the section below, Third Party Websites and
-            Links.
+            Communicate with you, either directly or through one of our
+            partners, including for customer service, to provide you with
+            updates and other information relating to the website, and for
+            marketing and promotional purposes
           </li>
+          <li>Send you emails</li>
+          <li>Find and prevent fraud</li>
         </ul>
       </section>
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
-          How We Disclose Personal Information
+          Data Collection &amp; Log Files
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          In certain circumstances, we may disclose your personal information to
-          third parties for legitimate purposes subject to this Privacy Policy.
-          Such circumstances may include:
+          This Song follows a standard procedure of using log files. These files
+          log visitors when they visit websites. All hosting companies do this
+          and a part of hosting services&apos; analytics. The information
+          collected by log files include internet protocol (IP) addresses,
+          browser type, Internet Service Provider (ISP), date and time stamp,
+          referring/exit pages, and possibly the number of clicks. These are not
+          linked to any information that is personally identifiable. The purpose
+          of the information is for analyzing trends, administering the site,
+          tracking users&apos; movement on the website, and gathering
+          demographic information.
         </p>
-        <ul className="ml-5 text-xs list-disc text-muted">
-          <li>
-            With business and marketing partners, including Spotify, to provide
-            services and advertise to you. Our business and marketing partners
-            will use your information in accordance with their own privacy
-            notices.
-          </li>
-        </ul>
       </section>
 
       <section className="mb-6">
         <h3 className="mb-3 text-xl font-semibold text-primary">
-          Third Party Websites and Links
+          Cookies and Web Beacons
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          Our Site may provide links to websites or other online platforms
-          operated by third parties. If you follow links to sites not affiliated
-          or controlled by us, you should review their privacy and security
-          policies and other terms and conditions. We do not guarantee and are
-          not responsible for the privacy or security of such sites, including
-          the accuracy, completeness, or reliability of information found on
-          these sites. Information you provide on public or semi-public venues,
-          including information you share on third-party social networking
-          platforms may also be viewable by other users of the Services and/or
-          users of those third-party platforms without limitation as to its use
-          by us or by a third party. Our inclusion of such links does not, by
-          itself, imply any endorsement of the content on such platforms or of
-          their owners or operators, except as disclosed on the Services.
+          Like most modern websites, This Song uses &apos;cookies&apos;. These
+          cookies are used to store information including visitors&apos;
+          preferences, and the pages on the website that the visitor accessed or
+          visited. The information is used to optimize the users&apos;
+          experience by customizing our web page content based on visitors&apos;
+          browser type and/or other information.
         </p>
-        {/* List the conditions for data disclosure */}
+      </section>
+
+      <section className="mb-6">
+        <h3 className="mb-3 text-xl font-semibold text-primary">
+          Advertising Partners Privacy Policies
+        </h3>
+        <p className="text-sm leading-relaxed text-muted">
+          You may consult this list to find the Privacy Policy for each of the
+          advertising partners of This Song. Third-party ad servers or ad
+          networks uses technologies like cookies, JavaScript, or Web Beacons
+          that are used in their respective advertisements and links that appear
+          on This Song, which are sent directly to users&apos; browser. They
+          automatically receive your IP address when this occurs. These
+          technologies are used to measure the effectiveness of their
+          advertising campaigns and/or to personalize the advertising content
+          that you see on websites that you visit. Note that This Song has no
+          access to or control over these cookies that are used by third-party
+          advertisers.
+        </p>
+      </section>
+
+      <section className="mb-6">
+        <h3 className="mb-3 text-xl font-semibold text-primary">
+          Third-Party Privacy Policies
+        </h3>
+        <p className="text-sm leading-relaxed text-muted">
+          This Song&apos;s Privacy Policy does not apply to other advertisers or
+          websites. Thus, we are advising you to consult the respective Privacy
+          Policies of these third-party ad servers for more detailed
+          information. It may include their practices and instructions about how
+          to opt-out of certain options.
+          <br />
+          You can choose to disable cookies through your individual browser
+          options. To know more detailed information about cookie management
+          with specific web browsers, it can be found at the browsers&apos;
+          respective websites.
+        </p>
       </section>
 
       <section className="mb-6">
@@ -234,7 +223,7 @@ const PrivacyPolicyPage = () => {
           Children&apos;s Data
         </h3>
         <p className="text-sm leading-relaxed text-muted">
-          The Services are not intended to be used by children, and we do not
+          This Song is not intended to be used by children, and we do not
           knowingly collect any personal information about children. If you are
           the parent or guardian of a child who has provided us with their
           personal information, you may contact us using the contact details set
@@ -258,23 +247,6 @@ const PrivacyPolicyPage = () => {
           analyzing how our service is used.
         </p>
         {/* Additional details about service providers */}
-      </section>
-
-      <section className="mb-6">
-        <h3 className="mb-3 text-xl font-semibold text-primary">
-          Security and Retention of Your Information
-        </h3>
-        <p className="text-sm leading-relaxed text-muted">
-          Please be aware that no security measures are perfect or impenetrable,
-          and we cannot guarantee &quot;perfect security.&quot; In addition, any
-          information you send to us may not be secure while in transit. We
-          recommend that you do not use unsecure channels to communicate
-          sensitive or confidential information to us. How long we retain your
-          personal information depends on different factors, such as whether we
-          need the information to maintain your account, to provide the
-          Services, comply with legal obligations, resolve disputes or enforce
-          other applicable contracts and policies.
-        </p>
       </section>
 
       <section className="mb-6">
