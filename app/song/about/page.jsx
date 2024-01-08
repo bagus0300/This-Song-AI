@@ -79,14 +79,6 @@ const AboutPage = () => {
         </p>
       </section>
 
-      {/* Meet Our Team Section */}
-      <section className="mb-6 meet-our-team">
-        <h3 className="mb-3 text-2xl font-semibold text-primary">
-          Meet Our Team
-        </h3>
-        {/* Add team members here */}
-      </section>
-
       {/* Get In Touch Section */}
       <section className="mb-6 get-in-touch">
         <h3 className="mb-3 text-2xl font-semibold text-primary">
@@ -105,24 +97,6 @@ const AboutPage = () => {
           .
         </p>
       </section>
-
-      {/* Follow Us Section */}
-      <section className="mb-6 follow-us">
-        <h3 className="mb-3 text-2xl font-semibold text-primary">Follow Us</h3>
-        <p className="leading-relaxed text-muted">
-          Stay updated with the latest from This Song by following us on social
-          media.
-        </p>
-      </section>
-
-      {/* Footer Image */}
-      <div className="footer-image">
-        <img
-          src="/path/to/footer-image.jpg"
-          alt="Artists and Genres Collage"
-          className="w-full h-auto rounded-lg shadow-lg"
-        />
-      </div>
     </div>
   );
 };
