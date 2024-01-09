@@ -40,7 +40,7 @@ const Page = () => {
           </a>
           <img
             src="images/border-bottom.png"
-            className="w-full min-w-[1400px] h-[70px]"
+            className="w-full md:min-w-[1400px] h-[70px]"
             // className="w-full h-[70px]"
           />
         </div>

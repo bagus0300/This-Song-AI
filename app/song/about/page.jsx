@@ -36,7 +36,7 @@ const AboutPage = () => {
         </div>
         <img
           src="/images/border-bottom.png"
-          className="dark:brightness-0 min-w-[1400px]"
+          className="dark:brightness-0 md:min-w-[1400px]"
         />
       </div>
 
