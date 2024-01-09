@@ -43,19 +43,30 @@ export default function NavMenu() {
 
   const menuLinks = (mobile = null) => (
     <ul className={mobile ? "flex flex-col items-center text-3xl" : "flex"}>
-      <a href="/" onClick={() => setShowMenu(false)}>
+      <a key={"/"} href="/" onClick={() => setShowMenu(false)}>
         <li className={pathname === "/" ? ACTIVE_ROUTE : INACTIVE_ROUTE}>
           Home
         </li>
       </a>
       {[
+        { title: "Song", path: "/song" },
         { title: "Currently Playing", path: "/song/current" },
         { title: "About Us", path: "/song/about" }
-        // { title: "Song", path: "/song/id" },
-        // { title: "Protected", path: "/song/protected" }
       ].map(({ title, path }) => (
         <Link key={path} href={path} onClick={() => setShowMenu(false)}>
-          <li className={pathname === path ? ACTIVE_ROUTE : INACTIVE_ROUTE}>
+          <li
+            className={
+              title === "Song"
+                ? pathname.startsWith("/song") &&
+                  pathname !== "/song/current" &&
+                  pathname !== "/song/about"
+                  ? ACTIVE_ROUTE
+                  : INACTIVE_ROUTE
+                : pathname === path
+                ? ACTIVE_ROUTE
+                : INACTIVE_ROUTE
+            }
+          >
             {title}
           </li>
         </Link>

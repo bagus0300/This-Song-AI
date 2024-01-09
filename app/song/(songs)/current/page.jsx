@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 
 import { SongContext } from "@/context/ContextProvider";
 
@@ -9,7 +9,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import clsx from "clsx";
 import Lyrics from "@/components/lyrics";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import LoginButton from "@/components/ui/login-button";
+import { redirect } from "next/navigation";
+import { rajdhani } from "@/components/ui/fonts";
 
 const Page = () => {
   /**
@@ -192,7 +195,7 @@ const Page = () => {
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist, index) => (
-                    <>
+                    <Fragment key={index}>
                       <a
                         href={artist.external_urls.spotify}
                         target="_blank"
@@ -201,7 +204,7 @@ const Page = () => {
                         {artist.name}
                       </a>
                       {index < song.artists.length - 1 && ", "}
-                    </>
+                    </Fragment>
                   ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
@@ -231,7 +234,7 @@ const Page = () => {
             </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist, index) => (
-                <>
+                <Fragment key={index}>
                   <a
                     href={artist.external_urls.spotify}
                     target="_blank"
@@ -240,7 +243,7 @@ const Page = () => {
                     {artist.name}
                   </a>
                   {index < song.artists.length - 1 && ", "}
-                </>
+                </Fragment>
               ))}
             </h2>
             <h3 className="text-xl hover:brightness-150 hover:underline">
@@ -276,10 +279,25 @@ const Page = () => {
         // )) ||
         (!session && (
           <>
-            <p className="mt-2">
-              Search for a song, or log in to Spotify to see what you&apos;re
-              currently listening to.
-            </p>
+            <section
+              className={clsx(
+                rajdhani.className,
+                "flex flex-col items-center justify-center pt-2"
+              )}
+            >
+              <h1 className="text-2xl font-bold">Welcome to This Song!</h1>
+              <p className="mt-2 text-lg">
+                This Song is a tool providing AI-enhanced analysis of song
+                lyrics.
+              </p>
+              <p className="mt-2 text-base">
+                Search for a song, log in with Spotify to see what you&apos;re
+                currently listening to, or use the menu to explore popular
+                tracks.
+              </p>
+            </section>
+
+            {/* <LoginButton onClick={signIn} /> */}
           </>
         )) || (
           <>

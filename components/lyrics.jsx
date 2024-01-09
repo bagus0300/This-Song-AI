@@ -350,7 +350,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         if (gpt4Response.ok) {
           const interpretation = await gpt4Response.text();
           if (interpretation) {
-            console.log("GPT-4 interpretation response: ", interpretation);
+            // console.log("GPT-4 interpretation response: ", interpretation);
             // console.log("Interpretation: ", interpretation);
             setGPTInterpretation(interpretation);
             return;

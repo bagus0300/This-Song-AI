@@ -8,7 +8,7 @@ import {
 import { catchErrors } from "@/lib/utils";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
@@ -237,7 +237,7 @@ const Page = ({ params }) => {
                 </h1>
                 <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
                   {song.artists.map((artist, index) => (
-                    <>
+                    <Fragment key={index}>
                       <a
                         href={artist.external_urls.spotify}
                         target="_blank"
@@ -246,7 +246,7 @@ const Page = ({ params }) => {
                         {artist.name}
                       </a>
                       {index < song.artists.length - 1 && ", "}
-                    </>
+                    </Fragment>
                   ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
@@ -276,7 +276,7 @@ const Page = ({ params }) => {
             </h1>
             <h2 className="text-2xl text-muted">
               {song.artists.map((artist, index) => (
-                <>
+                <Fragment key={index}>
                   <a
                     href={artist.external_urls.spotify}
                     target="_blank"
@@ -285,7 +285,7 @@ const Page = ({ params }) => {
                     {artist.name}
                   </a>
                   {index < song.artists.length - 1 && ", "}
-                </>
+                </Fragment>
               ))}
             </h2>
             <h3 className="text-xl hover:brightness-150 hover:underline">
