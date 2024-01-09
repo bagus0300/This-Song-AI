@@ -14,7 +14,7 @@ const AboutPage = () => {
         About Us
       </h2> */}
 
-      <div className="w-full pb-14 bg-secondary">
+      <div className="w-full md:pb-[70px] sm:pb-14 pb-9 bg-secondary">
         {/* Header Image */}
         <div className="max-w-3xl mx-auto mb-5 header-image">
           {/* Replace with actual image component or path */}
