@@ -8,9 +8,9 @@ import Footer from "@/components/ui/Footer";
 const Page = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
+      <div className="flex flex-col items-center justify-center gap-2 text-base text-center align-bottom md:gap-5 xl:px-0">
         <div
-          className="flex flex-col items-center justify-center w-full gap-5 overflow-hidden text-base text-center align-bottom md:bg-fixed"
+          className="flex flex-col items-center justify-center w-full overflow-hidden text-base text-center align-bottom md:gap-5 md:bg-fixed"
           style={{
             backgroundImage: "url(/images/banner.jpg)",
             backgroundSize: "cover",
@@ -51,10 +51,10 @@ const Page = () => {
             These are the songs everybody&apos;s talking about. Check out what
             they mean:
           </h2>
-          <p className={clsx(rajdhani.className, "text-base mt-5")}>
+          <p className={clsx(rajdhani.className, "text-base md:mt-5 mt-2")}>
             (Select a song to learn more)
           </p>
-          <div className="max-w-[1680px] mx-auto pb-8 pt-5">
+          <div className="max-w-[1680px] mx-auto pb-8 md:pt-5 pt-2">
             <Suspense fallback={<TopSongsSnippetsSkeleton />}>
               <TopSongsSnippets limit="20" offset="0" />
             </Suspense>
