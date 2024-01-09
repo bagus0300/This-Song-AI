@@ -61,7 +61,8 @@ export default function NavMenu() {
                 ? pathname.startsWith("/song") &&
                   // pathname !== "/song/current" &&
                   pathname !== "/song/about" &&
-                  pathname !== "/song/contact"
+                  pathname !== "/song/contact" &&
+                  pathname !== "/song/privacy"
                   ? ACTIVE_ROUTE
                   : INACTIVE_ROUTE
                 : pathname === path
