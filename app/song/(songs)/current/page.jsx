@@ -285,10 +285,10 @@ const Page = () => {
                 "flex flex-col items-center justify-center pt-2"
               )}
             >
-              <h1 className="text-2xl font-bold">Welcome to This Song!</h1>
-              <p className="mt-2 text-lg">
-                This Song is a tool providing AI-enhanced analysis of song
-                lyrics.
+              {/* <h1 className="text-2xl font-bold">Welcome to This Song!</h1> */}
+              <p className="mt-2 text-2xl">
+                <span className="font-bold">This Song</span> is a tool providing
+                AI-enhanced analysis of song lyrics.
               </p>
               <p className="mt-2 text-base">
                 Search for a song, log in with Spotify to see what you&apos;re

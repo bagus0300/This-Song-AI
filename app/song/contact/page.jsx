@@ -110,7 +110,7 @@ const ContactPage = () => {
                 Name
               </label>
               <input
-                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline"
                 id="name"
                 type="text"
                 name="name"
@@ -130,7 +130,7 @@ const ContactPage = () => {
                 Email
               </label>
               <input
-                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline"
                 id="email"
                 type="email"
                 name="email"
@@ -150,7 +150,7 @@ const ContactPage = () => {
                 Message
               </label>
               <textarea
-                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight border rounded shadow appearance-none text-primary focus:outline"
                 id="message"
                 name="message"
                 rows="7"
