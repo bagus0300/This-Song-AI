@@ -14,16 +14,17 @@ const AboutPage = () => {
         About Us
       </h2> */}
 
-      <div className="w-full md:pb-[70px] sm:pb-14 pb-9 bg-secondary">
+      {/* <div className="w-full sm:pb-5 pb-3 bg-[#121212]"> */}
+      <div className="w-full bg-secondary">
         {/* Header Image */}
         <div className="max-w-3xl mx-auto mb-5 header-image">
           {/* Replace with actual image component or path */}
           <img
-            src="/images/this-song-full.png"
-            width={768}
-            height={512}
+            src="/images/this-song-large.png"
+            width={720}
+            height={576}
             alt="This Song - AI-Enhanced Lyric Analysis"
-            className="rounded-lg"
+            className="mx-auto rounded-lg"
           />
         </div>
       </div>

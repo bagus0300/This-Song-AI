@@ -9,17 +9,31 @@ const Page = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
-        <div className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 bg-secondary">
+        <div
+          className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 md:h-[770px] h-[700px]"
+          style={{
+            backgroundImage: "url(/images/banner.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        >
           {/* <video width="540" height="360" autoPlay loop>
             <source src="videos/this-song.mp4" type="video/mp4" /> */}
-          <img src="images/this-song.png" alt="This Song" />
+          <img src="images/this-song-large.png" alt="This Song" />
           {/* </video> */}
-          <h1 className={clsx(rajdhani.className, `text-2xl`, "px-10")}>
+          <h1
+            className={clsx(
+              rajdhani.className,
+              `md:text-3xl text-2xl`,
+              "px-10 text-white"
+            )}
+            style={{ textShadow: "1px 1px 2px black" }}
+          >
             Discover the meaning behind your favorite songs!
           </h1>
           <a
             href="song/current"
-            className="inline-block px-6 py-2 font-bold text-white bg-[#1DB954] rounded-full hover:brightness-110"
+            className="inline-block font-bold text-lg md:text-xl px-6 py-2  text-white bg-[#1DB954] rounded-full hover:brightness-110"
           >
             Click here to search for a song!
           </a>
