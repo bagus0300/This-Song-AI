@@ -68,6 +68,12 @@ const AboutPage = () => {
             and our AI assistants will do the rest.
           </li>
           <li>
+            Multilingual Understanding: Explore song interpretations that
+            transcend language barriers. Our platform offers English insights
+            into songs from various languages, ensuring you can connect with the
+            music you love, regardless of its linguistic origin.
+          </li>
+          <li>
             Personalized Experience (coming soon): Save your favorite songs,
             follow artists, and receive updates on new interpretations and
             features.

@@ -51,7 +51,8 @@ export default function NavMenu() {
       {[
         { title: "Song", path: "/song" },
         { title: "Currently Playing", path: "/song/current" },
-        { title: "About Us", path: "/song/about" }
+        { title: "About Us", path: "/song/about" },
+        { title: "Contact", path: "/song/contact" }
       ].map(({ title, path }) => (
         <Link key={path} href={path} onClick={() => setShowMenu(false)}>
           <li
@@ -59,7 +60,8 @@ export default function NavMenu() {
               title === "Song"
                 ? pathname.startsWith("/song") &&
                   pathname !== "/song/current" &&
-                  pathname !== "/song/about"
+                  pathname !== "/song/about" &&
+                  pathname !== "/song/contact"
                   ? ACTIVE_ROUTE
                   : INACTIVE_ROUTE
                 : pathname === path
