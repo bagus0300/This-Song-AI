@@ -48,7 +48,7 @@ const ContactPage = () => {
           console.log("Message sent successfully!");
           setLoading(false);
           toast({
-            title: "Message sent successfully:",
+            title: "Message sent successfully!",
             description: (
               <p className="mt-2 w-[340px] rounded-md p-4">
                 Thank you for contacting us! We will get back to you as soon as
@@ -60,7 +60,7 @@ const ContactPage = () => {
         (error) => {
           setLoading(false);
           toast({
-            title: "Failed to send message:",
+            title: "Failed to send message!",
             description: (
               <p className="mt-2 w-[340px] rounded-md p-4">
                 An error occurred while sending your message. Please try again
