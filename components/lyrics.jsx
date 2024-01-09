@@ -265,6 +265,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [sendingError, setSendingError] = useState(false);
@@ -489,6 +490,18 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               type="single"
               collapsible
               className="w-[360px] mx-auto"
+              onClick={(e) => {
+                if (scrolled) {
+                  setScrolled(false);
+                } else {
+                  window.scrollTo({
+                    top: e.target.offsetTop,
+                    left: 0,
+                    behavior: "smooth"
+                  });
+                  setScrolled(true);
+                }
+              }}
             >
               <AccordionItem value="item-1">
                 <AccordionTrigger>
