@@ -40,7 +40,7 @@ const AboutPage = () => {
         />
       </div>
 
-      <div className="max-w-5xl p-4 mx-auto my-7">
+      <div className="max-w-5xl p-4 mx-auto mb-7">
         {/* Our Mission Section */}
         <section className="mb-7 about-us">
           <h3 className="mb-3 text-3xl font-semibold text-primary">About Us</h3>
