@@ -38,7 +38,10 @@ const Page = () => {
           >
             Click here to search for a song!
           </a>
-          <img src="images/border-bottom.png" className="min-w-[1400px]" />
+          <img
+            src="images/border-bottom.png"
+            className="w-full min-w-[1400px] h-[70px]"
+          />
         </div>
         <div className="w-full">
           <h2
