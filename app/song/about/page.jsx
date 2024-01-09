@@ -16,12 +16,12 @@ const AboutPage = () => {
 
       {/* <div className="w-full sm:pb-5 pb-3 bg-[#121212]"> */}
       <div
-        className="flex flex-col items-center justify-center w-full text-base text-center align-bottom xl:px-0 "
+        className="flex flex-col items-center justify-center w-full overflow-hidden text-base text-center align-bottom md:bg-fixed"
         style={{
           backgroundImage: "url(/images/banner.jpg)",
           backgroundSize: "cover",
-          backgroundPosition: "100% 100%",
-          backgroundAttachment: "fixed"
+          backgroundPosition: "100% 100%"
+          // backgroundAttachment: "fixed"
         }}
       >
         {/* Header Image */}

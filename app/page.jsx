@@ -10,12 +10,12 @@ const Page = () => {
     <>
       <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
         <div
-          className="flex flex-col items-center justify-center w-full gap-5 text-base text-center align-bottom xl:px-0 "
+          className="flex flex-col items-center justify-center w-full gap-5 overflow-hidden text-base text-center align-bottom md:bg-fixed"
           style={{
             backgroundImage: "url(/images/banner.jpg)",
             backgroundSize: "cover",
-            backgroundPosition: "100% 100%",
-            backgroundAttachment: "fixed"
+            backgroundPosition: "100% 100%"
+            // backgroundAttachment: "fixed"
           }}
         >
           {/* <video width="540" height="360" autoPlay loop>
@@ -41,6 +41,7 @@ const Page = () => {
           <img
             src="images/border-bottom.png"
             className="w-full min-w-[1400px] h-[70px]"
+            // className="w-full h-[70px]"
           />
         </div>
         <div className="w-full">
