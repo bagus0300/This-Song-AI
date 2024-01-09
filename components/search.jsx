@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { useDebouncedCallback } from "use-debounce";
 import {
@@ -35,6 +35,14 @@ const Search = ({ onClick }) => {
   const pathname = usePathname();
 
   console.log("Rendering search.jsx");
+
+  useEffect(() => {
+    console.log("Search useEffect");
+    console.log("inputElement:", inputElement.current);
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }, []);
 
   const searchSongs = (term) => {
     // Clear the previous state variables
@@ -102,6 +110,7 @@ const Search = ({ onClick }) => {
           value={searchTerm}
           className="text-base"
           placeholder="Search for a song...."
+          // autoFocus
         />
         <span
           className={clsx(
