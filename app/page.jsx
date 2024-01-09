@@ -10,7 +10,7 @@ const Page = () => {
     <>
       <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
         <div
-          className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 md:h-[770px] h-[100vh]"
+          className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 "
           style={{
             backgroundImage: "url(/images/banner.jpg)",
             backgroundSize: "cover",
