@@ -22,7 +22,7 @@ export default async function SongLayout({ children }) {
     <ThemeProvider attribute="class" defaultTheme="system">
       <SessionProvider session={session}>
         <ContextProvider>
-          <div className="flex flex-col h-full min-h-[100vh]">
+          <div className="flex flex-col h-full min-h-[100dvh]">
             <nav className="fixed top-0 left-0 z-20 w-full bg-background h-fit lg:py-2 lg:px-2">
               <NavMenu />
             </nav>

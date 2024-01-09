@@ -15,7 +15,7 @@ const AboutPage = () => {
       </h2> */}
 
       {/* <div className="w-full sm:pb-5 pb-3 bg-[#121212]"> */}
-      <div className="w-full bg-secondary">
+      <div className="w-full bg-secondary py-14">
         {/* Header Image */}
         <div className="max-w-3xl mx-auto mb-5 header-image">
           {/* Replace with actual image component or path */}

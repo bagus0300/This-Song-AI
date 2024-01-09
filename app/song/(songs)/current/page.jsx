@@ -294,7 +294,7 @@ const Page = () => {
             <section
               className={clsx(
                 rajdhani.className,
-                "flex flex-col items-center justify-center pt-2 pb-5"
+                "flex flex-col items-center justify-center text-center pt-2 pb-5"
               )}
             >
               {/* <h1 className="text-2xl font-bold">Welcome to This Song!</h1> */}
@@ -316,7 +316,7 @@ const Page = () => {
             <section
               className={clsx(
                 rajdhani.className,
-                "flex flex-col items-center justify-center pt-2 pb-5"
+                "flex flex-col items-center justify-center text-center pt-2 pb-5"
               )}
             >
               <p className="mt-2 text-xl">Loading currently playing song...</p>
