@@ -15,18 +15,29 @@ const AboutPage = () => {
       </h2> */}
 
       {/* <div className="w-full sm:pb-5 pb-3 bg-[#121212]"> */}
-      <div className="w-full bg-secondary py-14">
+      <div
+        className="flex flex-col items-center justify-center w-full text-base text-center align-bottom xl:px-0 "
+        style={{
+          backgroundImage: "url(/images/banner.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "100% 100%",
+          backgroundAttachment: "fixed"
+        }}
+      >
         {/* Header Image */}
-        <div className="max-w-3xl mx-auto mb-5 header-image">
-          {/* Replace with actual image component or path */}
+        <div className="max-w-3xl mx-auto header-image">
           <img
             src="/images/this-song-large.png"
-            width={720}
-            height={576}
+            width={500}
+            height={500}
             alt="This Song - AI-Enhanced Lyric Analysis"
             className="mx-auto rounded-lg"
           />
         </div>
+        <img
+          src="/images/border-bottom.png"
+          className="dark:brightness-0 min-w-[1400px]"
+        />
       </div>
 
       <div className="max-w-5xl p-4 mx-auto my-7">

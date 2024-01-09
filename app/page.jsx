@@ -10,11 +10,12 @@ const Page = () => {
     <>
       <div className="flex flex-col items-center justify-center gap-5 text-base text-center align-bottom xl:px-0">
         <div
-          className="flex flex-col items-center justify-center w-full gap-5 pb-10 text-base text-center align-bottom xl:px-0 "
+          className="flex flex-col items-center justify-center w-full gap-5 text-base text-center align-bottom xl:px-0 "
           style={{
             backgroundImage: "url(/images/banner.jpg)",
             backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundPosition: "100% 100%",
+            backgroundAttachment: "fixed"
           }}
         >
           {/* <video width="540" height="360" autoPlay loop>
@@ -37,6 +38,7 @@ const Page = () => {
           >
             Click here to search for a song!
           </a>
+          <img src="images/border-bottom.png" className="min-w-[1400px]" />
         </div>
         <div className="w-full">
           <h2
