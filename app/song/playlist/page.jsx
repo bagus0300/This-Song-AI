@@ -15,6 +15,7 @@ import {
 
 import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -160,8 +161,9 @@ const PlaylistPage = () => {
                 <div className="p-1">
                   <Card className="bg-card hover:brightness-125">
                     <CardContent className="flex items-center justify-center p-0 overflow-hidden text-center rounded-lg cursor-pointer aspect-square">
-                      <span className="text-lg font-semibold">
-                        Loading playlist...
+                      <Skeleton className="w-full h-full" />
+                      <span className="absolute text-lg font-semibold">
+                        Loading...
                       </span>
                     </CardContent>
                   </Card>
