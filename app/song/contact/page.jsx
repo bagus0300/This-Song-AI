@@ -95,7 +95,7 @@ const ContactPage = () => {
           Get in Touch
         </h3>
         <p className="mb-4 leading-relaxed text-muted">
-          Have questions, feedback, or just want to say hello? Reach out to us
+          Have questions, feedback, or just want to say hi? Reach out to us
           using the form below, or email us directly.
         </p>
 
