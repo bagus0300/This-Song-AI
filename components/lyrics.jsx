@@ -102,6 +102,13 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               .getElementById("problemReported")
               .classList.remove("hidden");
             setLoading(false);
+            if (window.innerWidth >= 1024) {
+              window.scrollTo({
+                top: -100,
+                behavior: "smooth"
+              });
+            }
+            setScrolled(false);
             toast({
               title: "Report sent successfully:",
               description: (
@@ -490,21 +497,31 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               type="single"
               collapsible
               className="w-[360px] mx-auto"
-              onClick={(e) => {
-                if (scrolled) {
-                  setScrolled(false);
-                } else {
-                  window.scrollTo({
-                    top: e.target.offsetTop,
-                    left: 0,
-                    behavior: "smooth"
-                  });
-                  setScrolled(true);
-                }
-              }}
             >
               <AccordionItem value="item-1">
-                <AccordionTrigger>
+                <AccordionTrigger
+                  onClick={(e) => {
+                    if (scrolled) {
+                      if (window.innerWidth >= 1024) {
+                        console.log(
+                          e.target.offsetTop - (window.innerHeight - 100)
+                        );
+                        window.scrollTo({
+                          top: e.target.offsetTop - (window.innerHeight - 100),
+                          behavior: "smooth"
+                        });
+                      }
+                      setScrolled(false);
+                    } else {
+                      window.scrollTo({
+                        top: e.target.offsetTop,
+                        left: 0,
+                        behavior: "smooth"
+                      });
+                      setScrolled(true);
+                    }
+                  }}
+                >
                   Report a problem with this description
                 </AccordionTrigger>
                 <AccordionContent>
