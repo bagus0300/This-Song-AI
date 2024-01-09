@@ -262,7 +262,19 @@ const Page = () => {
       )) ||
         (status == 204 && (
           <>
-            <p className="mt-2">No song is currently playing.</p>
+            <section
+              className={clsx(
+                rajdhani.className,
+                "flex flex-col items-center justify-center pt-2 pb-5"
+              )}
+            >
+              {/* <h1 className="text-2xl font-bold">Welcome to This Song!</h1> */}
+              <p className="mt-2 text-xl">No song is currently playing.</p>
+              <p className="mt-2 text-base">
+                Search for a song, or use the menu to see what you&apos;ve
+                played recently or to explore popular tracks.
+              </p>
+            </section>
           </>
         )) ||
         (status >= 400 && (
@@ -282,7 +294,7 @@ const Page = () => {
             <section
               className={clsx(
                 rajdhani.className,
-                "flex flex-col items-center justify-center pt-2"
+                "flex flex-col items-center justify-center pt-2 pb-5"
               )}
             >
               {/* <h1 className="text-2xl font-bold">Welcome to This Song!</h1> */}
@@ -301,7 +313,14 @@ const Page = () => {
           </>
         )) || (
           <>
-            <p className="mt-2">Loading currently playing song...</p>
+            <section
+              className={clsx(
+                rajdhani.className,
+                "flex flex-col items-center justify-center pt-2 pb-5"
+              )}
+            >
+              <p className="mt-2 text-xl">Loading currently playing song...</p>
+            </section>
           </>
         )}
     </section>
