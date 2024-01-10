@@ -120,15 +120,9 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                       </div>
                     </div>
                     <div className="px-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-                      {summaries.has(item.track.id) ? (
-                        summaries.get(item.track.id)
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-center align-middle">
-                          <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
-                          <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                          <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
-                        </div>
-                      )}
+                      {summaries.has(item.track.id)
+                        ? summaries.get(item.track.id)
+                        : "Description currently unavailable."}
                     </div>
                   </div>
                 </a>
