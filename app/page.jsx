@@ -20,7 +20,9 @@ const Page = () => {
         >
           {/* <video width="540" height="360" autoPlay loop>
             <source src="videos/this-song.mp4" type="video/mp4" /> */}
-          <img src="images/this-song-large.png" alt="This Song" />
+          {/* <img src="images/this-song-large.png" alt="This Song" /> */}
+          {/* <img src="images/this-song-logo.png" alt="This Song" /> */}
+          <img src="images/this-song-logo-white.png" alt="This Song" />
           {/* </video> */}
           <div className="mt-[-100px] flex flex-col gap-5 items-center justify-center">
             <h1

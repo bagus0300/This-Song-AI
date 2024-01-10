@@ -118,7 +118,7 @@ const PlaylistPage = () => {
                           alt={playlist.name}
                           className="block"
                         />
-                        <span
+                        {/* <span
                           className="absolute bottom-0 left-0 w-full pb-2 text-lg text-center transition-all duration-300 opacity-0 text-[#1fdf64] group-hover:opacity-100"
                           style={{
                             textShadow:
@@ -126,7 +126,7 @@ const PlaylistPage = () => {
                           }}
                         >
                           {playlist.name}
-                        </span>
+                        </span> */}
                       </CardContent>
                     </Card>
                   </div>

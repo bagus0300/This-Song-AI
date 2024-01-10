@@ -27,7 +27,9 @@ const AboutPage = () => {
         {/* Header Image */}
         <div className="max-w-3xl mx-auto header-image">
           <img
-            src="/images/this-song-large.png"
+            // src="/images/this-song-large.png"
+            // src="/images/this-song-logo.png"
+            src="/images/this-song-logo-white.png"
             width={500}
             height={500}
             alt="This Song - AI-Enhanced Lyric Analysis"
