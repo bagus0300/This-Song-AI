@@ -17,6 +17,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import clsx from "clsx";
+import { rajdhani } from "@/components/ui/fonts";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -123,7 +124,12 @@ const PlaylistPage = () => {
 
           {/* <Suspense fallback={<TopSongsSnippetsSkeleton />}> */}
           <div className="flex flex-col items-center justify-center w-full gap-2 mt-5 text-base text-center align-bottom md:gap-5 xl:px-0">
-            <h1 className="text-2xl font-bold text-center text-foreground">
+            <h1
+              className={clsx(
+                rajdhani.className,
+                "text-3xl font-semibold tracking-wider text-center text-foreground"
+              )}
+            >
               {
                 playlists.find((playlist) => playlist.id == selectedPlaylist)
                   .name
