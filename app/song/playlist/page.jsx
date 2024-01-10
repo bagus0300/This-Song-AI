@@ -1,7 +1,7 @@
 "use client";
 import Playlist from "@/components/Playlist";
 import TopSongsSnippetsSkeleton from "@/components/TopSongsSnippetsSkeleton";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { playlistIDs } from "@/lib/data";
 
@@ -39,7 +39,7 @@ const PlaylistPage = () => {
     setSelectedPlaylist(playlistID);
   };
 
-  useState(() => {
+  useEffect(() => {
     const getPlaylists = async () => {
       try {
         const { data } = await axios.get(`${BACKEND_URI}/client_token`);
@@ -52,22 +52,34 @@ const PlaylistPage = () => {
         const playlistsList = [];
 
         for (let playlistID of playlistIDs) {
-          const playlistResponse = await axios.get(
+          // const playlistResponse = await axios.get(
+          //   `https://api.spotify.com/v1/playlists/${playlistID}`,
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${token}`
+          //     }
+          //   }
+          // );
+          const playlistResponse = await fetch(
             `https://api.spotify.com/v1/playlists/${playlistID}`,
             {
+              method: "GET",
               headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
               }
             }
           );
-          // console.log("playlistResponse", playlistResponse);
+
+          const playlistData = await playlistResponse.json();
+          console.log("playlistData", playlistData);
 
           const newPlaylist = {
             id: playlistID,
-            name: playlistResponse.data.name,
-            imageURL: playlistResponse.data.images[0].url,
-            description: playlistResponse.data.description,
-            externalURL: playlistResponse.data.external_urls.spotify
+            name: playlistData.name,
+            imageURL: playlistData.images ? playlistData.images[0].url : null,
+            description: playlistData.description,
+            externalURL: playlistData.external_urls.spotify
           };
 
           console.log("newPlaylist", newPlaylist);
