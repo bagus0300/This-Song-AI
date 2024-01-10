@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
+import clsx from "clsx";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -81,9 +82,14 @@ const PlaylistPage = () => {
                   className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
                 >
                   <div className="p-1">
-                    <Card className="bg-card hover:brightness-125">
+                    <Card
+                      className={clsx(
+                        "bg-card hover:brightness-125",
+                        playlist.id == selectedPlaylist && "border-[#1fdf64]"
+                      )}
+                    >
                       <CardContent
-                        className="relative p-0 overflow-hidden text-center rounded-lg cursor-pointer aspect-square group"
+                        className="relative p-0 overflow-hidden text-center rounded-md cursor-pointer aspect-square group"
                         onClick={() => changePlaylist(playlist.id)}
                         // style={{
                         //   backgroundImage: `url(${playlist.imageURL})`,
