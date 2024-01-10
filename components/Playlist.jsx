@@ -125,7 +125,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                   className="flex-grow w-full h-full"
                 >
                   <div className="w-full md:w-[400px] h-full flex flex-col justify-center group hover:bg-card">
-                    <div className="flex items-center justify-center w-full gap-2 p-2 overflow-hidden">
+                    <div className="flex items-center justify-center w-full gap-2 px-2 overflow-hidden">
                       <img
                         className="w-16 h-16"
                         src={item.track.album.images[2].url}
@@ -156,7 +156,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                       </a> */}
                       </div>
                     </div>
-                    <div className="px-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
+                    <div className="max-h-[120px] px-2 overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
                       {summaries.has(item.track.id) ? (
                         summaries.get(item.track.id)
                       ) : (
@@ -174,7 +174,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                   href={item.track.external_urls.spotify}
                   target="_blank"
                 >
-                  <div className="flex gap-2 items-center justify-center w-full text-base bg-[#1fdf64] text-white hover:brightness-110">
+                  <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1fdf64] text-white hover:brightness-110">
                     <img
                       src="/images/Spotify_Icon_RGB_White.png"
                       className="w-5 h-5"
