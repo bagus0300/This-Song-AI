@@ -1,6 +1,7 @@
 const playlistIDs = [
   "37i9dQZF1DWXRqgorJj26U", // Rock Classics
   "37i9dQZF1DXcBWIGoYBM5M", // Today's Top Hits
+  "37i9dQZEVXbMDoHDwVN2tF", // Top 50 - Global
   "37i9dQZF1DX0XUsuxWHRQd", // RapCaviar
   // "37i9dQZF1DX4JAvHpjipBk", // New Music Friday
   "37i9dQZF1DX4UtSsGT1Sbe", // All Out 80s
