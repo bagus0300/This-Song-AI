@@ -152,7 +152,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                       </a> */}
                     </div>
                   </div>
-                  <p className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
+                  <div className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
                     {summaries.has(item.track.id) ? (
                       summaries.get(item.track.id)
                     ) : (
@@ -162,7 +162,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                         <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
                       </div>
                     )}
-                  </p>
+                  </div>
                 </div>
               </a>
             </div>
