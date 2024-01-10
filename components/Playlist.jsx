@@ -116,29 +116,33 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
           summaries &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="flex py-4 m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer hover:bg-card group md:w-[400px] w-full h-[200px] items-center justify-center group overflow-hidden"
+              className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
             >
-              <a href={`/song/${item.track.id}`} className="w-full">
-                <div className="w-full md:w-[400px] h-[200px] flex flex-col justify-center">
-                  <div className="flex items-center justify-center w-full gap-2 p-2 overflow-hidden">
-                    <img
-                      className="w-16 h-16"
-                      src={item.track.album.images[2].url}
-                      alt="Album image"
-                    />
-                    <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                      {item.track.name}
-                      <br />
-                      <span className="inline-flex justify-between text-muted">
-                        {/* <span>Popularity: {item.track.popularity}</span> */}
-                        <span>{item.track.artists[0].name}</span>
-                      </span>
-                      <br />
-                      {/* <span className="text-foreground">{item.album.name}</span> */}
-                    </p>
-                    <div className="flex flex-col items-center justify-center align-middle min-w-[36px]">
-                      {/* <a
+              <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
+                <a
+                  href={`/song/${item.track.id}`}
+                  className="flex-grow w-full h-full"
+                >
+                  <div className="w-full md:w-[400px] h-full flex flex-col justify-center group hover:bg-card">
+                    <div className="flex items-center justify-center w-full gap-2 p-2 overflow-hidden">
+                      <img
+                        className="w-16 h-16"
+                        src={item.track.album.images[2].url}
+                        alt="Album image"
+                      />
+                      <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
+                        {item.track.name}
+                        <br />
+                        <span className="inline-flex justify-between text-muted">
+                          {/* <span>Popularity: {item.track.popularity}</span> */}
+                          <span>{item.track.artists[0].name}</span>
+                        </span>
+                        <br />
+                        {/* <span className="text-foreground">{item.album.name}</span> */}
+                      </p>
+                      <div className="flex flex-col items-center justify-center align-middle min-w-[36px]">
+                        {/* <a
                         href={item.track.external_urls.spotify}
                         target="_blank"
                       >
@@ -150,21 +154,36 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                           />
                         </button>
                       </a> */}
+                      </div>
+                    </div>
+                    <div className="px-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
+                      {summaries.has(item.track.id) ? (
+                        summaries.get(item.track.id)
+                      ) : (
+                        <div className="flex flex-col items-center justify-center text-center align-middle">
+                          <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
+                          <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
+                          <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="p-2 overflow-hidden text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-                    {summaries.has(item.track.id) ? (
-                      summaries.get(item.track.id)
-                    ) : (
-                      <div className="flex flex-col items-center justify-center text-center align-middle">
-                        <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
-                        <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                        <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
-                      </div>
-                    )}
+                </a>
+                <a
+                  className="w-full"
+                  href={item.track.external_urls.spotify}
+                  target="_blank"
+                >
+                  <div className="flex gap-2 items-center justify-center w-full text-base bg-[#1fdf64] text-white hover:brightness-110">
+                    <img
+                      src="/images/Spotify_Icon_RGB_White.png"
+                      className="w-5 h-5"
+                      alt="Listen on Spotify"
+                    />
+                    Listen on Spotify
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           ))) || (
           <>
