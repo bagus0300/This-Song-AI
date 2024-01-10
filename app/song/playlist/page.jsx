@@ -42,50 +42,17 @@ const PlaylistPage = () => {
   useEffect(() => {
     const getPlaylists = async () => {
       try {
-        const { data } = await axios.get(`${BACKEND_URI}/client_token`);
+        const playlistResponse = await fetch("/api/playlists", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
 
-        const token = data.access_token;
+        console.log("playlistResponse", playlistResponse);
+        const playlistsList = await playlistResponse.json();
 
-        axios.defaults.baseURL = "https://api.spotify.com/v1";
-        axios.defaults.headers["Content-Type"] = "application/json";
-
-        const playlistsList = [];
-
-        for (let playlistID of playlistIDs) {
-          // const playlistResponse = await axios.get(
-          //   `https://api.spotify.com/v1/playlists/${playlistID}`,
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${token}`
-          //     }
-          //   }
-          // );
-          const playlistResponse = await fetch(
-            `https://api.spotify.com/v1/playlists/${playlistID}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-              }
-            }
-          );
-
-          const playlistData = await playlistResponse.json();
-          console.log("playlistData", playlistData);
-
-          const newPlaylist = {
-            id: playlistID,
-            name: playlistData.name,
-            imageURL: playlistData.images ? playlistData.images[0].url : null,
-            description: playlistData.description,
-            externalURL: playlistData.external_urls.spotify
-          };
-
-          console.log("newPlaylist", newPlaylist);
-
-          playlistsList.push(newPlaylist);
-        }
+        console.log("playlistsList", playlistsList);
 
         setPlaylists(playlistsList);
       } catch (e) {
