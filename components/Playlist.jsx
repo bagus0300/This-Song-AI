@@ -160,7 +160,7 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
                   href={item.track.external_urls.spotify}
                   target="_blank"
                 >
-                  <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1fdf64] text-white hover:brightness-110">
+                  <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
                     <img
                       src="/images/Spotify_Icon_RGB_White.png"
                       className="w-5 h-5"
