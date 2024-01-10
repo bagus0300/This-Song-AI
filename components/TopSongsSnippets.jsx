@@ -87,8 +87,8 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                   href={`/song/${item.track.id}`}
                   className="flex-grow w-full h-full"
                 >
-                  <div className="w-full md:w-[400px] h-full flex flex-col justify-center group hover:bg-card">
-                    <div className="flex items-center justify-center w-full gap-2 overflow-hidden p-x2">
+                  <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">
+                    <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden">
                       <img
                         className="w-16 h-16"
                         src={item.track.album.images[2].url}
@@ -104,20 +104,6 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                         <br />
                         {/* <span className="text-foreground">{item.album.name}</span> */}
                       </p>
-                      <div className="flex flex-col items-center justify-center align-middle min-w-[36px]">
-                        {/* <a
-                        href={item.track.external_urls.spotify}
-                        target="_blank"
-                      >
-                        <button className="flex flex-col items-center gap-1 text-xs text-white align-middle rounded-full hover:brightness-110">
-                          <img
-                            src="/images/Spotify_Icon_RGB_Green.png"
-                            className="w-9 h-9"
-                            alt="Listen on Spotify"
-                          />
-                        </button>
-                      </a> */}
-                      </div>
                     </div>
                     <div className="px-2 max-h-[120px] overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
                       {summaries.has(item.track.id)
