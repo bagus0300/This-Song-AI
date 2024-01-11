@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { set } from "react-hook-form";
 import { Skeleton } from "./ui/skeleton";
 
 const BACKEND_URI =
@@ -113,6 +112,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   };
 
   useEffect(() => {
+    window.alert("useEffect for playlist changed");
     setTopSongs(null);
     setReady(false);
     setSummaries(null);
@@ -138,10 +138,18 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
       window.alert("currentOffset: " + currentOffset);
       window.alert("offsetToUse: " + offsetToUse);
       getSongs(offsetToUse);
-      setCurrentOffset(offsetToUse);
-      // observer.unobserve(observerRef.current);
+      setCurrentOffset((currentOffset) => currentOffset + 20);
+      observer.unobserve(observerRef.current);
     }
   });
+
+  useEffect(() => {
+    window.alert("currentOffset changed");
+    window.alert("currentOffset: " + currentOffset);
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+  }, [currentOffset]);
 
   useEffect(() => {
     if (observerRef.current) {
