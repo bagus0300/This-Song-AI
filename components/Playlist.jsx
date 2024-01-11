@@ -133,20 +133,20 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   useEffect(() => {
     if (currentOffset === 0) return;
+    if (currentOffset === limit) {
+      const footer = document.querySelector("footer");
 
-    const footer = document.querySelector("footer");
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          const button = document.getElementById("scroll-to-top-button");
+          console.log("Reached bottom of page");
+          button.style.visibility = "visible";
+          button.style.opacity = 1;
+        }
+      });
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        const button = document.getElementById("scroll-to-top-button");
-        console.log("Reached bottom of page");
-        button.style.visibility = "visible";
-        button.style.opacity = 1;
-        observer.unobserve(entry.target);
-      }
-    });
-
-    observer.observe(footer);
+      observer.observe(footer);
+    }
 
     getSongs(currentOffset);
   }, [currentOffset]);
