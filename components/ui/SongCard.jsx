@@ -27,14 +27,16 @@ const SongCard = ({
 
     const animationObserver = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        console.log(entry);
-        entry.target.classList.remove("opacity-0");
-        entry.target.classList.remove("translate-x-[30px]");
         if (window.scrollY < 100) {
           entry.target.classList.remove("duration-1000");
           entry.target.classList.add("duration-0");
           entry.target.style.transitionDelay = "0s";
+        } else {
+          // entry.target.style.willChange = "transform, opacity";
         }
+        console.log(entry);
+        entry.target.classList.remove("opacity-0");
+        entry.target.classList.remove("translate-x-[30px]");
         animationObserver.unobserve(entry.target);
       }
     });
@@ -45,15 +47,16 @@ const SongCard = ({
 
   return (
     <div
-      className="w-full max-w-[400px] md:w-[400px] h-[225px] flex flex-col items-center justify-center opacity-0 translate-x-[30px] transition-all duration-1000 border-[1px] rounded-lg overflow-hidden"
+      className="w-full max-w-[400px] md:w-[400px] h-[225px] flex flex-col items-center justify-center opacity-0 translate-x-[30px] transition-all duration-1000 border-[1px] rounded-lg overflow-hidden rotate-[0.01deg]"
       style={{
         transitionDelay: `${Math.random() * 0.5}s`
+        // willChange: "transform, opacity"
       }}
       ref={cardRef}
     >
       <a href={`/song/${id}`} className="flex-grow w-full h-full">
         <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">
-          <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden">
+          <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden rotate-[0.01deg]">
             <img className="w-16 h-16" src={imageURL} alt="Album image" />
             <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
               {name}
