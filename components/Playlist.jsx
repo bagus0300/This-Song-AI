@@ -152,6 +152,9 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   }, [topSongs]);
 
   useEffect(() => {
+    window.alert("observerRef.current", observerRef);
+    console.log("observerRef.current", observerRef.current);
+
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         window.alert("Intersection observer!");
@@ -182,9 +185,10 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
           topSongs.length > 0 &&
           topSongs.map((item, index) => (
             <div
+              id={index}
               className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
-              ref={index === 10 ? observerRef : null}
+              ref={index === topSongs.length - 1 ? observerRef : null}
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
@@ -200,6 +204,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
                       />
                       <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
                         {item.track.name}
+                        {observerRef.current && observerRef.current.id}
                         <br />
                         <span className="inline-flex justify-between text-muted">
                           {/* <span>Popularity: {item.track.popularity}</span> */}
