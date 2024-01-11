@@ -133,9 +133,9 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
 
   const observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
-      console.log("Last item is in view!");
       window.alert("Last item is in view!");
       const offsetToUse = currentOffset + 20;
+      window.alert("currentOffset: " + currentOffset);
       window.alert("offsetToUse: " + offsetToUse);
       getSongs(offsetToUse);
       setCurrentOffset(offsetToUse);
