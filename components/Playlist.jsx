@@ -172,7 +172,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
         observer.unobserve(observerRef.current);
       }
     };
-  }, [observerRef]);
+  }, [observerRef.current]);
 
   return (
     <section className="w-full gap-1">
