@@ -24,7 +24,15 @@ const SongCard = ({
       }
     });
 
+    const animationObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        console.log(entry);
+        animationObserver.unobserve(entry.target);
+      }
+    });
+
     observer.observe(cardRef.current);
+    animationObserver.observe(cardRef.current);
   }, [isLast]);
 
   return (
