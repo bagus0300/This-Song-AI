@@ -10,7 +10,7 @@ const BACKEND_URI =
 
 const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
 
-const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
+const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
   let [topSongs, setTopSongs] = useState(null);
   const [ready, setReady] = useState(false);
   const [summaries, setSummaries] = useState(null);
@@ -144,7 +144,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
           topSongs.map((item, index) => (
             <div
               id={index}
-              className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
+              className="flex m-[10px] transition-all sm:max-w-[400px] duration-300 w-full items-center justify-center sm:overflow-visible overflow-hidden"
               key={index}
             >
               <SongCard
@@ -167,10 +167,10 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
             <div className="flex flex-wrap items-center justify-center w-full">
               {new Array(20).fill().map((item, index) => (
                 <div
-                  className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[200px] items-center justify-center"
+                  className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[225px] items-center justify-center"
                   key={index}
                 >
-                  <div className="w-full md:w-[400px] h-[200px] flex flex-col items-center justify-center">
+                  <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                     <div className="flex items-center justify-center w-full gap-2 p-2 overflow-x-hidden">
                       <Skeleton className="w-16 h-16" />
                       <div className="flex flex-col items-center w-[70%] gap-2">

@@ -28,6 +28,13 @@ const SongCard = ({
     const animationObserver = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         console.log(entry);
+        entry.target.classList.remove("opacity-0");
+        entry.target.classList.remove("translate-x-[30px]");
+        if (window.scrollY < 100) {
+          entry.target.classList.remove("duration-1000");
+          entry.target.classList.add("duration-0");
+          entry.target.style.transitionDelay = "0s";
+        }
         animationObserver.unobserve(entry.target);
       }
     });
@@ -38,7 +45,10 @@ const SongCard = ({
 
   return (
     <div
-      className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center"
+      className="w-full max-w-[400px] md:w-[400px] h-[225px] flex flex-col items-center justify-center opacity-0 translate-x-[30px] transition-all duration-1000 border-[1px] rounded-lg overflow-hidden"
+      style={{
+        transitionDelay: `${Math.random() * 0.5}s`
+      }}
       ref={cardRef}
     >
       <a href={`/song/${id}`} className="flex-grow w-full h-full">
