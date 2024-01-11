@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { set } from "react-hook-form";
 import { Skeleton } from "./ui/skeleton";
@@ -10,16 +10,17 @@ const BACKEND_URI =
 
 const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
 
-const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
+const Playlist = ({ playlist, limit = 5, offset = 0 }) => {
   let [topSongs, setTopSongs] = useState(null);
   const [ready, setReady] = useState(false);
   const [summaries, setSummaries] = useState(null);
+  const [currentOffset, setCurrentOffset] = useState(0);
   let errorMessage = "";
+  const observerRef = useRef(null);
 
   console.log("Rendering Playlist.jsx");
 
-  const getSongs = async () => {
-    setTopSongs(null);
+  const getSongs = async (offset = 0) => {
     try {
       const { data } = await axios.get(`${BACKEND_URI}/client_token`);
 
@@ -41,10 +42,19 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
         }
       );
 
-      setTopSongs(topSongsResponse);
+      // setTopSongs((prev) =>
+      //   prev
+      //     ? [...prev, topSongsResponse.data.items]
+      //     : [topSongsResponse.data.items]
+      // );
+      setTopSongs((prev) =>
+        prev
+          ? prev.concat(topSongsResponse.data.items)
+          : topSongsResponse.data.items
+      );
 
       const songs = topSongsResponse.data.items;
-      // console.log("songs", songs);
+      console.log("songs", songs);
 
       // return songs;
 
@@ -90,7 +100,9 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
         })
       );
 
-      setSummaries(allSummaries);
+      setSummaries((prev) =>
+        prev ? new Map([...prev, ...allSummaries]) : allSummaries
+      );
       // console.log(summaries);
       setReady(true);
     } catch (e) {
@@ -107,17 +119,46 @@ const Playlist = ({ playlist, limit = 10, offset = 0 }) => {
   useEffect(() => {
     console.log("summaries");
     console.log(summaries);
+    console.log("topSongs", topSongs);
   }, [summaries]);
+
+  useEffect(() => {
+    console.log("topSongs", topSongs);
+  }, [topSongs]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log("Last item is in view!");
+        const offsetToUse = currentOffset + 5;
+        getSongs(offsetToUse);
+        setCurrentOffset(offsetToUse);
+        observer.unobserve(observerRef.current);
+      }
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [observerRef.current]);
 
   return (
     <section className="w-full gap-1">
       <div className="flex flex-wrap items-center justify-center w-full">
         {(topSongs &&
           summaries &&
-          topSongs.data.items.map((item, index) => (
+          topSongs.length > 0 &&
+          topSongs.map((item, index) => (
             <div
               className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
+              ref={index === topSongs.length - 1 ? observerRef : null}
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
