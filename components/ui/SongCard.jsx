@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { Skeleton } from "./skeleton";
 
 const SongCard = ({
   id,
