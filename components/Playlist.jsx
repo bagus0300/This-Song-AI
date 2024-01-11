@@ -104,7 +104,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
         prev ? new Map([...prev, ...allSummaries]) : allSummaries
       );
       // console.log(summaries);
-      setReady(true);
+      // setReady(true);
     } catch (e) {
       console.log(e);
       errorMessage = JSON.stringify(e);
@@ -146,6 +146,8 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
+
+    setReady(true);
 
     return () => {
       if (observerRef.current) {
