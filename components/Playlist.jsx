@@ -155,10 +155,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
 
   return (
     <section className="w-full gap-1">
-      <div
-        className="flex flex-wrap items-center justify-center w-full"
-        ref={!topSongs || topSongs.length === 0 ? observerRef : null}
-      >
+      <div className="flex flex-wrap items-center justify-center w-full">
         {(topSongs &&
           summaries &&
           topSongs.length > 0 &&
