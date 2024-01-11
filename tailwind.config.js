@@ -68,12 +68,17 @@ module.exports = {
         "slide-in": {
           "0%": { transform: "translateX(30px)", opacity: 0 },
           "100%": { transform: "translateX(0)", opacity: 1 }
+        },
+        "fade-in": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 }
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "slide-in": "slide-in 0.2s ease-in-out forwards"
+        "slide-in": "slide-in 0.2s ease-in-out forwards",
+        "fade-in": "fade-in 0.2s ease-in-out forwards"
       }
     }
   },

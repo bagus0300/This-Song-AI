@@ -61,7 +61,7 @@ const Page = () => {
           </p>
           <div className="max-w-[1680px] mx-auto pb-8 md:pt-5 pt-2">
             <Suspense fallback={<TopSongsSnippetsSkeleton />}>
-              <TopSongsSnippets limit="20" offset="0" />
+              <TopSongsSnippets limit="24" offset="0" />
             </Suspense>
           </div>
         </div>

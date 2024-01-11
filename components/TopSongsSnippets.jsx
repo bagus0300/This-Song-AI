@@ -140,6 +140,23 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
           </>
         )}
       </div>
+      {topSongs && (
+        <p
+          className="mt-8 mb-4 animate-fade-in"
+          style={{
+            opacity: 0,
+            animationDuration: "500ms",
+            animationDelay: `${topSongs.data.items.length * 200}ms`
+          }}
+        >
+          <a
+            href="song/playlist"
+            className="inline-block font-bold text-lg md:text-xl px-6 py-2 text-white bg-[#1DB954] rounded-full hover:brightness-110"
+          >
+            Explore more playlists
+          </a>
+        </p>
+      )}
     </section>
   );
 };
