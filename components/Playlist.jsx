@@ -133,10 +133,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
 
   const observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
-      window.alert("Last item is in view!");
       const offsetToUse = currentOffset + 20;
-      window.alert("currentOffset: " + currentOffset);
-      window.alert("offsetToUse: " + offsetToUse);
       getSongs(offsetToUse);
       setCurrentOffset((currentOffset) => currentOffset + 20);
       observer.unobserve(observerRef.current);
@@ -144,8 +141,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   });
 
   useEffect(() => {
-    window.alert("currentOffset changed");
-    window.alert("currentOffset: " + currentOffset);
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
@@ -157,7 +152,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     }
 
     return () => {
-      window.alert("unmounting");
       if (observerRef.current) {
         observer.unobserve(observerRef.current);
       }
