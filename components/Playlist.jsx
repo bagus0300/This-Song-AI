@@ -131,19 +131,19 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     console.log("topSongs", topSongs);
   }, [topSongs]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        console.log("Last item is in view!");
-        window.alert("Last item is in view!");
-        const offsetToUse = currentOffset + 20;
-        window.alert("offsetToUse: " + offsetToUse);
-        getSongs(offsetToUse);
-        setCurrentOffset(offsetToUse);
-        // observer.unobserve(observerRef.current);
-      }
-    });
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      console.log("Last item is in view!");
+      window.alert("Last item is in view!");
+      const offsetToUse = currentOffset + 20;
+      window.alert("offsetToUse: " + offsetToUse);
+      getSongs(offsetToUse);
+      setCurrentOffset(offsetToUse);
+      // observer.unobserve(observerRef.current);
+    }
+  });
 
+  useEffect(() => {
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
