@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       </head>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>

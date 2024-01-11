@@ -75,7 +75,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
 
   return (
     <section className="w-full gap-1">
-      <div className="flex flex-wrap items-center justify-center w-full">
+      <div className="flex flex-wrap items-center justify-center w-full overflow-hidden">
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div

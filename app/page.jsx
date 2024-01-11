@@ -49,9 +49,12 @@ const Page = () => {
           />
         </div>
         <div className="w-full">
-          <h2 className={clsx(rajdhani.className, "px-2 text-lg text-center")}>
+          {/* <h2 className={clsx(rajdhani.className, "px-2 text-lg text-center")}>
             These are the songs everybody&apos;s talking about. Check out what
             they mean:
+          </h2> */}
+          <h2 className={clsx(rajdhani.className, "px-2 text-lg text-center")}>
+            Or start by exploring the world of rock classics:
           </h2>
           <p className={clsx(rajdhani.className, "text-base md:mt-5 mt-2")}>
             (Select a song to learn more)
