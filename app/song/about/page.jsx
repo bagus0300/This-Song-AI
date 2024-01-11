@@ -16,7 +16,7 @@ const AboutPage = () => {
 
       {/* <div className="w-full sm:pb-5 pb-3 bg-[#121212]"> */}
       <div
-        className="flex flex-col items-center justify-center w-full overflow-hidden text-base text-center align-bottom md:bg-fixed"
+        className="relative md:min-h-[500px] w-full text-base md:bg-fixed h-[400px] -z-10"
         style={{
           backgroundImage: "url(/images/banner.jpg)",
           backgroundSize: "cover",
@@ -25,24 +25,25 @@ const AboutPage = () => {
         }}
       >
         {/* Header Image */}
-        <div className="max-w-3xl mx-auto header-image">
+        <div className="relative min-h-[700px] w-full header-image pt-[150px] -z-10">
           <img
             // src="/images/this-song-large.png"
             // src="/images/this-song-logo.png"
-            src="/images/this-song-logo-white.png"
+            src="/images/this-song-logo-base.png"
             width={500}
-            height={500}
+            // height={500}
             alt="This Song - AI-Enhanced Lyric Analysis"
-            className="mx-auto rounded-lg"
+            // className="sticky mx-auto rounded-lg top-14 lg:top-20 -z-10 dark:invert"
+            className="sticky mx-auto rounded-lg top-14 lg:top-20 -z-10"
           />
         </div>
         <img
           src="/images/border-bottom.png"
-          className="dark:brightness-0 md:min-w-[1400px]"
+          className="dark:brightness-0 md:min-w-[1400px] absolute bottom-0"
         />
       </div>
 
-      <div className="max-w-5xl p-4 mx-auto mb-7">
+      <div className="z-20 max-w-5xl p-4 mx-auto mb-7 bg-background">
         {/* Our Mission Section */}
         <section className="mb-7 about-us">
           <h3 className="mb-3 text-3xl font-semibold text-primary">About Us</h3>
