@@ -49,7 +49,9 @@ const SongCard = ({
     <div
       className="w-full max-w-[400px] md:w-[400px] h-[225px] flex flex-col items-center justify-center opacity-0 translate-x-[30px] transition-all duration-1000 border-[1px] rounded-lg overflow-hidden rotate-[0.01deg]"
       style={{
-        transitionDelay: `${Math.random() * 0.5}s`
+        // Add a random transition delay to each card when the window allows more than one card per row
+        transitionDelay:
+          window && window.innerWidth >= 840 ? `${Math.random() * 0.5}s` : "0s"
         // willChange: "transform, opacity"
       }}
       ref={cardRef}
