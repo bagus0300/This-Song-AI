@@ -137,6 +137,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
         console.log("Last item is in view!");
         window.alert("Last item is in view!");
         const offsetToUse = currentOffset + 20;
+        window.alert("offsetToUse: " + offsetToUse);
         getSongs(offsetToUse);
         setCurrentOffset(offsetToUse);
         // observer.unobserve(observerRef.current);
