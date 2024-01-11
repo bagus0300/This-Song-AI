@@ -184,7 +184,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
             <div
               className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
-              ref={index === topSongs.length - 1 ? observerRef : null}
+              ref={index === 10 ? observerRef : null}
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
