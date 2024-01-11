@@ -135,6 +135,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         console.log("Last item is in view!");
+        window.alert("Last item is in view!");
         const offsetToUse = currentOffset + 20;
         getSongs(offsetToUse);
         setCurrentOffset(offsetToUse);
@@ -164,7 +165,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
               id={index}
               className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
-              ref={index === topSongs.length - 1 ? observerRef : null}
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
@@ -245,6 +245,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
           </>
         )}
       </div>
+      <div ref={observerRef} className="w-full h-1" />
     </section>
   );
 };
