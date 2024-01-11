@@ -139,7 +139,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
         const offsetToUse = currentOffset + 20;
         getSongs(offsetToUse);
         setCurrentOffset(offsetToUse);
-        observer.unobserve(observerRef.current);
+        // observer.unobserve(observerRef.current);
       }
     });
 
