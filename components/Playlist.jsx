@@ -132,6 +132,7 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   }, [topSongs]);
 
   useEffect(() => {
+    window.alert("Intersection observer!");
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         console.log("Last item is in view!");
