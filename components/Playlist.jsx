@@ -129,6 +129,26 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
 
   useEffect(() => {
     console.log("topSongs", topSongs);
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        window.alert("Intersection observer!");
+        console.log("Last item is in view!");
+        const offsetToUse = currentOffset + 20;
+        getSongs(offsetToUse);
+        setCurrentOffset(offsetToUse);
+        observer.unobserve(observerRef.current);
+      }
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
   }, [topSongs]);
 
   useEffect(() => {
@@ -146,8 +166,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
-
-    setReady(true);
 
     return () => {
       if (observerRef.current) {
