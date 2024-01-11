@@ -135,7 +135,7 @@ const PlaylistPage = () => {
                   .name
               }
             </h1>
-            <Playlist playlist={selectedPlaylist} limit="20" offset="0" />
+            <Playlist playlist={selectedPlaylist} />
           </div>
           {/* </Suspense> */}
         </div>
