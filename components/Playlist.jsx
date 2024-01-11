@@ -148,11 +148,12 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     }
 
     return () => {
+      window.alert("unmounting");
       if (observerRef.current) {
         observer.unobserve(observerRef.current);
       }
     };
-  }, [observerRef.current]);
+  }, []);
 
   return (
     <section className="w-full gap-1">
@@ -245,7 +246,9 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
           </>
         )}
       </div>
-      <div ref={observerRef} className="w-full h-1" />
+      <div ref={observerRef} className="w-full h-1">
+        aaaaaaa
+      </div>
     </section>
   );
 };
