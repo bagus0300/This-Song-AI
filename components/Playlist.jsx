@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Skeleton } from "./ui/skeleton";
 import SongCard from "./ui/SongCard";
+import { Button } from "./ui/button";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -132,6 +133,21 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   useEffect(() => {
     if (currentOffset === 0) return;
+
+    const footer = document.querySelector("footer");
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const button = document.getElementById("scroll-to-top-button");
+        console.log("Reached bottom of page");
+        button.style.visibility = "visible";
+        button.style.opacity = 1;
+        observer.unobserve(entry.target);
+      }
+    });
+
+    observer.observe(footer);
+
     getSongs(currentOffset);
   }, [currentOffset]);
 
@@ -188,6 +204,28 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
           </>
         )}
       </div>
+      <Button
+        id="scroll-to-top-button"
+        variant="outline"
+        onClick={(e) => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+          e.target.style.visibility = "hidden";
+          e.target.style.opacity = 0;
+        }}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          transition: "opacity 1s, visibility 1s",
+          visibility: currentOffset === 0 ? "hidden" : "visible",
+          opacity: currentOffset === 0 ? 0 : 1
+        }}
+      >
+        Scroll to Top
+      </Button>
     </section>
   );
 };
