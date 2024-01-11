@@ -10,7 +10,7 @@ const BACKEND_URI =
 
 const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
 
-const Playlist = ({ playlist, limit = 5, offset = 0 }) => {
+const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   let [topSongs, setTopSongs] = useState(null);
   const [ready, setReady] = useState(false);
   const [summaries, setSummaries] = useState(null);
@@ -113,6 +113,11 @@ const Playlist = ({ playlist, limit = 5, offset = 0 }) => {
   };
 
   useEffect(() => {
+    setTopSongs(null);
+    setReady(false);
+    setSummaries(null);
+    setCurrentOffset(0);
+
     getSongs();
   }, [playlist]);
 
@@ -130,7 +135,7 @@ const Playlist = ({ playlist, limit = 5, offset = 0 }) => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         console.log("Last item is in view!");
-        const offsetToUse = currentOffset + 5;
+        const offsetToUse = currentOffset + 20;
         getSongs(offsetToUse);
         setCurrentOffset(offsetToUse);
         observer.unobserve(observerRef.current);
