@@ -79,7 +79,13 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
         {(topSongs &&
           topSongs.data.items.map((item, index) => (
             <div
-              className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
+              className="animate-slide-in flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
+              style={{
+                transform: "translateX(30px)",
+                opacity: 0,
+                animationDuration: "500ms",
+                animationDelay: `${index * 200}ms`
+              }}
               key={index}
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
