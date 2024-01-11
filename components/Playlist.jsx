@@ -112,7 +112,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   };
 
   useEffect(() => {
-    window.alert("useEffect for playlist changed");
     setTopSongs(null);
     setReady(false);
     setSummaries(null);
