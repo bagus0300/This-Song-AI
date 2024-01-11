@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Skeleton } from "./ui/skeleton";
+import SongCard from "./ui/SongCard";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -15,7 +16,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   const [summaries, setSummaries] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
   let errorMessage = "";
-  const observerRef = useRef(null);
 
   console.log("Rendering Playlist.jsx");
 
@@ -130,32 +130,10 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
     console.log("topSongs", topSongs);
   }, [topSongs]);
 
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      const offsetToUse = currentOffset + 20;
-      getSongs(offsetToUse);
-      setCurrentOffset((currentOffset) => currentOffset + 20);
-      observer.unobserve(observerRef.current);
-    }
-  });
-
   useEffect(() => {
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
+    if (currentOffset === 0) return;
+    getSongs(currentOffset);
   }, [currentOffset]);
-
-  useEffect(() => {
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, []);
 
   return (
     <section className="w-full gap-1">
@@ -169,58 +147,20 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
               className="flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               key={index}
             >
-              <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
-                <a
-                  href={`/song/${item.track.id}`}
-                  className="flex-grow w-full h-full"
-                >
-                  <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">
-                    <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden">
-                      <img
-                        className="w-16 h-16"
-                        src={item.track.album.images[2].url}
-                        alt="Album image"
-                      />
-                      <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                        {item.track.name}
-                        {observerRef.current && observerRef.current.id}
-                        <br />
-                        <span className="inline-flex justify-between text-muted">
-                          {/* <span>Popularity: {item.track.popularity}</span> */}
-                          <span>{item.track.artists[0].name}</span>
-                        </span>
-                        <br />
-                        {/* <span className="text-foreground">{item.album.name}</span> */}
-                      </p>
-                    </div>
-                    <div className="max-h-[125px] px-2 overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-                      {summaries.has(item.track.id) ? (
-                        summaries.get(item.track.id)
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-center align-middle">
-                          <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
-                          <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                          <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </a>
-                <a
-                  className="w-full"
-                  href={item.track.external_urls.spotify}
-                  target="_blank"
-                >
-                  <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
-                    <img
-                      src="/images/Spotify_Icon_RGB_White.png"
-                      className="w-5 h-5"
-                      alt="Listen on Spotify"
-                    />
-                    Listen on Spotify
-                  </div>
-                </a>
-              </div>
+              <SongCard
+                id={item.track.id}
+                imageURL={item.track.album.images[2].url}
+                name={item.track.name}
+                artistName={item.track.artists[0].name}
+                summary={
+                  summaries.has(item.track.id)
+                    ? summaries.get(item.track.id)
+                    : "Description currently unavailable."
+                }
+                spotifyURL={item.track.external_urls.spotify}
+                isLast={index === topSongs.length - 1}
+                newLimit={() => setCurrentOffset(currentOffset + limit)}
+              />
             </div>
           ))) || (
           <>
@@ -247,9 +187,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
             </div>
           </>
         )}
-      </div>
-      <div ref={observerRef} className="w-full h-1">
-        aaaaaaa
       </div>
     </section>
   );
