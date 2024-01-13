@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { initialSongs } from "@/lib/data";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -12,61 +13,28 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   let topSongs = null;
   const summaries = new Map();
   let errorMessage = "";
+  let parsedSongs = null;
 
   try {
+    // Get a client token to make sure the server wakes from its idle state
     const { data } = await axios.get(`${BACKEND_URI}/client_token`);
 
-    const token = data.access_token;
+    parsedSongs = initialSongs.map((song) => JSON.parse(song));
 
-    console.log("Getting top songs...");
-
-    // Today's top hits: 37i9dQZF1DXcBWIGoYBM5M
-    // Rock classics: 37i9dQZF1DWXRqgorJj26U
-    axios.defaults.baseURL = "https://api.spotify.com/v1";
-    axios.defaults.headers["Content-Type"] = "application/json";
-    topSongs = await axios.get(
-      `https://api.spotify.com/v1/playlists/37i9dQZF1DWXRqgorJj26U/tracks?limit=${limit}&offset=${offset}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-
-    const songs = topSongs.data.items;
-    // console.log("songs", songs);
-
-    await Promise.all(
-      songs.map(async (element) => {
-        // console.log(element.track.name);
-        const songID = element.track.id;
-        const songName = element.track.name;
-
-        const gpt4Response = await fetch(GPT_SUMMARY_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            songID: songID,
-            trackName: songName
-          }),
-          cache: "no-store"
-        });
-
-        if (gpt4Response.ok) {
-          const summary = await gpt4Response.text();
-          if (summary) {
-            const firstLetter = summary.slice(13, 14);
-            const restOfSummary = summary.slice(14);
-            summaries.set(
-              element.track.id,
-              firstLetter.toUpperCase() + restOfSummary
-            );
-          }
-        }
-      })
-    );
+    // console.log(
+    //   songs.map((element) => {
+    //     return JSON.stringify({
+    //       id: element.track.id,
+    //       name: element.track.name,
+    //       artist: element.track.artists[0].name,
+    //       album: element.track.album.name,
+    //       popularity: element.track.popularity,
+    //       image: element.track.album.images[2].url,
+    //       url: element.track.external_urls.spotify,
+    //       summary: summaries.get(element.track.id)
+    //     });
+    //   })
+    // );
   } catch (e) {
     console.log(e);
     errorMessage = JSON.stringify(e);
@@ -76,8 +44,8 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   return (
     <section className="w-full gap-1">
       <div className="flex flex-wrap items-center justify-center w-full overflow-hidden">
-        {(topSongs &&
-          topSongs.data.items.map((item, index) => (
+        {(parsedSongs &&
+          parsedSongs.map((item, index) => (
             <div
               className="animate-slide-in flex m-[10px] max-w-[400px] transition-all duration-300 border-[1px] rounded-lg cursor-pointer md:w-[400px] w-full items-center justify-center overflow-hidden"
               style={{
@@ -90,39 +58,33 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
-                  href={`/song/${item.track.id}`}
+                  href={`/song/${item.id}`}
                   className="flex-grow w-full h-full"
                 >
                   <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">
                     <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden">
                       <img
                         className="w-16 h-16"
-                        src={item.track.album.images[2].url}
+                        src={item.image}
                         alt="Album image"
                       />
                       <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-                        {item.track.name}
+                        {item.name}
                         <br />
                         <span className="inline-flex justify-between text-muted">
                           {/* <span>Popularity: {item.track.popularity}</span> */}
-                          <span>{item.track.artists[0].name}</span>
+                          <span>{item.artist}</span>
                         </span>
                         <br />
                         {/* <span className="text-foreground">{item.album.name}</span> */}
                       </p>
                     </div>
                     <div className="px-2 max-h-[120px] overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-                      {summaries.has(item.track.id)
-                        ? summaries.get(item.track.id)
-                        : "Description currently unavailable."}
+                      {item.summary}
                     </div>
                   </div>
                 </a>
-                <a
-                  className="w-full"
-                  href={item.track.external_urls.spotify}
-                  target="_blank"
-                >
+                <a className="w-full" href={item.url} target="_blank">
                   <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
                     <img
                       src="/images/Spotify_Icon_RGB_White.png"
@@ -140,13 +102,13 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
           </>
         )}
       </div>
-      {topSongs && (
+      {parsedSongs && (
         <p
           className="mt-8 mb-4 animate-fade-in"
           style={{
             opacity: 0,
             animationDuration: "500ms",
-            animationDelay: `${topSongs.data.items.length * 200}ms`
+            animationDelay: `${parsedSongs.length * 200}ms`
           }}
         >
           <a
