@@ -76,9 +76,10 @@ const SongCard = ({
               summary
             ) : (
               <div className="flex flex-col items-center justify-center text-center align-middle">
-                <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
+                {/* <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
                 <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
+                <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" /> */}
+                Loading description...
               </div>
             )}
           </div>
