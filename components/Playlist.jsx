@@ -171,7 +171,7 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
                 summary={
                   summaries.has(item.track.id)
                     ? summaries.get(item.track.id)
-                    : "Description currently unavailable."
+                    : "loading"
                 }
                 spotifyURL={item.track.external_urls.spotify}
                 isLast={index === topSongs.length - 1}

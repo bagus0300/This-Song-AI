@@ -72,7 +72,7 @@ const SongCard = ({
             </p>
           </div>
           <div className="max-h-[125px] px-2 overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-            {summary ? (
+            {summary && summary != "loading" ? (
               summary
             ) : (
               <div className="flex flex-col items-center justify-center text-center align-middle">
