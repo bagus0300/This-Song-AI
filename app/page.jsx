@@ -4,20 +4,22 @@ import { Suspense } from "react";
 import { rajdhani } from "@/components/ui/fonts";
 import clsx from "clsx";
 import Footer from "@/components/ui/Footer";
-import axios from "axios";
 
 const Page = () => {
-  const BACKEND_URI =
-    process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
+  // const BACKEND_URI =
+  //   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+  //     ? "http://192.168.4.158:8000"
+  //     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-  try {
-    // Get a client token to make sure the backend server wakes from its idle state
-    const response = axios.get(`${BACKEND_URI}/client_token`);
-  } catch (e) {
-    console.error(e);
-  }
+  // try {
+  //   // Get a client token to make sure the backend server wakes from its idle state
+  //   const response = fetch(`${BACKEND_URI}/client_token`, {
+  //     cache: "no-store"
+  //   });
+  //   console.log(response);
+  // } catch (e) {
+  //   console.error(e);
+  // }
 
   return (
     <>
