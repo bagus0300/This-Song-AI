@@ -89,7 +89,9 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                       </p>
                     </div>
                     <div className="px-2 max-h-[120px] overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
-                      {item.summary}
+                      {item.summary
+                        ? item.summary
+                        : "Description currently unavailable."}
                     </div>
                   </div>
                 </a>
