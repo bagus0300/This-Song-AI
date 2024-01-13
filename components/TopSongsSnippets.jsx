@@ -21,6 +21,13 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
       cache: "no-store"
     });
 
+    // Simulate waiting for data fetch
+    // If the server isn't idle, getting the data should take about a second
+    // When it's idle it can take much longer, so for now this page is just getting its data directly from a file rather than from the server, so that users won't have to wait a long time if they visit the site when the server happens to be idle
+    await new Promise((resolve) => {
+      setTimeout(() => resolve(), 1000);
+    });
+
     parsedSongs = initialSongs.map((song) => JSON.parse(song));
 
     // console.log(

@@ -6,21 +6,6 @@ import clsx from "clsx";
 import Footer from "@/components/ui/Footer";
 
 const Page = () => {
-  // const BACKEND_URI =
-  //   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-  //     ? "http://192.168.4.158:8000"
-  //     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
-
-  // try {
-  //   // Get a client token to make sure the backend server wakes from its idle state
-  //   const response = fetch(`${BACKEND_URI}/client_token`, {
-  //     cache: "no-store"
-  //   });
-  //   console.log(response);
-  // } catch (e) {
-  //   console.error(e);
-  // }
-
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-2 text-base text-center align-bottom md:gap-5 xl:px-0">
