@@ -17,7 +17,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
 
   try {
     // Get a client token to make sure the backend server wakes from its idle state
-    const response = axios.get(`${BACKEND_URI}/client_token`);
+    // const response = axios.get(`${BACKEND_URI}/client_token`);
 
     parsedSongs = initialSongs.map((song) => JSON.parse(song));
 
