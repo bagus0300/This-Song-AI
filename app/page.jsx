@@ -22,7 +22,12 @@ const Page = () => {
             <source src="videos/this-song.mp4" type="video/mp4" /> */}
           {/* <img src="images/this-song-large.png" alt="This Song" /> */}
           {/* <img src="images/this-song-logo.png" alt="This Song" /> */}
-          <img src="images/this-song-logo-white.png" alt="This Song" />
+          <img
+            src="images/this-song-logo-white.png"
+            alt="This Song"
+            width={720}
+            height={576}
+          />
           {/* </video> */}
           <div className="mt-[-100px] flex flex-col gap-5 items-center justify-center">
             <h1
