@@ -16,6 +16,8 @@ import { X } from "lucide-react";
 import { catchErrors } from "@/lib/utils";
 import AlbumItem from "./album-item";
 
+import { inter } from "./fonts";
+
 const AlbumSearch = () => {
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(null);
@@ -86,7 +88,9 @@ const AlbumSearch = () => {
   };
 
   return (
-    <section className="flex flex-col items-center w-full gap-1 p-2">
+    <section
+      className={`${inter.className} flex flex-col items-center w-full gap-1 p-2`}
+    >
       <span className="relative group/field">
         <Input
           ref={inputElement}
