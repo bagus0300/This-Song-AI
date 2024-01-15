@@ -16,7 +16,7 @@ const AlbumPage = () => {
         <span className="font-bold">This Song</span> can help you unravel the
         meaning behind your favorite albums, track by track.
       </p>
-      <p className="mt-2 text-base">Search for an album:</p>
+      {/* <p className="mt-2 text-base">Search for an album:</p> */}
       <div>
         <AlbumSearch />
       </div>

@@ -84,7 +84,8 @@ const AlbumPage = ({ params }) => {
               } else {
                 allSummaries.set(
                   element.id,
-                  "Description currently unavailable."
+                  // "Description currently unavailable."
+                  "Click to generate description!"
                 );
               }
             }
