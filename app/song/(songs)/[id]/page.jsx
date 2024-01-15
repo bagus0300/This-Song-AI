@@ -175,9 +175,9 @@ const Page = ({ params }) => {
             >
               <Link
                 href={"/song/album/" + song.album.id}
-                style={{
-                  cursor: "default"
-                }}
+                // style={{
+                //   cursor: "default"
+                // }}
               >
                 <motion.div
                   className="relative group"

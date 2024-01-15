@@ -178,9 +178,9 @@ const AlbumPage = ({ params }) => {
               <a
                 href={album.externalURL}
                 target="_blank"
-                style={{
-                  cursor: "default"
-                }}
+                // style={{
+                //   cursor: "default"
+                // }}
               >
                 <motion.div
                   className="relative group"
