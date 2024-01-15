@@ -44,7 +44,7 @@ const AlbumPage = ({ params }) => {
 
         const albumJSON = await albumResponse.json();
 
-        console.log("album.tracks.items", albumJSON.tracks.items);
+        console.log("albumJSON", albumJSON);
 
         setAlbum(albumJSON);
 
@@ -175,8 +175,9 @@ const AlbumPage = ({ params }) => {
                 height: scrollHeight
               }}
             >
-              <Link
-                href="/song/current"
+              <a
+                href={album.externalURL}
+                target="_blank"
                 style={{
                   cursor: "default"
                 }}
@@ -189,20 +190,15 @@ const AlbumPage = ({ params }) => {
                   }}
                 >
                   <img
-                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    className="absolute w-full h-full transition-all duration-500 opacity-100 -z-10"
                     src={album.imageURL}
                     placeholder={`data:image/svg+xml;base64,${toBase64(
                       shimmer(300, 300)
                     )}`}
                     alt="Album art"
                   />
-                  <img
-                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
-                    src="/images/refresh.png"
-                    alt="Refresh icon"
-                  />
                 </motion.div>
-              </Link>
+              </a>
               <div
                 className={clsx(
                   "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0 text-ellipsis whitespace-nowrap",

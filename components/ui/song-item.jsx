@@ -11,7 +11,7 @@ import Link from "next/link";
 import { SongContext } from "@/context/ContextProvider";
 import Image from "next/image";
 
-const SongItem = ({ item, path, onClick = null }) => {
+const SongItem = ({ item, path = null, onClick = null }) => {
   const { songID } = useContext(SongContext);
 
   return (
