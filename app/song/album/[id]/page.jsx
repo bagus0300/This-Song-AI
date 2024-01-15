@@ -1,7 +1,10 @@
 "use client";
 import SongCard from "@/components/ui/SongCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
+import clsx from "clsx";
+import Link from "next/link";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -18,7 +21,16 @@ const URL =
 const AlbumPage = ({ params }) => {
   const { id } = params;
   const [album, setAlbum] = useState(null);
+  const [albumID, setAlbumID] = useState(null);
   const [summaries, setSummaries] = useState(null);
+
+  const ref = useRef(null);
+
+  const [scrolled, setScrolled] = useState(false);
+
+  const { scrollY } = useScroll({});
+
+  const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -81,6 +93,8 @@ const AlbumPage = ({ params }) => {
 
         setSummaries(allSummaries);
 
+        setAlbumID(id);
+
         return albumJSON;
       } catch (e) {
         console.log(e);
@@ -90,64 +104,238 @@ const AlbumPage = ({ params }) => {
     getAlbum();
   }, []);
 
+  // Run this hook when the albumID changes; by that point, the DOM will be ready so the ref will be defined
+  useEffect(() => {
+    // Toggle the scrolled state variable when the scroll target is intersected
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setScrolled(false);
+          // console.log("Not scrolled!");
+        } else {
+          // console.log("Scrolled!");
+          setScrolled(true);
+        }
+      },
+      { threshold: 0, rootMargin: "-204px" }
+    );
+
+    const scrollTarget = ref.current;
+
+    if (scrollTarget) {
+      observer.observe(scrollTarget);
+    }
+
+    return () => {
+      setScrolled(false);
+      scrollTo(0, 0);
+      if (scrollTarget) {
+        observer.unobserve(scrollTarget);
+      }
+    };
+  }, [albumID]);
+
   useEffect(() => {
     console.log("album", album);
   }, [album]);
 
+  // These two functions are used to convert the album art to a base64 string representing a shimmer effect, which is used as a placeholder for the Image component
+  // https://image-component.nextjs.gallery/shimmer
+  const toBase64 = (str) =>
+    typeof window === "undefined"
+      ? Buffer.from(str).toString("base64")
+      : window.btoa(str);
+  const shimmer = (
+    w,
+    h
+  ) => `<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`;
+
   return (
-    <section className="w-full gap-1">
-      <div className="flex flex-wrap items-center justify-center w-full">
-        {(album &&
-          summaries &&
-          album.tracks &&
-          album.tracks.items.map((item, index) => (
-            <div
-              id={index}
-              className="flex m-[10px] transition-all sm:max-w-[400px] duration-300 w-full items-center justify-center text-center sm:overflow-visible overflow-hidden"
-              key={index}
+    <>
+      {(album && (
+        <>
+          <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
+            <motion.div
+              className={clsx(
+                "flex flex-row items-center justify-center align-middle w-full fixed top-[calc(56px)] lg:top-[calc(56px+8px+8px)] md:gap-5 z-10",
+                "bg-background"
+              )}
+              style={{
+                height: scrollHeight
+              }}
             >
-              <SongCard
-                id={item.id}
-                name={
-                  (item.track_number ? item.track_number + ". " : "") +
-                  item.name
-                }
-                artistName={item.artists[0].name}
-                summary={
-                  summaries.has(item.id) ? summaries.get(item.id) : "loading"
-                }
-                spotifyURL={item.external_urls.spotify}
-                // isLast={index === topSongs.length - 1}
-                // newLimit={() => setCurrentOffset(currentOffset + limit)}
-              />
-            </div>
-          ))) || (
-          <>
-            <div className="flex flex-wrap items-center justify-center w-full">
-              {new Array(20).fill().map((item, index) => (
-                <div
-                  className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[225px] items-center justify-center"
-                  key={index}
+              <Link
+                href="/song/current"
+                style={{
+                  cursor: "default"
+                }}
+              >
+                <motion.div
+                  className="relative group"
+                  style={{
+                    width: scrollHeight,
+                    height: scrollHeight
+                  }}
                 >
-                  <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
-                    <div className="flex items-center justify-center w-full gap-2 p-2 overflow-x-hidden">
-                      <Skeleton className="w-16 h-16" />
-                      <div className="flex flex-col items-center w-[70%] gap-2">
-                        <Skeleton className="w-full h-7" />
-                        <Skeleton className="w-[70%] h-5" />
-                      </div>
-                    </div>
-                    <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
-                    <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                    <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
-                  </div>
-                </div>
+                  <img
+                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    src={album.imageURL}
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(300, 300)
+                    )}`}
+                    alt="Album art"
+                  />
+                  <img
+                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
+                    src="/images/refresh.png"
+                    alt="Refresh icon"
+                  />
+                </motion.div>
+              </Link>
+              <div
+                className={clsx(
+                  "relative flex flex-col justify-center transition-all duration-500 overflow-hidden md:opacity-100 md:w-fit w-[0%] opacity-0 text-ellipsis whitespace-nowrap",
+                  scrolled
+                    ? "opacity-100 sm:w-[500px] w-[300px] flex-grow md:flex-grow-0 max-h-[100px]"
+                    : "w-[0%] opacity-0"
+                )}
+              >
+                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
+                  <a
+                    href={album.externalURL}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {album.name}
+                  </a>
+                </h1>
+                <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
+                  {album.artists.map((artist, index) => (
+                    <Fragment key={index}>
+                      <a
+                        href={artist.external_urls.spotify}
+                        target="_blank"
+                        className="hover:brightness-150 hover:underline"
+                      >
+                        {artist.name}
+                      </a>
+                      {index < album.artists.length - 1 && ", "}
+                    </Fragment>
+                  ))}
+                </h2>
+              </div>
+            </motion.div>
+          </div>
+          <div
+            // id="scroll-target"
+            ref={ref}
+            className={clsx(
+              "flex flex-col items-center justify-center text-center transition-opacity duration-500 md:h-0 overflow-hidden mb-2"
+              // scrolled ? "opacity-0 -z-10" : "opacity-100"
+            )}
+          >
+            <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150 hover:underline">
+              <a href={album.externalURL} target="_blank">
+                {album.name}
+              </a>
+            </h1>
+            <h2 className="text-2xl text-muted">
+              {album.artists.map((artist, index) => (
+                <Fragment key={index}>
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    className="hover:brightness-150 hover:underline"
+                  >
+                    {artist.name}
+                  </a>
+                  {index < album.artists.length - 1 && ", "}
+                </Fragment>
               ))}
+            </h2>
+          </div>
+
+          <section className="w-full gap-1">
+            <div className="flex flex-wrap items-center justify-center w-full">
+              {(summaries &&
+                album.tracks &&
+                album.tracks.items.map((item, index) => (
+                  <div
+                    id={index}
+                    className="animate-slide-in flex m-[10px] transition-all sm:max-w-[400px] duration-300 w-full items-center justify-center text-center sm:overflow-visible overflow-hidden"
+                    key={index}
+                    style={{
+                      transform: "translateX(30px)",
+                      opacity: 0,
+                      animationDuration: "500ms",
+                      animationDelay: `${index * 200}ms`
+                    }}
+                  >
+                    <SongCard
+                      id={item.id}
+                      name={
+                        (item.track_number ? item.track_number + ". " : "") +
+                        item.name
+                      }
+                      artistName={item.artists[0].name}
+                      summary={
+                        summaries.has(item.id)
+                          ? summaries.get(item.id)
+                          : "loading"
+                      }
+                      spotifyURL={item.external_urls.spotify}
+                      // isLast={index === topSongs.length - 1}
+                      // newLimit={() => setCurrentOffset(currentOffset + limit)}
+                    />
+                  </div>
+                ))) || (
+                <>
+                  <section className="w-full gap-1">
+                    <div className="flex flex-wrap items-center justify-center w-full my-[10px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#1DB954"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={"animate-spin"}
+                      >
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                      </svg>
+                    </div>
+                  </section>
+                </>
+              )}
             </div>
-          </>
-        )}
-      </div>
-    </section>
+          </section>
+        </>
+      )) || (
+        <>
+          <div className="flex flex-col items-center justify-center w-full gap-1 align-middle md:flex-row md:gap-5">
+            <Skeleton className="w-[300px] h-[300px]" />
+            <div className="flex flex-col items-center justify-center gap-1">
+              <Skeleton className="w-[400px] h-[36px]" />
+              <Skeleton className="w-[200px] h-[32px]" />
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

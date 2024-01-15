@@ -250,13 +250,13 @@ const Page = ({ params }) => {
                   ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
-                  <a
-                    href={song.album.external_urls.spotify}
-                    target="_blank"
+                  <Link
+                    // href={song.album.external_urls.spotify}
+                    href={"/song/album/" + song.album.id}
                     className="hover:brightness-150 hover:underline"
                   >
                     {song.album.name}
-                  </a>
+                  </Link>
                 </h3>
               </div>
             </motion.div>
@@ -289,9 +289,13 @@ const Page = ({ params }) => {
               ))}
             </h2>
             <h3 className="text-xl hover:brightness-150 hover:underline">
-              <a href={song.album.external_urls.spotify} target="_blank">
+              <Link
+                // href={song.album.external_urls.spotify}
+                href={"/song/album/" + song.album.id}
+                className="hover:brightness-150 hover:underline"
+              >
                 {song.album.name}
-              </a>
+              </Link>
             </h3>
           </div>
           <Lyrics
