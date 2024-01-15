@@ -30,7 +30,7 @@ const AuthButton = () => {
   }
   return (
     <>
-      <LoginButton onClick={signIn} />
+      {/* <LoginButton onClick={signIn} /> */}
       {/* <button onClick={() => signIn()}>Sign in</button> */}
     </>
   );

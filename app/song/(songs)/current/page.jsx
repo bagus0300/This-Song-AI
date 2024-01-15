@@ -302,10 +302,13 @@ const Page = () => {
                 <span className="font-bold">This Song</span> is a tool providing
                 AI-enhanced analysis of song lyrics.
               </p>
-              <p className="mt-2 text-base">
+              {/* <p className="mt-2 text-base">
                 Search for a song, log in with Spotify to see what you&apos;re
                 currently listening to, or use the menu to explore popular
                 tracks.
+              </p> */}
+              <p className="mt-2 text-base">
+                Search for a song or use the menu to explore popular tracks.
               </p>
             </section>
 
