@@ -1,16 +1,17 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Skeleton } from "./skeleton";
+import clsx from "clsx";
 
 const SongCard = ({
   id,
-  imageURL,
+  imageURL = null,
   name,
   artistName,
   summary,
   spotifyURL,
-  newLimit,
-  isLast
+  newLimit = null,
+  isLast = false
 }) => {
   const cardRef = useRef(null);
 
@@ -57,9 +58,21 @@ const SongCard = ({
       ref={cardRef}
     >
       <a href={`/song/${id}`} className="flex-grow w-full h-full">
-        <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">
-          <div className="flex items-center justify-center flex-grow max-h-[100px] w-full gap-2 px-3 overflow-hidden rotate-[0.01deg]">
-            <img className="w-16 h-16" src={imageURL} alt="Album image" />
+        <div
+          className={clsx(
+            "w-full md:w-[400px] h-full flex flex-col group hover:bg-card pb-2",
+            imageURL ? "justify-center" : "justify-start"
+          )}
+        >
+          <div
+            className={clsx(
+              "flex items-center justify-center  max-h-[100px] w-full gap-2 px-3 overflow-hidden rotate-[0.01deg]",
+              imageURL ? "flex-grow" : "pt-4"
+            )}
+          >
+            {imageURL && (
+              <img className="w-16 h-16" src={imageURL} alt="Album image" />
+            )}
             <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
               {name}
               <br />
@@ -71,7 +84,12 @@ const SongCard = ({
               {/* <span className="text-foreground">{item.album.name}</span> */}
             </p>
           </div>
-          <div className="max-h-[125px] px-2 overflow-auto text-sm duration-300 text-muted group-hover:text-primary text-ellipsis">
+          <div
+            className={clsx(
+              "max-h-[125px] px-2 overflow-auto text-sm duration-300 my-auto text-muted group-hover:text-primary text-ellipsis",
+              !imageURL && ""
+            )}
+          >
             {summary && summary != "loading" ? (
               summary
             ) : (

@@ -174,7 +174,7 @@ const Page = ({ params }) => {
               }}
             >
               <Link
-                href="/song/current"
+                href={"/song/album/" + song.album.id}
                 style={{
                   cursor: "default"
                 }}
@@ -204,17 +204,12 @@ const Page = ({ params }) => {
                     height={300}
                   /> */}
                   <img
-                    className="absolute transition-all duration-500 opacity-100 md:group-hover:opacity-50 md:group-hover:rounded-[50%] md:group-hover:brightness-50 -z-10 h-full w-full"
+                    className="absolute w-full h-full transition-all duration-500 opacity-100 -z-10"
                     src={song.album.images[1].url}
                     placeholder={`data:image/svg+xml;base64,${toBase64(
                       shimmer(300, 300)
                     )}`}
                     alt="Album art"
-                  />
-                  <img
-                    className="hidden md:block absolute [transition:opacity_0.5s,transform_1s] origin-center scale-75 rotate-0 opacity-0 group-hover:opacity-75 group-hover:rotate-[360deg] hover:opacity-100 h-full w-full z-10"
-                    src="/images/refresh.png"
-                    alt="Refresh icon"
                   />
                 </motion.div>
               </Link>
@@ -250,13 +245,13 @@ const Page = ({ params }) => {
                   ))}
                 </h2>
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
-                  <a
-                    href={song.album.external_urls.spotify}
-                    target="_blank"
+                  <Link
+                    // href={song.album.external_urls.spotify}
+                    href={"/song/album/" + song.album.id}
                     className="hover:brightness-150 hover:underline"
                   >
                     {song.album.name}
-                  </a>
+                  </Link>
                 </h3>
               </div>
             </motion.div>
@@ -289,9 +284,13 @@ const Page = ({ params }) => {
               ))}
             </h2>
             <h3 className="text-xl hover:brightness-150 hover:underline">
-              <a href={song.album.external_urls.spotify} target="_blank">
+              <Link
+                // href={song.album.external_urls.spotify}
+                href={"/song/album/" + song.album.id}
+                className="hover:brightness-150 hover:underline"
+              >
                 {song.album.name}
-              </a>
+              </Link>
             </h3>
           </div>
           <Lyrics

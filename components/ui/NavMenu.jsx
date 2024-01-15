@@ -51,6 +51,7 @@ export default function NavMenu() {
       {[
         // { title: "Song", path: "/song" },
         { title: "Song", path: "/song/current" },
+        { title: "Album", path: "/song/album" },
         { title: "Playlists", path: "/song/playlist" },
         { title: "About Us", path: "/song/about" },
         { title: "Contact", path: "/song/contact" }
@@ -60,13 +61,15 @@ export default function NavMenu() {
             className={
               title === "Song"
                 ? pathname.startsWith("/song") &&
+                  !pathname.startsWith("/song/album") &&
                   pathname !== "/song/playlist" &&
                   pathname !== "/song/about" &&
                   pathname !== "/song/contact" &&
                   pathname !== "/song/privacy"
                   ? ACTIVE_ROUTE
                   : INACTIVE_ROUTE
-                : pathname === path
+                : pathname === path ||
+                  (pathname.startsWith("/song/album") && path === "/song/album")
                 ? ACTIVE_ROUTE
                 : INACTIVE_ROUTE
             }
