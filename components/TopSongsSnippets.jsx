@@ -18,7 +18,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   try {
     // Get a client token to make sure the backend server wakes from its idle state
     const response = fetch(`${BACKEND_URI}/client_token`, {
-      cache: "no-store"
+      // cache: "no-store"
     });
 
     // Simulate waiting for data fetch
