@@ -4,7 +4,7 @@
 
 In the event that a song's description is not readily available in the database, This Song employs a GPT model to analyze the lyrics. This AI-driven interpretation provides users with an immediate rich, insightful analysis of the song's themes, context, and artistic nuances. Additionally, this newly generated description is saved in the database, continually enriching the repository and enhancing the user experience for future queries.
 
-![this-song-song](https://github.com/atopala7/this-song/assets/17114523/a2255e47-3350-49a0-89c9-2e7981b8c676)
+<!--![this-song-song](https://github.com/atopala7/this-song/assets/17114523/a2255e47-3350-49a0-89c9-2e7981b8c676)-->
 
 One of the standout features of This Song is its ability to present concise summaries of songs' meanings. These summaries are easily accessible, allowing users to quickly grasp the essence of a song by exploring albums or curated Spotify playlists. This feature is particularly beneficial for music lovers who wish to gain a deeper understanding of their favorite records or explore new genres with informed guidance.
 
