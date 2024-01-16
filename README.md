@@ -4,7 +4,7 @@
 
 ![this-song-song](https://github.com/atopala7/this-song/assets/17114523/a2255e47-3350-49a0-89c9-2e7981b8c676)
 
-Short summaries of songs' meaning can be viewed at a glace by exploring albums or Spotify playlists.
+Short summaries of songs' meanings can be viewed at a glace by exploring albums or Spotify playlists.
 
 ![this-song-playlists](https://github.com/atopala7/this-song/assets/17114523/050b00b1-1945-485a-81af-92c7efd678cf)
 
