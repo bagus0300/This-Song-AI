@@ -93,7 +93,8 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
             } else {
               allSummaries.set(
                 element.track.id,
-                "Description currently unavailable."
+                // "Description currently unavailable."
+                "Click to generate description!"
               );
             }
           }
