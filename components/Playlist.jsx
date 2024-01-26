@@ -1,8 +1,11 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Skeleton } from "./ui/skeleton";
 import SongCard from "./ui/SongCard";
 import { Button } from "./ui/button";
+import clsx from "clsx";
+import { rajdhani } from "./ui/fonts";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"

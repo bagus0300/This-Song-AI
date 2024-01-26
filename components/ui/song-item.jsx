@@ -19,7 +19,7 @@ const SongItem = ({ item, path = null, onClick = null }) => {
       <TooltipProvider delayDuration={200}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link href={`/song/${item.id}`} onClick={onClick}>
+            <Link href={`/songs/id/${item.id}`} onClick={onClick}>
               <div
                 className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
                 // onClick={() => {
@@ -46,7 +46,8 @@ const SongItem = ({ item, path = null, onClick = null }) => {
                   <span
                     className={clsx(
                       // Use context instead of path so that /song/current can give the highlight effect as well.
-                      path === `/song/${item.id}` || songID === item.id
+                      // path === `/songs/id/${item.id}` || songID === item.id
+                      path === `/songs/id/${item.id}`
                         ? "text-[#1fdf64]"
                         : "text-foreground"
                     )}

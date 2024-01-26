@@ -174,7 +174,7 @@ const Page = ({ params }) => {
               }}
             >
               <Link
-                href={"/song/album/" + song.album.id}
+                href={"/albums/" + song.album.id}
                 // style={{
                 //   cursor: "default"
                 // }}
@@ -247,7 +247,7 @@ const Page = ({ params }) => {
                 <h3 className="transform-all duration-500 text-base xl:text-xl lg:text-lg min-w-[300px] overflow-hidden text-ellipsis">
                   <Link
                     // href={song.album.external_urls.spotify}
-                    href={"/song/album/" + song.album.id}
+                    href={"/albums/" + song.album.id}
                     className="hover:brightness-150 hover:underline"
                   >
                     {song.album.name}
@@ -286,7 +286,7 @@ const Page = ({ params }) => {
             <h3 className="text-xl hover:brightness-150 hover:underline">
               <Link
                 // href={song.album.external_urls.spotify}
-                href={"/song/album/" + song.album.id}
+                href={"/albums/" + song.album.id}
                 className="hover:brightness-150 hover:underline"
               >
                 {song.album.name}

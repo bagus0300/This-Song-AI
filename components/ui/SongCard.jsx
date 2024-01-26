@@ -57,7 +57,7 @@ const SongCard = ({
       }}
       ref={cardRef}
     >
-      <a href={`/song/${id}`} className="flex-grow w-full h-full">
+      <a href={`/songs/id/${id}`} className="flex-grow w-full h-full">
         <div
           className={clsx(
             "w-full md:w-[400px] h-full flex flex-col group hover:bg-card pb-2",

@@ -21,7 +21,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/song/about"
+                  href="/about"
                   className="transition text-muted hover:opacity-75"
                 >
                   About Us
@@ -29,7 +29,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/song/privacy"
+                  href="/privacy"
                   className="transition text-muted hover:opacity-75"
                 >
                   Privacy Policy
@@ -43,7 +43,7 @@ const Footer = () => {
                   Contact
                 </a> */}
                 <a
-                  href="/song/contact"
+                  href="/contact"
                   className="transition text-muted hover:opacity-75"
                 >
                   Contact

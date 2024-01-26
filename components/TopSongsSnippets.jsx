@@ -67,7 +67,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
             >
               <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
                 <a
-                  href={`/song/${item.id}`}
+                  href={`/songs/id/${item.id}`}
                   className="flex-grow w-full h-full"
                 >
                   <div className="w-full md:w-[400px] h-full flex flex-col group hover:bg-card justify-center pb-2">

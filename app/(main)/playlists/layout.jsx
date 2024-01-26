@@ -18,28 +18,23 @@ import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import clsx from "clsx";
 import { rajdhani } from "@/components/ui/fonts";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
     ? "http://192.168.4.158:8000"
     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-const PlaylistPage = () => {
+const PlaylistPage = ({ children }) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState(
     "37i9dQZF1DWXRqgorJj26U"
   );
 
+  const pathname = usePathname();
+
   const [playlists, setPlaylists] = useState(null);
   const [ready, setReady] = useState(false);
-
-  const handlePlaylistChange = (event) => {
-    setSelectedPlaylist(event.target.value);
-  };
-
-  const changePlaylist = (playlistID) => {
-    console.log("changePlaylist", playlistID);
-    setSelectedPlaylist(playlistID);
-  };
 
   useEffect(() => {
     const getPlaylists = async () => {
@@ -86,24 +81,26 @@ const PlaylistPage = () => {
                     <Card
                       className={clsx(
                         "bg-card hover:brightness-125",
-                        playlist.id == selectedPlaylist && "border-[#1fdf64]"
+                        pathname &&
+                          pathname.split("/")[2] == playlist.id &&
+                          "border-[#1fdf64]"
                       )}
                     >
-                      <CardContent
-                        className="relative p-0 overflow-hidden text-center rounded-md cursor-pointer aspect-square group"
-                        onClick={() => changePlaylist(playlist.id)}
-                        // style={{
-                        //   backgroundImage: `url(${playlist.imageURL})`,
-                        //   backgroundSize: "cover",
-                        //   backgroundPosition: "center"
-                        // }}
-                      >
-                        <img
-                          src={playlist.imageURL}
-                          alt={playlist.name}
-                          className="block"
-                        />
-                        {/* <span
+                      <Link href={`/playlists/${playlist.id}`}>
+                        <CardContent
+                          className="relative p-0 overflow-hidden text-center rounded-md cursor-pointer aspect-square group"
+                          // style={{
+                          //   backgroundImage: `url(${playlist.imageURL})`,
+                          //   backgroundSize: "cover",
+                          //   backgroundPosition: "center"
+                          // }}
+                        >
+                          <img
+                            src={playlist.imageURL}
+                            alt={playlist.name}
+                            className="block"
+                          />
+                          {/* <span
                           className="absolute bottom-0 left-0 w-full pb-2 text-lg text-center transition-all duration-300 opacity-0 text-[#1fdf64] group-hover:opacity-100"
                           style={{
                             textShadow:
@@ -112,7 +109,8 @@ const PlaylistPage = () => {
                         >
                           {playlist.name}
                         </span> */}
-                      </CardContent>
+                        </CardContent>
+                      </Link>
                     </Card>
                   </div>
                 </CarouselItem>
@@ -122,22 +120,24 @@ const PlaylistPage = () => {
             <CarouselNext />
           </Carousel>
 
-          {/* <Suspense fallback={<TopSongsSnippetsSkeleton />}> */}
-          <div className="flex flex-col items-center justify-center w-full gap-2 mt-5 text-base text-center align-bottom md:gap-5 xl:px-0">
-            <h1
-              className={clsx(
-                rajdhani.className,
-                "text-3xl font-semibold tracking-wider text-center text-foreground"
-              )}
-            >
-              {
-                playlists.find((playlist) => playlist.id == selectedPlaylist)
-                  .name
-              }
-            </h1>
-            <Playlist playlist={selectedPlaylist} />
-          </div>
-          {/* </Suspense> */}
+          <Suspense fallback={<TopSongsSnippetsSkeleton />}>
+            <div className="flex flex-col items-center justify-center w-full mt-5 text-base text-center align-bottom xl:px-0">
+              <h1
+                className={clsx(
+                  rajdhani.className,
+                  "text-3xl font-semibold tracking-wider text-center text-foreground"
+                )}
+              >
+                {playlists &&
+                  pathname.split("/")[2] &&
+                  playlists.find(
+                    (playlist) => playlist.id == pathname.split("/")[2]
+                  ).name}
+              </h1>
+              {children}
+              {/* <Playlist playlist={selectedPlaylist} /> */}
+            </div>
+          </Suspense>
         </div>
       </>
     )) || (

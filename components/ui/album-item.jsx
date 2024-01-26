@@ -34,11 +34,7 @@ const shimmer = (
 const AlbumItem = ({ item, path = null, onClick = null }) => {
   return (
     <>
-      <Link
-        href={`/song/album/${item.id}`}
-        onClick={onClick}
-        className="w-[300px]"
-      >
+      <Link href={`/albums/${item.id}`} onClick={onClick} className="w-[300px]">
         <div
           className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer group"
           // onClick={() => {
@@ -63,16 +59,7 @@ const AlbumItem = ({ item, path = null, onClick = null }) => {
             )}`}
           />
           <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
-            <span
-            // className={clsx(
-            //   // Use context instead of path so that /song/current can give the highlight effect as well.
-            //   path === `/song/${item.id}` || songID === item.id
-            //     ? "text-[#1fdf64]"
-            //     : "text-foreground"
-            // )}
-            >
-              {item.name}
-            </span>
+            <span>{item.name}</span>
             <br />
             <span className="text-muted">
               {item.artists[0].name}
