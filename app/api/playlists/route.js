@@ -33,6 +33,8 @@ export async function GET() {
       imageURL: playlistData.images ? playlistData.images[0].url : null,
       description: playlistData.description,
       externalURL: playlistData.external_urls.spotify
+        ? playlistData.external_urls.spotify
+        : "#"
     };
 
     playlistsList.push(newPlaylist);
