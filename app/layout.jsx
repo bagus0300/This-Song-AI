@@ -15,11 +15,11 @@ export default function RootLayout({ children }) {
     // <html lang="en">
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        {/* <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
           crossOrigin="anonymous"
-        ></script>
+        ></script> */}
       </head>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <main className="gap-2 mx-auto">{children}</main>
