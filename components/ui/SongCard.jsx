@@ -66,7 +66,7 @@ const SongCard = ({
         >
           <div
             className={clsx(
-              "flex items-center justify-center  max-h-[100px] w-full gap-2 px-3 overflow-hidden rotate-[0.01deg]",
+              "flex items-center justify-center max-h-[100px] w-full gap-2 px-3 overflow-hidden rotate-[0.01deg]",
               imageURL ? "flex-grow" : "pt-4"
             )}
           >
@@ -94,10 +94,10 @@ const SongCard = ({
               summary
             ) : (
               <div className="flex flex-col items-center justify-center text-center align-middle">
-                {/* <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
+                <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
                 <Skeleton className="w-[80%] h-4 my-1 text-sm text-muted" />
-                <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" /> */}
-                Loading description...
+                <Skeleton className="w-[70%] h-4 my-1 text-sm text-muted" />
+                {/* Loading description... */}
               </div>
             )}
           </div>

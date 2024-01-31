@@ -159,7 +159,6 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
     <section className="w-full gap-1">
       <div className="flex flex-wrap items-center justify-center w-full">
         {(topSongs &&
-          summaries &&
           topSongs.length > 0 &&
           topSongs.map((item, index) => (
             <div
@@ -173,7 +172,7 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
                 name={item.track.name}
                 artistName={item.track.artists[0].name}
                 summary={
-                  summaries.has(item.track.id)
+                  summaries && summaries.has(item.track.id)
                     ? summaries.get(item.track.id)
                     : "loading"
                 }
@@ -190,7 +189,7 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
                   className="flex py-4 m-[10px] transition-all duration-500 border-[1px] rounded-lg cursor-pointer hover:bg-secondary group md:w-[400px] w-full h-[225px] items-center justify-center"
                   key={index}
                 >
-                  <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center">
+                  <div className="w-full md:w-[400px] h-[225px] flex flex-col items-center justify-center flex-grow">
                     <div className="flex items-center justify-center w-full gap-2 p-2 overflow-x-hidden">
                       <Skeleton className="w-16 h-16" />
                       <div className="flex flex-col items-center w-[70%] gap-2">
