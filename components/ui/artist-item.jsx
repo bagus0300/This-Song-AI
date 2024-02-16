@@ -31,37 +31,34 @@ const shimmer = (
 <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
 </svg>`;
 
-const AlbumItem = ({ item, info = "artist", path = null, onClick = null }) => {
+const ArtistItem = ({ item, path = null, onClick = null }) => {
   return (
     <>
-      <Link href={`/albums/${item.id}`} onClick={onClick} className="w-[300px]">
+      <Link
+        href={`/artists/${item.id}`}
+        onClick={onClick}
+        className="w-[300px]"
+      >
         <div
-          className="flex items-center gap-2 p-2 overflow-x-hidden transition-all duration-500 cursor-pointer group"
+          className="flex items-center overflow-x-hidden transition-all duration-500 cursor-pointer group"
           // onClick={() => {
           //   recentSelectSong(item);
           // }}
         >
           <img
             className="w-16 h-16"
-            src={item.images && item.images.length > 2 && item.images[2].url}
-            alt="Album image"
+            src={
+              (item.images && item.images.length > 2 && item.images[2].url) ||
+              (item.images && item.images.length > 1 && item.images[1].url) ||
+              (item.images && item.images.length > 0 && item.images[0].url) ||
+              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' fill='black'%3E%3Crect width='100%25' height='100%25'/%3E%3C/svg%3E"
+            }
+            alt=""
             width={64}
             height={64}
-            placeholder={`data:image/svg+xml;base64,${toBase64(
-              shimmer(300, 300)
-            )}`}
           />
           <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
             <span>{item.name}</span>
-            <br />
-            <span className="text-muted">
-              {info === "artist" && item.artists[0].name}
-              {info === "year" &&
-                (item.release_date.split("-")
-                  ? item.release_date.split("-")[0]
-                  : item.release_date)}
-            </span>
-            <br />
           </p>
         </div>
       </Link>
@@ -69,4 +66,4 @@ const AlbumItem = ({ item, info = "artist", path = null, onClick = null }) => {
   );
 };
 
-export default AlbumItem;
+export default ArtistItem;

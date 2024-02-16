@@ -217,8 +217,8 @@ const Page = ({ params }) => {
                   {song.artists.map((artist, index) => (
                     <Fragment key={index}>
                       <a
-                        href={artist.external_urls.spotify}
-                        target="_blank"
+                        // href={artist.external_urls.spotify}
+                        href={`/artists/${artist.id}`}
                         className="hover:brightness-150 hover:underline"
                       >
                         {artist.name}
@@ -256,8 +256,8 @@ const Page = ({ params }) => {
               {song.artists.map((artist, index) => (
                 <Fragment key={index}>
                   <a
-                    href={artist.external_urls.spotify}
-                    target="_blank"
+                    // href={artist.external_urls.spotify}
+                    href={`/artists/${artist.id}`}
                     className="hover:brightness-150 hover:underline"
                   >
                     {artist.name}

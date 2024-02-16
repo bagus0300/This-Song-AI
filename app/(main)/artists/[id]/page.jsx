@@ -5,6 +5,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import clsx from "clsx";
 import Link from "next/link";
+import ArtistTopAlbums from "@/components/ui/ArtistTopAlbums";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -18,10 +19,10 @@ const URL =
     ? "http://localhost:3000"
     : "https://thissong.app";
 
-const AlbumPage = ({ params }) => {
+const ArtistPage = ({ params }) => {
   const { id } = params;
-  const [album, setAlbum] = useState(null);
-  const [albumID, setAlbumID] = useState(null);
+  const [artist, setArtist] = useState(null);
+  const [artistID, setArtistID] = useState(null);
   const [summaries, setSummaries] = useState(null);
 
   const ref = useRef(null);
@@ -33,81 +34,30 @@ const AlbumPage = ({ params }) => {
   const scrollHeight = useTransform(scrollY, [0, 200], [300, 100]);
 
   useEffect(() => {
-    const getAlbum = async () => {
+    const getArtist = async () => {
       try {
-        const albumResponse = await fetch(`/api/albums?albumID=${id}`, {
+        const artistResponse = await fetch(`/api/artists?artistID=${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json"
           }
         });
 
-        const albumJSON = await albumResponse.json();
+        const artistJSON = await artistResponse.json();
 
-        console.log("albumJSON", albumJSON);
+        console.log("artistJSON", artistJSON);
 
-        setAlbum(albumJSON);
+        setArtist(artistJSON);
 
-        const songs = albumJSON.tracks.items;
-        const allSummaries = new Map();
+        setArtistID(id);
 
-        await Promise.all(
-          songs.map(async (element) => {
-            // console.log(element.track.name);
-            const songID = element.id;
-            const songName = element.name;
-            const artistName = element.artists[0].name;
-
-            const parameters = new URLSearchParams([
-              ["trackName", songName],
-              ["artistName", artistName]
-            ]);
-
-            const gpt4Response = await fetch(
-              `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                cache: "no-store"
-              }
-            );
-
-            if (gpt4Response.ok) {
-              const summary = await gpt4Response.text();
-              if (summary) {
-                // console.log("songID", songID);
-                // console.log("songName", songName);
-                // console.log("summary", summary);
-                const firstLetter = summary.slice(13, 14);
-                const restOfSummary = summary.slice(14);
-                allSummaries.set(
-                  element.id,
-                  firstLetter.toUpperCase() + restOfSummary
-                );
-              } else {
-                allSummaries.set(
-                  element.id,
-                  // "Description currently unavailable."
-                  "Click to generate description!"
-                );
-              }
-            }
-          })
-        );
-
-        setSummaries(allSummaries);
-
-        setAlbumID(id);
-
-        return albumJSON;
+        return artistJSON;
       } catch (e) {
         console.log(e);
       }
     };
 
-    getAlbum();
+    getArtist();
   }, []);
 
   // Run this hook when the albumID changes; by that point, the DOM will be ready so the ref will be defined
@@ -139,11 +89,7 @@ const AlbumPage = ({ params }) => {
         observer.unobserve(scrollTarget);
       }
     };
-  }, [albumID]);
-
-  useEffect(() => {
-    console.log("album", album);
-  }, [album]);
+  }, [artistID]);
 
   // These two functions are used to convert the album art to a base64 string representing a shimmer effect, which is used as a placeholder for the Image component
   // https://image-component.nextjs.gallery/shimmer
@@ -169,7 +115,7 @@ const AlbumPage = ({ params }) => {
 
   return (
     <>
-      {(album && (
+      {(artist && (
         <>
           <div className="flex flex-col items-center justify-end text-center align-bottom h-[300px] w-full">
             <motion.div
@@ -182,7 +128,7 @@ const AlbumPage = ({ params }) => {
               }}
             >
               <a
-                href={album.externalURL}
+                href={artist.externalURL}
                 target="_blank"
                 // style={{
                 //   cursor: "default"
@@ -197,11 +143,11 @@ const AlbumPage = ({ params }) => {
                 >
                   <img
                     className="absolute w-full h-full transition-all duration-500 opacity-100 -z-10"
-                    src={album.imageURL}
+                    src={artist.imageURL}
                     placeholder={`data:image/svg+xml;base64,${toBase64(
                       shimmer(300, 300)
                     )}`}
-                    alt="Album art"
+                    alt=""
                   />
                 </motion.div>
               </a>
@@ -213,29 +159,25 @@ const AlbumPage = ({ params }) => {
                     : "w-[0%] opacity-0"
                 )}
               >
-                <h1 className="transform-all duration-500 text-base font-extra bold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
+                <h1 className="transform-all duration-500 text-base font-extrabold xl:text-3xl lg:text-xl text-[#1fdf64] min-w-[300px] overflow-hidden text-ellipsis">
                   <a
-                    href={album.externalURL}
+                    href={artist.externalURL}
                     target="_blank"
                     className="hover:brightness-150 hover:underline"
                   >
-                    {album.name}
+                    {artist.name}
                   </a>
                 </h1>
-                <h2 className="transform-all duration-500 text-base text-muted xl:text-2xl lg:text-lg min-w-[300px]">
-                  {album.artists.map((artist, index) => (
-                    <Fragment key={index}>
-                      <a
-                        // href={artist.external_urls.spotify}
-                        href={`/artists/${artist.id}`}
-                        className="hover:brightness-150 hover:underline"
-                      >
-                        {artist.name}
-                      </a>
-                      {index < album.artists.length - 1 && ", "}
-                    </Fragment>
-                  ))}
+                <h2 className="text-base">
+                  {artist.genres
+                    .map(
+                      (genre) => genre.charAt(0).toUpperCase() + genre.slice(1)
+                    )
+                    .join(", ")}
                 </h2>
+                <h3 className="text-sm duration-500 transform-all min-w-[300px] overflow-hidden text-ellipsis">
+                  Total followers: {artist.followers.toLocaleString("en-US")}
+                </h3>
               </div>
             </motion.div>
           </div>
@@ -248,60 +190,23 @@ const AlbumPage = ({ params }) => {
             )}
           >
             <h1 className="text-3xl font-extrabold text-[#1fdf64] hover:brightness-150 hover:underline">
-              <a href={album.externalURL} target="_blank">
-                {album.name}
+              <a href={artist.externalURL} target="_blank">
+                {artist.name}
               </a>
             </h1>
-            <h2 className="text-2xl text-muted">
-              {album.artists.map((artist, index) => (
-                <Fragment key={index}>
-                  <a
-                    // href={artist.external_urls.spotify}
-                    href={`/artists/${artist.id}`}
-                    className="hover:brightness-150 hover:underline"
-                  >
-                    {artist.name}
-                  </a>
-                  {index < album.artists.length - 1 && ", "}
-                </Fragment>
-              ))}
+            <h2 className="text-base">
+              {artist.genres
+                .map((genre) => genre.charAt(0).toUpperCase() + genre.slice(1))
+                .join(", ")}
             </h2>
+            <h3 className="text-sm">
+              Total followers: {artist.followers.toLocaleString("en-US")}
+            </h3>
           </div>
 
           <section className="w-full gap-1">
             <div className="flex flex-wrap items-center justify-center w-full">
-              {(summaries &&
-                album.tracks &&
-                album.tracks.items.map((item, index) => (
-                  <div
-                    id={index}
-                    className="animate-slide-in flex m-[10px] transition-all sm:max-w-[400px] duration-300 w-full items-center justify-center text-center sm:overflow-visible overflow-hidden"
-                    key={index}
-                    style={{
-                      transform: "translateX(30px)",
-                      opacity: 0,
-                      animationDuration: "500ms",
-                      animationDelay: `${index * 200}ms`
-                    }}
-                  >
-                    <SongCard
-                      id={item.id}
-                      name={
-                        (item.track_number ? item.track_number + ". " : "") +
-                        item.name
-                      }
-                      artistName={item.artists[0].name}
-                      summary={
-                        summaries.has(item.id)
-                          ? summaries.get(item.id)
-                          : "loading"
-                      }
-                      spotifyURL={item.external_urls.spotify}
-                      // isLast={index === topSongs.length - 1}
-                      // newLimit={() => setCurrentOffset(currentOffset + limit)}
-                    />
-                  </div>
-                ))) || (
+              {(!artistID && (
                 <>
                   <section className="w-full gap-1">
                     <div className="flex flex-wrap items-center justify-center w-full my-[10px]">
@@ -320,6 +225,21 @@ const AlbumPage = ({ params }) => {
                         <path d="M21 12a9 9 0 1 1-6.219-8.56" />
                       </svg>
                     </div>
+                  </section>
+                </>
+              )) || (
+                <>
+                  <section className="flex flex-col justify-between w-full lg:flex-row max-w-7xl">
+                    <section className="flex flex-col items-center justify-center flex-1">
+                      <h1 className="text-3xl">Albums</h1>
+                      <ArtistTopAlbums artistID={artistID} limit={10} />
+                    </section>
+                    <section className="flex flex-col items-center flex-1">
+                      Top Songs
+                    </section>
+                    <section className="flex flex-col items-center flex-1">
+                      Similar Artists
+                    </section>
                   </section>
                 </>
               )}
@@ -341,4 +261,4 @@ const AlbumPage = ({ params }) => {
   );
 };
 
-export default AlbumPage;
+export default ArtistPage;
