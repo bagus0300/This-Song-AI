@@ -7,7 +7,7 @@ const BACKEND_URI =
     ? "http://192.168.4.158:8000"
     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
+const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
 const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   let topSongs = null;
@@ -17,7 +17,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
 
   try {
     // Get a client token to make sure the backend server wakes from its idle state
-    const response = fetch(`${BACKEND_URI}/client_token`, {
+    const response = fetch(`${BACKEND_URI}/api/v1/spotify/client_token`, {
       // cache: "no-store"
     });
 

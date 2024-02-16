@@ -12,7 +12,7 @@ const BACKEND_URI =
     ? "http://192.168.4.158:8000"
     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
+const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
 const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
   let [topSongs, setTopSongs] = useState(null);
@@ -25,7 +25,9 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   const getSongs = async (offset = 0) => {
     try {
-      const { data } = await axios.get(`${BACKEND_URI}/client_token`);
+      const { data } = await axios.get(
+        `${BACKEND_URI}/api/v1/spotify/client_token`
+      );
 
       const token = data.access_token;
 
@@ -68,18 +70,23 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
           // console.log(element.track.name);
           const songID = element.track.id;
           const songName = element.track.name;
+          const artistName = element.track.artists[0].name;
 
-          const gpt4Response = await fetch(GPT_SUMMARY_ENDPOINT, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              songID: songID,
-              trackName: songName
-            }),
-            cache: "no-store"
-          });
+          const parameters = new URLSearchParams([
+            ["trackName", songName],
+            ["artistName", artistName]
+          ]);
+
+          const gpt4Response = await fetch(
+            `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              cache: "no-store"
+            }
+          );
 
           if (gpt4Response.ok) {
             const summary = await gpt4Response.text();

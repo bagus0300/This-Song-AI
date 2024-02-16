@@ -41,13 +41,6 @@ const AlbumItem = ({ item, path = null, onClick = null }) => {
           //   recentSelectSong(item);
           // }}
         >
-          {/* <Image
-                  className="w-16 h-16"
-                  src={item.album.images[2].url}
-                  width={300}
-                  height={300}
-                  alt="Album image"
-                /> */}
           <img
             className="w-16 h-16"
             src={item.images && item.images.length > 2 && item.images[2].url}

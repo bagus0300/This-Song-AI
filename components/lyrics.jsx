@@ -38,6 +38,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import emailjs from "@emailjs/browser";
+import { TypeAnimation } from "react-type-animation";
 
 const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const emailjsPublicKey = "BRpCzUI0MwvVUI2Vs";
@@ -272,6 +273,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
+  const [GPT3Interpretation, setGPT3Interpretation] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -282,13 +284,13 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
 
   const GPT_ENDPOINT =
     process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/gpt"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/gpt";
+      ? "http://192.168.4.158:8000/api/v1/gpt"
+      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt";
 
   const GPT_INTERPRETATION_ENDPOINT =
     process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/interpretation"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/interpretation";
+      ? "http://192.168.4.158:8000/api/v1/gpt/interpretation"
+      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt/interpretation";
 
   // The useEffect hook will run whenever the song changes and fetch the lyrics for that song
   useEffect(() => {
@@ -296,14 +298,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     setLyrics(null);
     setStatus(null);
     setGPTInterpretation(null);
+    setGPT3Interpretation(null);
 
     const fetchData = async () => {
-      const songLyricsResponse = await getLyrics(
-        songID,
-        songName,
-        artistName,
-        albumName
-      );
+      const songLyricsResponse = await getLyrics(songName, artistName);
       // console.log(songLyricsResponse);
       const statusCode =
         songLyricsResponse.data.message?.header?.status_code ||
@@ -341,24 +339,28 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
       if (!lyrics || lyrics.body == "No lyrics found") return;
       console.log(`Asking GPT about ${songName} by ${artistName}...`);
 
+      const parameters = new URLSearchParams([
+        ["trackName", songName],
+        ["artistName", artistName]
+      ]);
+
       // See if we can get a response from GPT-4
       try {
-        const gpt4Response = await fetch(GPT_INTERPRETATION_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            songID: songID,
-            trackName: songName
-          })
-        });
+        const gpt4Response = await fetch(
+          `${GPT_INTERPRETATION_ENDPOINT}?${parameters.toString()}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        );
 
         console.log("GPT-4 fetch response: ", gpt4Response);
         if (gpt4Response.ok) {
           const interpretation = await gpt4Response.text();
           if (interpretation) {
-            // console.log("GPT-4 interpretation response: ", interpretation);
+            console.log("GPT-4 interpretation response: ", interpretation);
             // console.log("Interpretation: ", interpretation);
             setGPTInterpretation(interpretation);
             return;
@@ -395,7 +397,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           break;
         }
         // console.log("Received: ", value);
-        setGPTInterpretation((prev) => (prev ? prev : "") + value);
+        setGPT3Interpretation((prev) => (prev ? prev : "") + value);
       }
     };
 
@@ -438,7 +440,9 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           <div
             className={clsx(
               "h-full whitespace-break-spaces w-full",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "lg:w-[200px]",
+              GPTInterpretation || GPT3Interpretation
+                ? "lg:w-[500px] xl:w-[700px]"
+                : "lg:w-[200px]",
               lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
@@ -447,28 +451,38 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                 Interpretation of lyrics:
               </h2> */}
               <div className="items-center text-left">
-                {GPTInterpretation
-                  ? GPTInterpretation
-                  : lyrics &&
-                    lyrics.body != "No lyrics found" && (
-                      <div className="items-center justify-center text-center">
-                        <div className="flex flex-col items-center justify-center text-center">
-                          <ThreeCircles
-                            height="100"
-                            width="100"
-                            color="#1fdf64"
-                            wrapperStyle={{}}
-                            wrapperClass=""
-                            visible={true}
-                            ariaLabel="three-circles-rotating"
-                            outerCircleColor=""
-                            innerCircleColor=""
-                            middleCircleColor=""
-                          />
-                          <p>Generating analysis...</p>
-                        </div>
+                {GPTInterpretation ? (
+                  <TypeAnimation
+                    splitter={(str) => str.split(/(?= )/)}
+                    sequence={[GPTInterpretation]}
+                    speed={{ type: "keyStrokeDelayInMs", value: 10 }}
+                    repeat={0}
+                    cursor={false}
+                  />
+                ) : GPT3Interpretation ? (
+                  GPT3Interpretation
+                ) : (
+                  lyrics &&
+                  lyrics.body != "No lyrics found" && (
+                    <div className="items-center justify-center text-center">
+                      <div className="flex flex-col items-center justify-center text-center">
+                        <ThreeCircles
+                          height="100"
+                          width="100"
+                          color="#1fdf64"
+                          wrapperStyle={{}}
+                          wrapperClass=""
+                          visible={true}
+                          ariaLabel="three-circles-rotating"
+                          outerCircleColor=""
+                          innerCircleColor=""
+                          middleCircleColor=""
+                        />
+                        <p>Generating analysis...</p>
                       </div>
-                    )}
+                    </div>
+                  )
+                )}
               </div>
             </section>
           </div>
