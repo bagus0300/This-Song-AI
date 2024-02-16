@@ -6,6 +6,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import clsx from "clsx";
 import Link from "next/link";
 import ArtistTopAlbums from "@/components/ui/ArtistTopAlbums";
+import ArtistTopSongs from "@/components/ui/ArtistTopSongs";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -229,17 +230,18 @@ const ArtistPage = ({ params }) => {
                 </>
               )) || (
                 <>
-                  <section className="flex flex-col justify-between w-full lg:flex-row max-w-7xl">
-                    <section className="flex flex-col items-center justify-center flex-1">
+                  <section className="flex flex-col justify-between w-full lg:items-start lg:flex-row max-w-7xl">
+                    <section className="flex flex-col items-center justify-center basis-1/3">
                       <h1 className="text-3xl">Albums</h1>
                       <ArtistTopAlbums artistID={artistID} limit={10} />
                     </section>
-                    <section className="flex flex-col items-center flex-1">
-                      Top Songs
+                    <section className="flex flex-col items-center basis-2/3">
+                      <h1 className="text-3xl">Top Songs</h1>
+                      <ArtistTopSongs artistID={artistID} limit={10} />
                     </section>
-                    <section className="flex flex-col items-center flex-1">
+                    {/* <section className="flex flex-col items-center flex-1">
                       Similar Artists
-                    </section>
+                    </section> */}
                   </section>
                 </>
               )}
