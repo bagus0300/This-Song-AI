@@ -63,57 +63,57 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
       // return songs;
 
-      const allSummaries = new Map();
+      // const allSummaries = new Map();
 
-      await Promise.all(
-        songs.map(async (element) => {
-          // console.log(element.track.name);
-          const songID = element.track.id;
-          const songName = element.track.name;
-          const artistName = element.track.artists[0].name;
+      // await Promise.all(
+      //   songs.map(async (element) => {
+      //     // console.log(element.track.name);
+      //     const songID = element.track.id;
+      //     const songName = element.track.name;
+      //     const artistName = element.track.artists[0].name;
 
-          const parameters = new URLSearchParams([
-            ["trackName", songName],
-            ["artistName", artistName]
-          ]);
+      //     const parameters = new URLSearchParams([
+      //       ["trackName", songName],
+      //       ["artistName", artistName]
+      //     ]);
 
-          const gpt4Response = await fetch(
-            `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              cache: "no-store"
-            }
-          );
+      //     const gpt4Response = await fetch(
+      //       `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
+      //       {
+      //         method: "GET",
+      //         headers: {
+      //           "Content-Type": "application/json"
+      //         },
+      //         cache: "no-store"
+      //       }
+      //     );
 
-          if (gpt4Response.ok) {
-            const summary = await gpt4Response.text();
-            if (summary) {
-              // console.log("songID", songID);
-              // console.log("songName", songName);
-              // console.log("summary", summary);
-              const firstLetter = summary.slice(13, 14);
-              const restOfSummary = summary.slice(14);
-              allSummaries.set(
-                element.track.id,
-                firstLetter.toUpperCase() + restOfSummary
-              );
-            } else {
-              allSummaries.set(
-                element.track.id,
-                // "Description currently unavailable."
-                "Click to generate description!"
-              );
-            }
-          }
-        })
-      );
+      //     if (gpt4Response.ok) {
+      //       const summary = await gpt4Response.text();
+      //       if (summary) {
+      //         // console.log("songID", songID);
+      //         // console.log("songName", songName);
+      //         // console.log("summary", summary);
+      //         const firstLetter = summary.slice(13, 14);
+      //         const restOfSummary = summary.slice(14);
+      //         allSummaries.set(
+      //           element.track.id,
+      //           firstLetter.toUpperCase() + restOfSummary
+      //         );
+      //       } else {
+      //         allSummaries.set(
+      //           element.track.id,
+      //           // "Description currently unavailable."
+      //           "Click to generate description!"
+      //         );
+      //       }
+      //     }
+      //   })
+      // );
 
-      setSummaries((prev) =>
-        prev ? new Map([...prev, ...allSummaries]) : allSummaries
-      );
+      // setSummaries((prev) =>
+      //   prev ? new Map([...prev, ...allSummaries]) : allSummaries
+      // );
       // console.log(summaries);
       // setReady(true);
     } catch (e) {
@@ -178,11 +178,12 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
                 imageURL={item.track.album.images[2].url}
                 name={item.track.name}
                 artistName={item.track.artists[0].name}
-                summary={
-                  summaries && summaries.has(item.track.id)
-                    ? summaries.get(item.track.id)
-                    : "loading"
-                }
+                // summary={
+                //   summaries && summaries.has(item.track.id)
+                //     ? summaries.get(item.track.id)
+                //     : "loading"
+                // }
+                summary="loading"
                 spotifyURL={item.track.external_urls.spotify}
                 isLast={index === topSongs.length - 1}
                 newLimit={() => setCurrentOffset(currentOffset + limit)}

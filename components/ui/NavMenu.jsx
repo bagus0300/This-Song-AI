@@ -50,8 +50,9 @@ export default function NavMenu() {
       </a>
       {[
         // { title: "Song", path: "/song" },
-        { title: "Song", path: "/songs" },
-        { title: "Album", path: "/albums" },
+        { title: "Songs", path: "/songs" },
+        { title: "Albums", path: "/albums" },
+        { title: "Artists", path: "/artists" },
         { title: "Playlists", path: "/playlists" },
         { title: "About Us", path: "/about" },
         { title: "Contact", path: "/contact" }
@@ -62,6 +63,7 @@ export default function NavMenu() {
               pathname === path ||
               (pathname.startsWith("/albums") && path === "/albums") ||
               (pathname.startsWith("/songs") && path === "/songs") ||
+              (pathname.startsWith("/artists") && path === "/artists") ||
               (pathname.startsWith("/playlists") && path === "/playlists")
                 ? ACTIVE_ROUTE
                 : INACTIVE_ROUTE

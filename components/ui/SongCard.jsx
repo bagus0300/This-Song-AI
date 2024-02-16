@@ -3,17 +3,65 @@ import React, { useEffect, useRef, useState } from "react";
 import { Skeleton } from "./skeleton";
 import clsx from "clsx";
 
+const BACKEND_URI =
+  process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+    ? "http://192.168.4.158:8000"
+    : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
+
+const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
+
 const SongCard = ({
   id,
   imageURL = null,
   name,
   artistName,
+  displayArtist = true,
   summary,
   spotifyURL,
   newLimit = null,
   isLast = false
 }) => {
   const cardRef = useRef(null);
+  const [songSummary, setSongSummary] = useState(summary);
+
+  useEffect(() => {
+    const getSummary = async () => {
+      console.log("Getting summary for", name);
+      const parameters = new URLSearchParams([
+        ["trackName", name],
+        ["artistName", artistName]
+      ]);
+
+      const summaryResponse = await fetch(
+        `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          cache: "no-store"
+        }
+      );
+
+      if (summaryResponse.ok) {
+        const summaryData = await summaryResponse.text();
+        console.log(summaryData);
+        if (summaryData) {
+          const firstLetter = summaryData.slice(13, 14);
+          const restOfSummary = summaryData.slice(14);
+          setSongSummary(firstLetter.toUpperCase() + restOfSummary);
+        } else {
+          setSongSummary("Click to generate description!");
+        }
+      }
+    };
+
+    if (!summary || summary === "loading") getSummary();
+  }, []);
+
+  useEffect(() => {
+    setSongSummary(summary);
+  }, [summary]);
 
   useEffect(() => {
     if (!cardRef?.current) return;
@@ -75,12 +123,16 @@ const SongCard = ({
             )}
             <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
               {name}
-              <br />
-              <span className="inline-flex justify-between text-muted">
-                {/* <span>Popularity: {item.track.popularity}</span> */}
-                <span>{artistName}</span>
-              </span>
-              <br />
+              {artistName && displayArtist && (
+                <>
+                  <br />
+                  <span className="inline-flex justify-between text-muted">
+                    {/* <span>Popularity: {item.track.popularity}</span> */}
+                    <span>{artistName}</span>
+                  </span>
+                  <br />
+                </>
+              )}
               {/* <span className="text-foreground">{item.album.name}</span> */}
             </p>
           </div>
@@ -90,8 +142,8 @@ const SongCard = ({
               !imageURL && ""
             )}
           >
-            {summary && summary != "loading" ? (
-              summary
+            {songSummary && songSummary != "loading" ? (
+              songSummary
             ) : (
               <div className="flex flex-col items-center justify-center text-center align-middle">
                 <Skeleton className="w-[90%] h-4 my-1 text-sm text-muted" />
