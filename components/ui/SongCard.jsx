@@ -163,7 +163,12 @@ const SongCard = ({
       </a>
       {(previewURL && (
         <div className="w-full">
-          <audio ref={previewRef} controls preload="none" className="w-full">
+          <audio
+            ref={previewRef}
+            controls
+            preload="none"
+            className="w-full h-7 bg-[#f1f3f4] dark:bg-[#3d3d3d]"
+          >
             <source src={previewURL} type="audio/mpeg" />
             <a className="w-full" href={spotifyURL} target="_blank">
               <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
