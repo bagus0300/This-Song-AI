@@ -26,6 +26,15 @@ const SongCard = ({
   const [songSummary, setSongSummary] = useState(summary);
   const previewRef = useRef(null);
 
+  const handlePlay = () => {
+    console.log("Playing", name);
+    if (songSummary != "Click to generate description!") {
+      return;
+    }
+    console.log("Generating a summary for", name);
+    // setSongSummary("Loading description...");
+  };
+
   useEffect(() => {
     console.log("previewURL", previewURL);
     const getSummary = async () => {
@@ -59,7 +68,19 @@ const SongCard = ({
       }
     };
 
+    const previewAudio = previewRef.current;
+
+    if (previewAudio) {
+      previewAudio.addEventListener("play", handlePlay);
+    }
+
     if (!summary || summary === "loading") getSummary();
+
+    return () => {
+      if (previewAudio) {
+        previewAudio.removeEventListener("play", handlePlay);
+      }
+    };
   }, []);
 
   useEffect(() => {
