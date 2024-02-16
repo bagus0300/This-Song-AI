@@ -10,7 +10,9 @@ export async function GET() {
 
   const playlistsList = [];
 
-  const { data } = await axios.get(`${BACKEND_URI}/client_token`);
+  const { data } = await axios.get(
+    `${BACKEND_URI}/api/v1/spotify/client_token`
+  );
   const token = data.access_token;
 
   for (let playlistID of playlistIDs) {

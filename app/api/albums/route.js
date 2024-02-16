@@ -13,7 +13,9 @@ export async function GET(request, response) {
         ? "http://192.168.4.158:8000"
         : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-    const { data } = await axios.get(`${BACKEND_URI}/client_token`);
+    const { data } = await axios.get(
+      `${BACKEND_URI}/api/v1/spotify/client_token`
+    );
     const token = data.access_token;
 
     const albumResponse = await fetch(

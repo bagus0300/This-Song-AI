@@ -282,13 +282,13 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
 
   const GPT_ENDPOINT =
     process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/gpt"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/gpt";
+      ? "http://192.168.4.158:8000/api/v1/gpt"
+      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt";
 
   const GPT_INTERPRETATION_ENDPOINT =
     process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/interpretation"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/interpretation";
+      ? "http://192.168.4.158:8000/api/v1/gpt/interpretation"
+      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt/interpretation";
 
   // The useEffect hook will run whenever the song changes and fetch the lyrics for that song
   useEffect(() => {
@@ -298,12 +298,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     setGPTInterpretation(null);
 
     const fetchData = async () => {
-      const songLyricsResponse = await getLyrics(
-        songID,
-        songName,
-        artistName,
-        albumName
-      );
+      const songLyricsResponse = await getLyrics(songName, artistName);
       // console.log(songLyricsResponse);
       const statusCode =
         songLyricsResponse.data.message?.header?.status_code ||
@@ -341,24 +336,28 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
       if (!lyrics || lyrics.body == "No lyrics found") return;
       console.log(`Asking GPT about ${songName} by ${artistName}...`);
 
+      const parameters = new URLSearchParams([
+        ["trackName", songName],
+        ["artistName", artistName]
+      ]);
+
       // See if we can get a response from GPT-4
       try {
-        const gpt4Response = await fetch(GPT_INTERPRETATION_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            songID: songID,
-            trackName: songName
-          })
-        });
+        const gpt4Response = await fetch(
+          `${GPT_INTERPRETATION_ENDPOINT}?${parameters.toString()}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        );
 
         console.log("GPT-4 fetch response: ", gpt4Response);
         if (gpt4Response.ok) {
           const interpretation = await gpt4Response.text();
           if (interpretation) {
-            // console.log("GPT-4 interpretation response: ", interpretation);
+            console.log("GPT-4 interpretation response: ", interpretation);
             // console.log("Interpretation: ", interpretation);
             setGPTInterpretation(interpretation);
             return;

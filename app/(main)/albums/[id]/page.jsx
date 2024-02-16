@@ -11,7 +11,7 @@ const BACKEND_URI =
     ? "http://192.168.4.158:8000"
     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/summary`;
+const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
 const URL =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -56,18 +56,23 @@ const AlbumPage = ({ params }) => {
             // console.log(element.track.name);
             const songID = element.id;
             const songName = element.name;
+            const artistName = element.artists[0].name;
 
-            const gpt4Response = await fetch(GPT_SUMMARY_ENDPOINT, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                songID: songID,
-                trackName: songName
-              }),
-              cache: "no-store"
-            });
+            const parameters = new URLSearchParams([
+              ["trackName", songName],
+              ["artistName", artistName]
+            ]);
+
+            const gpt4Response = await fetch(
+              `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                cache: "no-store"
+              }
+            );
 
             if (gpt4Response.ok) {
               const summary = await gpt4Response.text();
