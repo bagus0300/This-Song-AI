@@ -272,6 +272,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const [lyrics, setLyrics] = useState(null);
   const [status, setStatus] = useState(null);
   const [GPTInterpretation, setGPTInterpretation] = useState(null);
+  const [GPT3Interpretation, setGPT3Interpretation] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -296,6 +297,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     setLyrics(null);
     setStatus(null);
     setGPTInterpretation(null);
+    setGPT3Interpretation(null);
 
     const fetchData = async () => {
       const songLyricsResponse = await getLyrics(songName, artistName);
@@ -394,7 +396,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           break;
         }
         // console.log("Received: ", value);
-        setGPTInterpretation((prev) => (prev ? prev : "") + value);
+        setGPT3Interpretation((prev) => (prev ? prev : "") + value);
       }
     };
 
@@ -437,7 +439,9 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
           <div
             className={clsx(
               "h-full whitespace-break-spaces w-full",
-              GPTInterpretation ? "lg:w-[500px] xl:w-[700px]" : "lg:w-[200px]",
+              GPTInterpretation || GPT3Interpretation
+                ? "lg:w-[500px] xl:w-[700px]"
+                : "lg:w-[200px]",
               lyrics.body == "No lyrics found" && "w-0 lg:w-0 xl:w-0"
             )}
           >
@@ -448,6 +452,8 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
               <div className="items-center text-left">
                 {GPTInterpretation
                   ? GPTInterpretation
+                  : GPT3Interpretation
+                  ? GPT3Interpretation
                   : lyrics &&
                     lyrics.body != "No lyrics found" && (
                       <div className="items-center justify-center text-center">
