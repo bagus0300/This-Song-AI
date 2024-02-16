@@ -53,7 +53,7 @@ export default function NavMenu() {
         { title: "Songs", path: "/songs" },
         { title: "Albums", path: "/albums" },
         { title: "Artists", path: "/artists" },
-        { title: "Playlists", path: "/playlists" },
+        { title: "Playlists", path: "/playlists/37i9dQZF1DWXRqgorJj26U" },
         { title: "About Us", path: "/about" },
         { title: "Contact", path: "/contact" }
       ].map(({ title, path }) => (
