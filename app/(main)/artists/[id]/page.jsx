@@ -230,7 +230,7 @@ const ArtistPage = ({ params }) => {
                 </>
               )) || (
                 <>
-                  <section className="flex flex-col justify-between w-full lg:items-start lg:flex-row max-w-7xl">
+                  <section className="flex flex-col justify-center w-full lg:items-start lg:flex-row max-w-7xl">
                     <section className="flex flex-col items-center justify-center basis-1/3">
                       <h1 className="text-3xl">Albums</h1>
                       <ArtistTopAlbums artistID={artistID} limit={10} />
