@@ -185,6 +185,7 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
                 // }
                 summary="loading"
                 spotifyURL={item.track.external_urls.spotify}
+                previewURL={item.track.preview_url}
                 isLast={index === topSongs.length - 1}
                 newLimit={() => setCurrentOffset(currentOffset + limit)}
               />

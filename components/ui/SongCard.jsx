@@ -18,13 +18,16 @@ const SongCard = ({
   displayArtist = true,
   summary,
   spotifyURL,
+  previewURL = null,
   newLimit = null,
   isLast = false
 }) => {
   const cardRef = useRef(null);
   const [songSummary, setSongSummary] = useState(summary);
+  const previewRef = useRef(null);
 
   useEffect(() => {
+    console.log("previewURL", previewURL);
     const getSummary = async () => {
       console.log("Getting summary for", name);
       const parameters = new URLSearchParams([
@@ -104,6 +107,9 @@ const SongCard = ({
         // willChange: "transform, opacity"
       }}
       ref={cardRef}
+      onMouseOver={() => {
+        console.log("previewURL", previewURL);
+      }}
     >
       <a href={`/songs/${id}`} className="flex-grow w-full h-full">
         <div
@@ -155,16 +161,34 @@ const SongCard = ({
           </div>
         </div>
       </a>
-      <a className="w-full" href={spotifyURL} target="_blank">
-        <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
-          <img
-            src="/images/Spotify_Icon_RGB_White.png"
-            className="w-5 h-5"
-            alt="Listen on Spotify"
-          />
-          Listen on Spotify
+      {(previewURL && (
+        <div className="w-full">
+          <audio ref={previewRef} controls preload="none" className="w-full">
+            <source src={previewURL} type="audio/mpeg" />
+            <a className="w-full" href={spotifyURL} target="_blank">
+              <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
+                <img
+                  src="/images/Spotify_Icon_RGB_White.png"
+                  className="w-5 h-5"
+                  alt="Listen on Spotify"
+                />
+                Listen on Spotify
+              </div>
+            </a>
+          </audio>
         </div>
-      </a>
+      )) || (
+        <a className="w-full" href={spotifyURL} target="_blank">
+          <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
+            <img
+              src="/images/Spotify_Icon_RGB_White.png"
+              className="w-5 h-5"
+              alt="Listen on Spotify"
+            />
+            Listen on Spotify
+          </div>
+        </a>
+      )}
     </div>
   );
 };

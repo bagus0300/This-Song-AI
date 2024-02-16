@@ -297,6 +297,7 @@ const AlbumPage = ({ params }) => {
                           : "loading"
                       }
                       spotifyURL={item.external_urls.spotify}
+                      previewURL={item.preview_url}
                       // isLast={index === topSongs.length - 1}
                       // newLimit={() => setCurrentOffset(currentOffset + limit)}
                     />

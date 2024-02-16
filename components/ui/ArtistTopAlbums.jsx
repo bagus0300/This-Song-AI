@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import AlbumItem from "./album-item";
 import { set } from "react-hook-form";
 
-const ArtistTopAlbums = ({ artistID, limit = 10, offset = 0 }) => {
+const ArtistTopAlbums = ({ artistID, limit = 5, offset = 0 }) => {
   const [albums, setAlbums] = useState(null);
   const [albumOffset, setAlbumOffset] = useState(offset);
   const [hasNext, setHasNext] = useState(true);
@@ -10,7 +10,7 @@ const ArtistTopAlbums = ({ artistID, limit = 10, offset = 0 }) => {
 
   const handleAlbumOffset = () => {
     setLoadingMore(true);
-    setAlbumOffset((prev) => prev + 10);
+    setAlbumOffset((prev) => prev + 5);
   };
 
   useEffect(() => {
