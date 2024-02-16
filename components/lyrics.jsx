@@ -38,6 +38,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import emailjs from "@emailjs/browser";
+import { TypeAnimation } from "react-type-animation";
 
 const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const emailjsPublicKey = "BRpCzUI0MwvVUI2Vs";
@@ -450,30 +451,38 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
                 Interpretation of lyrics:
               </h2> */}
               <div className="items-center text-left">
-                {GPTInterpretation
-                  ? GPTInterpretation
-                  : GPT3Interpretation
-                  ? GPT3Interpretation
-                  : lyrics &&
-                    lyrics.body != "No lyrics found" && (
-                      <div className="items-center justify-center text-center">
-                        <div className="flex flex-col items-center justify-center text-center">
-                          <ThreeCircles
-                            height="100"
-                            width="100"
-                            color="#1fdf64"
-                            wrapperStyle={{}}
-                            wrapperClass=""
-                            visible={true}
-                            ariaLabel="three-circles-rotating"
-                            outerCircleColor=""
-                            innerCircleColor=""
-                            middleCircleColor=""
-                          />
-                          <p>Generating analysis...</p>
-                        </div>
+                {GPTInterpretation ? (
+                  <TypeAnimation
+                    splitter={(str) => str.split(/(?= )/)}
+                    sequence={[GPTInterpretation]}
+                    speed={{ type: "keyStrokeDelayInMs", value: 10 }}
+                    repeat={0}
+                    cursor={false}
+                  />
+                ) : GPT3Interpretation ? (
+                  GPT3Interpretation
+                ) : (
+                  lyrics &&
+                  lyrics.body != "No lyrics found" && (
+                    <div className="items-center justify-center text-center">
+                      <div className="flex flex-col items-center justify-center text-center">
+                        <ThreeCircles
+                          height="100"
+                          width="100"
+                          color="#1fdf64"
+                          wrapperStyle={{}}
+                          wrapperClass=""
+                          visible={true}
+                          ariaLabel="three-circles-rotating"
+                          outerCircleColor=""
+                          innerCircleColor=""
+                          middleCircleColor=""
+                        />
+                        <p>Generating analysis...</p>
                       </div>
-                    )}
+                    </div>
+                  )
+                )}
               </div>
             </section>
           </div>

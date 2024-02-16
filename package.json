@@ -37,6 +37,7 @@
     "react-hook-form": "^7.49.2",
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^5.4.5",
+    "react-type-animation": "^3.2.0",
     "react-use": "^17.4.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
