@@ -64,7 +64,8 @@ export default function NavMenu() {
               (pathname.startsWith("/albums") && path === "/albums") ||
               (pathname.startsWith("/songs") && path === "/songs") ||
               (pathname.startsWith("/artists") && path === "/artists") ||
-              (pathname.startsWith("/playlists") && path === "/playlists")
+              (pathname.startsWith("/playlists") &&
+                path.startsWith("/playlists"))
                 ? ACTIVE_ROUTE
                 : INACTIVE_ROUTE
             }
