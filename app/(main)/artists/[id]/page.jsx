@@ -7,6 +7,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import ArtistTopAlbums from "@/components/ui/ArtistTopAlbums";
 import ArtistTopSongs from "@/components/ui/ArtistTopSongs";
+import RelatedArtists from "@/components/ui/RelatedArtists";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -143,7 +144,7 @@ const ArtistPage = ({ params }) => {
                   }}
                 >
                   <img
-                    className="absolute w-full h-full transition-all duration-500 opacity-100 -z-10"
+                    className="absolute object-cover w-full h-full transition-all duration-500 opacity-100 -z-10"
                     src={artist.imageURL}
                     placeholder={`data:image/svg+xml;base64,${toBase64(
                       shimmer(300, 300)
@@ -234,6 +235,8 @@ const ArtistPage = ({ params }) => {
                     <section className="flex flex-col items-center justify-center basis-1/3">
                       <h1 className="text-3xl">Albums</h1>
                       <ArtistTopAlbums artistID={artistID} limit={5} />
+                      <h1 className="text-3xl">Related Artists</h1>
+                      <RelatedArtists artistID={artistID} />
                     </section>
                     <section className="flex flex-col items-center basis-2/3">
                       <h1 className="text-3xl">Top Songs</h1>

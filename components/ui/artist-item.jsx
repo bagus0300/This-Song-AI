@@ -40,13 +40,13 @@ const ArtistItem = ({ item, path = null, onClick = null }) => {
         className="w-[300px]"
       >
         <div
-          className="flex items-center overflow-x-hidden transition-all duration-500 cursor-pointer group"
+          className="flex items-center gap-2 overflow-x-hidden transition-all duration-500 cursor-pointer group"
           // onClick={() => {
           //   recentSelectSong(item);
           // }}
         >
           <img
-            className="w-16 h-16"
+            className="object-cover w-16 h-16"
             src={
               (item.images && item.images.length > 2 && item.images[2].url) ||
               (item.images && item.images.length > 1 && item.images[1].url) ||
