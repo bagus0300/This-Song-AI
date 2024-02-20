@@ -169,7 +169,7 @@ const ArtistPage = ({ params }) => {
                     {artist.name}
                   </a>
                 </h1>
-                <h2 className="text-base">
+                <h2 className="text-base duration-500 transform-all">
                   {artist.genres
                     .map(
                       (genre) => genre.charAt(0).toUpperCase() + genre.slice(1)
