@@ -195,7 +195,7 @@ const SongCard = ({
               <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
                 <img
                   src="/images/Spotify_Icon_RGB_White.png"
-                  className="w-5 h-5"
+                  className="w-[21px] h-[21px]"
                   alt="Listen on Spotify"
                 />
                 Listen on Spotify
@@ -208,7 +208,7 @@ const SongCard = ({
           <div className="flex gap-2 items-center justify-center w-full h-9 text-base bg-[#1DB954] text-white hover:brightness-110">
             <img
               src="/images/Spotify_Icon_RGB_White.png"
-              className="w-5 h-5"
+              className="w-[21px] h-[21px]"
               alt="Listen on Spotify"
             />
             Listen on Spotify

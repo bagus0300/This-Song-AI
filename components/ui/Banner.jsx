@@ -17,7 +17,7 @@ const Banner = () => {
           </span>
           <img
             src="/images/Spotify_Logo_RGB_Green.png"
-            className="h-5 group-hover:brightness-125"
+            className="w-[70px] group-hover:brightness-125"
           />
         </p>
       </a>
