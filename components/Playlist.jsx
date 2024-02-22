@@ -26,8 +26,9 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   const getSongs = async (offset = 0) => {
     try {
-      const tokenResponse = await getClientToken();
-      const token = tokenResponse.access_token;
+      const tokenResponse = await fetch("/api/token");
+      const tokenJson = await tokenResponse.json();
+      const token = tokenJson.access_token;
 
       // console.log("Getting top songs...");
 
