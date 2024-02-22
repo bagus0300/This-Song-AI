@@ -60,7 +60,7 @@ export default function SongLayout({ children }) {
       <div className="relative lg:flex">
         <div
           id="menu"
-          className="lg:sticky flex-shrink-0 fixed lg:top-[72px] top-[56px] left-0 lg:w-72 w-full lg:h-[calc(100vh-80px)] lg:mx-2 lg:mb-2 lg:rounded-lg lg:bg-card bg-background z-10"
+          className="lg:sticky flex-shrink-0 fixed lg:top-[72px] top-[56px] left-0 lg:w-72 w-full lg:h-[calc(100vh-80px)] lg:mx-2 lg:mb-2 lg:rounded-lg lg:bg-card bg-background z-20"
         >
           <div className={clsx("h-full justify-between p-1")}>
             <div className="flex flex-col justify-between h-full">
