@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
-export async function GET(request, { params }) {
+export const POST = async () => {
   console.log("Token request received.");
   console.log("CLIENT_ID", CLIENT_ID);
   console.log("CLIENT_SECRET", CLIENT_SECRET);
@@ -32,4 +32,4 @@ export async function GET(request, { params }) {
     console.log(error);
     return NextResponse.error(error);
   }
-}
+};
