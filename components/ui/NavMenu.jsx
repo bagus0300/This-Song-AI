@@ -78,8 +78,8 @@ export default function NavMenu() {
   );
 
   return (
-    <div>
-      <div className="z-20 flex items-center justify-between p-4 lg:rounded-lg bg-background h-14">
+    <div className="relative z-30">
+      <div className="relative z-30 flex items-center justify-between p-4 lg:rounded-lg bg-background h-14">
         <Banner />
         <div
           className={

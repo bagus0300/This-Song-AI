@@ -23,7 +23,7 @@ export default async function SongLayout({ children }) {
       <SessionProvider session={session}>
         <ContextProvider>
           <div className="flex flex-col h-full min-h-[100dvh] overflow-x-clip">
-            <nav className="fixed top-0 left-0 z-20 w-full bg-background h-fit lg:py-2 lg:px-2">
+            <nav className="fixed top-0 left-0 z-30 w-full bg-background h-fit lg:py-2 lg:px-2">
               <NavMenu />
             </nav>
             <section className="relative mt-[56px] lg:mt-[72px] lg:w-full flex-grow">
