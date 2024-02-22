@@ -26,7 +26,10 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   const getSongs = async (offset = 0) => {
     try {
-      const tokenResponse = await fetch("/api/token");
+      const tokenResponse = await fetch("/api/token", {
+        method: "GET",
+        cache: "no-store"
+      });
       const tokenJson = await tokenResponse.json();
       const token = tokenJson.access_token;
 
