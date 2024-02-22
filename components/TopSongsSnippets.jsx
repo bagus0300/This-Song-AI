@@ -17,9 +17,9 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
 
   try {
     // Get a client token to make sure the backend server wakes from its idle state
-    const response = fetch(`${BACKEND_URI}/api/v1/spotify/client_token`, {
-      // cache: "no-store"
-    });
+    // const response = fetch(`${BACKEND_URI}/api/v1/spotify/client_token`, {
+    //   // cache: "no-store"
+    // });
 
     // Simulate waiting for data fetch
     // If the server isn't idle, getting the data should take about a second

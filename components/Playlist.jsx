@@ -6,6 +6,7 @@ import SongCard from "./ui/SongCard";
 import { Button } from "./ui/button";
 import clsx from "clsx";
 import { rajdhani } from "./ui/fonts";
+import { getClientToken } from "@/lib/clientToken";
 
 const BACKEND_URI =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
@@ -25,11 +26,8 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
 
   const getSongs = async (offset = 0) => {
     try {
-      const { data } = await axios.get(
-        `${BACKEND_URI}/api/v1/spotify/client_token`
-      );
-
-      const token = data.access_token;
+      const tokenResponse = await getClientToken();
+      const token = tokenResponse.access_token;
 
       // console.log("Getting top songs...");
 

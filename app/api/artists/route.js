@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
+import { getClientToken } from "@/lib/clientToken";
 
 export async function GET(request, response) {
   const { searchParams } = new URL(request.url);
@@ -8,15 +9,8 @@ export async function GET(request, response) {
   console.log("artistID", artistID);
 
   try {
-    const BACKEND_URI =
-      process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-        ? "http://192.168.4.158:8000"
-        : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
-
-    const { data } = await axios.get(
-      `${BACKEND_URI}/api/v1/spotify/client_token`
-    );
-    const token = data.access_token;
+    const tokenResponse = await getClientToken();
+    const token = tokenResponse.access_token;
 
     const artistResponse = await fetch(
       `https://api.spotify.com/v1/artists/${artistID}`,
