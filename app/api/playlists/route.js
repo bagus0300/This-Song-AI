@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { playlistIDs } from "@/lib/data";
-import axios from "axios";
 import { getClientToken } from "@/lib/clientToken";
 
 export async function GET() {

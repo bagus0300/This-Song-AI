@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
 import { getClientToken } from "@/lib/clientToken";
 
 export async function GET(request, { params }) {

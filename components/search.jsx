@@ -99,7 +99,7 @@ const Search = ({ onClick }) => {
   };
 
   return (
-    <section className="flex flex-col items-center w-full gap-1 min-h-[calc(80dvh-48px-2px-24px)]">
+    <section className="relative flex flex-col items-center w-full gap-1 min-h-[calc(80dvh-48px-2px-24px)]">
       <span className="relative w-full group/field">
         <Input
           ref={inputElement}

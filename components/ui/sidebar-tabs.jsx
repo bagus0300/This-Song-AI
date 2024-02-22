@@ -9,7 +9,7 @@ const SidebarTabs = ({ setShowMenu }) => {
   const { token } = useContext(TokenContext);
 
   return (
-    <div>
+    <div className="relative">
       <Tabs defaultValue="search">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="search">Search</TabsTrigger>
