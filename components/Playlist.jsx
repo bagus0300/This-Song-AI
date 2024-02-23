@@ -144,23 +144,27 @@ const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
   }, [topSongs]);
 
   useEffect(() => {
+    const footer = document.querySelector("footer");
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const button = document.getElementById("scroll-to-top-button");
+        console.log("Reached bottom of page");
+        button.style.visibility = "visible";
+        button.style.opacity = 1;
+      }
+    });
+
     if (currentOffset === 0) return;
     if (currentOffset === limit) {
-      const footer = document.querySelector("footer");
-
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          const button = document.getElementById("scroll-to-top-button");
-          console.log("Reached bottom of page");
-          button.style.visibility = "visible";
-          button.style.opacity = 1;
-        }
-      });
-
       observer.observe(footer);
     }
 
     getSongs(currentOffset);
+
+    return () => {
+      observer.unobserve(footer);
+    };
   }, [currentOffset]);
 
   return (
