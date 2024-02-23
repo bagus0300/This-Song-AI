@@ -290,7 +290,7 @@ export default function SongLayout({ children }) {
         <div
           id="content"
           className={clsx(
-            "px-2 mt-12 lg:pl-[304px] lg:mt-2 w-full bg-background"
+            "px-2 mt-12 lg:pl-[304px] lg:mt-2 w-full min-h-[100vh] bg-background"
           )}
         >
           {children}
