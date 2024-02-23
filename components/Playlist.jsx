@@ -144,28 +144,36 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   }, [topSongs]);
 
   useEffect(() => {
-    const footer = document.querySelector("footer");
+    if (currentOffset === 0) return;
+    getSongs(currentOffset);
+  }, [currentOffset]);
+
+  useEffect(() => {
+    const topContent = document.querySelector("#top-content");
+
+    console.log("topContent", topContent);
+
+    if (!topContent) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        const button = document.getElementById("scroll-to-top-button");
-        console.log("Reached bottom of page");
+      const button = document.getElementById("scroll-to-top-button");
+      if (!entry.isIntersecting) {
         button.style.visibility = "visible";
         button.style.opacity = 1;
+        button.style.pointerEvents = "auto";
+      } else {
+        button.style.visibility = "hidden";
+        button.style.opacity = 0;
+        button.style.pointerEvents = "none";
       }
     });
 
-    if (currentOffset === 0) return;
-    if (currentOffset === limit) {
-      observer.observe(footer);
-    }
-
-    getSongs(currentOffset);
+    observer.observe(topContent);
 
     return () => {
-      observer.unobserve(footer);
+      if (topContent) observer.unobserve(topContent);
     };
-  }, [currentOffset]);
+  }, []);
 
   return (
     <section className="w-full gap-1">
@@ -229,8 +237,6 @@ const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
             top: 0,
             behavior: "smooth"
           });
-          e.target.style.visibility = "hidden";
-          e.target.style.opacity = 0;
         }}
         style={{
           position: "fixed",

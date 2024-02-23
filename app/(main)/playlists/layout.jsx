@@ -70,6 +70,7 @@ const PlaylistPage = ({ children }) => {
               align: "start"
             }}
             className="w-[70vw] max-w-3xl md:mx-auto"
+            id="top-content"
           >
             <CarouselContent>
               {playlists.map((playlist, index) => (
