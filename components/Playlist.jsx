@@ -15,7 +15,7 @@ const BACKEND_URI =
 
 const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
-const Playlist = ({ playlist, limit = 40, offset = 0 }) => {
+const Playlist = ({ playlist, limit = 20, offset = 0 }) => {
   let [topSongs, setTopSongs] = useState(null);
   const [ready, setReady] = useState(false);
   const [summaries, setSummaries] = useState(null);
