@@ -45,6 +45,7 @@ const AlbumItem = ({ item, info = "artist", path = null, onClick = null }) => {
             className="w-16 h-16"
             src={item.images && item.images.length > 2 && item.images[2].url}
             alt="Album image"
+            loading="lazy"
             width={64}
             height={64}
             placeholder={`data:image/svg+xml;base64,${toBase64(

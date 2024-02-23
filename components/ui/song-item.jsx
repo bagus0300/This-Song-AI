@@ -40,6 +40,7 @@ const SongItem = ({ item, path = null, onClick = null }) => {
                     item.album.images.length > 2 &&
                     item.album.images[2].url
                   }
+                  loading="lazy"
                   alt="Album image"
                 />
                 <p className="justify-end flex-1 overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">

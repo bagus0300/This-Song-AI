@@ -146,7 +146,12 @@ const SongCard = ({
             )}
           >
             {imageURL && (
-              <img className="w-16 h-16" src={imageURL} alt="Album image" />
+              <img
+                className="w-16 h-16"
+                src={imageURL}
+                loading="lazy"
+                alt="Album image"
+              />
             )}
             <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
               {name}

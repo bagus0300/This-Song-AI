@@ -53,6 +53,7 @@ const ArtistItem = ({ item, path = null, onClick = null }) => {
               (item.images && item.images.length > 0 && item.images[0].url) ||
               "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' fill='black'%3E%3Crect width='100%25' height='100%25'/%3E%3C/svg%3E"
             }
+            loading="lazy"
             alt=""
             width={64}
             height={64}

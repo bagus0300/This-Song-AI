@@ -76,6 +76,7 @@ const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
                         className="w-16 h-16"
                         src={item.image}
                         alt="Album image"
+                        loading="lazy"
                       />
                       <p className="overflow-x-hidden duration-500 whitespace-nowrap text-ellipsis">
                         {item.name}
