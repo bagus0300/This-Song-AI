@@ -40,6 +40,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import emailjs from "@emailjs/browser";
 import { TypeAnimation } from "react-type-animation";
 
+import { BACKEND_URL } from "@/lib/backendURL";
+
 const Lyrics = ({ songID, songName, artistName, albumName }) => {
   const emailjsPublicKey = "BRpCzUI0MwvVUI2Vs";
   const emailjsTemplateID = "template_p5nstyt";
@@ -282,15 +284,19 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
 
   const musixmatchLogo = "/images/musixmatch_logo.svg";
 
-  const GPT_ENDPOINT =
-    process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/api/v1/gpt"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt";
+  // const GPT_ENDPOINT =
+  //   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+  //     ? "http://192.168.4.158:8000/api/v1/gpt"
+  //     : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt";
 
-  const GPT_INTERPRETATION_ENDPOINT =
-    process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-      ? "http://192.168.4.158:8000/api/v1/gpt/interpretation"
-      : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt/interpretation";
+  const GPT_ENDPOINT = `${BACKEND_URL}/api/v1/gpt`;
+
+  // const GPT_INTERPRETATION_ENDPOINT =
+  //   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+  //     ? "http://192.168.4.158:8000/api/v1/gpt/interpretation"
+  //     : "https://spotify-node1313-f6ce692711e7.herokuapp.com/api/v1/gpt/interpretation";
+
+  const GPT_INTERPRETATION_ENDPOINT = `${BACKEND_URL}/api/v1/gpt/interpretation`;
 
   // The useEffect hook will run whenever the song changes and fetch the lyrics for that song
   useEffect(() => {

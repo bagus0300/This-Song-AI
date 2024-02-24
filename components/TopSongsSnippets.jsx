@@ -2,12 +2,12 @@ import React from "react";
 import axios from "axios";
 import { initialSongs } from "@/lib/data";
 
-const BACKEND_URI =
-  process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-    ? "http://192.168.4.158:8000"
-    : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
+// const BACKEND_URI =
+//   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+//     ? "http://192.168.4.158:8000"
+//     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
 
-const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
+// const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
 const TopSongsSnippets = async ({ limit = 10, offset = 0 }) => {
   let topSongs = null;
