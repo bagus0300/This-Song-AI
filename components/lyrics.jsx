@@ -307,24 +307,29 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
     setGPT3Interpretation(null);
 
     const fetchData = async () => {
-      const songLyricsResponse = await getLyrics(songName, artistName);
-      // console.log(songLyricsResponse);
-      const statusCode =
-        songLyricsResponse.data.message?.header?.status_code ||
-        songLyricsResponse.status;
-      setStatus(statusCode);
+      try {
+        const songLyricsResponse = await getLyrics(songName, artistName);
+        // console.log(songLyricsResponse);
+        const statusCode =
+          songLyricsResponse.data.message?.header?.status_code ||
+          songLyricsResponse.status;
+        setStatus(statusCode);
 
-      // console.log("Lyrics status code: " + statusCode);
+        // console.log("Lyrics status code: " + statusCode);
 
-      if (statusCode == 200) {
-        const songLyrics =
-          songLyricsResponse.data.message?.body?.lyrics ||
-          songLyricsResponse.data;
-        // console.log(songLyrics);
-        // setLyrics(formatLyrics(songLyrics));
-        setLyrics(createLyrics(songLyrics));
-      } else {
-        setLyrics(null);
+        if (statusCode == 200) {
+          const songLyrics =
+            songLyricsResponse.data.message?.body?.lyrics ||
+            songLyricsResponse.data;
+          // console.log(songLyrics);
+          // setLyrics(formatLyrics(songLyrics));
+          setLyrics(createLyrics(songLyrics));
+        } else {
+          setLyrics(null);
+        }
+      } catch (error) {
+        console.log("Error fetching lyrics from database: ", error);
+        setLyrics("Error connecting to server. Please try again later.");
       }
     };
 
@@ -374,6 +379,10 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         }
       } catch (error) {
         console.log("Error fetching GPT interpretation from database: ", error);
+        setGPTInterpretation(
+          "Error connecting to server. Please try again later."
+        );
+        return;
       }
 
       // If we can't get a response from GPT-4, ask GPT-3.5 and stream the response

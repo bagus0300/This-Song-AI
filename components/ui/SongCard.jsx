@@ -46,27 +46,32 @@ const SongCard = ({
         ["artistName", artistName]
       ]);
 
-      const summaryResponse = await fetch(
-        `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          cache: "no-store"
-        }
-      );
+      try {
+        const summaryResponse = await fetch(
+          `${GPT_SUMMARY_ENDPOINT}?${parameters.toString()}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            cache: "no-store"
+          }
+        );
 
-      if (summaryResponse.ok) {
-        const summaryData = await summaryResponse.text();
-        console.log(summaryData);
-        if (summaryData) {
-          const firstLetter = summaryData.slice(13, 14);
-          const restOfSummary = summaryData.slice(14);
-          setSongSummary(firstLetter.toUpperCase() + restOfSummary);
-        } else {
-          setSongSummary("Click to generate description!");
+        if (summaryResponse.ok) {
+          const summaryData = await summaryResponse.text();
+          console.log(summaryData);
+          if (summaryData) {
+            const firstLetter = summaryData.slice(13, 14);
+            const restOfSummary = summaryData.slice(14);
+            setSongSummary(firstLetter.toUpperCase() + restOfSummary);
+          } else {
+            setSongSummary("Click to generate description!");
+          }
         }
+      } catch (e) {
+        console.log(e);
+        setSongSummary("Description currently unavailable.");
       }
     };
 
