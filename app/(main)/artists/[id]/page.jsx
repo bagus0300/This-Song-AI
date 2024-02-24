@@ -21,7 +21,7 @@ import { BACKEND_URL } from "@/lib/backendURL";
 const URL =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
     ? "http://localhost:3000"
-    : "https://thissong.app";
+    : "https://thissong.net";
 
 const ArtistPage = ({ params }) => {
   const { id } = params;

@@ -133,10 +133,10 @@ const AboutPage = () => {
               or just want to share your favorite song story, feel free to reach
               out to us at{" "}
               <a
-                href="mailto:info@thissong.com"
+                href="mailto:info@thissong.net"
                 className="text-primary hover:underline"
               >
-                info@thissong.com
+                info@thissong.net
               </a>
               .
             </p>

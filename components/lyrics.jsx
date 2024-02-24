@@ -93,7 +93,7 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
             from_name: data.name,
             to_name: "admin",
             reply_to: data.email,
-            to_email: "admin@thissong.app",
+            to_email: "admin@thissong.net",
             message: JSON.stringify(data, null, 2)
           },
           emailjsPublicKey
