@@ -1,5 +1,6 @@
 import "./globals.css";
 import { inter } from "@/components/ui/fonts";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <main className="gap-2 mx-auto">{children}</main>
+        <Analytics />
       </body>
     </html>
   );
