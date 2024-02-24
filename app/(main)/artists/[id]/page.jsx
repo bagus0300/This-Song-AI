@@ -9,12 +9,14 @@ import ArtistTopAlbums from "@/components/ui/ArtistTopAlbums";
 import ArtistTopSongs from "@/components/ui/ArtistTopSongs";
 import RelatedArtists from "@/components/ui/RelatedArtists";
 
-const BACKEND_URI =
-  process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-    ? "http://192.168.4.158:8000"
-    : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
+import { BACKEND_URL } from "@/lib/backendURL";
 
-const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
+// const BACKEND_URI =
+//   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
+//     ? "http://192.168.4.158:8000"
+//     : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
+
+// const GPT_SUMMARY_ENDPOINT = `${BACKEND_URI}/api/v1/gpt/summary`;
 
 const URL =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"

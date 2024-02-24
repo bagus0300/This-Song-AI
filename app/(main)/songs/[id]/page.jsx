@@ -54,25 +54,42 @@ const Page = ({ params }) => {
         console.log("Getting song by id with session token");
         accessToken = session.accessToken;
       } else {
-        token = clientToken;
+        // token = clientToken;
+        const tokenResponse = await fetch("/api/token", {
+          method: "POST"
+        });
+        const tokenJson = await tokenResponse.json();
+        accessToken = tokenJson.access_token;
         if (!token) {
-          token = await getClientAccessToken();
-          setClientToken(token);
-          console.log("token", token);
-          console.log("clientToken", clientToken);
-          console.log("Getting song by id with brand new client token");
-          accessToken = token.clientToken;
+          // token = await getClientAccessToken();
+          // setClientToken(token);
+          // console.log("token", token);
+          // console.log("clientToken", clientToken);
+          // console.log("Getting song by id with brand new client token");
+          // accessToken = token.clientToken;
+          const tokenResponse = await fetch("/api/token", {
+            method: "POST"
+          });
+          const tokenJson = await tokenResponse.json();
+          accessToken = tokenJson.access_token;
         } else {
           console.log("Found a token in TokenContext");
           if (hasClientTokenExpired(token)) {
-            console.log("Token has expired");
-            token = await getClientAccessToken();
-            setClientToken(token);
-            console.log("token", token);
-            console.log("clientToken", clientToken);
+            // console.log("Token has expired");
+            // token = await getClientAccessToken();
+            // setClientToken(token);
+            // console.log("token", token);
+            // console.log("clientToken", clientToken);
+            const tokenResponse = await fetch("/api/token", {
+              method: "POST"
+            });
+            const tokenJson = await tokenResponse.json();
+            accessToken = tokenJson.access_token;
           }
+
           console.log("Getting song by id with existing client token");
-          accessToken = token.clientToken;
+          console.log("accessToken", accessToken);
+          // accessToken = token.clientToken;
         }
       }
       // console.log("Getting song...");

@@ -18,11 +18,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import clsx from "clsx";
 import { rajdhani } from "@/components/ui/fonts";
 
-const BACKEND_URI =
-  process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
-    ? "http://192.168.4.158:8000"
-    : "https://spotify-node1313-f6ce692711e7.herokuapp.com";
-
 export const metadata = {
   title: "This Song | Playlist Information",
   description: "AI-enhanced analysis of lyrics for songs on Spotify."
