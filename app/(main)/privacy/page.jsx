@@ -23,7 +23,7 @@ const PrivacyPolicyPage = () => {
           This Privacy Policy describes how This Song (the &quot;Site&quot;,
           &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses,
           and discloses your personal information when you visit
-          https://www.thissong.app (the &quot;Site&quot;), use our services, or
+          https://www.thissong.net (the &quot;Site&quot;), use our services, or
           otherwise communicate with us (collectively, the
           &quot;Services&quot;). For purposes of this Privacy Policy,
           &quot;you&quot; and &quot;your&quot; means you as the user of the
@@ -39,7 +39,7 @@ const PrivacyPolicyPage = () => {
         <p className="text-sm leading-relaxed text-muted">
           If you have additional questions or require more information about our
           Privacy Policy, do not hesitate to contact us through email at
-          admin@thissong.app
+          admin@thissong.net
         </p>
       </section>
 
@@ -166,7 +166,7 @@ const PrivacyPolicyPage = () => {
           has collected. Request that a business that sells a consumer&apos;s
           personal data, not sell the consumer&apos;s personal data. If you
           would like to exercise any of these rights, please contact us at
-          admin@thissong.app.
+          admin@thissong.net.
         </p>
       </section>
 
@@ -214,7 +214,7 @@ const PrivacyPolicyPage = () => {
         </ul>
         <p className="text-sm leading-relaxed text-muted">
           If you would like to exercise any of these rights, please contact us
-          at admin@thissong.app.
+          at admin@thissong.net.
         </p>
       </section>
 
@@ -277,7 +277,7 @@ const PrivacyPolicyPage = () => {
         <p className="text-sm leading-relaxed text-muted">
           Should you have any questions about our privacy practices or this
           Privacy Policy, or if you would like to exercise any of the rights
-          available to you, please email us at admin@thissong.app.
+          available to you, please email us at admin@thissong.net.
         </p>
       </section>
     </div>

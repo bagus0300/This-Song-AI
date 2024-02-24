@@ -37,7 +37,7 @@ const Footer = () => {
               </li>
               <li>
                 {/* <a
-                  href="mailto:admin@thissong.app"
+                  href="mailto:admin@thissong.net"
                   className="transition text-muted hover:opacity-75"
                 >
                   Contact

@@ -18,7 +18,7 @@ const GPT_SUMMARY_ENDPOINT = `${BACKEND_URL}/api/v1/gpt/summary`;
 const URL =
   process.env.NEXT_PUBLIC_VERCEL_ENV == "development"
     ? "http://localhost:3000"
-    : "https://thissong.app";
+    : "https://thissong.net";
 
 const AlbumPage = ({ params }) => {
   const { id } = params;

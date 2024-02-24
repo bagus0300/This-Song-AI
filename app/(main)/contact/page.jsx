@@ -38,7 +38,7 @@ const ContactPage = () => {
           from_name: form.name,
           to_name: "This Song",
           reply_to: form.email,
-          to_email: "admin@thissong.app",
+          to_email: "admin@thissong.net",
           message: form.message
         },
         emailjsPublicKey
@@ -66,10 +66,10 @@ const ContactPage = () => {
                 An error occurred while sending your message. Please try again
                 later, or email us directly at{" "}
                 <a
-                  href="mailto:admin@thissong.app"
+                  href="mailto:admin@thissong.net"
                   className="hover:underline hover:brightness-150"
                 >
-                  admin@thissong.app
+                  admin@thissong.net
                 </a>
                 .
               </p>
@@ -185,10 +185,10 @@ const ContactPage = () => {
         <p className="leading-relaxed text-muted">
           Email:{" "}
           <a
-            href="mailto:admin@thissong.app"
+            href="mailto:admin@thissong.net"
             className="hover:underline hover:brightness-150"
           >
-            admin@thissong.app
+            admin@thissong.net
           </a>
         </p>
         {/* <p className="leading-relaxed text-muted">
