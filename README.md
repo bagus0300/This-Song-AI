@@ -16,4 +16,4 @@ This Song is currently in the process of obtaining approval from Spotify to tran
 
 ## Technology stack
 
-This project was built using [React](https://react.dev/) via [Next.js](https://nextjs.org/), using a [Node.js](https://nodejs.org/) backend with [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/).
+This project was built using [React](https://react.dev/) via [Next.js](https://nextjs.org/), using a [Node.js](https://nodejs.org/) backend with [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/). The lyric interpretation system is hosted on [AWS](https://aws.amazon.com).
