@@ -6,7 +6,7 @@ In the event that a song's description is not readily available in the database,
 
 <!--![this-song-song](https://github.com/atopala7/this-song/assets/17114523/a2255e47-3350-49a0-89c9-2e7981b8c676)-->
 
-One of the standout features of This Song is its ability to present concise summaries of songs' meanings. These summaries are easily accessible, allowing users to quickly grasp the essence of a song by exploring albums or curated Spotify playlists. This feature is particularly beneficial for music lovers who wish to gain a deeper understanding of their favorite records or explore new genres with informed guidance.
+One of the standout features of This Song is its ability to present concise summaries of songs' meanings. These summaries are easily accessible, allowing users to grasp the essence of a song by exploring albums or curated Spotify playlists. This feature is particularly beneficial for music lovers who wish to gain a deeper understanding of their favorite records or explore new genres with informed guidance.
 
 ![this-song-playlists](https://github.com/atopala7/this-song/assets/17114523/050b00b1-1945-485a-81af-92c7efd678cf)
 
