@@ -1,6 +1,8 @@
 # This Song
 
-[This Song](https://thissong.net/) is a web application designed to offer AI-powered lyrical analysis. Utilizing artificial intelligence, This Song allows users to delve deeply into the meanings and nuances of song lyrics. The process begins when a user searches for a particular song. Upon selection, the application promptly checks a comprehensive, cloud-hosted database that houses detailed descriptions of thousands of songs across various genres and eras.
+[This Song](https://thissong.net/) is a web application designed to offer AI-powered lyrical analysis. Utilizing artificial intelligence, This Song allows users to delve deeply into the meanings and nuances of song lyrics.
+
+The process begins when a user searches for a particular song. Upon selection, the application promptly checks a comprehensive, cloud-hosted database that houses detailed descriptions of thousands of songs across various genres and eras.
 
 In the event that a song's description is not readily available in the database, This Song employs a GPT model to analyze the lyrics. This AI-driven interpretation provides users with an immediate rich, insightful analysis of the song's themes, context, and artistic nuances. Additionally, this newly generated description is saved in the database, continually enriching the repository and enhancing the user experience for future queries.
 
