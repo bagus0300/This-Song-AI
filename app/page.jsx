@@ -15,7 +15,6 @@ const Page = () => {
             backgroundImage: "url(/images/banner.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "100% 100%"
-            // backgroundAttachment: "fixed"
           }}
         >
           <img
