@@ -44,7 +44,6 @@ const Page = () => {
           <img
             src="images/border-bottom.png"
             className="w-full md:min-w-[1400px] h-[70px] pointer-events-none"
-            // className="w-full h-[70px]"
           />
         </div>
         <div className="w-full">
