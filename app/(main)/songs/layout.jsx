@@ -286,7 +286,6 @@ export default function SongLayout({ children }) {
             </div>
           </div>
         </div>
-        {/* Content */}
         <div
           id="content"
           className={clsx(
