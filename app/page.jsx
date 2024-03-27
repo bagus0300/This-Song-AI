@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { rajdhani } from "@/components/ui/fonts";
 import clsx from "clsx";
 import Footer from "@/components/ui/Footer";
+import Playlist from "@/components/Playlist";
 
 const Page = () => {
   return (
@@ -47,16 +48,23 @@ const Page = () => {
           />
         </div>
         <div className="w-full">
-          <h2 className={clsx(rajdhani.className, "px-2 text-lg text-center")}>
-            Or start by exploring the world of rock classics:
+          <h2
+            className={clsx(
+              rajdhani.className,
+              "px-2 text-xl font-bold text-center"
+            )}
+            id="top-content"
+          >
+            Trending Songs
           </h2>
-          <p className={clsx(rajdhani.className, "text-base md:mt-5 mt-2")}>
+          <p className={clsx(rajdhani.className, "text-base mt-1")}>
             (Select a song to learn more)
           </p>
           <div className="max-w-[1680px] mx-auto pb-8 md:pt-5 pt-2">
-            <Suspense fallback={<TopSongsSnippetsSkeleton />}>
+            {/* <Suspense fallback={<TopSongsSnippetsSkeleton />}>
               <TopSongsSnippets limit="24" offset="0" />
-            </Suspense>
+            </Suspense> */}
+            <Playlist playlist="37i9dQZF1DXcBWIGoYBM5M" />
           </div>
         </div>
       </div>
