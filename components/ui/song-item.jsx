@@ -12,7 +12,7 @@ import { SongContext } from "@/context/ContextProvider";
 import Image from "next/image";
 
 const SongItem = ({ item, path = null, onClick = null }) => {
-  const { songID } = useContext(SongContext);
+  // const { songID } = useContext(SongContext);
 
   return (
     <>
@@ -21,7 +21,7 @@ const SongItem = ({ item, path = null, onClick = null }) => {
           <TooltipTrigger asChild>
             <Link href={`/songs/${item.id}`} onClick={onClick}>
               <div
-                className="flex items-center gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
+                className="flex items-center w-full gap-2 py-2 overflow-x-hidden transition-all duration-500 cursor-pointer hover:pl-4 hover:bg-secondary group"
                 // onClick={() => {
                 //   recentSelectSong(item);
                 // }}

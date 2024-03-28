@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { useDebouncedCallback } from "use-debounce";
