@@ -398,8 +398,6 @@ const Lyrics = ({ songID, songName, artistName, albumName }) => {
         })
       });
 
-      // console.log("Response body: ", response.body);
-
       // Create a ReadableStream to read the response body
       const reader = response.body
         .pipeThrough(new TextDecoderStream())

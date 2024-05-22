@@ -12,7 +12,8 @@ const nextConfig = {
   },
   compiler: {
     removeConsole: process.env.NEXT_PUBLIC_VERCEL_ENV != "development"
-  }
+  },
+  reactStrictMode: false
 };
 
 module.exports = nextConfig;
