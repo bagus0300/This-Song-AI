@@ -70,7 +70,7 @@ const MainSearch = ({ setSearching, setSearchTermParent, searchSongs }) => {
           value={searchTerm}
           className="text-base"
           placeholder="Search for a song...."
-          // autoFocus
+          autoFocus
         />
         <span
           className={clsx(
