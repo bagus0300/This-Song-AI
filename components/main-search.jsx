@@ -29,14 +29,6 @@ const MainSearch = ({ setSearching, setSearchTermParent, searchSongs }) => {
 
   console.log("Rendering search.jsx");
 
-  // useEffect(() => {
-  //   console.log("Search useEffect");
-  //   console.log("inputElement:", inputElement.current);
-  //   if (inputElement.current) {
-  //     inputElement.current.focus();
-  //   }
-  // }, []);
-
   const handleSearch = useDebouncedCallback((term) => {
     searchSongs(term);
   }, 300);
