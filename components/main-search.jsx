@@ -23,7 +23,6 @@ const MainSearch = ({ setSearching, setSearchTermParent, searchSongs }) => {
    * Status is the response status
    */
   const [searchTerm, setSearchTerm] = useState("");
-  // const [searching, setSearching] = useState(false);
 
   const inputElement = useRef(null);
 
